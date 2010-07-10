@@ -1,0 +1,8 @@
+- Find DropBox path correctly and automatically
+- Set up o7.no forwards
+- Put URL in clipboard
+- MenuExtra
+- Localized "Screen shot" string
+ (/System/Library/CoreServices/SystemUIServer.app/Contents/Resources)
+- Can you rename Dropbox/Public?
+- Growl notification
