@@ -12,6 +12,9 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		8E4A508C11E9086700A0A743 /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8E4A508B11E9086700A0A743 /* TODO.txt */; };
+		8E4A509111E9105700A0A743 /* InitialStartup.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4A509011E9105700A0A743 /* InitialStartup.m */; };
+		8E4A50A011E9155500A0A743 /* InformationGatherer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4A509F11E9155500A0A743 /* InformationGatherer.m */; };
 		8E51825911E7CE3A00D15CAB /* FSRefConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E51825811E7CE3A00D15CAB /* FSRefConversions.m */; };
 		8E60861811E6D1B600881A1C /* Notifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E60861711E6D1B600881A1C /* Notifier.m */; };
 /* End PBXBuildFile section */
@@ -29,6 +32,11 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* GrabBox-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GrabBox-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* GrabBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E4A508B11E9086700A0A743 /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
+		8E4A508F11E9105700A0A743 /* InitialStartup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialStartup.h; sourceTree = "<group>"; };
+		8E4A509011E9105700A0A743 /* InitialStartup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialStartup.m; sourceTree = "<group>"; };
+		8E4A509E11E9155500A0A743 /* InformationGatherer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationGatherer.h; sourceTree = "<group>"; };
+		8E4A509F11E9155500A0A743 /* InformationGatherer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationGatherer.m; sourceTree = "<group>"; };
 		8E51825711E7CE3A00D15CAB /* FSRefConversions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSRefConversions.h; sourceTree = "<group>"; };
 		8E51825811E7CE3A00D15CAB /* FSRefConversions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSRefConversions.m; sourceTree = "<group>"; };
 		8E60861611E6D1B600881A1C /* Notifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifier.h; sourceTree = "<group>"; };
@@ -56,6 +64,10 @@
 				8E60861711E6D1B600881A1C /* Notifier.m */,
 				256AC3D80F4B6AC300CF3369 /* GrabBoxAppDelegate.h */,
 				256AC3D90F4B6AC300CF3369 /* GrabBoxAppDelegate.m */,
+				8E4A508F11E9105700A0A743 /* InitialStartup.h */,
+				8E4A509011E9105700A0A743 /* InitialStartup.m */,
+				8E4A509E11E9155500A0A743 /* InformationGatherer.h */,
+				8E4A509F11E9155500A0A743 /* InformationGatherer.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -89,6 +101,7 @@
 		29B97314FDCFA39411CA2CEA /* GrabBox */ = {
 			isa = PBXGroup;
 			children = (
+				8E4A508B11E9086700A0A743 /* TODO.txt */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -171,6 +184,7 @@
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
+				8E4A508C11E9086700A0A743 /* TODO.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +199,8 @@
 				256AC3DA0F4B6AC300CF3369 /* GrabBoxAppDelegate.m in Sources */,
 				8E60861811E6D1B600881A1C /* Notifier.m in Sources */,
 				8E51825911E7CE3A00D15CAB /* FSRefConversions.m in Sources */,
+				8E4A509111E9105700A0A743 /* InitialStartup.m in Sources */,
+				8E4A50A011E9155500A0A743 /* InformationGatherer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

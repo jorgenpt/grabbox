@@ -7,11 +7,26 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Notifier.h"
+#import "InformationGatherer.h"
 
 @interface GrabBoxAppDelegate : NSObject <NSApplicationDelegate> {
-    NSWindow *window;
+    NSWindow* window;
+	NSWindow* initialStartupWindow;
+	InformationGatherer* info;
+	Notifier* notifier;
 }
 
-@property (assign) IBOutlet NSWindow *window;
+- (id) init;
+- (void) dealloc;
+
+- (void) eventForStream:(ConstFSEventStreamRef)stream
+				  paths:(NSArray *)paths
+				  flags:(const FSEventStreamEventFlags[])flags
+					ids:(const FSEventStreamEventId[]) ids;
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification;
+
+@property (assign) IBOutlet NSWindow* window;
+@property (assign) IBOutlet NSWindow* initialStartupWindow;
 
 @end

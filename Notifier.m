@@ -10,14 +10,15 @@
 
 @implementation Notifier
 
-+ (id) notifierWithCallback:(FSEventStreamCallback)newCallback path:(NSString *)newPath {
-	return [[[self alloc] initWithCallback:newCallback path:newPath] autorelease];
++ (id) notifierWithCallback:(FSEventStreamCallback)newCallback path:(NSString *)newPath callbackArgument:(void *)info; {
+	return [[[self alloc] initWithCallback:newCallback path:newPath callbackArgument:info] autorelease];
 }
-- (id) initWithCallback:(FSEventStreamCallback)newCallback path:(NSString *)newPath {
+
+- (id) initWithCallback:(FSEventStreamCallback)newCallback path:(NSString *)newPath callbackArgument:(void *)info {
 	if((self = [super init])) {
 		paths = [[NSArray arrayWithObject:newPath] retain];
 		context.version = 0L;
-		context.info = newPath;
+		context.info = info;
 		context.retain = (CFAllocatorRetainCallBack)CFRetain;
 		context.release = (CFAllocatorReleaseCallBack)CFRelease;
 		context.copyDescription = (CFAllocatorCopyDescriptionCallBack)CFCopyDescription;
