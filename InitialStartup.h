@@ -11,12 +11,20 @@
 
 @interface InitialStartup : NSObject {
 	NSWindow *window;
+	NSTextField *dropboxId;
 	NSTimer *timer;
+	int lastIdFromUrl;
 }
 
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSTextField *dropboxId;
+
+- (id) init;
+- (void) dealloc;
+
+- (IBAction)okClicked: (id) sender;
+- (void) windowDidBecomeKey: (NSNotification *) aNotification;
 
 - (void) checkClipboard: (NSTimer *) timer;
-- (void) startClipboardTimer;
 
 @end

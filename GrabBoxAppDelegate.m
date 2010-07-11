@@ -21,11 +21,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 						   const FSEventStreamEventFlags eventFlags[], 
 						   const FSEventStreamEventId eventIds[]
 						   ) {
-	NSMutableArray *paths = [NSMutableArray arrayWithCapacity:numEvents];
-	char **eventPaths = eventPathsVoidPointer;
-	for (size_t event = 0; event < numEvents; ++event)
-		[paths addObject:[NSString stringWithUTF8String:eventPaths[event]]];
-	
+	NSArray *paths = (NSArray*)eventPathsVoidPointer;	
 	[(GrabBoxAppDelegate *)clientCallBackInfo eventForStream:stream
 													   paths:paths
 													   flags:eventFlags
