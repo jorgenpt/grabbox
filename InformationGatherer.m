@@ -8,6 +8,7 @@
 
 #import "InformationGatherer.h"
 
+#include "sqlite3.h"
 
 @implementation InformationGatherer
 
@@ -33,35 +34,6 @@
 	[super dealloc];
 }
 
-- (NSSet *)createdFiles
-{
-	NSSet *newContents = [self files];
-	if (!newContents)
-		return nil;
-	
-	NSSet* newEntries = [newContents objectsPassingTest:^ BOOL (id obj, BOOL* stop) {
-		return [dirContents member:obj] == nil;
-	}];
-
-	[dirContents release];
-	dirContents = [newContents retain];
-	return newEntries;
-}
-
-- (NSSet *)files
-{
-	NSError* error;
-	NSFileManager* fm = [NSFileManager defaultManager];
-	NSArray* dirList = [fm contentsOfDirectoryAtPath:[self screenshotPath]
-											   error:&error];
-	if (!dirList)
-	{
-		NSLog(@"Failed getting dirlist: %@", [error localizedDescription]);
-		return nil;
-	}
-	
-	return [NSSet setWithArray:dirList];
-}
 - (NSString *)screenshotPath
 {
 	if (screenshotPath)
@@ -84,8 +56,59 @@
 	if (uploadPath)
 		return uploadPath;
 
-	uploadPath = [[@"~/Dropbox/Public/Screenshots" stringByStandardizingPath] retain];
+	NSString *result = @"~/Dropbox";
+	NSString* path = [@"~/.dropbox/dropbox.db" stringByStandardizingPath];
+	NSString* sqlStatement = @"select value from config where key = 'dropbox_path'";
+	
+	sqlite3 *db;
+	sqlite3_stmt *statement;
+
+	if (sqlite3_open_v2([path UTF8String], &db, SQLITE_OPEN_READONLY, NULL) == SQLITE_OK)
+	{
+		if (sqlite3_prepare_v2(db, [sqlStatement UTF8String], -1, &statement, 0) == SQLITE_OK)
+		{
+			if (sqlite3_step(statement) == SQLITE_ROW)
+			{
+				result = [NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 0)];
+			}
+			sqlite3_finalize(statement);
+		}
+		sqlite3_close(db);
+	}
+
+	NSArray* pathComponents = [NSArray arrayWithObjects:result, "Public", "Screenshots", nil];
+	uploadPath = [[[NSString pathWithComponents:pathComponents] stringByStandardizingPath] retain];
 	return uploadPath;
+}
+
+- (NSSet *)createdFiles
+{
+	NSSet *newContents = [self files];
+	if (!newContents)
+		return nil;
+	
+	NSSet* newEntries = [newContents objectsPassingTest:^ BOOL (id obj, BOOL* stop) {
+		return [dirContents member:obj] == nil;
+	}];
+	
+	[dirContents release];
+	dirContents = [newContents retain];
+	return newEntries;
+}
+
+- (NSSet *)files
+{
+	NSError* error;
+	NSFileManager* fm = [NSFileManager defaultManager];
+	NSArray* dirList = [fm contentsOfDirectoryAtPath:[self screenshotPath]
+											   error:&error];
+	if (!dirList)
+	{
+		NSLog(@"Failed getting dirlist: %@", [error localizedDescription]);
+		return nil;
+	}
+	
+	return [NSSet setWithArray:dirList];
 }
 
 @end
