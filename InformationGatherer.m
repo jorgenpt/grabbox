@@ -10,13 +10,23 @@
 
 #include "sqlite3.h"
 
+@interface InformationGatherer ()
+@property (nonatomic, retain) NSString* screenshotPath;
+@property (nonatomic, retain) NSString* uploadPath;
+@property (nonatomic, retain) NSSet* dirContents;
+@end
+
 @implementation InformationGatherer
+
+@synthesize screenshotPath;
+@synthesize uploadPath;
+@synthesize dirContents;
 
 - (id) init
 {
 	if (self = [super init])
 	{
-		dirContents = [[self files] retain];
+		[self setDirContents:[self files]];
 		if (!dirContents)
 			return nil;
 		screenshotPath = nil;
@@ -28,9 +38,9 @@
 
 - (void) dealloc
 {
-	[dirContents release];
-	[screenshotPath release];
-	[uploadPath release];
+	[self setDirContents:nil];
+	[self setScreenshotPath:nil];
+	[self setUploadPath:nil];
 	[super dealloc];
 }
 
@@ -46,7 +56,7 @@
 	if (!foundPath)
 		foundPath = @"~/Desktop";
 
-	screenshotPath = [[foundPath stringByStandardizingPath] retain];
+	[self setScreenshotPath:[foundPath stringByStandardizingPath]];
 
 	return screenshotPath;
 }
@@ -77,7 +87,7 @@
 	}
 
 	NSArray* pathComponents = [NSArray arrayWithObjects:result, "Public", "Screenshots", nil];
-	uploadPath = [[[NSString pathWithComponents:pathComponents] stringByStandardizingPath] retain];
+	[self setUploadPath:[[NSString pathWithComponents:pathComponents] stringByStandardizingPath]];
 	return uploadPath;
 }
 
@@ -91,8 +101,7 @@
 		return [dirContents member:obj] == nil;
 	}];
 	
-	[dirContents release];
-	dirContents = [newContents retain];
+	[self setDirContents:newContents];
 	return newEntries;
 }
 
