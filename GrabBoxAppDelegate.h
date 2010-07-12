@@ -17,8 +17,15 @@
 	Notifier* notifier;
 }
 
+@property int dropboxId;
+
 - (id) init;
 - (void) dealloc;
+
+- (int) dropboxId;
+- (void) setDropboxId:(int) toId;
+
+- (void) startMonitoring;
 
 - (void) eventForStream:(ConstFSEventStreamRef)stream
 				  paths:(NSArray *)paths

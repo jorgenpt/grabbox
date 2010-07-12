@@ -13,6 +13,7 @@
 
 @synthesize window;
 @synthesize initialStartupWindow;
+@synthesize dropboxId;
 
 static void translateEvent(ConstFSEventStreamRef stream, 
 						   void *clientCallBackInfo, 
@@ -45,15 +46,31 @@ static void translateEvent(ConstFSEventStreamRef stream,
 	[super dealloc];
 }
 
+- (int) dropboxId
+{
+	return [[NSUserDefaults standardUserDefaults] integerForKey:@"dropbox_id"];
+}
+
+- (void) setDropboxId:(int) toId
+{
+	[[NSUserDefaults standardUserDefaults] setInteger:toId forKey:@"dropbox_id"];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-	NSLog(@"App started!");
-	
-	[notifier start];
-	NSUserDefaults* u = [NSUserDefaults standardUserDefaults];
-	if ([u integerForKey:@"dropbox_id"] == 0)
+	if ([self dropboxId] == 0)
 	{
 		[initialStartupWindow makeKeyAndOrderFront:self];
 	}
+	else
+	{
+		[self startMonitoring];
+	}
+}
+
+
+- (void) startMonitoring
+{
+	[notifier start];
 }
 
 - (void) eventForStream:(ConstFSEventStreamRef)stream
@@ -129,7 +146,19 @@ static void translateEvent(ConstFSEventStreamRef stream,
 		}
 		else
 		{
-			NSLog(@"Move of %@ succeeded!", entry);
+			NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
+			[pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
+			
+			NSString *escapedEntry = [entry stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+			
+			NSString *dropboxUrl = [NSString stringWithFormat:@"http://dl.dropbox.com/u/%d/Screenshots/%@", [self dropboxId], escapedEntry];
+			if (![pasteboard setString:dropboxUrl forType:NSStringPboardType])
+			{
+				// TODO: Growl this?
+				NSLog(@"Error: Couldn't put url into pasteboard.");
+			}
+			
+			// TODO: Growl success.
 		}
 	}
 }
