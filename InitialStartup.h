@@ -21,7 +21,7 @@
 @property (assign) IBOutlet NSTextField *dropboxId;
 @property (assign) IBOutlet GrabBoxAppDelegate *appDelegate;
 
-- (id) init;
+- (void) awakeFromNib;
 - (void) dealloc;
 
 - (void) close;

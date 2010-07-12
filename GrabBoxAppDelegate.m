@@ -9,11 +9,18 @@
 #import "GrabBoxAppDelegate.h"
 #import "FSRefConversions.h"
 
+@interface GrabBoxAppDelegate ()
+@property (nonatomic) InformationGatherer* info;
+@property (nonatomic, retain) Notifier* notifier;
+@end
+
+
 @implementation GrabBoxAppDelegate
 
 @synthesize window;
 @synthesize initialStartupWindow;
-@synthesize dropboxId;
+@synthesize info;
+@synthesize notifier;
 
 static void translateEvent(ConstFSEventStreamRef stream, 
 						   void *clientCallBackInfo, 
@@ -29,20 +36,18 @@ static void translateEvent(ConstFSEventStreamRef stream,
 														 ids:eventIds];
 }
 
-- (id) init
+- (void) awakeFromNib
 {
-	if (self = [super init])
-	{
-		info = [[InformationGatherer alloc] init];
-		notifier = [[Notifier notifierWithCallback:translateEvent path:[info screenshotPath] callbackArgument:self] retain];
-	}
-	return self;
+	[self setInfo:[[InformationGatherer alloc] init]];
+	[self setNotifier:[Notifier notifierWithCallback:translateEvent
+												path:[info screenshotPath]
+									callbackArgument:self]];
 }
 
 - (void) dealloc
 {
-	[info release];
-	[notifier release];
+	[self setInfo:nil];
+	[self setNotifier:nil];
 	[super dealloc];
 }
 

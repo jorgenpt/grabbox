@@ -19,7 +19,7 @@
 
 @property int dropboxId;
 
-- (id) init;
+- (void) awakeFromNib;
 - (void) dealloc;
 
 - (int) dropboxId;

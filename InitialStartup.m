@@ -9,32 +9,33 @@
 #import "InitialStartup.h"
 
 
+@interface InitialStartup ()
+@property (nonatomic, retain) NSTimer *timer;
+@end
+
 @implementation InitialStartup
 
 @synthesize window;
 @synthesize dropboxId;
 @synthesize appDelegate;
+@synthesize timer;
 
-- (id) init
+- (void) awakeFromNib
 {
-	if (self = [super init])
-	{
-		timer = nil;
-		lastIdFromUrl = 0;
-	}
-	return self;
+	[self setTimer:nil];
+	lastIdFromUrl = 0;
 }
+
 - (void) dealloc
 {
-	[timer release];
+	[self setTimer:nil];
 	[super dealloc];
 }
 
 - (void) close
 {
 	[timer invalidate];
-	[timer release];
-	timer = nil;
+	[self setTimer:nil];
 	lastIdFromUrl = 0;
 	
 	[window orderOut:self];
