@@ -13,6 +13,7 @@
 
 @synthesize window;
 @synthesize dropboxId;
+@synthesize appDelegate;
 
 - (id) init
 {
@@ -29,14 +30,74 @@
 	[super dealloc];
 }
 
+- (void) close
+{
+	[timer invalidate];
+	[timer release];
+	timer = nil;
+	lastIdFromUrl = 0;
+	
+	[window orderOut:self];
+}
+
 - (IBAction) okClicked:(id)sender
 {
+	NSString* enteredValue = [dropboxId stringValue];
+	int intValue = [enteredValue integerValue];
+	NSString* stringRepresentation = [NSString stringWithFormat:@"%d", intValue];
+	NSAlert* alert = nil;
+	
+	if (!intValue)
+	{
+		alert = [NSAlert alertWithMessageText:nil
+								defaultButton:nil
+							  alternateButton:nil
+								  otherButton:nil
+					informativeTextWithFormat:@"You must enter a valid Dropbox ID to continue!"];
+	}
+	else if (![enteredValue isEqualToString:stringRepresentation])
+	{
+		alert = [NSAlert alertWithMessageText:nil
+								defaultButton:nil
+							  alternateButton:nil
+								  otherButton:nil
+					informativeTextWithFormat:@"The entered Dropbox ID contains invalid characters!"];
+
+	}
+	
+	if (!alert)
+	{
+		[self close];
+		[appDelegate setDropboxId:intValue];
+		[appDelegate startMonitoring];
+	}
+	else
+	{
+		[alert beginSheetModalForWindow:window
+						  modalDelegate:nil
+						 didEndSelector:nil
+							contextInfo:nil];
+	}
+
+}
+
+- (IBAction)cancelClicked: (id) sender
+{
+	if ([appDelegate dropboxId])
+	{
+		[self close];
+	}
+	else {
+		[[NSApplication sharedApplication] terminate:self];
+	}
+
 }
 
 - (void) windowDidBecomeKey:(NSNotification *)aNotification
 {
 	if (!timer)
 	{
+		[dropboxId setIntValue:[appDelegate dropboxId]];
 		timer = [[NSTimer scheduledTimerWithTimeInterval: 0.5
 												  target: self
 												selector: @selector(checkClipboard:)
