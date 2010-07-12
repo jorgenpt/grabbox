@@ -111,4 +111,10 @@
 	return [NSSet setWithArray:dirList];
 }
 
+- (NSString *)getURLForFile:(NSString *)file withId:(int)dropboxId
+{
+	NSString *escapedFile = [file stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+	// "http://dl.dropbox.com/u/%d/Screenshots/%@"
+	return  [NSString stringWithFormat:@"http://o7.no/%d/%@", dropboxId, escapedFile];
+}
 @end

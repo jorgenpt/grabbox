@@ -149,9 +149,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 			NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
 			[pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
 			
-			NSString *escapedEntry = [entry stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-			
-			NSString *dropboxUrl = [NSString stringWithFormat:@"http://dl.dropbox.com/u/%d/Screenshots/%@", [self dropboxId], escapedEntry];
+			NSString *dropboxUrl = [info getURLForFile:entry withId:[self dropboxId]];
 			if (![pasteboard setString:dropboxUrl forType:NSStringPboardType])
 			{
 				// TODO: Growl this?
