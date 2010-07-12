@@ -15,7 +15,7 @@
 {
 	if (self = [super init])
 	{
-		dirContents = [self files];
+		dirContents = [[self files] retain];
 		if (!dirContents)
 			return nil;
 		screenshotPath = nil;
@@ -35,7 +35,7 @@
 
 - (NSSet *)newFiles
 {
-	NSSet *newContents = [[self files] retain];
+	NSSet *newContents = [self files];
 	if (!newContents)
 		return nil;
 	
@@ -44,7 +44,7 @@
 	}];
 
 	[dirContents release];
-	dirContents = newContents;
+	dirContents = [newContents retain];
 	return newEntries;
 }
 
