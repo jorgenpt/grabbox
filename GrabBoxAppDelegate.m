@@ -117,7 +117,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 	if (!screenshotDirChanged)
 		return;
 	
-	NSSet* newEntries = [info newFiles];
+	NSSet* newEntries = [info createdFiles];
 	NSError* error;
 	NSString* uploadPath = [info uploadPath];
 	NSFileManager* fm = [NSFileManager defaultManager];

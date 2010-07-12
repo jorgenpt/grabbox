@@ -33,7 +33,7 @@
 	[super dealloc];
 }
 
-- (NSSet *)newFiles
+- (NSSet *)createdFiles
 {
 	NSSet *newContents = [self files];
 	if (!newContents)

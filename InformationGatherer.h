@@ -18,10 +18,10 @@
 - (id)init;
 - (void) dealloc;
 
-- (NSSet *)newFiles;
-- (NSSet *)files;
-
 - (NSString *)screenshotPath;
 - (NSString *)uploadPath;
+
+- (NSSet *)createdFiles;
+- (NSSet *)files;
 
 @end
