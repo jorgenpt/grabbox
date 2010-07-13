@@ -66,7 +66,7 @@
 	if (uploadPath)
 		return uploadPath;
 
-	NSString *result = @"~/Dropbox";
+	NSString* result = [@"~/Dropbox" stringByStandardizingPath];
 	NSString* path = [@"~/.dropbox/dropbox.db" stringByStandardizingPath];
 	NSString* sqlStatement = @"select value from config where key = 'dropbox_path'";
 	
@@ -86,7 +86,7 @@
 		sqlite3_close(db);
 	}
 
-	NSArray* pathComponents = [NSArray arrayWithObjects:result, "Public", "Screenshots", nil];
+	NSArray* pathComponents = [NSArray arrayWithObjects:result, @"Public", @"Screenshots", nil];
 	[self setUploadPath:[[NSString pathWithComponents:pathComponents] stringByStandardizingPath]];
 	return uploadPath;
 }

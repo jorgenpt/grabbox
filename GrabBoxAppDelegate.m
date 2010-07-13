@@ -9,8 +9,11 @@
 #import "GrabBoxAppDelegate.h"
 #import "FSRefConversions.h"
 
+#import "Growler.h"
+#import "Pasteboarder.h"
+
 @interface GrabBoxAppDelegate ()
-@property (nonatomic) InformationGatherer* info;
+@property (nonatomic, assign) InformationGatherer* info;
 @property (nonatomic, retain) Notifier* notifier;
 @end
 
@@ -87,6 +90,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
 	FSRef screenshotPathRef;
 	if (![screenshotPath getFSRef:&screenshotPathRef])
 	{
+		[Growler errorWithTitle:@"Could not get Screen Grab path!"
+					description:@"Could not find directory to monitor for screenshots."];
 		NSLog(@"ERROR: Failed getting FSRef for screenshotPath '%@'", screenshotPath);
 		return;
 	}
@@ -99,7 +104,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 		if (![path getFSRef:&pathRef])
 		{
 			NSLog(@"ERROR: Failed getting FSRef for path '%@'", path);
-			return;
+			continue;
 		}
 		
 		OSErr comparison = FSCompareFSRefs(&screenshotPathRef, &pathRef);
@@ -111,8 +116,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 		if (comparison != noErr)
 		{
 			NSLog(@"ERROR: Failed comparing FSRef for path (%@) and screenshotPath (%@): %i", path, screenshotPath, comparison);
-			// TODO: Should we continue; instead?
-			return;
+			continue;
 		}
 		
 		screenshotDirChanged = YES;
@@ -132,7 +136,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
 									   error:&error];
 	if (!mkdirOk)
 	{
-		NSLog(@"Error: %@ (%i)", [error localizedDescription], [error code]);
+		[Growler errorWithTitle:@"Could not copy file!"
+					description:[error localizedDescription]];
+		NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
 		return;
 	}
 	
@@ -147,21 +153,14 @@ static void translateEvent(ConstFSEventStreamRef stream,
 								   error:&error];
 		if (!moveOk)
 		{
-			NSLog(@"Error: %@ (%i)", [error localizedDescription], [error code]);
+			[Growler errorWithTitle:@"Could not upload file!"
+						description:[error localizedDescription]];
+			NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
 		}
 		else
 		{
-			NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
-			[pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
-			
 			NSString *dropboxUrl = [info getURLForFile:entry withId:[self dropboxId]];
-			if (![pasteboard setString:dropboxUrl forType:NSStringPboardType])
-			{
-				// TODO: Growl this?
-				NSLog(@"Error: Couldn't put url into pasteboard.");
-			}
-			
-			// TODO: Growl success.
+			[[Pasteboarder pasteboarder] copy:dropboxUrl];
 		}
 	}
 }

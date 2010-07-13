@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"  xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <title>GrabBox's Changelog</title>
+        <link>http://o7.no/grabbox/appcast.xml</link>
+        <description>Most recent changes.</description>
+        <language>en</language>
+
+        <item>
+            <title>Version 0.1.1</title>
+            <sparkle:releaseNotesLink>http://o7.no/grabbox/updates/GrabBox 0.1.1.html</sparkle:releaseNotesLink>
+            <pubDate>Mon, 12 Jul 2010 16:52:14 -0700</pubDate>
+            <enclosure
+                url="http://o7.no/grabbox/updates/GrabBox 0.1.1.zip"
+                sparkle:version="0.1.1"
+                type="application/octet-stream"
+                length="1190795"
+                sparkle:dsaSignature="MC4CFQDLwzkcDFT3gvf+F913ORxhHqfDPQIVALcw0bleTn7bKAHQ/iTZnENzQuzz"
+                />
+        </item>
+
+        <item>
+            <title>Version 0.1</title>
+            <sparkle:releaseNotesLink>http://o7.no/grabbox/updates/GrabBox 0.1.html</sparkle:releaseNotesLink>
+            <pubDate>Mon, 12 Jul 2010 16:27:22 -0700</pubDate>
+            <enclosure
+                url="http://o7.no/grabbox/updates/GrabBox 0.1.zip"
+                sparkle:version="0.1"
+                type="application/octet-stream"
+                length="1187753"
+                sparkle:dsaSignature="MC0CFQCdZqD9GF9hrTXEOgRXFcErXPD/3QIUA7AtBkup3LCP/Ogd8x6m0+Iw/vs="
+                />
+        </item>
+
+    </channel>
+</rss>
