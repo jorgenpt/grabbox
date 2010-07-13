@@ -18,6 +18,8 @@
 @synthesize dropboxId;
 @synthesize appDelegate;
 @synthesize timer;
+@synthesize preferences;
+@synthesize autoLaunch;
 
 - (void) awakeFromNib
 {
@@ -31,16 +33,7 @@
     [super dealloc];
 }
 
-- (void) close
-{
-    [timer invalidate];
-    [self setTimer:nil];
-    lastIdFromUrl = 0;
-
-    [window orderOut:self];
-}
-
-- (IBAction) okClicked:(id)sender
+- (BOOL)windowShouldClose:(id)sender
 {
     NSString* enteredValue = [dropboxId stringValue];
     int intValue = [enteredValue integerValue];
@@ -67,36 +60,29 @@
 
     if (!alert)
     {
-        [self close];
+        NSLog(@"Should close: YES.");
         [appDelegate setDropboxId:intValue];
         [appDelegate startMonitoring];
+        [preferences setEnabled:YES];
+        return YES;
     }
     else
     {
+        NSLog(@"Should close: NO.");
         [alert beginSheetModalForWindow:window
                           modalDelegate:nil
                          didEndSelector:nil
                             contextInfo:nil];
+        return NO;
     }
-
 }
-
-- (IBAction)cancelClicked: (id) sender
-{
-    if ([appDelegate dropboxId])
-    {
-        [self close];
-    }
-    else {
-        [[NSApplication sharedApplication] terminate:self];
-    }
-
-}
-
 - (void) windowDidBecomeKey:(NSNotification *)aNotification
 {
     if (!timer)
     {
+        if ([autoLaunch state] != NSOnState)
+            [autoLaunch performClick:self];
+        [preferences setEnabled:NO];
         [dropboxId setIntValue:[appDelegate dropboxId]];
         timer = [[NSTimer scheduledTimerWithTimeInterval: 0.5
                                                   target: self

@@ -4,13 +4,14 @@ X Set up o7.no forwards
 X Growl notification
 X Rename screenshot
 X Optional upload
-+ Option for o7 forwards
+X Option for o7 forwards
+X Start at login checkbox
+X First run "start at login?" dialog.
+- Optional custom name
 - Link to Public dir from uid entry dialog
 - Check if Dropbox is running when starting up.
 - Icon
 - Option for alternate upload URL / local directory.
 - Localized "Screen shot" string
  (/System/Library/CoreServices/SystemUIServer.app/Contents/Resources)
-- Optional custom name
-- Start at login checkbox
 ? MenuExtra

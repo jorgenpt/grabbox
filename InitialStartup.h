@@ -12,6 +12,8 @@
 @interface InitialStartup : NSObject {
     NSWindow *window;
     NSTextField *dropboxId;
+    NSMenuItem* preferences;
+    NSButton* autoLaunch;
     GrabBoxAppDelegate *appDelegate;
     NSTimer *timer;
     int lastIdFromUrl;
@@ -20,15 +22,13 @@
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSTextField *dropboxId;
 @property (assign) IBOutlet GrabBoxAppDelegate *appDelegate;
+@property (assign) IBOutlet NSMenuItem *preferences;
+@property (assign) IBOutlet NSButton *autoLaunch;
 
 - (void) awakeFromNib;
 - (void) dealloc;
 
-- (void) close;
-
-- (IBAction)okClicked: (id) sender;
-- (IBAction)cancelClicked: (id) sender;
-
+- (BOOL)windowShouldClose:(id)sender;
 - (void) windowDidBecomeKey: (NSNotification *) aNotification;
 
 - (void) checkClipboard: (NSTimer *) timer;
