@@ -27,6 +27,8 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		8E49CF2211ED0DFA0041CE70 /* ImageRenamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E49CF2111ED0DFA0041CE70 /* ImageRenamer.m */; };
+		8E49CF4D11ED14640041CE70 /* ImageRenamer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E49CF4B11ED14640041CE70 /* ImageRenamer.xib */; };
 		8E4A509111E9105700A0A743 /* InitialStartup.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4A509011E9105700A0A743 /* InitialStartup.m */; };
 		8E4A50A011E9155500A0A743 /* InformationGatherer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4A509F11E9155500A0A743 /* InformationGatherer.m */; };
 		8E51825911E7CE3A00D15CAB /* FSRefConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E51825811E7CE3A00D15CAB /* FSRefConversions.m */; };
@@ -82,6 +84,9 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* GrabBox-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GrabBox-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* GrabBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E49CF2011ED0DFA0041CE70 /* ImageRenamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageRenamer.h; sourceTree = "<group>"; };
+		8E49CF2111ED0DFA0041CE70 /* ImageRenamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageRenamer.m; sourceTree = "<group>"; };
+		8E49CF4C11ED14640041CE70 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ImageRenamer.xib; sourceTree = "<group>"; };
 		8E4A508B11E9086700A0A743 /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		8E4A508F11E9105700A0A743 /* InitialStartup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialStartup.h; sourceTree = "<group>"; };
 		8E4A509011E9105700A0A743 /* InitialStartup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialStartup.m; sourceTree = "<group>"; };
@@ -138,6 +143,8 @@
 				8E7B696111EBEFCF00112165 /* Growler.m */,
 				8E7B69D711EBF66900112165 /* GrowlerDelegate.h */,
 				8E7B69D811EBF66900112165 /* GrowlerDelegate.m */,
+				8E49CF2011ED0DFA0041CE70 /* ImageRenamer.h */,
+				8E49CF2111ED0DFA0041CE70 /* ImageRenamer.m */,
 				8E4A509E11E9155500A0A743 /* InformationGatherer.h */,
 				8E4A509F11E9155500A0A743 /* InformationGatherer.m */,
 				8E4A508F11E9105700A0A743 /* InitialStartup.h */,
@@ -211,6 +218,7 @@
 				8E7B689711EBD87500112165 /* dsa_pub.pem */,
 				8D1107310486CEB800E47090 /* GrabBox-Info.plist */,
 				8E7B692311EBEBB400112165 /* Growl Registration Ticket.growlRegDict */,
+				8E49CF4B11ED14640041CE70 /* ImageRenamer.xib */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 			);
@@ -288,6 +296,7 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 				8E7B689811EBD87500112165 /* dsa_pub.pem in Resources */,
+				8E49CF4D11ED14640041CE70 /* ImageRenamer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +333,7 @@
 				8E7B69D911EBF66900112165 /* GrowlerDelegate.m in Sources */,
 				8E7B6BC911EC383800112165 /* UploadInitiator.m in Sources */,
 				8E7B6C2511EC433B00112165 /* Preferences.m in Sources */,
+				8E49CF2211ED0DFA0041CE70 /* ImageRenamer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +362,14 @@
 				1DDD58150DA1D0A300B32029 /* English */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		8E49CF4B11ED14640041CE70 /* ImageRenamer.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8E49CF4C11ED14640041CE70 /* English */,
+			);
+			name = ImageRenamer.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
