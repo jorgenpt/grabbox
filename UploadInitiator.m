@@ -71,11 +71,11 @@
     {
         NSString *dropboxUrl = [[InformationGatherer defaultGatherer] getURLForFile:shortName
                                                                              withId:[self dropboxId]];
-        [self copyURL:dropboxUrl basedOnFile:destination];
+        [UploadInitiator copyURL:dropboxUrl basedOnFile:destination];
     }
 }
 
-- (void) copyURL:(NSString *)url basedOnFile:(NSString *)path
++ (void) copyURL:(NSString *)url basedOnFile:(NSString *)path
 {
     NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
     [pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
