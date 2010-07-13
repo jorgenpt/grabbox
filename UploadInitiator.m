@@ -3,7 +3,7 @@
 //  GrabBox
 //
 //  Created by Jørgen P. Tjernø on 7/12/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 devSoft. All rights reserved.
 //
 
 #import "UploadInitiator.h"
@@ -46,7 +46,7 @@
 	[self setSrcFile:nil];
 	[self setSrcPath:nil];
 	[self setDestPath:nil];
-
+    
 	[super dealloc];
 }
 
@@ -60,8 +60,8 @@
 	NSString* sourcePath = [NSString pathWithComponents:[NSArray arrayWithObjects: [self srcPath], [self srcFile], nil]];
 	NSString* destination = [NSString pathWithComponents:[NSArray arrayWithObjects: [self destPath], shortName, nil]];
 	BOOL moveOk = [[NSFileManager defaultManager] moveItemAtPath:sourcePath
-							  toPath:destination
-							   error:&error];
+                                                          toPath:destination
+                                                           error:&error];
 	if (!moveOk)
 	{
 		[Growler errorWithTitle:@"Could not upload file!"
@@ -84,8 +84,8 @@
 - (void) growlTimedOutWithData:(id)data
 {
 }
-					 
-					 
+
+
 - (NSString *) getNextFilenameWithExtension:(NSString *)ext
 {
 	NSFileManager* fm = [NSFileManager defaultManager];

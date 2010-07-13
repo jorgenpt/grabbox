@@ -3,11 +3,10 @@
 //  GrabBox
 //
 //  Created by Jørgen P. Tjernø on 7/10/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 devSoft. All rights reserved.
 //
 
 #import "InitialStartup.h"
-
 
 @interface InitialStartup ()
 @property (nonatomic, retain) NSTimer *timer;
@@ -63,7 +62,7 @@
 							  alternateButton:nil
 								  otherButton:nil
 					informativeTextWithFormat:@"The entered Dropbox ID contains invalid characters!"];
-
+        
 	}
 	
 	if (!alert)
@@ -79,7 +78,7 @@
 						 didEndSelector:nil
 							contextInfo:nil];
 	}
-
+    
 }
 
 - (IBAction)cancelClicked: (id) sender
@@ -91,7 +90,7 @@
 	else {
 		[[NSApplication sharedApplication] terminate:self];
 	}
-
+    
 }
 
 - (void) windowDidBecomeKey:(NSNotification *)aNotification
@@ -115,18 +114,18 @@
 	NSArray *copiedItems = [pasteboard readObjectsForClasses:classes options:options];
 	if (!copiedItems)
 		return;
-
+    
 	NSURL *url = [NSURL URLWithString:[copiedItems objectAtIndex:0]];
 	if (!url)
 		return;
-
+    
 	if ([[url host] hasSuffix:@".dropbox.com"])
 	{
 		NSArray* components = [url pathComponents];
 		NSString* dirComponent = [components objectAtIndex:1];
 		if (![dirComponent isEqualToString:@"u"])
 			return;
-
+        
 		NSString* idComponent = [components objectAtIndex:2];
 		int idFromUrl = [idComponent intValue];
 		if (idFromUrl && idFromUrl != lastIdFromUrl)

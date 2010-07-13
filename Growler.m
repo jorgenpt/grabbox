@@ -3,7 +3,7 @@
 //  GrabBox
 //
 //  Created by Jørgen P. Tjernø on 7/12/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 devSoft. All rights reserved.
 //
 
 #import "Growler.h"
@@ -31,7 +31,7 @@
 + (void) messageWithTitle:(NSString *)title
 			  description:(NSString *)description
 					 name:(NSString *)notificationName
-				 delegateContext:(GrowlerDelegateContext *)context
+          delegateContext:(GrowlerDelegateContext *)context
 {
 	[Growler messageWithTitle:title
 				  description:description
@@ -48,8 +48,8 @@
 {
 	NSNumber* contextKey;
 	if (context)
-		 contextKey = [(Growler*)[GrowlApplicationBridge growlDelegate] addContext:context];
-
+        contextKey = [(Growler*)[GrowlApplicationBridge growlDelegate] addContext:context];
+    
 	[GrowlApplicationBridge notifyWithTitle:title
 								description:description
 						   notificationName:notificationName
@@ -77,7 +77,6 @@
 {
 	GrowlerDelegateContext* context = [self retrieveContextByKey:contextKey];
 	[[context delegate] growlClickedWithData:[context data]];
-	[contexts removeObjectForKey:contextKey];
 }
 
 - (void) growlNotificationTimedOut:(id)contextKey

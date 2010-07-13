@@ -22,14 +22,14 @@
 		context.retain = (CFAllocatorRetainCallBack)CFRetain;
 		context.release = (CFAllocatorReleaseCallBack)CFRelease;
 		context.copyDescription = (CFAllocatorCopyDescriptionCallBack)CFCopyDescription;
-
+        
 		stream = FSEventStreamCreate(kCFAllocatorDefault, newCallback, &context, (CFArrayRef)paths, kFSEventStreamEventIdSinceNow, /*latency*/ 1.0, kFSEventStreamCreateFlagUseCFTypes);
 		if (!stream) {
 			NSLog(@"Could not create event stream for path %@", newPath);
 			[self release];
 			return nil;
 		}
-
+        
 		FSEventStreamScheduleWithRunLoop(stream, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 	}
 	return self;

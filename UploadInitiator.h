@@ -3,7 +3,7 @@
 //  GrabBox
 //
 //  Created by Jørgen P. Tjernø on 7/12/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 devSoft. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
@@ -31,14 +31,12 @@
 - (id) initForFile:(NSString *)file
 			atPath:(NSString *)source
 			toPath:(NSString *)destination
-		   withId:(int)dropId;
-
+            withId:(int)dropId;
 - (void) dealloc;
 
 - (void) upload;
 - (void) growlClickedWithData:(id)data;
 - (void) growlTimedOutWithData:(id)data;
-
 - (NSString *) getNextFilenameWithExtension:(NSString *)ext;
 
 @end

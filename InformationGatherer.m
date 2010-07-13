@@ -3,7 +3,7 @@
 //  GrabBox
 //
 //  Created by Jørgen P. Tjernø on 7/10/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 devSoft. All rights reserved.
 //
 
 #import "InformationGatherer.h"
@@ -32,7 +32,7 @@ static InformationGatherer* defaultInstance;
 			defaultInstance = [[InformationGatherer alloc] init];
 	}
 	return defaultInstance;
-
+    
 }
 - (id) init
 {
@@ -44,7 +44,7 @@ static InformationGatherer* defaultInstance;
 		screenshotPath = nil;
 		uploadPath = nil;
 	}
-
+    
 	return self;
 }
 
@@ -67,9 +67,9 @@ static InformationGatherer* defaultInstance;
 	NSString* foundPath = [dict objectForKey:@"location"];
 	if (!foundPath)
 		foundPath = @"~/Desktop";
-
+    
 	[self setScreenshotPath:[foundPath stringByStandardizingPath]];
-
+    
 	return screenshotPath;
 }
 
@@ -77,14 +77,14 @@ static InformationGatherer* defaultInstance;
 {
 	if (uploadPath)
 		return uploadPath;
-
+    
 	NSString* result = [@"~/Dropbox" stringByStandardizingPath];
 	NSString* path = [@"~/.dropbox/dropbox.db" stringByStandardizingPath];
 	NSString* sqlStatement = @"select value from config where key = 'dropbox_path'";
 	
 	sqlite3 *db;
 	sqlite3_stmt *statement;
-
+    
 	if (sqlite3_open_v2([path UTF8String], &db, SQLITE_OPEN_READONLY, NULL) == SQLITE_OK)
 	{
 		if (sqlite3_prepare_v2(db, [sqlStatement UTF8String], -1, &statement, 0) == SQLITE_OK)
@@ -97,7 +97,7 @@ static InformationGatherer* defaultInstance;
 		}
 		sqlite3_close(db);
 	}
-
+    
 	NSArray* pathComponents = [NSArray arrayWithObjects:result, @"Public", @"Screenshots", nil];
 	[self setUploadPath:[[NSString pathWithComponents:pathComponents] stringByStandardizingPath]];
 	return uploadPath;

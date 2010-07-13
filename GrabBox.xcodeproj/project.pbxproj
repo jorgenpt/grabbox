@@ -50,7 +50,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8D1107260486CEB800E47090 /* GrabBox */;
+			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = GrabBox;
 		};
 /* End PBXContainerItemProxy section */
@@ -149,10 +149,10 @@
 				8E60861711E6D1B600881A1C /* Notifier.m */,
 				8E7B69DE11EBF77200112165 /* Pasteboarder.h */,
 				8E7B69DF11EBF77200112165 /* Pasteboarder.m */,
-				8E7B6BC711EC383800112165 /* UploadInitiator.h */,
-				8E7B6BC811EC383800112165 /* UploadInitiator.m */,
 				8E7B6C2311EC433B00112165 /* Preferences.h */,
 				8E7B6C2411EC433B00112165 /* Preferences.m */,
+				8E7B6BC711EC383800112165 /* UploadInitiator.h */,
+				8E7B6BC811EC383800112165 /* UploadInitiator.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";

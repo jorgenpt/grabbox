@@ -3,7 +3,7 @@
 //  GrabBox
 //
 //  Created by Jørgen P. Tjernø on 7/9/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 devSoft. All rights reserved.
 //
 
 #import "FSRefConversions.h"
@@ -12,7 +12,7 @@
 
 + (NSString *)stringWithFSRef:(const FSRef *)aFSRef
 {
-	CFURLRef theURL = CFURLCreateFromFSRef( kCFAllocatorDefault, aFSRef );
+    CFURLRef theURL = CFURLCreateFromFSRef( kCFAllocatorDefault, aFSRef );
 	NSString* thePath = [(NSURL *)theURL path];
 	CFRelease ( theURL );
 	return thePath;
