@@ -4,9 +4,9 @@
 <dict>
 	<key>DefaultNotifications</key>
 	<array>
-		<string>Upload File?</string>
-		<string>URL Copied</string>
 		<string>Error</string>
+		<string>URL Copied</string>
+		<string>Upload Screenshot?</string>
 	</array>
 	<key>TicketVersion</key>
 	<integer>1</integer>
@@ -14,7 +14,7 @@
 	<array>
 		<string>Error</string>
 		<string>URL Copied</string>
-		<string>Upload File?</string>
+		<string>Upload Screenshot?</string>
 	</array>
 </dict>
 </plist>

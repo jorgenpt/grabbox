@@ -57,12 +57,12 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (int) dropboxId
 {
-	return [[NSUserDefaults standardUserDefaults] integerForKey:@"dropbox_id"];
+	return [[NSUserDefaults standardUserDefaults] integerForKey:@"dropboxId"];
 }
 
 - (void) setDropboxId:(int) toId
 {
-	[[NSUserDefaults standardUserDefaults] setInteger:toId forKey:@"dropbox_id"];
+	[[NSUserDefaults standardUserDefaults] setInteger:toId forKey:@"dropboxId"];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {

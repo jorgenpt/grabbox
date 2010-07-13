@@ -42,6 +42,7 @@
 		8E7B6B2E11EC19A500112165 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B6B2D11EC19A500112165 /* Growl.framework */; };
 		8E7B6B3611EC19A700112165 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B6B2D11EC19A500112165 /* Growl.framework */; };
 		8E7B6BC911EC383800112165 /* UploadInitiator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7B6BC811EC383800112165 /* UploadInitiator.m */; };
+		8E7B6C2511EC433B00112165 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7B6C2411EC433B00112165 /* Preferences.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,9 +107,12 @@
 		8E7B69DF11EBF77200112165 /* Pasteboarder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pasteboarder.m; sourceTree = "<group>"; };
 		8E7B6A7811EBFF1E00112165 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		8E7B6B2D11EC19A500112165 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
+		8E7B6BB811EC35E800112165 /* GrabBox 0.3.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "GrabBox 0.3.html"; sourceTree = "<group>"; };
 		8E7B6BBA11EC35EF00112165 /* GrabBox 0.2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "GrabBox 0.2.html"; sourceTree = "<group>"; };
 		8E7B6BC711EC383800112165 /* UploadInitiator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadInitiator.h; sourceTree = "<group>"; };
 		8E7B6BC811EC383800112165 /* UploadInitiator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadInitiator.m; sourceTree = "<group>"; };
+		8E7B6C2311EC433B00112165 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
+		8E7B6C2411EC433B00112165 /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,8 @@
 				8E7B69DF11EBF77200112165 /* Pasteboarder.m */,
 				8E7B6BC711EC383800112165 /* UploadInitiator.h */,
 				8E7B6BC811EC383800112165 /* UploadInitiator.m */,
+				8E7B6C2311EC433B00112165 /* Preferences.h */,
+				8E7B6C2411EC433B00112165 /* Preferences.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -230,6 +236,7 @@
 			children = (
 				8E7B691911EBE19F00112165 /* GrabBox 0.1.1.html */,
 				8E7B690911EBDFB400112165 /* GrabBox 0.1.html */,
+				8E7B6BBA11EC35EF00112165 /* GrabBox 0.2.html */,
 				8E7B6BB811EC35E800112165 /* GrabBox 0.3.html */,
 				8E7B690A11EBDFB400112165 /* updates.css */,
 			);
@@ -322,6 +329,7 @@
 				8E7B69D911EBF66900112165 /* GrowlerDelegate.m in Sources */,
 				8E7B69E011EBF77200112165 /* Pasteboarder.m in Sources */,
 				8E7B6BC911EC383800112165 /* UploadInitiator.m in Sources */,
+				8E7B6C2511EC433B00112165 /* Preferences.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
