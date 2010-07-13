@@ -9,12 +9,6 @@
 #import "Preferences.h"
 
 @implementation Preferences
-@synthesize window;
-
-- (void) awakeFromNib
-{
-    [window setReleasedWhenClosed:NO];
-}
 
 - (BOOL) willLaunchAtLogin
 {
