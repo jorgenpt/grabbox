@@ -29,7 +29,7 @@ static InformationGatherer* defaultInstance;
     @synchronized(self)
     {
         if (!defaultInstance)
-            defaultInstance = [[InformationGatherer alloc] init];
+            defaultInstance = [[self alloc] init];
     }
     return defaultInstance;
 

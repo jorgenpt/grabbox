@@ -15,7 +15,7 @@
 + (id) contextWithDelegate:(id <GrowlerDelegate>)delegate
                       data:(id)data
 {
-    return [[[GrowlerDelegateContext alloc] initWithDelegate:delegate data:data] autorelease];
+    return [[[self alloc] initWithDelegate:delegate data:data] autorelease];
 }
 - (id) initWithDelegate:(id <GrowlerDelegate>)initialDelegate
                    data:(id)initialData
