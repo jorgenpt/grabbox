@@ -11,6 +11,7 @@
 
 #import "Growler.h"
 #import "Pasteboarder.h"
+#import "UploadInitiator.h"
 
 @interface GrabBoxAppDelegate ()
 @property (nonatomic, assign) InformationGatherer* info;
@@ -41,7 +42,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void) awakeFromNib
 {
-	[self setInfo:[[InformationGatherer alloc] init]];
+	[self setInfo:[InformationGatherer defaultGatherer]];
 	[self setNotifier:[Notifier notifierWithCallback:translateEvent
 												path:[info screenshotPath]
 									callbackArgument:self]];
@@ -79,35 +80,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
 - (void) startMonitoring
 {
 	[notifier start];
-}
-
-- (NSString *) getNextFilenameWithExtension:(NSString *)ext
-									   from:(NSString *)dir
-{
-	NSFileManager* fm = [NSFileManager defaultManager];
-	NSString* characters = @"0123456789abcdefghijklmnopqrstuvwxyz";
-	
-	NSMutableArray* prefixes = [NSMutableArray arrayWithObject:@""];
-
-	for (int c = 0; c < [prefixes count]; ++c)
-	{
-		NSString* prefix = [prefixes objectAtIndex:c];
-		if ([prefix length] > MAX_NAME_LENGTH)
-			return nil;
-
-		for (int i = 0; i < [characters length]; i++)
-		{
-			NSString* filename = [prefix stringByAppendingString:[characters substringWithRange:NSMakeRange(i, 1)]];
-			[prefixes addObject:filename];
-			filename = [filename stringByAppendingFormat:@".%@", ext];
-
-			NSString* path = [NSString pathWithComponents:[NSArray arrayWithObjects:dir, filename, nil]];
-			if (![fm fileExistsAtPath:path])
-				return filename;	
-		}
-	}
-
-	return nil;
 }
 
 - (void) eventForStream:(ConstFSEventStreamRef)stream
@@ -157,9 +129,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
 	
 	NSSet* newEntries = [info createdFiles];
 	NSError* error;
-	NSString* uploadPath = [info uploadPath];
 	NSFileManager* fm = [NSFileManager defaultManager];
-	BOOL mkdirOk = [fm createDirectoryAtPath:uploadPath
+	BOOL mkdirOk = [fm createDirectoryAtPath:[info uploadPath]
 				 withIntermediateDirectories:YES
 								  attributes:nil
 									   error:&error];
@@ -175,27 +146,11 @@ static void translateEvent(ConstFSEventStreamRef stream,
 		if (![entry hasPrefix:@"Screen shot "])
 			continue;
 		
-		NSString* shortName = [self getNextFilenameWithExtension:[entry pathExtension]
-															from:uploadPath];
-		if (!shortName)
-			shortName = entry;
-
-		NSString* sourcePath = [NSString pathWithComponents:[NSArray arrayWithObjects: screenshotPath, entry, nil]];
-		NSString* destPath = [NSString pathWithComponents:[NSArray arrayWithObjects: uploadPath, shortName, nil]];
-		BOOL moveOk = [fm moveItemAtPath:sourcePath
-								  toPath:destPath
-								   error:&error];
-		if (!moveOk)
-		{
-			[Growler errorWithTitle:@"Could not upload file!"
-						description:[error localizedDescription]];
-			NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
-		}
-		else
-		{
-			NSString *dropboxUrl = [info getURLForFile:shortName withId:[self dropboxId]];
-			[[Pasteboarder pasteboarder] copy:dropboxUrl];
-		}
+		UploadInitiator* up = [UploadInitiator uploadFile:entry
+												   atPath:screenshotPath
+												   toPath:[info uploadPath]
+												   withId:[self dropboxId]];
+		[up upload];
 	}
 }
 

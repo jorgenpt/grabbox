@@ -14,7 +14,9 @@
 	NSSet* dirContents;
 }
 
-- (id)init;
++ (id) defaultGatherer;
+
+- (id) init;
 - (void) dealloc;
 
 - (NSString *)screenshotPath;

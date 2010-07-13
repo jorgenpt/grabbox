@@ -10,6 +10,8 @@
 
 #include <sqlite3.h>
 
+static InformationGatherer* defaultInstance;
+
 @interface InformationGatherer ()
 @property (nonatomic, retain) NSString* screenshotPath;
 @property (nonatomic, retain) NSString* uploadPath;
@@ -22,6 +24,16 @@
 @synthesize uploadPath;
 @synthesize dirContents;
 
++ (id) defaultGatherer
+{
+	@synchronized(self)
+	{
+		if (!defaultInstance)
+			defaultInstance = [[InformationGatherer alloc] init];
+	}
+	return defaultInstance;
+
+}
 - (id) init
 {
 	if (self = [super init])
