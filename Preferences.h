@@ -16,4 +16,7 @@
 
 - (void) awakeFromNib;
 
+- (BOOL) willLaunchAtLogin;
+- (void) setWillLaunchAtLogin:(BOOL)state;
+
 @end
