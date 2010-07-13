@@ -8,7 +8,7 @@
 
 #import "InformationGatherer.h"
 
-#include "sqlite3.h"
+#include <sqlite3.h>
 
 @interface InformationGatherer ()
 @property (nonatomic, retain) NSString* screenshotPath;
