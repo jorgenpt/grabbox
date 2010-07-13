@@ -10,7 +10,6 @@
 #import "FSRefConversions.h"
 
 #import "Growler.h"
-#import "Pasteboarder.h"
 #import "UploadInitiator.h"
 
 @interface GrabBoxAppDelegate ()

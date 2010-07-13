@@ -36,7 +36,6 @@
 		8E7B689811EBD87500112165 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 8E7B689711EBD87500112165 /* dsa_pub.pem */; };
 		8E7B696211EBEFCF00112165 /* Growler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7B696111EBEFCF00112165 /* Growler.m */; };
 		8E7B69D911EBF66900112165 /* GrowlerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7B69D811EBF66900112165 /* GrowlerDelegate.m */; };
-		8E7B69E011EBF77200112165 /* Pasteboarder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7B69DF11EBF77200112165 /* Pasteboarder.m */; };
 		8E7B6A4111EBFD4400112165 /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 8E7B692311EBEBB400112165 /* Growl Registration Ticket.growlRegDict */; };
 		8E7B6A7911EBFF1E00112165 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B6A7811EBFF1E00112165 /* libsqlite3.dylib */; };
 		8E7B6B2E11EC19A500112165 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B6B2D11EC19A500112165 /* Growl.framework */; };
@@ -103,8 +102,6 @@
 		8E7B696111EBEFCF00112165 /* Growler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Growler.m; sourceTree = "<group>"; };
 		8E7B69D711EBF66900112165 /* GrowlerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowlerDelegate.h; sourceTree = "<group>"; };
 		8E7B69D811EBF66900112165 /* GrowlerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowlerDelegate.m; sourceTree = "<group>"; };
-		8E7B69DE11EBF77200112165 /* Pasteboarder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pasteboarder.h; sourceTree = "<group>"; };
-		8E7B69DF11EBF77200112165 /* Pasteboarder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pasteboarder.m; sourceTree = "<group>"; };
 		8E7B6A7811EBFF1E00112165 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		8E7B6B2D11EC19A500112165 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		8E7B6BB811EC35E800112165 /* GrabBox 0.3.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "GrabBox 0.3.html"; sourceTree = "<group>"; };
@@ -147,8 +144,6 @@
 				8E4A509011E9105700A0A743 /* InitialStartup.m */,
 				8E60861611E6D1B600881A1C /* Notifier.h */,
 				8E60861711E6D1B600881A1C /* Notifier.m */,
-				8E7B69DE11EBF77200112165 /* Pasteboarder.h */,
-				8E7B69DF11EBF77200112165 /* Pasteboarder.m */,
 				8E7B6C2311EC433B00112165 /* Preferences.h */,
 				8E7B6C2411EC433B00112165 /* Preferences.m */,
 				8E7B6BC711EC383800112165 /* UploadInitiator.h */,
@@ -327,7 +322,6 @@
 				8E4A50A011E9155500A0A743 /* InformationGatherer.m in Sources */,
 				8E7B696211EBEFCF00112165 /* Growler.m in Sources */,
 				8E7B69D911EBF66900112165 /* GrowlerDelegate.m in Sources */,
-				8E7B69E011EBF77200112165 /* Pasteboarder.m in Sources */,
 				8E7B6BC911EC383800112165 /* UploadInitiator.m in Sources */,
 				8E7B6C2511EC433B00112165 /* Preferences.m in Sources */,
 			);

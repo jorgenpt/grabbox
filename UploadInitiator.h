@@ -35,6 +35,7 @@
 - (void) dealloc;
 
 - (void) upload;
+- (void) copyURL:(NSString *)url basedOnFile:(NSString *)path;
 - (void) growlClickedWithData:(id)data;
 - (void) growlTimedOutWithData:(id)data;
 - (NSString *) getNextFilenameWithExtension:(NSString *)ext;
