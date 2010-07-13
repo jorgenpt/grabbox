@@ -12,7 +12,7 @@
 #import "GrowlerDelegate.h"
 
 @interface Growler : NSObject <GrowlApplicationBridgeDelegate> {
-
+	NSMutableDictionary* contexts;
 }
 
 + (void) errorWithTitle:(NSString *)title
@@ -27,10 +27,11 @@
 		  delegateContext:(GrowlerDelegateContext *)context
 				   sticky:(BOOL)stickiness;
 
+- (NSNumber*) addContext:(id)context;
+- (GrowlerDelegateContext*) retrieveContextByKey:(id) contextKey;
+
 - (void) awakeFromNib;
 - (void) growlNotificationWasClicked:(id)context;
 - (void) growlNotificationTimedOut:(id)context;
-
-- (void) growlIsReady;
 
 @end

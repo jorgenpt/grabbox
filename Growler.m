@@ -13,6 +13,7 @@
 - (void)awakeFromNib
 {
 	[GrowlApplicationBridge setGrowlDelegate:self];
+	contexts = [[NSMutableDictionary alloc] init];
 }
 
 + (void) errorWithTitle:(NSString *)title
@@ -45,28 +46,44 @@
 		  delegateContext:(GrowlerDelegateContext *)context
 				   sticky:(BOOL)stickiness
 {
+	NSNumber* contextKey;
+	if (context)
+		 contextKey = [(Growler*)[GrowlApplicationBridge growlDelegate] addContext:context];
+
 	[GrowlApplicationBridge notifyWithTitle:title
 								description:description
 						   notificationName:notificationName
 								   iconData:nil
 								   priority:0
 								   isSticky:stickiness
-							   clickContext:context];
+							   clickContext:contextKey];
 }
 
-
-- (void) growlNotificationWasClicked:(id)context
+- (NSNumber*) addContext:(id) context
 {
+	NSNumber* hash = [NSNumber numberWithInt:[context hash]];
+	[contexts setObject:context forKey:hash];
+	return hash;
+}
+
+- (GrowlerDelegateContext*) retrieveContextByKey:(id) contextKey
+{
+	GrowlerDelegateContext* context = [[contexts objectForKey:contextKey] retain];
+	[contexts removeObjectForKey:contextKey];
+	return [context autorelease];
+}
+
+- (void) growlNotificationWasClicked:(id)contextKey
+{
+	GrowlerDelegateContext* context = [self retrieveContextByKey:contextKey];
 	[[context delegate] growlClickedWithData:[context data]];
+	[contexts removeObjectForKey:contextKey];
 }
 
-- (void) growlNotificationTimedOut:(id)context
+- (void) growlNotificationTimedOut:(id)contextKey
 {
+	GrowlerDelegateContext* context = [self retrieveContextByKey:contextKey];
 	[[context delegate] growlTimedOutWithData:[context data]];
 }
 
-- (void) growlIsReady
-{
-	NSLog(@"Growl is ready!");
-}
 @end
