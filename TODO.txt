@@ -6,6 +6,7 @@ X Rename screenshot
 X Optional upload
 + Option for o7 forwards
 - Link to Public dir from uid entry dialog
+- Check if Dropbox is running when starting up.
 - Icon
 - Option for alternate upload URL / local directory.
 - Localized "Screen shot" string
