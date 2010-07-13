@@ -31,6 +31,6 @@
                   paths:(NSArray *)paths
                   flags:(const FSEventStreamEventFlags[])flags
                     ids:(const FSEventStreamEventId[]) ids;
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification;
+- (void) applicationDidFinishLaunching:(NSNotification *)aNotification;
 
 @end

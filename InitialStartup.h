@@ -28,8 +28,8 @@
 - (void) awakeFromNib;
 - (void) dealloc;
 
-- (BOOL)windowShouldClose:(id)sender;
-- (void) windowDidBecomeKey: (NSNotification *) aNotification;
+- (BOOL) windowShouldClose:(id) sender;
+- (void) windowDidBecomeKey:(NSNotification *) aNotification;
 
 - (void) checkClipboard: (NSTimer *) timer;
 
