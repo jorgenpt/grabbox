@@ -1,5 +1,5 @@
 //
-//  FileRenamer.h
+//  ImageRenamer.h
 //  GrabBox
 //
 //  Created by Jørgen P. Tjernø on 7/13/10.
@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "GrowlerDelegate.h"
 
-@interface FileRenamer : NSObject <GrowlerDelegate> {
+@interface ImageRenamer : NSObject <GrowlerDelegate> {
     NSImageView *imageView;
     NSTextField *name;
     NSImage *image;

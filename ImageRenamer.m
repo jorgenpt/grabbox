@@ -1,15 +1,15 @@
 //
-//  FileRenamer.m
+//  ImageRenamer.m
 //  GrabBox
 //
 //  Created by Jørgen P. Tjernø on 7/13/10.
 //  Copyright 2010 devSoft. All rights reserved.
 //
 
-#import "FileRenamer.h"
+#import "ImageRenamer.h"
 
 
-@implementation FileRenamer
+@implementation ImageRenamer
 
 @synthesize imageView;
 @synthesize image;
