@@ -3,11 +3,13 @@ X Find DropBox path correctly and automatically
 X Set up o7.no forwards
 X Growl notification
 X Rename screenshot
+X Optional upload
++ Option for o7 forwards
+- Link to Public dir from uid entry dialog
 - Icon
-- Option for o7 forwards
 - Option for alternate upload URL / local directory.
 - Localized "Screen shot" string
  (/System/Library/CoreServices/SystemUIServer.app/Contents/Resources)
-- Optional upload
 - Optional custom name
+- Start at login checkbox
 ? MenuExtra
