@@ -10,6 +10,8 @@
 #import "Notifier.h"
 #import "InformationGatherer.h"
 
+#define MAX_NAME_LENGTH 32
+
 @interface GrabBoxAppDelegate : NSObject <NSApplicationDelegate> {
     NSWindow* window;
 	NSWindow* initialStartupWindow;
@@ -26,6 +28,8 @@
 - (void) setDropboxId:(int) toId;
 
 - (void) startMonitoring;
+
+- (NSString *) getNextFilenameWithExtension:(NSString *)ext from:(NSString *)dir;
 
 - (void) eventForStream:(ConstFSEventStreamRef)stream
 				  paths:(NSArray *)paths

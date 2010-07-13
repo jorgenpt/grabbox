@@ -81,6 +81,35 @@ static void translateEvent(ConstFSEventStreamRef stream,
 	[notifier start];
 }
 
+- (NSString *) getNextFilenameWithExtension:(NSString *)ext
+									   from:(NSString *)dir
+{
+	NSFileManager* fm = [NSFileManager defaultManager];
+	NSString* characters = @"0123456789abcdefghijklmnopqrstuvwxyz";
+	
+	NSMutableArray* prefixes = [NSMutableArray arrayWithObject:@""];
+
+	for (int c = 0; c < [prefixes count]; ++c)
+	{
+		NSString* prefix = [prefixes objectAtIndex:c];
+		if ([prefix length] > MAX_NAME_LENGTH)
+			return nil;
+
+		for (int i = 0; i < [characters length]; i++)
+		{
+			NSString* filename = [prefix stringByAppendingString:[characters substringWithRange:NSMakeRange(i, 1)]];
+			[prefixes addObject:filename];
+			filename = [filename stringByAppendingFormat:@".%@", ext];
+
+			NSString* path = [NSString pathWithComponents:[NSArray arrayWithObjects:dir, filename, nil]];
+			if (![fm fileExistsAtPath:path])
+				return filename;	
+		}
+	}
+
+	return nil;
+}
+
 - (void) eventForStream:(ConstFSEventStreamRef)stream
 				  paths:(NSArray *)paths
 				  flags:(const FSEventStreamEventFlags[])flags
@@ -146,8 +175,13 @@ static void translateEvent(ConstFSEventStreamRef stream,
 		if (![entry hasPrefix:@"Screen shot "])
 			continue;
 		
+		NSString* shortName = [self getNextFilenameWithExtension:[entry pathExtension]
+															from:uploadPath];
+		if (!shortName)
+			shortName = entry;
+
 		NSString* sourcePath = [NSString pathWithComponents:[NSArray arrayWithObjects: screenshotPath, entry, nil]];
-		NSString* destPath = [NSString pathWithComponents:[NSArray arrayWithObjects: uploadPath, entry, nil]];
+		NSString* destPath = [NSString pathWithComponents:[NSArray arrayWithObjects: uploadPath, shortName, nil]];
 		BOOL moveOk = [fm moveItemAtPath:sourcePath
 								  toPath:destPath
 								   error:&error];
@@ -159,7 +193,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 		}
 		else
 		{
-			NSString *dropboxUrl = [info getURLForFile:entry withId:[self dropboxId]];
+			NSString *dropboxUrl = [info getURLForFile:shortName withId:[self dropboxId]];
 			[[Pasteboarder pasteboarder] copy:dropboxUrl];
 		}
 	}
