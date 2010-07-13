@@ -7,8 +7,21 @@
         <language>en</language>
 
         <item>
+            <title>Version 0.2</title>
+            <sparkle:releaseNotesLink>http://o7.no/grabbox/updates/GrabBox%200.2.html</sparkle:releaseNotesLink>
+            <pubDate>Mon, 12 Jul 2010 21:09:18 -0700</pubDate>
+            <enclosure
+                url="http://o7.no/grabbox/updates/GrabBox 0.2.zip"
+                sparkle:version="0.2"
+                type="application/octet-stream"
+                length="570452"
+                sparkle:dsaSignature="MC0CFQC3bddcqMcU+zuyEGYd+MFQjQNRnQIUBIXKPWp6Jn4Cw3PeyPu0lgp3POQ="
+                />
+        </item>
+
+        <item>
             <title>Version 0.1.1</title>
-            <sparkle:releaseNotesLink>http://o7.no/grabbox/updates/GrabBox 0.1.1.html</sparkle:releaseNotesLink>
+            <sparkle:releaseNotesLink>http://o7.no/grabbox/updates/GrabBox%200.1.1.html</sparkle:releaseNotesLink>
             <pubDate>Mon, 12 Jul 2010 16:52:14 -0700</pubDate>
             <enclosure
                 url="http://o7.no/grabbox/updates/GrabBox 0.1.1.zip"
@@ -21,7 +34,7 @@
 
         <item>
             <title>Version 0.1</title>
-            <sparkle:releaseNotesLink>http://o7.no/grabbox/updates/GrabBox 0.1.html</sparkle:releaseNotesLink>
+            <sparkle:releaseNotesLink>http://o7.no/grabbox/updates/GrabBox%200.1.html</sparkle:releaseNotesLink>
             <pubDate>Mon, 12 Jul 2010 16:27:22 -0700</pubDate>
             <enclosure
                 url="http://o7.no/grabbox/updates/GrabBox 0.1.zip"
