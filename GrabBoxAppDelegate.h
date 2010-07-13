@@ -12,9 +12,9 @@
 
 @interface GrabBoxAppDelegate : NSObject <NSApplicationDelegate> {
     NSWindow* window;
-	NSWindow* initialStartupWindow;
-	InformationGatherer* info;
-	Notifier* notifier;
+    NSWindow* initialStartupWindow;
+    InformationGatherer* info;
+    Notifier* notifier;
 }
 
 @property (assign) IBOutlet NSWindow* window;
@@ -28,9 +28,9 @@
 
 - (void) startMonitoring;
 - (void) eventForStream:(ConstFSEventStreamRef)stream
-				  paths:(NSArray *)paths
-				  flags:(const FSEventStreamEventFlags[])flags
-					ids:(const FSEventStreamEventId[]) ids;
+                  paths:(NSArray *)paths
+                  flags:(const FSEventStreamEventFlags[])flags
+                    ids:(const FSEventStreamEventId[]) ids;
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification;
 
 @end

@@ -11,42 +11,42 @@
 @implementation Notifier
 
 + (id) notifierWithCallback:(FSEventStreamCallback)newCallback path:(NSString *)newPath callbackArgument:(void *)info; {
-	return [[[self alloc] initWithCallback:newCallback path:newPath callbackArgument:info] autorelease];
+    return [[[self alloc] initWithCallback:newCallback path:newPath callbackArgument:info] autorelease];
 }
 
 - (id) initWithCallback:(FSEventStreamCallback)newCallback path:(NSString *)newPath callbackArgument:(void *)info {
-	if((self = [super init])) {
-		paths = [[NSArray arrayWithObject:newPath] retain];
-		context.version = 0L;
-		context.info = info;
-		context.retain = (CFAllocatorRetainCallBack)CFRetain;
-		context.release = (CFAllocatorReleaseCallBack)CFRelease;
-		context.copyDescription = (CFAllocatorCopyDescriptionCallBack)CFCopyDescription;
-        
-		stream = FSEventStreamCreate(kCFAllocatorDefault, newCallback, &context, (CFArrayRef)paths, kFSEventStreamEventIdSinceNow, /*latency*/ 1.0, kFSEventStreamCreateFlagUseCFTypes);
-		if (!stream) {
-			NSLog(@"Could not create event stream for path %@", newPath);
-			[self release];
-			return nil;
-		}
-        
-		FSEventStreamScheduleWithRunLoop(stream, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
-	}
-	return self;
+    if((self = [super init])) {
+        paths = [[NSArray arrayWithObject:newPath] retain];
+        context.version = 0L;
+        context.info = info;
+        context.retain = (CFAllocatorRetainCallBack)CFRetain;
+        context.release = (CFAllocatorReleaseCallBack)CFRelease;
+        context.copyDescription = (CFAllocatorCopyDescriptionCallBack)CFCopyDescription;
+
+        stream = FSEventStreamCreate(kCFAllocatorDefault, newCallback, &context, (CFArrayRef)paths, kFSEventStreamEventIdSinceNow, /*latency*/ 1.0, kFSEventStreamCreateFlagUseCFTypes);
+        if (!stream) {
+            NSLog(@"Could not create event stream for path %@", newPath);
+            [self release];
+            return nil;
+        }
+
+        FSEventStreamScheduleWithRunLoop(stream, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
+    }
+    return self;
 }
 
 - (void) dealloc {
-	[self stop];
-	FSEventStreamUnscheduleFromRunLoop(stream, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
-	CFRelease(stream);
-	[super dealloc];
+    [self stop];
+    FSEventStreamUnscheduleFromRunLoop(stream, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
+    CFRelease(stream);
+    [super dealloc];
 }
 
 - (void) start {
-	FSEventStreamStart(stream);
+    FSEventStreamStart(stream);
 }
 - (void) stop {
-	FSEventStreamStop(stream);
+    FSEventStreamStop(stream);
 }
 
 @end

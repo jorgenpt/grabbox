@@ -13,7 +13,7 @@
 
 - (void) awakeFromNib
 {
-	[window setReleasedWhenClosed:NO];
+    [window setReleasedWhenClosed:NO];
 }
 
 @end

@@ -10,7 +10,7 @@
 #import "GrowlerDelegate.h"
 
 @interface Pasteboarder : NSObject <GrowlerDelegate> {
-	
+
 }
 
 + (id) pasteboarder;

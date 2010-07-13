@@ -12,20 +12,20 @@
 #import "GrowlerDelegate.h"
 
 @interface Growler : NSObject <GrowlApplicationBridgeDelegate> {
-	NSMutableDictionary* contexts;
+    NSMutableDictionary* contexts;
 }
 
 + (void) errorWithTitle:(NSString *)title
-			description:(NSString *)description;
+            description:(NSString *)description;
 + (void) messageWithTitle:(NSString *)title
-			  description:(NSString *)description
-					 name:(NSString *)notificationName
-		  delegateContext:(GrowlerDelegateContext *)context;
+              description:(NSString *)description
+                     name:(NSString *)notificationName
+          delegateContext:(GrowlerDelegateContext *)context;
 + (void) messageWithTitle:(NSString *)title
-			  description:(NSString *)description
-					 name:(NSString *)notificationName
-		  delegateContext:(GrowlerDelegateContext *)context
-				   sticky:(BOOL)stickiness;
+              description:(NSString *)description
+                     name:(NSString *)notificationName
+          delegateContext:(GrowlerDelegateContext *)context
+                   sticky:(BOOL)stickiness;
 
 - (NSNumber*) addContext:(id)context;
 - (GrowlerDelegateContext*) retrieveContextByKey:(id) contextKey;

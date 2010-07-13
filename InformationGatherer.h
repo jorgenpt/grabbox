@@ -9,9 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 @interface InformationGatherer : NSObject {
-	NSString* screenshotPath;
-	NSString* uploadPath;
-	NSSet* dirContents;
+    NSString* screenshotPath;
+    NSString* uploadPath;
+    NSSet* dirContents;
 }
 
 + (id) defaultGatherer;

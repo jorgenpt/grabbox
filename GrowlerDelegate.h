@@ -14,8 +14,8 @@
 @end
 
 @interface GrowlerDelegateContext : NSObject {
-	id <GrowlerDelegate> delegate;
-	id data;
+    id <GrowlerDelegate> delegate;
+    id data;
 }
 
 @property (nonatomic, retain) id <GrowlerDelegate> delegate;

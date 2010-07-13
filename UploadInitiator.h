@@ -12,10 +12,10 @@
 #define MAX_NAME_LENGTH 32
 
 @interface UploadInitiator : NSObject <GrowlerDelegate> {
-	NSString *srcFile;
-	NSString *srcPath;
-	NSString *destPath;
-	int dropboxId;
+    NSString *srcFile;
+    NSString *srcPath;
+    NSString *destPath;
+    int dropboxId;
 }
 
 @property (nonatomic, retain) NSString* srcFile;
@@ -24,13 +24,13 @@
 @property int dropboxId;
 
 + (id) uploadFile:(NSString *)file
-		   atPath:(NSString *)source
-		   toPath:(NSString *)destination
-		   withId:(int)dropId;
+           atPath:(NSString *)source
+           toPath:(NSString *)destination
+           withId:(int)dropId;
 
 - (id) initForFile:(NSString *)file
-			atPath:(NSString *)source
-			toPath:(NSString *)destination
+            atPath:(NSString *)source
+            toPath:(NSString *)destination
             withId:(int)dropId;
 - (void) dealloc;
 

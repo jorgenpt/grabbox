@@ -10,11 +10,11 @@
 #import "GrabBoxAppDelegate.h"
 
 @interface InitialStartup : NSObject {
-	NSWindow *window;
-	NSTextField *dropboxId;
-	GrabBoxAppDelegate *appDelegate;
-	NSTimer *timer;
-	int lastIdFromUrl;
+    NSWindow *window;
+    NSTextField *dropboxId;
+    GrabBoxAppDelegate *appDelegate;
+    NSTimer *timer;
+    int lastIdFromUrl;
 }
 
 @property (assign) IBOutlet NSWindow *window;

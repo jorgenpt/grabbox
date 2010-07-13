@@ -7,9 +7,9 @@
 //
 
 @interface Notifier : NSObject {
-	NSArray *paths; //Actually just one.
-	FSEventStreamRef stream;
-	struct FSEventStreamContext context;
+    NSArray *paths; //Actually just one.
+    FSEventStreamRef stream;
+    struct FSEventStreamContext context;
 }
 
 + (id) notifierWithCallback:(FSEventStreamCallback)newCallback path:(NSString *)newPath callbackArgument:(void *)info;

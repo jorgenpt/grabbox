@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface Preferences : NSObject {
-	NSWindow* window;
+    NSWindow* window;
 }
 
 @property (assign) IBOutlet NSWindow *window;
