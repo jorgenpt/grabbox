@@ -7,7 +7,8 @@ X Optional upload
 X Option for o7 forwards
 X Start at login checkbox
 X First run "start at login?" dialog.
-- Optional custom name
+X Optional custom name
+- Check if filename is in use when renaming & uploading
 - Link to Public dir from uid entry dialog
 - Check if Dropbox is running when starting up.
 - Icon
