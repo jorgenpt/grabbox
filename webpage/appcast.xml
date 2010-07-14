@@ -9,13 +9,13 @@
         <item>
             <title>Version 0.4.1</title>
             <sparkle:releaseNotesLink>http://o7.no/grabbox/updates/GrabBox%200.4.1.html</sparkle:releaseNotesLink>
-            <pubDate>Wed, 14 Jul 2010 10:33:51 -0700</pubDate>
+            <pubDate>Wed, 14 Jul 2010 11:07:38 -0700</pubDate>
             <enclosure
                 url="http://o7.no/grabbox/updates/GrabBox 0.4.1.zip"
                 sparkle:version="0.4.1"
                 type="application/octet-stream"
-               length="792022"
-                sparkle:dsaSignature="MC4CFQDROZAhKV+yItSjVvgffyq3Bjt1mQIVAKXwk9kKR+UQbJap/Aa5+1/9YFK5"
+               length="788644"
+                sparkle:dsaSignature="MC0CFQCgBWlQ3reLKAKrKuejeWkreTE5vwIUeg4CNKh5HVOmvkGtbP+oMqzxCD0="
                 />
         </item>
 
