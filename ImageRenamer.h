@@ -10,6 +10,7 @@
 #import "GrowlerDelegate.h"
 
 @interface ImageRenamer : NSObject <GrowlerDelegate> {
+    NSWindow *window;
     NSImageView *imageView;
     NSTextField *name;
     NSImage *image;
@@ -17,6 +18,7 @@
     NSString *url;
 }
 
+@property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSImageView *imageView;
 @property (assign) IBOutlet NSTextField *name;
 @property (nonatomic, retain) NSImage *image;
@@ -30,10 +32,13 @@
              atURL:(NSString *)url;
 - (void) dealloc;
 
-- (void) showRenamer;
 - (void) awakeFromNib;
+- (BOOL) windowShouldClose;
+
 - (void) growlClickedWithData:(id)data;
 - (void) growlTimedOutWithData:(id)data;
+
+- (void) showRenamer;
 - (IBAction) clickedOk:(id)sender;
 
 @end

@@ -9,6 +9,7 @@
 #import "UploadInitiator.h"
 #import "Growler.h"
 #import "InformationGatherer.h"
+#import "ImageRenamer.h"
 
 @implementation UploadInitiator
 
@@ -92,12 +93,15 @@
                            sticky:YES];
         NSLog(@"ERROR: Couldn't put url into pasteboard.");
     }
-    else {
+    else
+    {
+        ImageRenamer* renamer = [ImageRenamer renamerForFile:path atURL:url];
+        GrowlerDelegateContext* context = [GrowlerDelegateContext contextWithDelegate:renamer data:nil];
         [Growler messageWithTitle:@"Screenshot uploaded!"
                       description:@"The screenshot has been uploaded and a link put in your clipboard. Click here to give the file a more descriptive name!"
          //Click here to give it a better name, or press Cmd-Opt-N."
                              name:@"URL Copied"
-                  delegateContext:nil
+                  delegateContext:context
                            sticky:NO];
     }
 }
