@@ -64,6 +64,18 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [[NSUserDefaults standardUserDefaults] setInteger:toId forKey:@"DropboxId"];
 }
 
+- (NSArray *)feedParametersForUpdater:(SUUpdater *)updater sendingSystemProfile:(BOOL)sendingProfile
+{
+    NSString* appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSDictionary* versionParam = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  @"version", @"key",
+                                  appVersion, @"value",
+                                  @"Version", @"displayKey",
+                                  appVersion, @"displayValue",
+                                  nil];
+    return [NSArray arrayWithObject:versionParam];
+}
+ 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     NSUserDefaults* u = [NSUserDefaults standardUserDefaults];
@@ -76,7 +88,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
     if (![u boolForKey:@"UseDirectLink"])
         [u setBool:[u boolForKey:@"useDirectLink"] forKey:@"UseDirectLink"];
     [u removeObjectForKey:@"useDirectLink"];
-
+    
+    [[SUUpdater sharedUpdater] setDelegate:self];
+    
     if ([self dropboxId] == 0)
         [DropboxDetector assertDropboxRunningWithDelegate:self];
     else

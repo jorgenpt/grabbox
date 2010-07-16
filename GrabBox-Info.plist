@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleVersion</key>
-	<string>0.5</string>
+	<string>0.5.1</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.5</string>
+	<string>0.5.1</string>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUPublicDSAKeyFile</key>

@@ -10,6 +10,7 @@
 #import "Notifier.h"
 #import "InformationGatherer.h"
 #import "DropboxDetector.h"
+#import "Sparkle/SUUpdater.h"
 
 @interface GrabBoxAppDelegate : NSObject <NSApplicationDelegate, DropboxDetectorDelegate> {
     NSWindow* setupWindow;
@@ -30,6 +31,8 @@
                   paths:(NSArray *)paths
                   flags:(const FSEventStreamEventFlags[])flags
                     ids:(const FSEventStreamEventId[]) ids;
+- (NSArray *)feedParametersForUpdater:(SUUpdater *)updater
+                 sendingSystemProfile:(BOOL)sendingProfile;
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification;
 - (void) dropboxIsRunning:(BOOL) running;
 @end
