@@ -161,7 +161,7 @@ static InformationGatherer* defaultInstance = nil;
 - (NSString *)getURLForFile:(NSString *)file withId:(int)dropboxId
 {
     NSString *escapedFile = [file stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"useDirectLink"])
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"UseDirectLink"])
     {
         return  [NSString stringWithFormat:@"http://dl.dropbox.com/u/%d/Screenshots/%@", dropboxId, escapedFile];
     }

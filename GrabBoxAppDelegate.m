@@ -55,15 +55,26 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (int) dropboxId
 {
-    return [[NSUserDefaults standardUserDefaults] integerForKey:@"dropboxId"];
+    return [[NSUserDefaults standardUserDefaults] integerForKey:@"DropboxId"];
 }
 
 - (void) setDropboxId:(int) toId
 {
-    [[NSUserDefaults standardUserDefaults] setInteger:toId forKey:@"dropboxId"];
+    [[NSUserDefaults standardUserDefaults] setInteger:toId forKey:@"DropboxId"];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    NSUserDefaults* u = [NSUserDefaults standardUserDefaults];
+    if (![u integerForKey:@"DropboxId"])
+        [u setInteger:[u integerForKey:@"dropboxId"] forKey:@"DropboxId"];
+    [u removeObjectForKey:@"dropboxId"];
+    if (![u boolForKey:@"PromptBeforeUploading"])
+        [u setBool:[u boolForKey:@"promptBeforeUploading"] forKey:@"PromptBeforeUploading"];
+    [u removeObjectForKey:@"promptBeforeUploading"];
+    if (![u boolForKey:@"UseDirectLink"])
+        [u setBool:[u boolForKey:@"useDirectLink"] forKey:@"UseDirectLink"];
+    [u removeObjectForKey:@"useDirectLink"];
+
     if ([self dropboxId] == 0)
     {
         [setupWindow makeKeyAndOrderFront:self];
@@ -148,7 +159,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
                                                    atPath:screenshotPath
                                                    toPath:[info uploadPath]
                                                    withId:[self dropboxId]];
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"promptBeforeUploading"])
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PromptBeforeUploading"])
         {
             [Growler messageWithTitle:@"Should we upload the screenshot?"
                           description:@"If you'd like the screenshot you just took to be uploaded and a link put in your clipboard, click here."
