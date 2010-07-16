@@ -148,6 +148,9 @@
 		8E7B6BC811EC383800112165 /* UploadInitiator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadInitiator.m; sourceTree = "<group>"; };
 		8E7B6C2311EC433B00112165 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
 		8E7B6C2411EC433B00112165 /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
+		8E83818711F0DB1C00C3151D /* GrabBox 0.5.1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "GrabBox 0.5.1.html"; sourceTree = "<group>"; };
+		8E83818811F0DB2A00C3151D /* setup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setup.png; sourceTree = "<group>"; };
+		8E83818911F0DB2A00C3151D /* silk.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = silk.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				8E4E78F211EE2E7A00EB0CAD /* Updates */,
+				8E83818911F0DB2A00C3151D /* silk.gif */,
 				8E4E78EC11EE2E7A00EB0CAD /* index.html */,
 				8E2AF34111F04B8D00A29A61 /* favicon.ico */,
 				8E4E78EA11EE2E7A00EB0CAD /* grabbox.png */,
@@ -294,6 +298,7 @@
 				8E4E78EE11EE2E7A00EB0CAD /* preferences.png */,
 				8E4E78EF11EE2E7A00EB0CAD /* prompt_rename.png */,
 				8E4E78F011EE2E7A00EB0CAD /* prompt_upload.png */,
+				8E83818811F0DB2A00C3151D /* setup.png */,
 				8E4E78F111EE2E7A00EB0CAD /* sparkle.png */,
 				8E4E78E911EE2E7A00EB0CAD /* appcast.xml */,
 			);
@@ -311,6 +316,7 @@
 				8E4E78F811EE2E7A00EB0CAD /* GrabBox 0.3.html */,
 				8E4E78FA11EE2E7A00EB0CAD /* GrabBox 0.4.1.html */,
 				8E4E78FC11EE2E7A00EB0CAD /* GrabBox 0.4.html */,
+				8E83818711F0DB1C00C3151D /* GrabBox 0.5.1.html */,
 				8E2AF33D11F04B7900A29A61 /* GrabBox 0.5.html */,
 				8E4E78F411EE2E7A00EB0CAD /* GrabBox 0.1.1.zip */,
 				8E4E78F711EE2E7A00EB0CAD /* GrabBox 0.2.zip */,
