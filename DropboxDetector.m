@@ -55,10 +55,16 @@
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AutostartDropboxIfNeeded"])
                 [self startDropbox:self];
             else
+            {
+                [NSApp activateIgnoringOtherApps:YES];
                 [NSApp runModalForWindow:[self notRunning]];
+            }
         }
         else
-                [NSApp runModalForWindow:[self notInstalled]];
+        {
+            [NSApp activateIgnoringOtherApps:YES];
+            [NSApp runModalForWindow:[self notInstalled]];
+        }
     }
     else
         [[self delegate] dropboxIsRunning:YES];

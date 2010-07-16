@@ -48,7 +48,6 @@
 - (void) awakeFromNib
 {
     [self setImage:[[[NSImage alloc] initWithContentsOfFile:path] autorelease]];
-    [[self window] makeKeyAndOrderFront:self];
 
     NSRect windowRect = [[self window] frame];
 
@@ -87,6 +86,9 @@
     windowRect.size = newSize;
     [[self window] setFrame:windowRect display:YES];
     [imageView setImage:[self image]];
+    
+    [[self window] makeKeyAndOrderFront:self];
+    [NSApp activateIgnoringOtherApps:YES];
 }
 
 - (BOOL) windowShouldClose

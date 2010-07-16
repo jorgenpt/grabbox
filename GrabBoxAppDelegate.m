@@ -89,6 +89,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
     {
         if ([self dropboxId] == 0)
         {
+            [NSApp activateIgnoringOtherApps:YES];
             [NSApp runModalForWindow:setupWindow];
         }
         else
