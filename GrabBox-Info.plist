@@ -11,7 +11,7 @@
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
 	<key>SUFeedURL</key>
-	<string>http://o7.no/grabbox/appcast.xml</string>
+	<string>http://grabbox.devsoft.no/appcast.xml</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
