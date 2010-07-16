@@ -76,7 +76,8 @@
     }
 }
 
-+ (void) copyURL:(NSString *)url basedOnFile:(NSString *)path
++ (void) copyURL:(NSString *)url
+     basedOnFile:(NSString *)path
 {
     NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
     [pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
