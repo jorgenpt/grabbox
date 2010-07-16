@@ -89,7 +89,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
     {
         if ([self dropboxId] == 0)
         {
-            [setupWindow makeKeyAndOrderFront:self];
+            [NSApp runModalForWindow:setupWindow];
         }
         else
         {

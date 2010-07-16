@@ -958,10 +958,6 @@
 				<string key="NSFrameAutosaveName"/>
 			</object>
 			<object class="NSUserDefaultsController" id="977442305">
-				<object class="NSMutableArray" key="NSDeclaredKeys">
-					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>AutostartDropboxIfNeeded</string>
-				</object>
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
 			<object class="NSCustomObject" id="226433106">
@@ -1141,14 +1137,6 @@
 						<reference key="destination" ref="668911428"/>
 					</object>
 					<int key="connectionID">624</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">preferences</string>
-						<reference key="source" ref="615864898"/>
-						<reference key="destination" ref="609285721"/>
-					</object>
-					<int key="connectionID">625</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2034,7 +2022,6 @@
 							<string>appDelegate</string>
 							<string>autoLaunch</string>
 							<string>linkOk</string>
-							<string>preferences</string>
 							<string>window</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -2042,7 +2029,6 @@
 							<string>GrabBoxAppDelegate</string>
 							<string>NSButton</string>
 							<string>NSButton</string>
-							<string>NSMenuItem</string>
 							<string>NSWindow</string>
 						</object>
 					</object>
@@ -2053,7 +2039,6 @@
 							<string>appDelegate</string>
 							<string>autoLaunch</string>
 							<string>linkOk</string>
-							<string>preferences</string>
 							<string>window</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -2069,10 +2054,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">linkOk</string>
 								<string key="candidateClassName">NSButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">preferences</string>
-								<string key="candidateClassName">NSMenuItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">window</string>

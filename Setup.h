@@ -11,7 +11,6 @@
 
 @interface Setup : NSObject {
     NSWindow *window;
-    NSMenuItem *preferences;
     NSButton *linkOk;
     NSButton *autoLaunch;
     GrabBoxAppDelegate *appDelegate;
@@ -20,7 +19,6 @@
 }
 
 @property (assign) IBOutlet NSWindow *window;
-@property (assign) IBOutlet NSMenuItem *preferences;
 @property (assign) IBOutlet NSButton *linkOk;
 @property (assign) IBOutlet NSButton *autoLaunch;
 @property (assign) IBOutlet GrabBoxAppDelegate *appDelegate;

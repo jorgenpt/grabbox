@@ -15,7 +15,6 @@
 @implementation Setup
 
 @synthesize window;
-@synthesize preferences;
 @synthesize linkOk;
 @synthesize autoLaunch;
 @synthesize appDelegate;
@@ -30,6 +29,7 @@
 
 - (void) dealloc
 {
+    [[self timer] invalidate];
     [self setTimer:nil];
     [super dealloc];
 }
@@ -56,24 +56,26 @@
         if (!oldDropId)
             [appDelegate startMonitoring];
 
+        [[self timer] invalidate];
         [self setTimer:nil];
         [self setDropboxId:0];
-        [preferences setEnabled:YES];
 
         [window close];
+        [NSApp stopModal];
     }
 }
 
 - (IBAction) pressedCancel:(id) sender
 {
+    [[self timer] invalidate];
     [self setTimer:nil];
     [self setDropboxId:0];
-    [preferences setEnabled:YES];
 
     if (![appDelegate dropboxId])
         [[NSApplication sharedApplication] terminate:self];
     else
         [window close];
+    [NSApp stopModal];
 }
 
 - (IBAction) openPublicFolder:(id) sender
@@ -91,7 +93,6 @@
         {
             if ([autoLaunch state] != NSOnState)
                 [autoLaunch performClick:self];
-            [preferences setEnabled:NO];
         }
 
         timer = [[NSTimer scheduledTimerWithTimeInterval: 0.5
@@ -99,6 +100,9 @@
                                                 selector: @selector(checkClipboard:)
                                                 userInfo: nil
                                                  repeats: YES] retain];
+        [[NSRunLoop currentRunLoop] addTimer:timer
+                                     forMode:NSModalPanelRunLoopMode];
+
     }
 }
 

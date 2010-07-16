@@ -98,6 +98,9 @@
 		8E2AF15A11F01D4B00A29A61 /* link_waiting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = link_waiting.png; sourceTree = "<group>"; };
 		8E2AF15C11F0275000A29A61 /* howto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howto.png; sourceTree = "<group>"; };
 		8E2AF24D11F03A8500A29A61 /* dropbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropbox.png; sourceTree = "<group>"; };
+		8E2AF33D11F04B7900A29A61 /* GrabBox 0.5.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "GrabBox 0.5.html"; sourceTree = "<group>"; };
+		8E2AF34111F04B8D00A29A61 /* favicon.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = favicon.ico; sourceTree = "<group>"; };
+		8E2AF34711F04BAD00A29A61 /* GrabBox 0.5.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "GrabBox 0.5.zip"; sourceTree = "<group>"; };
 		8E49CF2011ED0DFA0041CE70 /* ImageRenamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageRenamer.h; sourceTree = "<group>"; };
 		8E49CF2111ED0DFA0041CE70 /* ImageRenamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageRenamer.m; sourceTree = "<group>"; };
 		8E49CF4C11ED14640041CE70 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ImageRenamer.xib; sourceTree = "<group>"; };
@@ -282,16 +285,17 @@
 		8E4E78E811EE2E7A00EB0CAD /* Webpage */ = {
 			isa = PBXGroup;
 			children = (
-				8E4E78E911EE2E7A00EB0CAD /* appcast.xml */,
+				8E4E78F211EE2E7A00EB0CAD /* Updates */,
+				8E4E78EC11EE2E7A00EB0CAD /* index.html */,
+				8E2AF34111F04B8D00A29A61 /* favicon.ico */,
 				8E4E78EA11EE2E7A00EB0CAD /* grabbox.png */,
 				8E4E78EB11EE2E7A00EB0CAD /* growl.png */,
-				8E4E78EC11EE2E7A00EB0CAD /* index.html */,
 				8E4E78ED11EE2E7A00EB0CAD /* muller.png */,
 				8E4E78EE11EE2E7A00EB0CAD /* preferences.png */,
 				8E4E78EF11EE2E7A00EB0CAD /* prompt_rename.png */,
 				8E4E78F011EE2E7A00EB0CAD /* prompt_upload.png */,
 				8E4E78F111EE2E7A00EB0CAD /* sparkle.png */,
-				8E4E78F211EE2E7A00EB0CAD /* Updates */,
+				8E4E78E911EE2E7A00EB0CAD /* appcast.xml */,
 			);
 			name = Webpage;
 			path = webpage;
@@ -300,18 +304,20 @@
 		8E4E78F211EE2E7A00EB0CAD /* Updates */ = {
 			isa = PBXGroup;
 			children = (
+				8E4E78FE11EE2E7A00EB0CAD /* updates.css */,
 				8E4E78F311EE2E7A00EB0CAD /* GrabBox 0.1.1.html */,
-				8E4E78F411EE2E7A00EB0CAD /* GrabBox 0.1.1.zip */,
 				8E4E78F511EE2E7A00EB0CAD /* GrabBox 0.1.html */,
 				8E4E78F611EE2E7A00EB0CAD /* GrabBox 0.2.html */,
-				8E4E78F711EE2E7A00EB0CAD /* GrabBox 0.2.zip */,
 				8E4E78F811EE2E7A00EB0CAD /* GrabBox 0.3.html */,
-				8E4E78F911EE2E7A00EB0CAD /* GrabBox 0.3.zip */,
 				8E4E78FA11EE2E7A00EB0CAD /* GrabBox 0.4.1.html */,
-				8E4E78FB11EE2E7A00EB0CAD /* GrabBox 0.4.1.zip */,
 				8E4E78FC11EE2E7A00EB0CAD /* GrabBox 0.4.html */,
+				8E2AF33D11F04B7900A29A61 /* GrabBox 0.5.html */,
+				8E4E78F411EE2E7A00EB0CAD /* GrabBox 0.1.1.zip */,
+				8E4E78F711EE2E7A00EB0CAD /* GrabBox 0.2.zip */,
+				8E4E78F911EE2E7A00EB0CAD /* GrabBox 0.3.zip */,
+				8E4E78FB11EE2E7A00EB0CAD /* GrabBox 0.4.1.zip */,
 				8E4E78FD11EE2E7A00EB0CAD /* GrabBox 0.4.zip */,
-				8E4E78FE11EE2E7A00EB0CAD /* updates.css */,
+				8E2AF34711F04BAD00A29A61 /* GrabBox 0.5.zip */,
 			);
 			name = Updates;
 			path = updates;
