@@ -1,5 +1,5 @@
 //
-//  InitialStartup.h
+//  Setup.h
 //  GrabBox
 //
 //  Created by Jørgen P. Tjernø on 7/10/10.
@@ -9,27 +9,29 @@
 #import <Cocoa/Cocoa.h>
 #import "GrabBoxAppDelegate.h"
 
-@interface InitialStartup : NSObject {
+@interface Setup : NSObject {
     NSWindow *window;
-    NSTextField *dropboxId;
-    NSMenuItem* preferences;
-    NSButton* autoLaunch;
+    NSMenuItem *preferences;
+    NSButton *linkOk;
+    NSButton *autoLaunch;
     GrabBoxAppDelegate *appDelegate;
+    int dropboxId;
     NSTimer *timer;
-    int lastIdFromUrl;
 }
 
 @property (assign) IBOutlet NSWindow *window;
-@property (assign) IBOutlet NSTextField *dropboxId;
-@property (assign) IBOutlet GrabBoxAppDelegate *appDelegate;
 @property (assign) IBOutlet NSMenuItem *preferences;
+@property (assign) IBOutlet NSButton *linkOk;
 @property (assign) IBOutlet NSButton *autoLaunch;
+@property (assign) IBOutlet GrabBoxAppDelegate *appDelegate;
+@property (nonatomic, assign) int dropboxId;
 
 - (void) awakeFromNib;
 - (void) dealloc;
 
 - (BOOL) windowShouldClose:(id) sender;
 - (void) windowDidBecomeKey:(NSNotification *) aNotification;
+- (IBAction) openPublicFolder:(id) sender;
 
 - (void) checkClipboard: (NSTimer *) timer;
 

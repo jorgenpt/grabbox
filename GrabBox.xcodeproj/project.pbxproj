@@ -28,9 +28,12 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		8E17FB1F11EE334B00819835 /* GrabBox.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8E4E78D511EE2AB100EB0CAD /* GrabBox.icns */; };
+		8E2AF15911F01D3100A29A61 /* link_ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E2AF15811F01D3100A29A61 /* link_ok.png */; };
+		8E2AF15B11F01D4B00A29A61 /* link_waiting.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E2AF15A11F01D4B00A29A61 /* link_waiting.png */; };
+		8E2AF15D11F0275000A29A61 /* howto.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E2AF15C11F0275000A29A61 /* howto.png */; };
 		8E49CF2211ED0DFA0041CE70 /* ImageRenamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E49CF2111ED0DFA0041CE70 /* ImageRenamer.m */; };
 		8E49CF4D11ED14640041CE70 /* ImageRenamer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E49CF4B11ED14640041CE70 /* ImageRenamer.xib */; };
-		8E4A509111E9105700A0A743 /* InitialStartup.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4A509011E9105700A0A743 /* InitialStartup.m */; };
+		8E4A509111E9105700A0A743 /* Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4A509011E9105700A0A743 /* Setup.m */; };
 		8E4A50A011E9155500A0A743 /* InformationGatherer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4A509F11E9155500A0A743 /* InformationGatherer.m */; };
 		8E51825911E7CE3A00D15CAB /* FSRefConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E51825811E7CE3A00D15CAB /* FSRefConversions.m */; };
 		8E60861811E6D1B600881A1C /* Notifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E60861711E6D1B600881A1C /* Notifier.m */; };
@@ -85,12 +88,15 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* GrabBox-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GrabBox-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* GrabBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E2AF15811F01D3100A29A61 /* link_ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = link_ok.png; sourceTree = "<group>"; };
+		8E2AF15A11F01D4B00A29A61 /* link_waiting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = link_waiting.png; sourceTree = "<group>"; };
+		8E2AF15C11F0275000A29A61 /* howto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howto.png; sourceTree = "<group>"; };
 		8E49CF2011ED0DFA0041CE70 /* ImageRenamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageRenamer.h; sourceTree = "<group>"; };
 		8E49CF2111ED0DFA0041CE70 /* ImageRenamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageRenamer.m; sourceTree = "<group>"; };
 		8E49CF4C11ED14640041CE70 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ImageRenamer.xib; sourceTree = "<group>"; };
 		8E4A508B11E9086700A0A743 /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
-		8E4A508F11E9105700A0A743 /* InitialStartup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialStartup.h; sourceTree = "<group>"; };
-		8E4A509011E9105700A0A743 /* InitialStartup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialStartup.m; sourceTree = "<group>"; };
+		8E4A508F11E9105700A0A743 /* Setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Setup.h; sourceTree = "<group>"; };
+		8E4A509011E9105700A0A743 /* Setup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Setup.m; sourceTree = "<group>"; };
 		8E4A509E11E9155500A0A743 /* InformationGatherer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationGatherer.h; sourceTree = "<group>"; };
 		8E4A509F11E9155500A0A743 /* InformationGatherer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationGatherer.m; sourceTree = "<group>"; };
 		8E4E78D511EE2AB100EB0CAD /* GrabBox.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = GrabBox.icns; sourceTree = "<group>"; };
@@ -164,12 +170,12 @@
 				8E49CF2111ED0DFA0041CE70 /* ImageRenamer.m */,
 				8E4A509E11E9155500A0A743 /* InformationGatherer.h */,
 				8E4A509F11E9155500A0A743 /* InformationGatherer.m */,
-				8E4A508F11E9105700A0A743 /* InitialStartup.h */,
-				8E4A509011E9105700A0A743 /* InitialStartup.m */,
 				8E60861611E6D1B600881A1C /* Notifier.h */,
 				8E60861711E6D1B600881A1C /* Notifier.m */,
 				8E7B6C2311EC433B00112165 /* Preferences.h */,
 				8E7B6C2411EC433B00112165 /* Preferences.m */,
+				8E4A508F11E9105700A0A743 /* Setup.h */,
+				8E4A509011E9105700A0A743 /* Setup.m */,
 				8E7B6BC711EC383800112165 /* UploadInitiator.h */,
 				8E7B6BC811EC383800112165 /* UploadInitiator.m */,
 			);
@@ -231,12 +237,14 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8E2AF15511F01D2100A29A61 /* Icons */,
+				8E7B692311EBEBB400112165 /* Growl Registration Ticket.growlRegDict */,
 				8E4E78D511EE2AB100EB0CAD /* GrabBox.icns */,
 				8E7B689711EBD87500112165 /* dsa_pub.pem */,
 				8D1107310486CEB800E47090 /* GrabBox-Info.plist */,
-				8E7B692311EBEBB400112165 /* Growl Registration Ticket.growlRegDict */,
-				8E49CF4B11ED14640041CE70 /* ImageRenamer.xib */,
+				8E2AF15C11F0275000A29A61 /* howto.png */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				8E49CF4B11ED14640041CE70 /* ImageRenamer.xib */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 			);
 			name = Resources;
@@ -249,6 +257,15 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8E2AF15511F01D2100A29A61 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				8E2AF15811F01D3100A29A61 /* link_ok.png */,
+				8E2AF15A11F01D4B00A29A61 /* link_waiting.png */,
+			);
+			name = Icons;
 			sourceTree = "<group>";
 		};
 		8E4E78E811EE2E7A00EB0CAD /* Webpage */ = {
@@ -340,6 +357,9 @@
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 				8E7B689811EBD87500112165 /* dsa_pub.pem in Resources */,
 				8E49CF4D11ED14640041CE70 /* ImageRenamer.xib in Resources */,
+				8E2AF15911F01D3100A29A61 /* link_ok.png in Resources */,
+				8E2AF15B11F01D4B00A29A61 /* link_waiting.png in Resources */,
+				8E2AF15D11F0275000A29A61 /* howto.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +390,7 @@
 				256AC3DA0F4B6AC300CF3369 /* GrabBoxAppDelegate.m in Sources */,
 				8E60861811E6D1B600881A1C /* Notifier.m in Sources */,
 				8E51825911E7CE3A00D15CAB /* FSRefConversions.m in Sources */,
-				8E4A509111E9105700A0A743 /* InitialStartup.m in Sources */,
+				8E4A509111E9105700A0A743 /* Setup.m in Sources */,
 				8E4A50A011E9155500A0A743 /* InformationGatherer.m in Sources */,
 				8E7B696211EBEFCF00112165 /* Growler.m in Sources */,
 				8E7B69D911EBF66900112165 /* GrowlerDelegate.m in Sources */,

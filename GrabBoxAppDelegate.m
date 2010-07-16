@@ -20,8 +20,7 @@
 
 @implementation GrabBoxAppDelegate
 
-@synthesize window;
-@synthesize initialStartupWindow;
+@synthesize setupWindow;
 @synthesize info;
 @synthesize notifier;
 
@@ -67,7 +66,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     if ([self dropboxId] == 0)
     {
-        [initialStartupWindow makeKeyAndOrderFront:self];
+        [setupWindow makeKeyAndOrderFront:self];
     }
     else
     {

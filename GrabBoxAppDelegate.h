@@ -11,14 +11,12 @@
 #import "InformationGatherer.h"
 
 @interface GrabBoxAppDelegate : NSObject <NSApplicationDelegate> {
-    NSWindow* window;
-    NSWindow* initialStartupWindow;
+    NSWindow* setupWindow;
     InformationGatherer* info;
     Notifier* notifier;
 }
 
-@property (assign) IBOutlet NSWindow* window;
-@property (assign) IBOutlet NSWindow* initialStartupWindow;
+@property (assign) IBOutlet NSWindow* setupWindow;
 
 - (void) awakeFromNib;
 - (void) dealloc;
