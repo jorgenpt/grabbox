@@ -29,10 +29,11 @@
 - (void) awakeFromNib;
 - (void) dealloc;
 
-- (BOOL) windowShouldClose:(id) sender;
 - (void) windowDidBecomeKey:(NSNotification *) aNotification;
 - (IBAction) openPublicFolder:(id) sender;
+- (IBAction) pressedOk:(id) sender;
+- (IBAction) pressedCancel:(id) sender;
 
-- (void) checkClipboard: (NSTimer *) timer;
+- (void) checkClipboard:(NSTimer *) timer;
 
 @end

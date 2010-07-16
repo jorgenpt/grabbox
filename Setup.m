@@ -34,32 +34,49 @@
     [super dealloc];
 }
 
-- (BOOL)windowShouldClose:(id)sender
+- (IBAction) pressedOk:(id) sender
 {
-    NSAlert* alert = nil;
     int oldDropId = [appDelegate dropboxId];
     if (![self dropboxId] && !oldDropId)
     {
+        NSAlert* alert = [NSAlert alertWithMessageText:nil
+                                         defaultButton:nil
+                                       alternateButton:nil
+                                           otherButton:nil
+                             informativeTextWithFormat:@"You must copy a Dropbox Public link to continue!"];
         [alert beginSheetModalForWindow:window
                           modalDelegate:nil
                          didEndSelector:nil
                             contextInfo:nil];
-        return NO;
     }
     else
     {
+        [appDelegate setDropboxId:[self dropboxId]];
+
         if (!oldDropId)
-        {
-            [appDelegate setDropboxId:[self dropboxId]];
             [appDelegate startMonitoring];
-        }
-        [preferences setEnabled:YES];
+
         [self setTimer:nil];
-        return YES;
+        [self setDropboxId:0];
+        [preferences setEnabled:YES];
+
+        [window close];
     }
 }
 
-- (void) windowDidBecomeKey:(NSNotification *)aNotification
+- (IBAction) pressedCancel:(id) sender
+{
+    [self setTimer:nil];
+    [self setDropboxId:0];
+    [preferences setEnabled:YES];
+
+    if (![appDelegate dropboxId])
+        [[NSApplication sharedApplication] terminate:self];
+    else
+        [window close];
+}
+
+- (void) windowDidBecomeKey:(NSNotification *) aNotification
 {
     if (!timer)
     {
@@ -85,7 +102,7 @@
     [[NSWorkspace sharedWorkspace] openFile:[[InformationGatherer defaultGatherer] publicPath]];
 }
 
-- (void) checkClipboard: (NSTimer *) timer
+- (void) checkClipboard:(NSTimer *) timer
 {
     NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
     NSArray *classes = [NSArray arrayWithObjects:[NSString class], nil];
