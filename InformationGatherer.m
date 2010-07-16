@@ -10,11 +10,12 @@
 
 #include <sqlite3.h>
 
-static InformationGatherer* defaultInstance;
+static InformationGatherer* defaultInstance = nil;
 
 @interface InformationGatherer ()
 @property (nonatomic, retain) NSString* screenshotPath;
 @property (nonatomic, retain) NSString* uploadPath;
+@property (nonatomic, retain) NSString* publicPath;
 @property (nonatomic, retain) NSSet* dirContents;
 @end
 
@@ -22,39 +23,55 @@ static InformationGatherer* defaultInstance;
 
 @synthesize screenshotPath;
 @synthesize uploadPath;
+@synthesize publicPath;
 @synthesize dirContents;
 
 + (id) defaultGatherer
 {
     @synchronized(self)
     {
-        if (!defaultInstance)
-            defaultInstance = [[self alloc] init];
+        if (defaultInstance == nil)
+            [[self alloc] init];
     }
     return defaultInstance;
 
 }
-- (id) init
+
++ (id)allocWithZone:(NSZone *)zone
 {
-    if (self = [super init])
-    {
-        [self setDirContents:[self files]];
-        if (!dirContents)
-            return nil;
-        screenshotPath = nil;
-        uploadPath = nil;
+    @synchronized(self) {
+        if (defaultInstance == nil) {
+            return [super allocWithZone:zone];
+        }
     }
-
-    return self;
+    return defaultInstance;
 }
 
-- (void) dealloc
+- (id)init
 {
-    [self setDirContents:nil];
-    [self setScreenshotPath:nil];
-    [self setUploadPath:nil];
-    [super dealloc];
+    Class myClass = [self class];
+    @synchronized(myClass) {
+        if (defaultInstance == nil) {
+            if (self = [super init]) {
+                [self setDirContents:[self files]];
+                if (!dirContents)
+                    return nil;
+                [self setScreenshotPath:nil];
+                [self setUploadPath:nil];
+                [self setPublicPath:nil];
+
+                defaultInstance = self;
+            }
+        }
+    }
+    return defaultInstance;
 }
+
+- (id) copyWithZone:(NSZone *)zone { return self; }
+- (id) retain { return self; }
+- (NSUInteger) retainCount { return UINT_MAX; }
+- (void) release {}
+- (id) autorelease { return self; }
 
 - (NSString *)screenshotPath
 {
@@ -77,7 +94,16 @@ static InformationGatherer* defaultInstance;
 {
     if (uploadPath)
         return uploadPath;
-
+    
+    NSString* path = [[[self publicPath] stringByAppendingPathComponent:@"Screenshots"] stringByStandardizingPath];
+    [self setUploadPath:path];
+    return [self uploadPath];
+    
+}
+- (NSString *)publicPath
+{
+    if (publicPath)
+        return publicPath;
     NSString* result = [@"~/Dropbox" stringByStandardizingPath];
     NSString* path = [@"~/.dropbox/dropbox.db" stringByStandardizingPath];
     NSString* sqlStatement = @"select value from config where key = 'dropbox_path'";
@@ -98,9 +124,9 @@ static InformationGatherer* defaultInstance;
         sqlite3_close(db);
     }
 
-    NSArray* pathComponents = [NSArray arrayWithObjects:result, @"Public", @"Screenshots", nil];
-    [self setUploadPath:[[NSString pathWithComponents:pathComponents] stringByStandardizingPath]];
-    return uploadPath;
+    result = [[result stringByAppendingPathComponent:@"Public"] stringByStandardizingPath];
+    [self setPublicPath:result];
+    return [self publicPath];
 }
 
 - (NSSet *)createdFiles

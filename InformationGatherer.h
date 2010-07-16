@@ -11,15 +11,21 @@
 @interface InformationGatherer : NSObject {
     NSString* screenshotPath;
     NSString* uploadPath;
+    NSString* publicPath;
     NSSet* dirContents;
 }
 
 + (id) defaultGatherer;
 
 - (id) init;
-- (void) dealloc;
+- (id) copyWithZone:(NSZone *)zone;
+- (id) retain;
+- (NSUInteger) retainCount;
+- (void) release;
+- (id) autorelease;
 
 - (NSString *)screenshotPath;
+- (NSString *)publicPath;
 - (NSString *)uploadPath;
 - (NSSet *)createdFiles;
 - (NSSet *)files;
