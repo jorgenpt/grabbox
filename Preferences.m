@@ -13,7 +13,8 @@
 - (BOOL) willLaunchAtLogin
 {
     NSString* appPath = [[NSBundle mainBundle] bundlePath];
-    NSArray* autoLaunch = (NSArray*)CFPreferencesCopyAppValue(CFSTR("AutoLaunchedApplicationDictionary"), CFSTR("loginwindow"));
+    NSArray* autoLaunch = (NSArray*)CFPreferencesCopyAppValue(CFSTR("AutoLaunchedApplicationDictionary"),
+                                                              CFSTR("loginwindow"));
     for (NSDictionary* dict in autoLaunch)
     {
         NSString* path = [dict objectForKey:@"Path"];
@@ -25,7 +26,8 @@
 - (void) setWillLaunchAtLogin:(BOOL)state
 {
     NSString* appPath = [[NSBundle mainBundle] bundlePath];
-    NSArray* autoLaunch = (NSArray*)CFPreferencesCopyAppValue(CFSTR("AutoLaunchedApplicationDictionary"), CFSTR("loginwindow"));
+    NSArray* autoLaunch = (NSArray*)CFPreferencesCopyAppValue(CFSTR("AutoLaunchedApplicationDictionary"),
+                                                              CFSTR("loginwindow"));
     NSMutableArray* autoLaunchMutable;
 
     if (state)
