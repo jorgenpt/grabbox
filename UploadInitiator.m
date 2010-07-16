@@ -99,7 +99,6 @@
         GrowlerDelegateContext* context = [GrowlerDelegateContext contextWithDelegate:renamer data:nil];
         [Growler messageWithTitle:@"Screenshot uploaded!"
                       description:@"The screenshot has been uploaded and a link put in your clipboard. Click here to give the file a more descriptive name!"
-         //Click here to give it a better name, or press Cmd-Opt-N."
                              name:@"URL Copied"
                   delegateContext:context
                            sticky:NO];
@@ -144,4 +143,9 @@
     return nil;
 }
 
+- (void) dropboxIsRunning:(BOOL)running
+{
+    if (running)
+        [self upload];
+}
 @end

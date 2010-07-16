@@ -9,8 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "Notifier.h"
 #import "InformationGatherer.h"
+#import "DropboxDetector.h"
 
-@interface GrabBoxAppDelegate : NSObject <NSApplicationDelegate> {
+@interface GrabBoxAppDelegate : NSObject <NSApplicationDelegate, DropboxDetectorDelegate> {
     NSWindow* setupWindow;
     InformationGatherer* info;
     Notifier* notifier;
@@ -30,5 +31,5 @@
                   flags:(const FSEventStreamEventFlags[])flags
                     ids:(const FSEventStreamEventId[]) ids;
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification;
-
+- (void) dropboxIsRunning:(BOOL) running;
 @end

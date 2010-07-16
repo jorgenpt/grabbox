@@ -76,6 +76,11 @@
         [window close];
 }
 
+- (IBAction) openPublicFolder:(id) sender
+{
+    [[NSWorkspace sharedWorkspace] openFile:[[InformationGatherer defaultGatherer] publicPath]];
+}
+
 - (void) windowDidBecomeKey:(NSNotification *) aNotification
 {
     if (!timer)
@@ -97,10 +102,6 @@
     }
 }
 
-- (IBAction) openPublicFolder:(id) sender
-{
-    [[NSWorkspace sharedWorkspace] openFile:[[InformationGatherer defaultGatherer] publicPath]];
-}
 
 - (void) checkClipboard:(NSTimer *) timer
 {

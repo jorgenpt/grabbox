@@ -11,6 +11,7 @@
 
 #import "Growler.h"
 #import "UploadInitiator.h"
+#import "DropboxDetector.h"
 
 @interface GrabBoxAppDelegate ()
 @property (nonatomic, assign) InformationGatherer* info;
@@ -63,7 +64,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [[NSUserDefaults standardUserDefaults] setInteger:toId forKey:@"DropboxId"];
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
     NSUserDefaults* u = [NSUserDefaults standardUserDefaults];
     if (![u integerForKey:@"DropboxId"])
         [u setInteger:[u integerForKey:@"dropboxId"] forKey:@"DropboxId"];
@@ -76,13 +78,29 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [u removeObjectForKey:@"useDirectLink"];
 
     if ([self dropboxId] == 0)
+        [DropboxDetector assertDropboxRunningWithDelegate:self];
+    else
+        [self startMonitoring];
+}
+
+- (void) dropboxIsRunning:(BOOL) running
+{
+    if (running)
     {
-        [setupWindow makeKeyAndOrderFront:self];
+        if ([self dropboxId] == 0)
+        {
+            [setupWindow makeKeyAndOrderFront:self];
+        }
+        else
+        {
+            [self startMonitoring];
+        }
     }
     else
     {
-        [self startMonitoring];
+        [NSApp terminate:self];
     }
+
 }
 
 
@@ -169,7 +187,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
         }
         else
         {
-            [up upload];
+            [DropboxDetector assertDropboxRunningWithDelegate:up];
         }
 
     }

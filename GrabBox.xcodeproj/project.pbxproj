@@ -28,9 +28,12 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		8E17FB1F11EE334B00819835 /* GrabBox.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8E4E78D511EE2AB100EB0CAD /* GrabBox.icns */; };
+		8E1A63EB11EFB63A00C3379F /* DropboxDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E1A63EA11EFB63A00C3379F /* DropboxDetector.m */; };
+		8E1A641611EFBAB200C3379F /* DropboxDetector.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E1A641511EFBAB200C3379F /* DropboxDetector.xib */; };
 		8E2AF15911F01D3100A29A61 /* link_ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E2AF15811F01D3100A29A61 /* link_ok.png */; };
 		8E2AF15B11F01D4B00A29A61 /* link_waiting.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E2AF15A11F01D4B00A29A61 /* link_waiting.png */; };
 		8E2AF15D11F0275000A29A61 /* howto.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E2AF15C11F0275000A29A61 /* howto.png */; };
+		8E2AF24E11F03A8500A29A61 /* dropbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E2AF24D11F03A8500A29A61 /* dropbox.png */; };
 		8E49CF2211ED0DFA0041CE70 /* ImageRenamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E49CF2111ED0DFA0041CE70 /* ImageRenamer.m */; };
 		8E49CF4D11ED14640041CE70 /* ImageRenamer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E49CF4B11ED14640041CE70 /* ImageRenamer.xib */; };
 		8E4A509111E9105700A0A743 /* Setup.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4A509011E9105700A0A743 /* Setup.m */; };
@@ -88,9 +91,13 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* GrabBox-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GrabBox-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* GrabBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E1A63E911EFB63A00C3379F /* DropboxDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxDetector.h; sourceTree = "<group>"; };
+		8E1A63EA11EFB63A00C3379F /* DropboxDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxDetector.m; sourceTree = "<group>"; };
+		8E1A641511EFBAB200C3379F /* DropboxDetector.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropboxDetector.xib; sourceTree = "<group>"; };
 		8E2AF15811F01D3100A29A61 /* link_ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = link_ok.png; sourceTree = "<group>"; };
 		8E2AF15A11F01D4B00A29A61 /* link_waiting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = link_waiting.png; sourceTree = "<group>"; };
 		8E2AF15C11F0275000A29A61 /* howto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howto.png; sourceTree = "<group>"; };
+		8E2AF24D11F03A8500A29A61 /* dropbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropbox.png; sourceTree = "<group>"; };
 		8E49CF2011ED0DFA0041CE70 /* ImageRenamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageRenamer.h; sourceTree = "<group>"; };
 		8E49CF2111ED0DFA0041CE70 /* ImageRenamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageRenamer.m; sourceTree = "<group>"; };
 		8E49CF4C11ED14640041CE70 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ImageRenamer.xib; sourceTree = "<group>"; };
@@ -158,6 +165,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8E1A63E911EFB63A00C3379F /* DropboxDetector.h */,
+				8E1A63EA11EFB63A00C3379F /* DropboxDetector.m */,
 				8E51825711E7CE3A00D15CAB /* FSRefConversions.h */,
 				8E51825811E7CE3A00D15CAB /* FSRefConversions.m */,
 				256AC3D80F4B6AC300CF3369 /* GrabBoxAppDelegate.h */,
@@ -239,11 +248,11 @@
 			children = (
 				8E2AF15511F01D2100A29A61 /* Icons */,
 				8E7B692311EBEBB400112165 /* Growl Registration Ticket.growlRegDict */,
-				8E4E78D511EE2AB100EB0CAD /* GrabBox.icns */,
 				8E7B689711EBD87500112165 /* dsa_pub.pem */,
 				8D1107310486CEB800E47090 /* GrabBox-Info.plist */,
 				8E2AF15C11F0275000A29A61 /* howto.png */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				8E1A641511EFBAB200C3379F /* DropboxDetector.xib */,
 				8E49CF4B11ED14640041CE70 /* ImageRenamer.xib */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 			);
@@ -262,6 +271,8 @@
 		8E2AF15511F01D2100A29A61 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				8E2AF24D11F03A8500A29A61 /* dropbox.png */,
+				8E4E78D511EE2AB100EB0CAD /* GrabBox.icns */,
 				8E2AF15811F01D3100A29A61 /* link_ok.png */,
 				8E2AF15A11F01D4B00A29A61 /* link_waiting.png */,
 			);
@@ -357,9 +368,11 @@
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 				8E7B689811EBD87500112165 /* dsa_pub.pem in Resources */,
 				8E49CF4D11ED14640041CE70 /* ImageRenamer.xib in Resources */,
+				8E1A641611EFBAB200C3379F /* DropboxDetector.xib in Resources */,
 				8E2AF15911F01D3100A29A61 /* link_ok.png in Resources */,
 				8E2AF15B11F01D4B00A29A61 /* link_waiting.png in Resources */,
 				8E2AF15D11F0275000A29A61 /* howto.png in Resources */,
+				8E2AF24E11F03A8500A29A61 /* dropbox.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +410,7 @@
 				8E7B6BC911EC383800112165 /* UploadInitiator.m in Sources */,
 				8E7B6C2511EC433B00112165 /* Preferences.m in Sources */,
 				8E49CF2211ED0DFA0041CE70 /* ImageRenamer.m in Sources */,
+				8E1A63EB11EFB63A00C3379F /* DropboxDetector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
