@@ -51,6 +51,7 @@
 		8E7B6B3611EC19A700112165 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B6B2D11EC19A500112165 /* Growl.framework */; };
 		8E7B6BC911EC383800112165 /* UploadInitiator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7B6BC811EC383800112165 /* UploadInitiator.m */; };
 		8E7B6C2511EC433B00112165 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7B6C2411EC433B00112165 /* Preferences.m */; };
+		8EE03A2711F2534E00655738 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8EE03A2611F2534E00655738 /* Credits.rtf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +152,7 @@
 		8E83818711F0DB1C00C3151D /* GrabBox 0.5.1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "GrabBox 0.5.1.html"; sourceTree = "<group>"; };
 		8E83818811F0DB2A00C3151D /* setup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setup.png; sourceTree = "<group>"; };
 		8E83818911F0DB2A00C3151D /* silk.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = silk.gif; sourceTree = "<group>"; };
+		8EE03A2611F2534E00655738 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +259,7 @@
 				8E7B689711EBD87500112165 /* dsa_pub.pem */,
 				8D1107310486CEB800E47090 /* GrabBox-Info.plist */,
 				8E2AF15C11F0275000A29A61 /* howto.png */,
+				8EE03A2611F2534E00655738 /* Credits.rtf */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				8E1A641511EFBAB200C3379F /* DropboxDetector.xib */,
 				8E49CF4B11ED14640041CE70 /* ImageRenamer.xib */,
@@ -385,6 +388,7 @@
 				8E2AF15B11F01D4B00A29A61 /* link_waiting.png in Resources */,
 				8E2AF15D11F0275000A29A61 /* howto.png in Resources */,
 				8E2AF24E11F03A8500A29A61 /* dropbox.png in Resources */,
+				8EE03A2711F2534E00655738 /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
