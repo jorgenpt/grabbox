@@ -30,7 +30,9 @@
            atPath:(NSString *)source
            toPath:(NSString *)destination
            withId:(int)dropId;
-+ (void) copyURL:(NSString *)url basedOnFile:(NSString *)path;
++ (void) copyURL:(NSString *)url
+     basedOnFile:(NSString *)path
+      wasRenamed:(BOOL)renamed;
 
 - (id) initForFile:(NSString *)file
             atPath:(NSString *)source

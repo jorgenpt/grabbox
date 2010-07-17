@@ -7,6 +7,7 @@
 		<string>Error</string>
 		<string>URL Copied</string>
 		<string>Upload Screenshot?</string>
+		<string>Screenshot Renamed</string>
 	</array>
 	<key>TicketVersion</key>
 	<integer>1</integer>
@@ -15,6 +16,7 @@
 		<string>Error</string>
 		<string>URL Copied</string>
 		<string>Upload Screenshot?</string>
+		<string>Screenshot Renamed</string>
 	</array>
 </dict>
 </plist>

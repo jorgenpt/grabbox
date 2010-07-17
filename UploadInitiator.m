@@ -81,12 +81,15 @@
     {
         NSString *dropboxUrl = [[InformationGatherer defaultGatherer] getURLForFile:shortName
                                                                              withId:[self dropboxId]];
-        [UploadInitiator copyURL:dropboxUrl basedOnFile:destination];
+        [UploadInitiator copyURL:dropboxUrl
+                     basedOnFile:destination
+                      wasRenamed:NO];
     }
 }
 
 + (void) copyURL:(NSString *)url
      basedOnFile:(NSString *)path
+      wasRenamed:(BOOL)renamed
 {
     NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
     [pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
@@ -105,13 +108,24 @@
     }
     else
     {
-        ImageRenamer* renamer = [ImageRenamer renamerForFile:path atURL:url];
-        GrowlerDelegateContext* context = [GrowlerDelegateContext contextWithDelegate:renamer data:nil];
-        [Growler messageWithTitle:@"Screenshot uploaded!"
-                      description:@"The screenshot has been uploaded and a link put in your clipboard. Click here to give the file a more descriptive name!"
-                             name:@"URL Copied"
-                  delegateContext:context
-                           sticky:NO];
+        if (renamed)
+        {
+            [Growler messageWithTitle:@"Screenshot renamed!"
+                          description:@"The screenshot has been renamed and an updated link put in your clipboard."
+                                 name:@"Screenshot Renamed"
+                      delegateContext:nil
+                               sticky:NO];
+        }
+        else
+        {
+            ImageRenamer* renamer = [ImageRenamer renamerForFile:path atURL:url];
+            GrowlerDelegateContext* context = [GrowlerDelegateContext contextWithDelegate:renamer data:nil];
+            [Growler messageWithTitle:@"Screenshot uploaded!"
+                          description:@"The screenshot has been uploaded and a link put in your clipboard. Click here to give the file a more descriptive name!"
+                                 name:@"URL Copied"
+                      delegateContext:context
+                               sticky:NO];
+        }
     }
 }
 

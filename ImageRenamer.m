@@ -130,7 +130,9 @@
                                                                error:&error];
         if (moveOk)
         {
-            [UploadInitiator copyURL:newUrl basedOnFile:newPath];
+            [UploadInitiator copyURL:newUrl
+                         basedOnFile:newPath
+                           wasRenamed:YES];
         }
         else
         {
