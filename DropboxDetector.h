@@ -8,8 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class DropboxDetector;
+
 @protocol DropboxDetectorDelegate
-- (void) dropboxIsRunning:(BOOL) runState;
+- (void) dropboxIsRunning:(BOOL)runState
+             fromDetector:(DropboxDetector *)detector;
 @end
 
 @interface DropboxDetector : NSObject {
@@ -22,7 +25,6 @@
 @property (assign) IBOutlet NSWindow* notInstalled;
 @property (nonatomic, retain) id <DropboxDetectorDelegate> delegate;
 
-+ (void) assertDropboxRunningWithDelegate:(id <DropboxDetectorDelegate>) notifiedDelegate;
 + (id) dropboxDetectorWithDelegate:(id <DropboxDetectorDelegate>) notifiedDelegate;
 
 - (id) initWithDelegate:(id <DropboxDetectorDelegate>) notifiedDelegate;

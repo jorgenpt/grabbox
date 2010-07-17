@@ -12,6 +12,10 @@ X Link to Public dir from uid entry dialog
 X Icon
 X Check if Dropbox is running when starting up.
 - Allow graceful recovery if filename is in use
+- Usage statistics:
+ Screenshots taken
+ Screenshots uploaded
+ Screenshots renamed
 - URL history
 - Unuploaded screenshots from Desktop
 - Option for alternate upload URL / local directory.

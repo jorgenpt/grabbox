@@ -17,6 +17,7 @@
 @synthesize srcPath;
 @synthesize destPath;
 @synthesize dropboxId;
+@synthesize detectors;
 
 + (id) uploadFile:(NSString *)file
            atPath:(NSString *)source
@@ -36,6 +37,7 @@
         [self setSrcFile:file];
         [self setSrcPath:source];
         [self setDestPath:destination];
+        [self setDetectors:[NSMutableArray array]];
         [self setDropboxId:dropId];
     }
     return self;
@@ -46,10 +48,17 @@
     [self setSrcFile:nil];
     [self setSrcPath:nil];
     [self setDestPath:nil];
+    [self setDetectors:nil];
 
     [super dealloc];
 }
 
+- (void) assertDropboxRunningAndUpload
+{
+    DropboxDetector* detector = [DropboxDetector dropboxDetectorWithDelegate:self];
+    [[self detectors] addObject:detector];
+    [detector checkIfRunning];
+}
 - (void) upload
 {
     NSError* error;
@@ -115,7 +124,6 @@
 {
 }
 
-
 - (NSString *) getNextFilenameWithExtension:(NSString *)ext
 {
     NSFileManager* fm = [NSFileManager defaultManager];
@@ -145,8 +153,10 @@
 }
 
 - (void) dropboxIsRunning:(BOOL)running
+             fromDetector:(DropboxDetector *)detector;
 {
     if (running)
         [self upload];
+    [[self detectors] removeObject:detector];
 }
 @end

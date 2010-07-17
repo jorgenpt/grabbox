@@ -15,11 +15,6 @@
 @synthesize notInstalled;
 @synthesize delegate;
 
-+ (void)assertDropboxRunningWithDelegate:(id <DropboxDetectorDelegate>) notifiedDelegate
-{
-    [[[self dropboxDetectorWithDelegate:notifiedDelegate] retain] checkIfRunning];
-}
-
 + (id)dropboxDetectorWithDelegate:(id <DropboxDetectorDelegate>) notifiedDelegate
 {
     return [[[self alloc] initWithDelegate:notifiedDelegate] autorelease];
@@ -67,10 +62,9 @@
         }
     }
     else
-        [[self delegate] dropboxIsRunning:YES];
+        [[self delegate] dropboxIsRunning:YES fromDetector:self];
     [[self notRunning] close];
     [[self notInstalled] close];
-    [self autorelease];
 }
 
 - (void) checkIfRunning
@@ -85,16 +79,16 @@
                                       additionalEventParamDescriptor:[NSAppleEventDescriptor nullDescriptor]
                                                     launchIdentifier:NULL])
     { 
-        [[self delegate] dropboxIsRunning:YES];
+        [[self delegate] dropboxIsRunning:YES fromDetector:self];
     }
     else
-        [[self delegate] dropboxIsRunning:NO];
+        [[self delegate] dropboxIsRunning:NO fromDetector:self];
     [NSApp stopModal];
 }
 
 - (IBAction) doNotStartDropbox:(id) sender
 {
-    [[self delegate] dropboxIsRunning:NO];
+    [[self delegate] dropboxIsRunning:NO fromDetector:self];
     [NSApp stopModal];
 }
 

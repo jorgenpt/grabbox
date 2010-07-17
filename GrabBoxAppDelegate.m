@@ -16,6 +16,7 @@
 @interface GrabBoxAppDelegate ()
 @property (nonatomic, assign) InformationGatherer* info;
 @property (nonatomic, retain) Notifier* notifier;
+@property (nonatomic, retain) NSMutableArray* detectors;
 @end
 
 
@@ -24,6 +25,7 @@
 @synthesize setupWindow;
 @synthesize info;
 @synthesize notifier;
+@synthesize detectors;
 
 static void translateEvent(ConstFSEventStreamRef stream,
                            void *clientCallBackInfo,
@@ -45,12 +47,15 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [self setNotifier:[Notifier notifierWithCallback:translateEvent
                                                 path:[info screenshotPath]
                                     callbackArgument:self]];
+    [self setDetectors:[NSMutableArray array]];
 }
 
 - (void) dealloc
 {
     [self setInfo:nil];
     [self setNotifier:nil];
+    [self setDetectors:nil];
+
     [super dealloc];
 }
 
@@ -92,12 +97,17 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [[SUUpdater sharedUpdater] setDelegate:self];
     
     if ([self dropboxId] == 0)
-        [DropboxDetector assertDropboxRunningWithDelegate:self];
+    {
+        DropboxDetector* detector = [DropboxDetector dropboxDetectorWithDelegate:self];
+        [[self detectors] addObject:detector];
+        [detector checkIfRunning];
+    }
     else
         [self startMonitoring];
 }
 
-- (void) dropboxIsRunning:(BOOL) running
+- (void) dropboxIsRunning:(BOOL)running
+             fromDetector:(DropboxDetector *)detector;
 {
     if (running)
     {
@@ -115,7 +125,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
     {
         [NSApp terminate:self];
     }
-
+    [[self detectors] removeObject:detector];
 }
 
 
@@ -202,7 +212,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
         }
         else
         {
-            [DropboxDetector assertDropboxRunningWithDelegate:up];
+            [up assertDropboxRunningAndUpload];
         }
 
     }

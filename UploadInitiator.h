@@ -16,12 +16,14 @@
     NSString *srcFile;
     NSString *srcPath;
     NSString *destPath;
+    NSMutableArray *detectors;
     int dropboxId;
 }
 
 @property (nonatomic, retain) NSString* srcFile;
 @property (nonatomic, retain) NSString* srcPath;
 @property (nonatomic, retain) NSString* destPath;
+@property (nonatomic, retain) NSMutableArray* detectors;
 @property int dropboxId;
 
 + (id) uploadFile:(NSString *)file
@@ -36,10 +38,11 @@
             withId:(int)dropId;
 - (void) dealloc;
 
+- (void) assertDropboxRunningAndUpload;
 - (void) upload;
 - (void) growlClickedWithData:(id)data;
 - (void) growlTimedOutWithData:(id)data;
 - (NSString *) getNextFilenameWithExtension:(NSString *)ext;
-- (void) dropboxIsRunning:(BOOL)running;
-
+- (void) dropboxIsRunning:(BOOL)running
+             fromDetector:(DropboxDetector *)detector;
 @end

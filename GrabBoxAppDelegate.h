@@ -16,6 +16,7 @@
     NSWindow* setupWindow;
     InformationGatherer* info;
     Notifier* notifier;
+    NSMutableArray* detectors;
 }
 
 @property (assign) IBOutlet NSWindow* setupWindow;
@@ -34,5 +35,6 @@
 - (NSArray *)feedParametersForUpdater:(SUUpdater *)updater
                  sendingSystemProfile:(BOOL)sendingProfile;
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification;
-- (void) dropboxIsRunning:(BOOL) running;
+- (void) dropboxIsRunning:(BOOL)running
+             fromDetector:(DropboxDetector *)detector;
 @end
