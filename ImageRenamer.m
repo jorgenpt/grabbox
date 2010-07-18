@@ -143,7 +143,8 @@
                                                  defaultButton:nil
                                                alternateButton:nil
                                                    otherButton:nil
-                                     informativeTextWithFormat:@"The filename '%@' is in use, please choose another one!", inputFilename];
+                                     informativeTextWithFormat:@"The filename '%@' is in use, please choose another name.", inputFilename];
+                [alert setIcon:[NSImage imageNamed:NSImageNameCaution]];
                 [alert beginSheetModalForWindow:[self window]
                                   modalDelegate:nil
                                  didEndSelector:nil
@@ -152,7 +153,7 @@
             }
             else
             {
-                [Growler errorWithTitle:@"Could not rename file!"
+                [Growler errorWithTitle:@"GrabBox could not rename file!"
                             description:[error localizedDescription]];
             }
         }

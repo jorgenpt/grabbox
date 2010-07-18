@@ -84,7 +84,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [[SUUpdater sharedUpdater] setDelegate:self];
-    
+
     if ([self dropboxId] == 0)
     {
         DropboxDetector* detector = [DropboxDetector dropboxDetectorWithDelegate:self];
@@ -132,7 +132,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
     FSRef screenshotPathRef;
     if (![screenshotPath getFSRef:&screenshotPathRef])
     {
-        [Growler errorWithTitle:@"Could not get Screen Grab path!"
+        [Growler errorWithTitle:@"GrabBox could not get Screen Grab path!"
                     description:@"Could not find directory to monitor for screenshots."];
         NSLog(@"ERROR: Failed getting FSRef for screenshotPath '%@'", screenshotPath);
         return;
@@ -177,7 +177,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
                                        error:&error];
     if (!mkdirOk)
     {
-        [Growler errorWithTitle:@"Could not copy file!"
+        [Growler errorWithTitle:@"GrabBox could not copy file!"
                     description:[error localizedDescription]];
         NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
         return;

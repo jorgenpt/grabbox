@@ -44,6 +44,7 @@
                                        alternateButton:nil
                                            otherButton:nil
                              informativeTextWithFormat:@"You must copy a Dropbox Public link to continue!"];
+        [alert setIcon:[NSImage imageNamed:NSImageNameCaution]];
         [alert beginSheetModalForWindow:window
                           modalDelegate:nil
                          didEndSelector:nil

@@ -80,7 +80,7 @@
         }
         else
         {
-            [Growler errorWithTitle:@"Could not upload file!"
+            [Growler errorWithTitle:@"GrabBox could not upload file!"
                         description:[error localizedDescription]];
             NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
         }

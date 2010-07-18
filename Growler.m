@@ -19,10 +19,11 @@
 + (void) errorWithTitle:(NSString *)title
             description:(NSString *)description
 {
+    NSImage* icon = [NSImage imageNamed:NSImageNameCaution];
     [GrowlApplicationBridge notifyWithTitle:title
                                 description:description
                            notificationName:@"Error"
-                                   iconData:nil
+                                   iconData:[icon TIFFRepresentation]
                                    priority:2 // EMERGENCY!
                                    isSticky:NO
                                clickContext:nil];
