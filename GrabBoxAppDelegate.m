@@ -83,17 +83,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
  
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    NSUserDefaults* u = [NSUserDefaults standardUserDefaults];
-    if (![u integerForKey:@"DropboxId"])
-        [u setInteger:[u integerForKey:@"dropboxId"] forKey:@"DropboxId"];
-    [u removeObjectForKey:@"dropboxId"];
-    if (![u boolForKey:@"PromptBeforeUploading"])
-        [u setBool:[u boolForKey:@"promptBeforeUploading"] forKey:@"PromptBeforeUploading"];
-    [u removeObjectForKey:@"promptBeforeUploading"];
-    if (![u boolForKey:@"UseDirectLink"])
-        [u setBool:[u boolForKey:@"useDirectLink"] forKey:@"UseDirectLink"];
-    [u removeObjectForKey:@"useDirectLink"];
-    
     [[SUUpdater sharedUpdater] setDelegate:self];
     
     if ([self dropboxId] == 0)
