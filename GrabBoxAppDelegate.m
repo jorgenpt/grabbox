@@ -218,4 +218,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
     }
 }
 
+- (IBAction) browseUploadedScreenshots:(id)sender
+{
+    [[NSWorkspace sharedWorkspace] openFile:[info uploadPath]];
+}
+
 @end

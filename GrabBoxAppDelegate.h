@@ -37,4 +37,6 @@
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification;
 - (void) dropboxIsRunning:(BOOL)running
              fromDetector:(DropboxDetector *)detector;
+
+- (IBAction) browseUploadedScreenshots:(id)sender;
 @end
