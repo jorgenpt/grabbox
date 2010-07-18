@@ -190,7 +190,7 @@
 							<bool key="NSNoAutoenable">YES</bool>
 						</object>
 					</object>
-					<object class="NSMenuItem" id="317824595">
+					<object class="NSMenuItem" id="950317433">
 						<reference key="NSMenu" ref="649796088"/>
 						<string key="NSTitle">Screenshots</string>
 						<string key="NSKeyEquiv"/>
@@ -198,12 +198,12 @@
 						<reference key="NSOnImage" ref="35465992"/>
 						<reference key="NSMixedImage" ref="502551668"/>
 						<string key="NSAction">submenuAction:</string>
-						<object class="NSMenu" key="NSSubmenu" id="212489790">
+						<object class="NSMenu" key="NSSubmenu" id="399500634">
 							<string key="NSTitle">Screenshots</string>
 							<object class="NSMutableArray" key="NSMenuItems">
 								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSMenuItem" id="217983869">
-									<reference key="NSMenu" ref="212489790"/>
+								<object class="NSMenuItem" id="1009794289">
+									<reference key="NSMenu" ref="399500634"/>
 									<string key="NSTitle">Browse Uploads</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -1278,7 +1278,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">browseUploadedScreenshots:</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="217983869"/>
+						<reference key="destination" ref="1009794289"/>
 					</object>
 					<int key="connectionID">732</int>
 				</object>
@@ -1317,7 +1317,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="694149608"/>
 							<reference ref="713487014"/>
-							<reference ref="317824595"/>
+							<reference ref="950317433"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1743,26 +1743,26 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">726</int>
-						<reference key="object" ref="317824595"/>
+						<reference key="object" ref="950317433"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="212489790"/>
+							<reference ref="399500634"/>
 						</object>
 						<reference key="parent" ref="649796088"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">727</int>
-						<reference key="object" ref="212489790"/>
+						<reference key="object" ref="399500634"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="217983869"/>
+							<reference ref="1009794289"/>
 						</object>
-						<reference key="parent" ref="317824595"/>
+						<reference key="parent" ref="950317433"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">731</int>
-						<reference key="object" ref="217983869"/>
-						<reference key="parent" ref="212489790"/>
+						<reference key="object" ref="1009794289"/>
+						<reference key="parent" ref="399500634"/>
 					</object>
 				</object>
 			</object>
