@@ -113,21 +113,22 @@
 
 - (IBAction) clickedOk:(id)sender
 {
-    NSString* filename = [[name stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    if ([filename length] > 0)
+    NSString* inputFilename = [[name stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if ([inputFilename length] > 0)
     {
         NSString* originalFilename = [[self path] lastPathComponent];
         NSString* extension = [originalFilename pathExtension];
-        filename = [filename stringByAppendingPathExtension:extension];
+        NSString* filename = [inputFilename stringByAppendingPathExtension:extension];
         NSRange replaceRange = NSMakeRange([[self url] length] - [originalFilename length],
                                            [originalFilename length]);
         NSString* newPath = [[[self path] stringByDeletingLastPathComponent] stringByAppendingPathComponent:filename];
         NSString* newUrl = [[self url] stringByReplacingCharactersInRange:replaceRange
                                                                withString:filename];
+        NSFileManager* fm = [NSFileManager defaultManager];
         NSError* error;
-        BOOL moveOk = [[NSFileManager defaultManager] moveItemAtPath:[self path]
-                                                              toPath:newPath
-                                                               error:&error];
+        BOOL moveOk = [fm moveItemAtPath:[self path]
+                                  toPath:newPath
+                                   error:&error];
         if (moveOk)
         {
             [UploadInitiator copyURL:newUrl
@@ -136,8 +137,24 @@
         }
         else
         {
-            [Growler errorWithTitle:@"Could not rename file!"
-                        description:[error localizedDescription]];
+            if ([fm fileExistsAtPath:newPath])
+            {
+                NSAlert* alert = [NSAlert alertWithMessageText:nil
+                                                 defaultButton:nil
+                                               alternateButton:nil
+                                                   otherButton:nil
+                                     informativeTextWithFormat:@"The filename '%@' is in use, please choose another one!", inputFilename];
+                [alert beginSheetModalForWindow:[self window]
+                                  modalDelegate:nil
+                                 didEndSelector:nil
+                                    contextInfo:nil];
+                return;
+            }
+            else
+            {
+                [Growler errorWithTitle:@"Could not rename file!"
+                            description:[error localizedDescription]];
+            }
         }
     }
     
