@@ -28,6 +28,7 @@
 - (NSString *)screenshotPath;
 - (NSString *)publicPath;
 - (NSString *)uploadPath;
+- (NSString *)localizedScreenshotPrefix;
 - (NSSet *)createdFiles;
 - (NSSet *)files;
 - (NSString *)getURLForFile:(NSString *)file withId:(int)dropboxId;

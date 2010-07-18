@@ -141,7 +141,9 @@ static InformationGatherer* defaultInstance = nil;
     NSString* screenshotName = [systemUIServer localizedStringForKey:@"Screen shot"
                                                                value:nil
                                                                table:@"ScreenCapture"];
+    
     [self setLocalizedScreenshotPrefix:[screenshotName stringByAppendingString:@" "]];
+    return [self localizedScreenshotPrefix];
 }
 
 - (NSSet *)createdFiles
