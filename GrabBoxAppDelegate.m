@@ -195,7 +195,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
     }
 
     for (NSString* entry in newEntries) {
-        if (![entry hasPrefix:@"Screen shot "])
+        if (![entry hasPrefix:[info localizedScreenshotPrefix]])
             continue;
 
         UploadInitiator* up = [UploadInitiator uploadFile:entry

@@ -16,6 +16,7 @@ static InformationGatherer* defaultInstance = nil;
 @property (nonatomic, retain) NSString* screenshotPath;
 @property (nonatomic, retain) NSString* uploadPath;
 @property (nonatomic, retain) NSString* publicPath;
+@property (nonatomic, retain) NSString* localizedScreenshotPrefix;
 @property (nonatomic, retain) NSSet* dirContents;
 @end
 
@@ -24,6 +25,7 @@ static InformationGatherer* defaultInstance = nil;
 @synthesize screenshotPath;
 @synthesize uploadPath;
 @synthesize publicPath;
+@synthesize localizedScreenshotPrefix;
 @synthesize dirContents;
 
 + (id) defaultGatherer
@@ -100,6 +102,7 @@ static InformationGatherer* defaultInstance = nil;
     return [self uploadPath];
     
 }
+
 - (NSString *)publicPath
 {
     if (publicPath)
@@ -127,6 +130,18 @@ static InformationGatherer* defaultInstance = nil;
     result = [[result stringByAppendingPathComponent:@"Public"] stringByStandardizingPath];
     [self setPublicPath:result];
     return [self publicPath];
+}
+
+- (NSString *)localizedScreenshotPrefix
+{
+    if (localizedScreenshotPrefix)
+        return localizedScreenshotPrefix;
+
+    NSBundle* systemUIServer = [NSBundle bundleWithPath:@"/System/Library/CoreServices/SystemUIServer.app"];
+    NSString* screenshotName = [systemUIServer localizedStringForKey:@"Screen shot"
+                                                               value:nil
+                                                               table:@"ScreenCapture"];
+    [self setLocalizedScreenshotPrefix:[screenshotName stringByAppendingString:@" "]];
 }
 
 - (NSSet *)createdFiles

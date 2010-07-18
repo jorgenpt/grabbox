@@ -12,6 +12,7 @@
     NSString* screenshotPath;
     NSString* uploadPath;
     NSString* publicPath;
+    NSString* localizedScreenshotPrefix;
     NSSet* dirContents;
 }
 
