@@ -12,13 +12,13 @@ X Link to Public dir from uid entry dialog
 X Icon
 X Check if Dropbox is running when starting up.
 X Localized "Screen shot" string
+/ URL history (recently uploaded screenshot)
 - Allow graceful recovery if filename is in use (when renaming or initial upload)
 - Submit usage statistics to server:
  # of screenshots taken
  # of screenshots uploaded
  # of screenshots renamed
  etc
-- URL history (recently uploaded screenshot)
-- Uploaded screenshots from Desktop (screenshots taken when not running, or not uploaded when prompted)
+- Upload screenshots from Desktop (screenshots taken when not running, or not uploaded when prompted)
 - Option for alternate upload URL / local directory.
 ? MenuExtra
