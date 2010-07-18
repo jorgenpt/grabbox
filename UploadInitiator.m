@@ -59,23 +59,31 @@
     [[self detectors] addObject:detector];
     [detector checkIfRunning];
 }
-- (void) upload
+- (void) uploadWithRetries:(int)retries
 {
     NSError* error;
     NSString* shortName = [self getNextFilenameWithExtension:[[self srcFile] pathExtension]];
     if (!shortName)
         shortName = [self srcFile];
 
+    NSFileManager* fm = [NSFileManager defaultManager];
     NSString* sourcePath = [NSString pathWithComponents:[NSArray arrayWithObjects: [self srcPath], [self srcFile], nil]];
     NSString* destination = [NSString pathWithComponents:[NSArray arrayWithObjects: [self destPath], shortName, nil]];
-    BOOL moveOk = [[NSFileManager defaultManager] moveItemAtPath:sourcePath
-                                                          toPath:destination
-                                                           error:&error];
+    BOOL moveOk = [fm moveItemAtPath:sourcePath
+                              toPath:destination
+                               error:&error];
     if (!moveOk)
     {
-        [Growler errorWithTitle:@"Could not upload file!"
-                    description:[error localizedDescription]];
-        NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
+        if (retries > 0 && [fm fileExistsAtPath:destination])
+        {
+            [self uploadWithRetries:(retries - 1)];
+        }
+        else
+        {
+            [Growler errorWithTitle:@"Could not upload file!"
+                        description:[error localizedDescription]];
+            NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
+        }
     }
     else
     {
@@ -131,7 +139,7 @@
 
 - (void) growlClickedWithData:(id)data
 {
-    [self upload];
+    [self uploadWithRetries:3];
 }
 
 - (void) growlTimedOutWithData:(id)data
@@ -170,7 +178,7 @@
              fromDetector:(DropboxDetector *)detector;
 {
     if (running)
-        [self upload];
+        [self uploadWithRetries:3];
     [[self detectors] removeObject:detector];
 }
 @end

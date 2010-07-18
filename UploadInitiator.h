@@ -41,7 +41,7 @@
 - (void) dealloc;
 
 - (void) assertDropboxRunningAndUpload;
-- (void) upload;
+- (void) uploadWithRetries:(int)retries;
 - (void) growlClickedWithData:(id)data;
 - (void) growlTimedOutWithData:(id)data;
 - (NSString *) getNextFilenameWithExtension:(NSString *)ext;
