@@ -66,15 +66,15 @@
     newSize.width = imageSize.width + paddingWidth + 20;
     newSize.height = imageSize.height + paddingHeight + 20;
     
-    if (newSize.width > maxSize.width)
+    if (newSize.width > maxSize.width - 20)
     {
-        newSize.width = maxSize.width;
+        newSize.width = maxSize.width - 20;
         newSize.height = (newSize.width - paddingWidth) * imageSize.height / imageSize.width + paddingHeight;
     }
     
-    if (newSize.height > maxSize.height)
+    if (newSize.height > maxSize.height - 20)
     {
-        newSize.height = maxSize.height;
+        newSize.height = maxSize.height - 20 ;
         newSize.width = (newSize.height - paddingHeight) * imageSize.width / imageSize.height + paddingWidth;
     }
 
