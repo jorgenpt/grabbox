@@ -36,8 +36,7 @@
 
 - (IBAction) pressedOk:(id) sender
 {
-    int oldDropId = [appDelegate dropboxId];
-    if (![self dropboxId] && !oldDropId)
+    if (![self dropboxId] && autoLaunch)
     {
         NSAlert* alert = [NSAlert alertWithMessageText:nil
                                          defaultButton:nil
@@ -54,7 +53,7 @@
     {
         [appDelegate setDropboxId:[self dropboxId]];
 
-        if (!oldDropId)
+        if (autoLaunch)
             [appDelegate startMonitoring];
 
         [[self timer] invalidate];
@@ -72,7 +71,7 @@
     [self setTimer:nil];
     [self setDropboxId:0];
 
-    if (![appDelegate dropboxId])
+    if (autoLaunch)
         [[NSApplication sharedApplication] terminate:self];
     else
         [window close];
@@ -89,20 +88,19 @@
     if (!timer)
     {
         [linkOk setState:NSOffState];
-
-        if (![appDelegate dropboxId])
-        {
-            if ([autoLaunch state] != NSOnState)
-                [autoLaunch performClick:self];
-        }
-
         timer = [[NSTimer scheduledTimerWithTimeInterval: 0.5
                                                   target: self
                                                 selector: @selector(checkClipboard:)
                                                 userInfo: nil
                                                  repeats: YES] retain];
-        [[NSRunLoop currentRunLoop] addTimer:timer
-                                     forMode:NSModalPanelRunLoopMode];
+
+        if (autoLaunch)
+        {
+            if ([autoLaunch state] != NSOnState)
+                [autoLaunch performClick:self];
+            [[NSRunLoop currentRunLoop] addTimer:timer
+                                         forMode:NSModalPanelRunLoopMode];
+        }
 
     }
 }
