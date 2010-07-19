@@ -7,8 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Notifier.h"
-#import "FSRefConversions.h"
 
 int main(int argc, const char *argv[])
 {

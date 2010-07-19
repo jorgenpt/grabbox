@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Growl/GrowlApplicationBridge.h"
+#import <Growl/Growl.h>
 
 #import "GrowlerDelegate.h"
 

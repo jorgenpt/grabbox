@@ -7,10 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <Sparkle/Sparkle.h>
+
 #import "Notifier.h"
 #import "InformationGatherer.h"
 #import "DropboxDetector.h"
-#import "Sparkle/SUUpdater.h"
 
 @interface GrabBoxAppDelegate : NSObject <NSApplicationDelegate, DropboxDetectorDelegate> {
     NSWindow* setupWindow;
