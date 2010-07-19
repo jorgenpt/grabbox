@@ -24,7 +24,7 @@
            toPath:(NSString *)destination
            withId:(int)dropId
 {
-    return [[self alloc] initForFile:file atPath:source toPath:destination withId:dropId];
+    return [[[self alloc] initForFile:file atPath:source toPath:destination withId:dropId] autorelease];
 }
 
 - (id) initForFile:(NSString *)file

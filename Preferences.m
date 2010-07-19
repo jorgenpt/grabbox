@@ -15,6 +15,7 @@
     NSString* appPath = [[NSBundle mainBundle] bundlePath];
     NSArray* autoLaunch = (NSArray*)CFPreferencesCopyAppValue(CFSTR("AutoLaunchedApplicationDictionary"),
                                                               CFSTR("loginwindow"));
+    [autoLaunch autorelease];
     for (NSDictionary* dict in autoLaunch)
     {
         NSString* path = [dict objectForKey:@"Path"];
@@ -28,6 +29,7 @@
     NSString* appPath = [[NSBundle mainBundle] bundlePath];
     NSArray* autoLaunch = (NSArray*)CFPreferencesCopyAppValue(CFSTR("AutoLaunchedApplicationDictionary"),
                                                               CFSTR("loginwindow"));
+    [autoLaunch autorelease];
     NSMutableArray* autoLaunchMutable;
 
     if (state)
@@ -37,7 +39,7 @@
                               appPath, @"Path",
                               nil];
 
-        autoLaunchMutable = [autoLaunch mutableCopy];
+        autoLaunchMutable = [[autoLaunch mutableCopy] autorelease];
         [autoLaunchMutable addObject:info];
     }
     else

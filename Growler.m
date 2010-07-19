@@ -47,7 +47,7 @@
           delegateContext:(GrowlerDelegateContext *)context
                    sticky:(BOOL)stickiness
 {
-    NSNumber* contextKey;
+    NSNumber* contextKey = nil;
     if (context)
         contextKey = [(Growler*)[GrowlApplicationBridge growlDelegate] addContext:context];
 
