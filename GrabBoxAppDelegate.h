@@ -13,7 +13,11 @@
 #import "InformationGatherer.h"
 #import "DropboxDetector.h"
 
+#if (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5)
+@interface GrabBoxAppDelegate : NSObject <DropboxDetectorDelegate> {
+#else
 @interface GrabBoxAppDelegate : NSObject <NSApplicationDelegate, DropboxDetectorDelegate> {
+#endif
     NSWindow* setupWindow;
     InformationGatherer* info;
     Notifier* notifier;

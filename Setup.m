@@ -109,6 +109,7 @@
 - (void) checkClipboard:(NSTimer *) timer
 {
     NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
+#if (MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5)
     NSArray *classes = [NSArray arrayWithObjects:[NSString class], nil];
     NSDictionary *options = [NSDictionary dictionary];
     NSArray *copiedItems = [pasteboard readObjectsForClasses:classes options:options];
@@ -116,12 +117,19 @@
         return;
 
     NSURL *url = [NSURL URLWithString:[copiedItems objectAtIndex:0]];
+#else
+    NSURL *url = [NSURL URLWithString:[pasteboard stringForType:NSStringPboardType]];
+#endif
     if (!url)
         return;
 
     if ([[url host] hasSuffix:@".dropbox.com"])
     {
+#if (MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5)
         NSArray* components = [url pathComponents];
+#else
+        NSArray* components = [[url path] pathComponents];
+#endif
         NSString* dirComponent = [components objectAtIndex:1];
         if (![dirComponent isEqualToString:@"u"])
             return;

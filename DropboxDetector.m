@@ -7,7 +7,7 @@
 //
 
 #import "DropboxDetector.h"
-
+#import "ProcessIsRunningWithBundleID.h"
 
 @implementation DropboxDetector
 
@@ -39,9 +39,13 @@
 
 - (void) awakeFromNib
 {
+#if (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5)
+    if (!ProcessIsRunningWithBundleID(CFSTR("com.getdropbox.dropbox"), NULL))
+#else
     NSArray* apps = [NSRunningApplication
                      runningApplicationsWithBundleIdentifier:@"com.getdropbox.dropbox"];
     if ([apps count] < 1)
+#endif
     {
         NSString *path = [[NSWorkspace sharedWorkspace]
                           absolutePathForAppBundleWithIdentifier:@"com.getdropbox.dropbox"];

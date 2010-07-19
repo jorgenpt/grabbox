@@ -17,7 +17,9 @@ static InformationGatherer* defaultInstance = nil;
 @property (nonatomic, retain) NSString* uploadPath;
 @property (nonatomic, retain) NSString* publicPath;
 @property (nonatomic, retain) NSString* localizedScreenshotPrefix;
+@property (nonatomic, assign) BOOL isSnowLeopardOrNewer;
 @property (nonatomic, retain) NSSet* dirContents;
+
 @end
 
 @implementation InformationGatherer
@@ -26,6 +28,7 @@ static InformationGatherer* defaultInstance = nil;
 @synthesize uploadPath;
 @synthesize publicPath;
 @synthesize localizedScreenshotPrefix;
+@synthesize isSnowLeopardOrNewer;
 @synthesize dirContents;
 
 + (id) defaultGatherer
@@ -61,6 +64,12 @@ static InformationGatherer* defaultInstance = nil;
                 [self setScreenshotPath:nil];
                 [self setUploadPath:nil];
                 [self setPublicPath:nil];
+
+                SInt32 MacVersion;
+                if (Gestalt(gestaltSystemVersion, &MacVersion) == noErr && MacVersion < 0x1060)
+                    [self setIsSnowLeopardOrNewer:NO];
+                else
+                    [self setIsSnowLeopardOrNewer:YES];
 
                 defaultInstance = self;
             }
@@ -113,8 +122,12 @@ static InformationGatherer* defaultInstance = nil;
 
     sqlite3 *db;
     sqlite3_stmt *statement;
-
+#if (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5)
+    if (sqlite3_open([path UTF8String], &db) == SQLITE_OK)
+#else
     if (sqlite3_open_v2([path UTF8String], &db, SQLITE_OPEN_READONLY, NULL) == SQLITE_OK)
+#endif
+
     {
         if (sqlite3_prepare_v2(db, [sqlStatement UTF8String], -1, &statement, 0) == SQLITE_OK)
         {
@@ -138,9 +151,17 @@ static InformationGatherer* defaultInstance = nil;
         return localizedScreenshotPrefix;
 
     NSBundle* systemUIServer = [NSBundle bundleWithPath:@"/System/Library/CoreServices/SystemUIServer.app"];
-    NSString* screenshotName = [systemUIServer localizedStringForKey:@"Screen shot"
+    NSString* stringKey = @"Screen shot";
+
+    if (![self isSnowLeopardOrNewer])
+        stringKey = @"Picture";
+
+    NSString* screenshotName = [systemUIServer localizedStringForKey:stringKey
                                                                value:nil
                                                                table:@"ScreenCapture"];
+    
+    if (!screenshotName)
+        screenshotName = @"";
     
     [self setLocalizedScreenshotPrefix:[screenshotName stringByAppendingString:@" "]];
     return [self localizedScreenshotPrefix];
@@ -152,9 +173,20 @@ static InformationGatherer* defaultInstance = nil;
     if (!newContents)
         return nil;
 
+#if (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5)
+    NSMutableSet* newEntries = [NSMutableSet set];
+    for (id obj in newContents)
+    {
+        if ([dirContents member:obj] == nil)
+        {
+            [newEntries addObject:obj];
+        }
+    }
+#else
     NSSet* newEntries = [newContents objectsPassingTest:^ BOOL (id obj, BOOL* stop) {
         return [dirContents member:obj] == nil;
     }];
+#endif
 
     [self setDirContents:newContents];
     return newEntries;

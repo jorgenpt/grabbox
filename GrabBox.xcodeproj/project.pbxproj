@@ -40,6 +40,8 @@
 		8E4A50A011E9155500A0A743 /* InformationGatherer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4A509F11E9155500A0A743 /* InformationGatherer.m */; };
 		8E51825911E7CE3A00D15CAB /* FSRefConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E51825811E7CE3A00D15CAB /* FSRefConversions.m */; };
 		8E60861811E6D1B600881A1C /* Notifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E60861711E6D1B600881A1C /* Notifier.m */; };
+		8E7385D811F3C5ED0051276B /* ProcessIsRunningWithBundleID.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E7385D711F3C5EC0051276B /* ProcessIsRunningWithBundleID.c */; };
+		8E7385EA11F3C7900051276B /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7385E911F3C7900051276B /* Carbon.framework */; };
 		8E7B686911EBD1BA00112165 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B686811EBD1BA00112165 /* Sparkle.framework */; };
 		8E7B688F11EBD26500112165 /* Sparkle.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B686811EBD1BA00112165 /* Sparkle.framework */; };
 		8E7B689811EBD87500112165 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 8E7B689711EBD87500112165 /* dsa_pub.pem */; };
@@ -136,6 +138,9 @@
 		8E51825811E7CE3A00D15CAB /* FSRefConversions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSRefConversions.m; sourceTree = "<group>"; };
 		8E60861611E6D1B600881A1C /* Notifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifier.h; sourceTree = "<group>"; };
 		8E60861711E6D1B600881A1C /* Notifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notifier.m; sourceTree = "<group>"; };
+		8E7385D611F3C5EC0051276B /* ProcessIsRunningWithBundleID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessIsRunningWithBundleID.h; sourceTree = "<group>"; };
+		8E7385D711F3C5EC0051276B /* ProcessIsRunningWithBundleID.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ProcessIsRunningWithBundleID.c; sourceTree = "<group>"; };
+		8E7385E911F3C7900051276B /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		8E7B686811EBD1BA00112165 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		8E7B689711EBD87500112165 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		8E7B692311EBEBB400112165 /* Growl Registration Ticket.growlRegDict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Growl Registration Ticket.growlRegDict"; sourceTree = "<group>"; };
@@ -164,6 +169,7 @@
 				8E7B686911EBD1BA00112165 /* Sparkle.framework in Frameworks */,
 				8E7B6A7911EBFF1E00112165 /* libsqlite3.dylib in Frameworks */,
 				8E7B6B2E11EC19A500112165 /* Growl.framework in Frameworks */,
+				8E7385EA11F3C7900051276B /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +201,8 @@
 				8E4A509011E9105700A0A743 /* Setup.m */,
 				8E7B6BC711EC383800112165 /* UploadInitiator.h */,
 				8E7B6BC811EC383800112165 /* UploadInitiator.m */,
+				8E7385D611F3C5EC0051276B /* ProcessIsRunningWithBundleID.h */,
+				8E7385D711F3C5EC0051276B /* ProcessIsRunningWithBundleID.c */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -216,6 +224,7 @@
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+				8E7385E911F3C7900051276B /* Carbon.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -427,6 +436,7 @@
 				8E7B6C2511EC433B00112165 /* Preferences.m in Sources */,
 				8E49CF2211ED0DFA0041CE70 /* ImageRenamer.m in Sources */,
 				8E1A63EB11EFB63A00C3379F /* DropboxDetector.m in Sources */,
+				8E7385D811F3C5ED0051276B /* ProcessIsRunningWithBundleID.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +517,7 @@
 				INFOPLIST_FILE = "GrabBox-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = GrabBox;
+				SDKROOT = macosx10.5;
 			};
 			name = Debug;
 		};
@@ -525,6 +536,7 @@
 				INFOPLIST_FILE = "GrabBox-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = GrabBox;
+				SDKROOT = macosx10.5;
 			};
 			name = Release;
 		};

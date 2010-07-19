@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+NSString *const NSImageNameCaution = @"NSCaution";
 
 int main(int argc, const char *argv[])
 {
