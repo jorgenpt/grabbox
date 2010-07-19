@@ -73,9 +73,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
 {
     NSString* appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     NSDictionary* versionParam = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  @"version", @"key",
+                                  @"currentversion", @"key",
                                   appVersion, @"value",
-                                  @"Version", @"displayKey",
+                                  @"Current Version", @"displayKey",
                                   appVersion, @"displayValue",
                                   nil];
     return [NSArray arrayWithObject:versionParam];
