@@ -154,14 +154,68 @@ static InformationGatherer* defaultInstance = nil;
     NSString* stringKey = @"Screen shot";
 
     if (![self isSnowLeopardOrNewer])
+    {
         stringKey = @"Picture";
+    }
 
-    NSString* screenshotName = [systemUIServer localizedStringForKey:stringKey
-                                                               value:nil
-                                                               table:@"ScreenCapture"];
-    
+    NSString* screenshotName;
+    NSMutableDictionary* bundleLanguages = [NSMutableDictionary dictionary];
+    for (NSString* locale in [systemUIServer localizations])
+    {
+        [bundleLanguages setObject:locale
+                            forKey:[NSLocale canonicalLocaleIdentifierFromString:locale]];
+    }
+
+    NSArray* languages = [NSLocale preferredLanguages];
+    for (NSString* language in languages)
+    {
+        language = [NSLocale canonicalLocaleIdentifierFromString:language];
+        NSString* lproj = [bundleLanguages objectForKey:language];
+        if (!lproj)
+        {
+            NSLog(@"No lproj for %@, trying next preferred language.", language);
+            continue;
+        }
+
+        NSString *table = [systemUIServer pathForResource:@"ScreenCapture"
+                                                   ofType:@"strings"
+                                              inDirectory:@""
+                                          forLocalization:lproj];
+        if (!table)
+        {
+            NSLog(@"No ScreenCapture.strings in %@, trying next preferred language.", lproj);
+            continue;
+        }
+
+        NSData* data = [NSData dataWithContentsOfFile:table];
+        NSString* error;
+        NSDictionary* strings = [NSPropertyListSerialization propertyListFromData:data
+                                                                 mutabilityOption:NSPropertyListImmutable
+                                                                           format:NULL
+                                                                 errorDescription:&error];
+        if (!strings)
+        {
+            NSLog(@"Couldn't load %@ (%@), trying next preferred language: %@", lproj, table, error);
+            continue;
+        }
+
+        NSString* localized = [strings objectForKey:stringKey];
+        if (localized)
+        {
+            screenshotName = localized;
+            break;
+        }
+        else
+        {
+            NSLog(@"No value for '%@' in %@ (%@), trying next preferred language.", stringKey, lproj, table);
+        }
+    }
+
     if (!screenshotName)
-        screenshotName = @"";
+    {
+        NSLog(@"screenshotName is nil-string.");
+        screenshotName = @"NO NAME FOUND";
+    }
     
     [self setLocalizedScreenshotPrefix:[screenshotName stringByAppendingString:@" "]];
     return [self localizedScreenshotPrefix];
