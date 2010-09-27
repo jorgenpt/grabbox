@@ -8,6 +8,8 @@
 
 #import "InformationGatherer.h"
 
+#import "NSDataAdditions.h"
+
 #include <sqlite3.h>
 
 static InformationGatherer* defaultInstance = nil;
@@ -139,6 +141,14 @@ static InformationGatherer* defaultInstance = nil;
         }
         sqlite3_close(db);
     }
+
+    /* Convert from Pickle
+     * XXX: THIS IS NOT SAFE! Pickle formats are internal and change without warning!
+     * (Though I don't think it does very often)
+     */
+    NSData* data = [NSData dataWithBase64EncodedString:result];
+    result = [[[NSString alloc] autorelease] initWithData:data encoding:NSUTF8StringEncoding];
+    result = [[[result componentsSeparatedByString:@"\n"] objectAtIndex:0] substringFromIndex:1];
 
     result = [[result stringByAppendingPathComponent:@"Public"] stringByStandardizingPath];
     [self setPublicPath:result];
