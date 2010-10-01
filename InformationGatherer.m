@@ -18,7 +18,7 @@ static InformationGatherer* defaultInstance = nil;
 @property (nonatomic, retain) NSString* screenshotPath;
 @property (nonatomic, retain) NSString* uploadPath;
 @property (nonatomic, retain) NSString* publicPath;
-@property (nonatomic, retain) NSString* localizedScreenshotPrefix;
+@property (nonatomic, retain) NSString* localizedScreenshotPattern;
 @property (nonatomic, assign) BOOL isSnowLeopardOrNewer;
 @property (nonatomic, retain) NSSet* dirContents;
 
@@ -29,7 +29,7 @@ static InformationGatherer* defaultInstance = nil;
 @synthesize screenshotPath;
 @synthesize uploadPath;
 @synthesize publicPath;
-@synthesize localizedScreenshotPrefix;
+@synthesize localizedScreenshotPattern;
 @synthesize isSnowLeopardOrNewer;
 @synthesize dirContents;
 
@@ -107,11 +107,11 @@ static InformationGatherer* defaultInstance = nil;
 {
     if (uploadPath)
         return uploadPath;
-    
+
     NSString* path = [[[self publicPath] stringByAppendingPathComponent:@"Screenshots"] stringByStandardizingPath];
     [self setUploadPath:path];
     return [self uploadPath];
-    
+
 }
 
 - (NSString *)publicPath
@@ -155,20 +155,22 @@ static InformationGatherer* defaultInstance = nil;
     return [self publicPath];
 }
 
-- (NSString *)localizedScreenshotPrefix
+- (NSString *)localizedScreenshotPattern
 {
-    if (localizedScreenshotPrefix)
-        return localizedScreenshotPrefix;
+    if (localizedScreenshotPattern)
+        return localizedScreenshotPattern;
 
     NSBundle* systemUIServer = [NSBundle bundleWithPath:@"/System/Library/CoreServices/SystemUIServer.app"];
-    NSString* stringKey = @"Screen shot";
+    NSString* error;
+    NSString* stringKeySC = @"Screen shot";
+    NSString* stringKeyFormat = @"%@ %@ at %@";
 
     if (![self isSnowLeopardOrNewer])
     {
-        stringKey = @"Picture";
+        stringKeySC = @"Picture";
     }
 
-    NSString* screenshotName;
+    NSString* screenshotPattern;
     NSMutableDictionary* bundleLanguages = [NSMutableDictionary dictionary];
     for (NSString* locale in [systemUIServer localizations])
     {
@@ -179,7 +181,9 @@ static InformationGatherer* defaultInstance = nil;
     NSArray* languages = [NSLocale preferredLanguages];
     for (NSString* language in languages)
     {
+        DLog(@"Trying language (before canonicalization): %@", language);
         language = [NSLocale canonicalLocaleIdentifierFromString:language];
+        DLog(@"Trying language (after canonicalization):  %@", language);
         NSString* lproj = [bundleLanguages objectForKey:language];
         if (!lproj)
         {
@@ -187,48 +191,75 @@ static InformationGatherer* defaultInstance = nil;
             continue;
         }
 
-        NSString *table = [systemUIServer pathForResource:@"ScreenCapture"
-                                                   ofType:@"strings"
-                                              inDirectory:@""
-                                          forLocalization:lproj];
-        if (!table)
+        NSString *tableSC = [systemUIServer pathForResource:@"ScreenCapture"
+                                                     ofType:@"strings"
+                                                inDirectory:@""
+                                            forLocalization:lproj];
+        NSString *tableLoc = [systemUIServer pathForResource:@"Localizable"
+                                                      ofType:@"strings"
+                                                 inDirectory:@""
+                                             forLocalization:lproj];
+        if (!tableSC || !tableLoc)
         {
-            NSLog(@"No ScreenCapture.strings in %@, trying next preferred language.", lproj);
+            NSLog(@"%@ doesn't have both ScreenCapture.strings and Localizable.strings, trying next preferred language.", lproj);
             continue;
         }
 
-        NSData* data = [NSData dataWithContentsOfFile:table];
-        NSString* error;
+        NSData* data = [NSData dataWithContentsOfFile:tableSC];
         NSDictionary* strings = [NSPropertyListSerialization propertyListFromData:data
                                                                  mutabilityOption:NSPropertyListImmutable
                                                                            format:NULL
                                                                  errorDescription:&error];
         if (!strings)
         {
-            NSLog(@"Couldn't load %@ (%@), trying next preferred language: %@", lproj, table, error);
+            NSLog(@"Couldn't load %@ (%@), trying next preferred language: %@", lproj, tableSC, error);
             continue;
         }
 
-        NSString* localized = [strings objectForKey:stringKey];
-        if (localized)
+        NSString* localizedSC = [strings objectForKey:stringKeySC];
+        if (!localizedSC)
         {
-            screenshotName = localized;
+            NSLog(@"No value for '%@' in %@ (%@), trying next preferred language.", stringKeySC, lproj, tableSC);
+            continue;
+        }
+
+        data = [NSData dataWithContentsOfFile:tableLoc];
+        strings = [NSPropertyListSerialization propertyListFromData:data
+                                                   mutabilityOption:NSPropertyListImmutable
+                                                             format:NULL
+                                                   errorDescription:&error];
+        if (!strings)
+        {
+            NSLog(@"Couldn't load %@ (%@), trying next preferred language: %@", lproj, tableLoc, error);
+            continue;
+        }
+
+        NSString* localizedFormat = [strings objectForKey:stringKeyFormat];
+        if (localizedFormat)
+        {
+            screenshotPattern = [NSString stringWithFormat:localizedFormat, localizedSC, @"*", @"*"];
             break;
         }
         else
         {
-            NSLog(@"No value for '%@' in %@ (%@), trying next preferred language.", stringKey, lproj, table);
+            NSLog(@"No value for '%@' in %@ (%@), trying next preferred language.", stringKeyFormat, lproj, tableLoc);
         }
     }
 
-    if (!screenshotName)
+    if (!screenshotPattern)
     {
-        NSLog(@"screenshotName is nil-string.");
-        screenshotName = @"NO NAME FOUND";
+        NSLog(@"ERROR: screenshotName is nil-string.");
+        screenshotPattern = @"NO PATTERN FOUND";
     }
-    
-    [self setLocalizedScreenshotPrefix:[screenshotName stringByAppendingString:@" "]];
-    return [self localizedScreenshotPrefix];
+    else
+    {
+        screenshotPattern = [screenshotPattern stringByAppendingString:@".*"];
+    }
+
+    DLog(@"Pattern is %@", screenshotPattern);
+
+    [self setLocalizedScreenshotPattern:screenshotPattern];
+    return [self localizedScreenshotPattern];
 }
 
 - (NSSet *)createdFiles

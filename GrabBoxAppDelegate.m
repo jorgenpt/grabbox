@@ -184,8 +184,11 @@ static void translateEvent(ConstFSEventStreamRef stream,
     }
 
     for (NSString* entry in newEntries) {
-        if (![entry hasPrefix:[info localizedScreenshotPrefix]])
+        if (![entry isLike:[info localizedScreenshotPattern]])
+        {
+            DLog(@"Found file '%@', but does not match  %@'", entry, [info localizedScreenshotPattern]);
             continue;
+        }
 
         UploadInitiator* up = [UploadInitiator uploadFile:entry
                                                    atPath:screenshotPath

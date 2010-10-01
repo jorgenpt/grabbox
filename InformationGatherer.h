@@ -12,7 +12,7 @@
     NSString* screenshotPath;
     NSString* uploadPath;
     NSString* publicPath;
-    NSString* localizedScreenshotPrefix;
+    NSString* localizedScreenshotPattern;
     BOOL isSnowLeopardOrNewer;
     NSSet* dirContents;
 }
@@ -29,7 +29,7 @@
 - (NSString *)screenshotPath;
 - (NSString *)publicPath;
 - (NSString *)uploadPath;
-- (NSString *)localizedScreenshotPrefix;
+- (NSString *)localizedScreenshotPattern;
 - (NSSet *)createdFiles;
 - (NSSet *)files;
 - (BOOL)isSnowLeopardOrNewer;
