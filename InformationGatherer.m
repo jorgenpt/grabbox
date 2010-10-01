@@ -136,19 +136,19 @@ static InformationGatherer* defaultInstance = nil;
             if (sqlite3_step(statement) == SQLITE_ROW)
             {
                 result = [NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 0)];
+
+                /* Convert from Pickle
+                 * XXX: THIS IS NOT SAFE! Pickle formats are internal and change without warning!
+                 * (Though I don't think it does very often)
+                 */
+                NSData* data = [NSData dataWithBase64EncodedString:result];
+                result = [[[NSString alloc] autorelease] initWithData:data encoding:NSUTF8StringEncoding];
+                result = [[[result componentsSeparatedByString:@"\n"] objectAtIndex:0] substringFromIndex:1];
             }
             sqlite3_finalize(statement);
         }
         sqlite3_close(db);
     }
-
-    /* Convert from Pickle
-     * XXX: THIS IS NOT SAFE! Pickle formats are internal and change without warning!
-     * (Though I don't think it does very often)
-     */
-    NSData* data = [NSData dataWithBase64EncodedString:result];
-    result = [[[NSString alloc] autorelease] initWithData:data encoding:NSUTF8StringEncoding];
-    result = [[[result componentsSeparatedByString:@"\n"] objectAtIndex:0] substringFromIndex:1];
 
     result = [[result stringByAppendingPathComponent:@"Public"] stringByStandardizingPath];
     [self setPublicPath:result];
