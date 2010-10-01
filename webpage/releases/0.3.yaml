@@ -1,0 +1,9 @@
+date:       Tue, 13 Jul 2010 02:21:41 -0700
+signature:  MCwCFBzaJzq6V2YKXzV6++1uN5nnUICAAhQfcdyVaK2PdIExGvPluqzNv8NbqA==
+changelog:
+    changes:
+        - Shorten names when 'uploading' screenshots.
+        - Option to prompt before 'uploading' screenshots.
+        - Option to use direct Dropbox link instead of o7.no short-url.
+    bugfixes:
+        - Adding URL to clipboard wouldn't retry if requested to after failing.

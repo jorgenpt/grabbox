@@ -1,0 +1,5 @@
+date:       Thu, 30 Sep 2010 11:55:57 -0700
+signature:  MC0CFQDWUEmw8oVb4kceixLiAGlUkJXoMAIUNzyZNIh+xxtCEwUlz56GxivQwdw=
+changelog:
+    bugfixes:
+        - Now works on Japanese OS X! (Better handling of localized filenames, might affect other locales too)

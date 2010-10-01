@@ -1,0 +1,15 @@
+date:       Mon, 27 Sep 2010 14:00:00 -0700
+signature:  MC0CFQCF3EUY2mew8jJhJaouRNW+tC9GRwIUEN9VeazEvj8NM7IItmwNYrF1pTk=
+changelog:
+    changes:
+        - More information in About.
+        - Identifier is now no.devsoft.grabbox, to match domain. All preferences will be lost.
+        - Now built to support Leopard (10.5) too.
+        - Show caution image on 10.6 for warning boxes / growls.
+        - Menu selection "Screenshots > Browse Uploads" to show Dropbox/Public/Screenshots.
+    bugfixes:
+        - Use different notifications for rename and upload.
+        - Should now work under different localizations (Screenshot filename looked up in localized SystemUIServer strings).
+        - Handle "filename in use" on upload and rename properly.
+        - Should now work if the user has a custom Dropbox path.
+        - Fix some leaks.

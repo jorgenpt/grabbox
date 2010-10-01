@@ -1,0 +1,7 @@
+date:       Mon, 12 Jul 2010 21:09:18 -0700
+signature:  MC0CFQC3bddcqMcU+zuyEGYd+MFQjQNRnQIUBIXKPWp6Jn4Cw3PeyPu0lgp3POQ=
+changelog:
+    changes:
+        - Use builtin sqlite3 instead of shipping our own build.
+        - Add Growl support for errors and messages.
+        - Better error handling if copying to clipboard fails.
