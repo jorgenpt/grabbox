@@ -23,6 +23,8 @@
 @implementation GrabBoxAppDelegate
 
 @synthesize setupWindow;
+@synthesize restartWindow;
+@synthesize menubar;
 @synthesize info;
 @synthesize notifier;
 @synthesize detectors;
@@ -43,11 +45,22 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void) awakeFromNib
 {
+    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
+                                                              forKeyPath:@"values.ShowInDock"
+                                                                 options:0
+                                                                 context:NULL];
+
     [self setInfo:[InformationGatherer defaultGatherer]];
     [self setNotifier:[Notifier notifierWithCallback:translateEvent
                                                 path:[info screenshotPath]
                                     callbackArgument:self]];
     [self setDetectors:[NSMutableArray array]];
+
+    BOOL showInDock = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowInDock"];
+    if (!showInDock)
+    {
+        [[self menubar] show];
+    }
 }
 
 - (void) dealloc
@@ -69,6 +82,34 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [[NSUserDefaults standardUserDefaults] setInteger:toId forKey:@"DropboxId"];
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+                        change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"values.ShowInDock"])
+    {
+        BOOL shouldShowInDock = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowInDock"];
+        if (shouldShowInDock)
+        {
+
+            ProcessSerialNumber psn = { 0, kCurrentProcess };
+            OSStatus returnCode = TransformProcessType(&psn, kProcessTransformToForegroundApplication);
+            if (returnCode != 0)
+            {
+                NSLog(@"ERROR: Could not bring the application to front. Error %d. Leaving in menubar.", returnCode);
+            }
+            else
+            {
+                [[self menubar] hide];
+            }
+        }
+        else
+        {
+            [NSApp activateIgnoringOtherApps:YES];
+            [NSApp runModalForWindow:restartWindow];
+        }
+    }
+}
+
 - (NSArray *)feedParametersForUpdater:(SUUpdater *)updater sendingSystemProfile:(BOOL)sendingProfile
 {
     NSString* appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
@@ -80,7 +121,22 @@ static void translateEvent(ConstFSEventStreamRef stream,
                                   nil];
     return [NSArray arrayWithObject:versionParam];
 }
- 
+
+- (void) applicationWillFinishLaunching:(NSNotification *)aNotification
+{
+    BOOL showInDock = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowInDock"];
+    if (showInDock)
+    {
+        ProcessSerialNumber psn = { 0, kCurrentProcess };
+        OSStatus returnCode = TransformProcessType(&psn, kProcessTransformToForegroundApplication);
+        if (returnCode != 0)
+        {
+            NSLog(@"Could not bring the application to front. Error %d. Using menubar.", returnCode);
+            [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:@"ShowInDock"];
+        }
+    }
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [[SUUpdater sharedUpdater] setDelegate:self];
@@ -213,6 +269,26 @@ static void translateEvent(ConstFSEventStreamRef stream,
 - (IBAction) browseUploadedScreenshots:(id)sender
 {
     [[NSWorkspace sharedWorkspace] openFile:[info uploadPath]];
+}
+
+- (IBAction) restartLater:(id)sender
+{
+    [NSApp stopModal];
+    [[self restartWindow] performClose:self];
+}
+
+- (IBAction) restartApplication:(id)sender
+{
+    NSString *launcherSource = [[NSBundle bundleForClass:[SUUpdater class]]  pathForResource:@"relaunch" ofType:@""];
+    NSString *launcherTarget = [NSTemporaryDirectory() stringByAppendingPathComponent:[launcherSource lastPathComponent]];
+    NSString *appPath = [[NSBundle mainBundle] bundlePath];
+    NSString *processID = [NSString stringWithFormat:@"%d", [[NSProcessInfo processInfo] processIdentifier]];
+
+    [[NSFileManager defaultManager] removeItemAtPath:launcherTarget error:NULL];
+    [[NSFileManager defaultManager] copyItemAtPath:launcherSource toPath:launcherTarget error:NULL];
+
+    [NSTask launchedTaskWithLaunchPath:launcherTarget arguments:[NSArray arrayWithObjects:appPath, processID, nil]];
+    [NSApp terminate:sender];
 }
 
 @end

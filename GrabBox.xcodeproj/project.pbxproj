@@ -54,6 +54,7 @@
 		8E7B6B3611EC19A700112165 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B6B2D11EC19A500112165 /* Growl.framework */; };
 		8E7B6BC911EC383800112165 /* UploadInitiator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7B6BC811EC383800112165 /* UploadInitiator.m */; };
 		8E7B6C2511EC433B00112165 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7B6C2411EC433B00112165 /* Preferences.m */; };
+		8EAAE7F41256675800798872 /* Menubar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EAAE7F31256675800798872 /* Menubar.m */; };
 		8EE03A2711F2534E00655738 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8EE03A2611F2534E00655738 /* Credits.rtf */; };
 /* End PBXBuildFile section */
 
@@ -160,6 +161,8 @@
 		8E83818711F0DB1C00C3151D /* GrabBox 0.5.1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "GrabBox 0.5.1.html"; sourceTree = "<group>"; };
 		8E83818811F0DB2A00C3151D /* setup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setup.png; sourceTree = "<group>"; };
 		8E83818911F0DB2A00C3151D /* silk.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = silk.gif; sourceTree = "<group>"; };
+		8EAAE7F21256675800798872 /* Menubar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menubar.h; sourceTree = "<group>"; };
+		8EAAE7F31256675800798872 /* Menubar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menubar.m; sourceTree = "<group>"; };
 		8EE03A2611F2534E00655738 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,18 +199,20 @@
 				8E49CF2111ED0DFA0041CE70 /* ImageRenamer.m */,
 				8E4A509E11E9155500A0A743 /* InformationGatherer.h */,
 				8E4A509F11E9155500A0A743 /* InformationGatherer.m */,
+				8EAAE7F21256675800798872 /* Menubar.h */,
+				8EAAE7F31256675800798872 /* Menubar.m */,
 				8E60861611E6D1B600881A1C /* Notifier.h */,
 				8E60861711E6D1B600881A1C /* Notifier.m */,
 				8E3A3221125034CF00E9D0F6 /* NSDataAdditions.h */,
 				8E3A321F125034BD00E9D0F6 /* NSDataAdditions.m */,
 				8E7B6C2311EC433B00112165 /* Preferences.h */,
 				8E7B6C2411EC433B00112165 /* Preferences.m */,
+				8E7385D711F3C5EC0051276B /* ProcessIsRunningWithBundleID.c */,
+				8E7385D611F3C5EC0051276B /* ProcessIsRunningWithBundleID.h */,
 				8E4A508F11E9105700A0A743 /* Setup.h */,
 				8E4A509011E9105700A0A743 /* Setup.m */,
 				8E7B6BC711EC383800112165 /* UploadInitiator.h */,
 				8E7B6BC811EC383800112165 /* UploadInitiator.m */,
-				8E7385D611F3C5EC0051276B /* ProcessIsRunningWithBundleID.h */,
-				8E7385D711F3C5EC0051276B /* ProcessIsRunningWithBundleID.c */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -443,6 +448,7 @@
 				8E1A63EB11EFB63A00C3379F /* DropboxDetector.m in Sources */,
 				8E7385D811F3C5ED0051276B /* ProcessIsRunningWithBundleID.c in Sources */,
 				8E3A3220125034BD00E9D0F6 /* NSDataAdditions.m in Sources */,
+				8EAAE7F41256675800798872 /* Menubar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

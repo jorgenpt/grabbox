@@ -12,25 +12,30 @@
 #import "Notifier.h"
 #import "InformationGatherer.h"
 #import "DropboxDetector.h"
+#import "Menubar.h"
 
-#if (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5)
 @interface GrabBoxAppDelegate : NSObject <DropboxDetectorDelegate> {
-#else
-@interface GrabBoxAppDelegate : NSObject <NSApplicationDelegate, DropboxDetectorDelegate> {
-#endif
     NSWindow* setupWindow;
+    NSWindow* restartWindow;
+    Menubar* menubar;
     InformationGatherer* info;
     Notifier* notifier;
     NSMutableArray* detectors;
 }
 
 @property (assign) IBOutlet NSWindow* setupWindow;
+@property (assign) IBOutlet NSWindow* restartWindow;
+@property (assign) IBOutlet Menubar* menubar;
+
 
 - (void) awakeFromNib;
 - (void) dealloc;
 
 - (void) setDropboxId:(int)toId;
 - (int) dropboxId;
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+                        change:(NSDictionary *)change context:(void *)context;
 
 - (void) startMonitoring;
 - (void) eventForStream:(ConstFSEventStreamRef)stream
@@ -39,9 +44,13 @@
                     ids:(const FSEventStreamEventId[]) ids;
 - (NSArray *)feedParametersForUpdater:(SUUpdater *)updater
                  sendingSystemProfile:(BOOL)sendingProfile;
+- (void) applicationWillFinishLaunching:(NSNotification *)aNotification;
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification;
 - (void) dropboxIsRunning:(BOOL)running
              fromDetector:(DropboxDetector *)detector;
 
 - (IBAction) browseUploadedScreenshots:(id)sender;
+- (IBAction) restartLater:(id)sender;
+- (IBAction) restartApplication:(id)sender;
+
 @end
