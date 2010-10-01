@@ -86,7 +86,9 @@
         [[self delegate] dropboxIsRunning:YES fromDetector:self];
     }
     else
+    {
         [[self delegate] dropboxIsRunning:NO fromDetector:self];
+    }
     [NSApp stopModal];
 }
 
