@@ -33,6 +33,5 @@
 - (NSSet *)createdFiles;
 - (NSSet *)files;
 - (BOOL)isSnowLeopardOrNewer;
-- (NSString *)getURLForFile:(NSString *)file withId:(int)dropboxId;
 
 @end

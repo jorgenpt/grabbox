@@ -302,16 +302,4 @@ static InformationGatherer* defaultInstance = nil;
     return [NSSet setWithArray:dirList];
 }
 
-- (NSString *)getURLForFile:(NSString *)file withId:(int)dropboxId
-{
-    NSString *escapedFile = [file stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"UseDirectLink"])
-    {
-        return  [NSString stringWithFormat:@"http://dl.dropbox.com/u/%d/Screenshots/%@", dropboxId, escapedFile];
-    }
-    else
-    {
-        return  [NSString stringWithFormat:@"http://o7.no/%d/%@", dropboxId, escapedFile];
-    }
-}
 @end

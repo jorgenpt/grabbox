@@ -24,9 +24,8 @@ X Allow graceful recovery if filename is in use (when renaming or initial upload
 ? Global hotkey for rename etc? (http://dbachrach.com/blog/2005/11/program-global-hotkeys-in-cocoa-easily/)
 X NSStatusItem.
 - Don't put link in clipboard before upload is complete.
-- Option to let file stay on Desktop
+X Option to let file stay on Desktop
 - Change hotkey?
 - Separate hotkey for screenshots (modifier?).
 - Classified on cheggit.
-- Unpredictable filenames (long & short)
-- Make About box use [NSApp activateIgnoringOtherApps:YES];
+X Unpredictable filenames (long & short)

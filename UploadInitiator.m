@@ -10,6 +10,7 @@
 #import "Growler.h"
 #import "InformationGatherer.h"
 #import "ImageRenamer.h"
+#import "URLShortener.h"
 
 @implementation UploadInitiator
 
@@ -101,8 +102,8 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     }
     else
     {
-        NSString *dropboxUrl = [[InformationGatherer defaultGatherer] getURLForFile:shortName
-                                                                             withId:[self dropboxId]];
+        NSString *dropboxUrl = [URLShortener shortenURLForFile:shortName
+                                                        withId:[self dropboxId]];
         [UploadInitiator copyURL:dropboxUrl
                      basedOnFile:destination
                       wasRenamed:NO];
