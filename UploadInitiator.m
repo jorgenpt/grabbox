@@ -19,7 +19,7 @@
 @synthesize dropboxId;
 @synthesize detectors;
 
-NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz";
+NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
 
 + (id) uploadFile:(NSString *)file
            atPath:(NSString *)source
