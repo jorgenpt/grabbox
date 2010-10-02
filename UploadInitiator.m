@@ -69,10 +69,22 @@
     NSFileManager* fm = [NSFileManager defaultManager];
     NSString* sourcePath = [NSString pathWithComponents:[NSArray arrayWithObjects: [self srcPath], [self srcFile], nil]];
     NSString* destination = [NSString pathWithComponents:[NSArray arrayWithObjects: [self destPath], shortName, nil]];
-    BOOL moveOk = [fm moveItemAtPath:sourcePath
-                              toPath:destination
-                               error:&error];
-    if (!moveOk)
+
+    BOOL uploadOk;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"DoNotDeleteScreenshot"])
+    {
+        uploadOk = [fm copyItemAtPath:sourcePath
+                               toPath:destination
+                                error:&error];
+    }
+    else
+    {
+        uploadOk = [fm moveItemAtPath:sourcePath
+                               toPath:destination
+                                error:&error];
+    }
+
+    if (!uploadOk)
     {
         if (retries > 0 && [fm fileExistsAtPath:destination])
         {
