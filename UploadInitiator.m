@@ -19,6 +19,8 @@
 @synthesize dropboxId;
 @synthesize detectors;
 
+NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz";
+
 + (id) uploadFile:(NSString *)file
            atPath:(NSString *)source
            toPath:(NSString *)destination
@@ -158,12 +160,47 @@
 {
 }
 
+- (NSString *) getRandomStringOfLength:(int)length
+{
+    NSMutableString* output = [NSMutableString string];
+    
+    for (int i = 0; i < length; ++i)
+    {
+        int character = drand48() * [urlCharacters length]; 
+        [output appendString:[urlCharacters substringWithRange:NSMakeRange(character, 1)]];
+    }
+    
+    return output;
+}
+
 - (NSString *) getNextFilenameWithExtension:(NSString *)ext
 {
     NSFileManager* fm = [NSFileManager defaultManager];
-    NSString* characters = @"0123456789abcdefghijklmnopqrstuvwxyz";
 
-    NSMutableArray* prefixes = [NSMutableArray arrayWithObject:@""];
+    NSMutableArray* prefixes = [NSMutableArray array];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"UseRandomFilename"])
+    {
+        NSString *output, *filename;
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"UseLongRandomFilename"])
+            output = [self getRandomStringOfLength:12];
+        else 
+            output = [self getRandomStringOfLength:4];
+        filename = [output stringByAppendingFormat:@".%@", ext];
+        
+        NSString* path = [NSString pathWithComponents:[NSArray arrayWithObjects:[self destPath], filename, nil]];
+        if (![fm fileExistsAtPath:path])
+            return filename;
+        else
+        {
+            // If the file exists, we start out with the random string,
+            // and try appending things to it - like normal filename generation.
+            [prefixes addObject:output];
+        }
+    }
+    else
+    {
+        [prefixes addObject:@""];
+    }
 
     for (int c = 0; c < [prefixes count]; ++c)
     {
@@ -171,9 +208,9 @@
         if ([prefix length] > MAX_NAME_LENGTH)
             return nil;
 
-        for (int i = 0; i < [characters length]; i++)
+        for (int i = 0; i < [urlCharacters length]; i++)
         {
-            NSString* filename = [prefix stringByAppendingString:[characters substringWithRange:NSMakeRange(i, 1)]];
+            NSString* filename = [prefix stringByAppendingString:[urlCharacters substringWithRange:NSMakeRange(i, 1)]];
             [prefixes addObject:filename];
             filename = [filename stringByAppendingFormat:@".%@", ext];
 

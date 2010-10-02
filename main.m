@@ -11,5 +11,6 @@ NSString *const NSImageNameCaution = @"NSCaution";
 
 int main(int argc, const char *argv[])
 {
+    srand48(time(NULL));
     return NSApplicationMain(argc,  argv);
 }
