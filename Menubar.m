@@ -29,7 +29,9 @@
     [[self item] setTarget:self];
     [[self item] setHighlightMode:YES];
     [[self item] setEnabled:YES];
-    [[self item] setTitle:@"GB"];
+    [[self item] setImage:[NSImage imageNamed:@"menuicon.png"]];
+    [[self item] setAlternateImage:[NSImage imageNamed:@"menuiconInverted.png"]];
+
 }
 
 - (void) hide
