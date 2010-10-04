@@ -29,8 +29,10 @@ X Option to let file stay on Desktop
 - Separate hotkey for screenshots (modifier?).
 - Classified on cheggit.
 X Unpredictable filenames (long & short)
-- Popup after 30 runs (donate?)
-- Donate button on Preferences
-- New screenshots (Preferences)
-- Favicon
-- Mailing list
+X Popup after 30 runs (donate?)
+X Donate button on Preferences
+X Mailing list
+X Switch to menubar picture.
+X New screenshots (Preferences)
+X Favicon
+X Update twitter avatar

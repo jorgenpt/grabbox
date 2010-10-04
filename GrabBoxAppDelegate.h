@@ -17,6 +17,7 @@
 @interface GrabBoxAppDelegate : NSObject <DropboxDetectorDelegate> {
     NSWindow* setupWindow;
     NSWindow* restartWindow;
+    NSWindow* nagWindow;
     Menubar* menubar;
     InformationGatherer* info;
     Notifier* notifier;
@@ -25,6 +26,7 @@
 
 @property (assign) IBOutlet NSWindow* setupWindow;
 @property (assign) IBOutlet NSWindow* restartWindow;
+@property (assign) IBOutlet NSWindow* nagWindow;
 @property (assign) IBOutlet Menubar* menubar;
 
 
@@ -50,6 +52,9 @@
              fromDetector:(DropboxDetector *)detector;
 
 - (IBAction) browseUploadedScreenshots:(id)sender;
+- (IBAction) openFeedback:(id)sender;
+- (IBAction) openDonatePref:(id)sender;
+- (IBAction) openDonateNag:(id)sender;
 - (IBAction) restartLater:(id)sender;
 - (IBAction) restartApplication:(id)sender;
 

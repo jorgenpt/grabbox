@@ -45,6 +45,10 @@
 		8E4D883F12587584003A64EA /* menuiconInverted.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D883812587584003A64EA /* menuiconInverted.png */; };
 		8E4D8842125875BE003A64EA /* DropboxDetector.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D8840125875BE003A64EA /* DropboxDetector.xib */; };
 		8E51825911E7CE3A00D15CAB /* FSRefConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E51825811E7CE3A00D15CAB /* FSRefConversions.m */; };
+		8E5EFF7C125918BD00D36662 /* donate.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E5EFF7A125918BD00D36662 /* donate.png */; };
+		8E5EFF7D125918BD00D36662 /* switch_to_menubar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E5EFF7B125918BD00D36662 /* switch_to_menubar.png */; };
+		8E5EFF9412592B3700D36662 /* give_feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E5EFF9312592B3700D36662 /* give_feedback.png */; };
+		8E5EFF9812592CBE00D36662 /* icontrans.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E5EFF9712592CBE00D36662 /* icontrans.png */; };
 		8E60861811E6D1B600881A1C /* Notifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E60861711E6D1B600881A1C /* Notifier.m */; };
 		8E7385D811F3C5ED0051276B /* ProcessIsRunningWithBundleID.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E7385D711F3C5EC0051276B /* ProcessIsRunningWithBundleID.c */; };
 		8E7385EA11F3C7900051276B /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7385E911F3C7900051276B /* Carbon.framework */; };
@@ -138,6 +142,10 @@
 		8E4E78FD11EE2E7A00EB0CAD /* GrabBox 0.4.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "GrabBox 0.4.zip"; sourceTree = "<group>"; };
 		8E51825711E7CE3A00D15CAB /* FSRefConversions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSRefConversions.h; sourceTree = "<group>"; };
 		8E51825811E7CE3A00D15CAB /* FSRefConversions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSRefConversions.m; sourceTree = "<group>"; };
+		8E5EFF7A125918BD00D36662 /* donate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = donate.png; path = Resources/Images/donate.png; sourceTree = "<group>"; };
+		8E5EFF7B125918BD00D36662 /* switch_to_menubar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switch_to_menubar.png; path = Resources/Images/switch_to_menubar.png; sourceTree = "<group>"; };
+		8E5EFF9312592B3700D36662 /* give_feedback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = give_feedback.png; path = Resources/Images/give_feedback.png; sourceTree = "<group>"; };
+		8E5EFF9712592CBE00D36662 /* icontrans.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icontrans.png; path = Resources/Images/icontrans.png; sourceTree = "<group>"; };
 		8E60861611E6D1B600881A1C /* Notifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifier.h; sourceTree = "<group>"; };
 		8E60861711E6D1B600881A1C /* Notifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notifier.m; sourceTree = "<group>"; };
 		8E7385D611F3C5EC0051276B /* ProcessIsRunningWithBundleID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessIsRunningWithBundleID.h; sourceTree = "<group>"; };
@@ -310,6 +318,10 @@
 		8E2AF15511F01D2100A29A61 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8E5EFF9712592CBE00D36662 /* icontrans.png */,
+				8E5EFF9312592B3700D36662 /* give_feedback.png */,
+				8E5EFF7A125918BD00D36662 /* donate.png */,
+				8E5EFF7B125918BD00D36662 /* switch_to_menubar.png */,
 				8E4D883212587584003A64EA /* dropbox.png */,
 				8E4D883312587584003A64EA /* GrabBox.icns */,
 				8E4D883412587584003A64EA /* howto.png */,
@@ -423,6 +435,10 @@
 				8E4D883E12587584003A64EA /* menuicon.png in Resources */,
 				8E4D883F12587584003A64EA /* menuiconInverted.png in Resources */,
 				8E4D8842125875BE003A64EA /* DropboxDetector.xib in Resources */,
+				8E5EFF7C125918BD00D36662 /* donate.png in Resources */,
+				8E5EFF7D125918BD00D36662 /* switch_to_menubar.png in Resources */,
+				8E5EFF9412592B3700D36662 /* give_feedback.png in Resources */,
+				8E5EFF9812592CBE00D36662 /* icontrans.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

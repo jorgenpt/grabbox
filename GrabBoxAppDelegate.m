@@ -24,6 +24,7 @@
 
 @synthesize setupWindow;
 @synthesize restartWindow;
+@synthesize nagWindow;
 @synthesize menubar;
 @synthesize info;
 @synthesize notifier;
@@ -173,10 +174,19 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [[self detectors] removeObject:detector];
 }
 
-
 - (void) startMonitoring
 {
     [notifier start];
+    BOOL hasBeenNagged = [[NSUserDefaults standardUserDefaults] boolForKey:@"HasBeenNagged"];
+    int numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
+
+    if (!hasBeenNagged && numberOfScreenshots >= 15)
+    {
+        [[self nagWindow] makeKeyAndOrderFront:self];
+        [NSApp activateIgnoringOtherApps:YES];
+        [[NSUserDefaults standardUserDefaults] setBool:TRUE
+                                                forKey:@"HasBeenNagged"];
+    }
 }
 
 - (void) eventForStream:(ConstFSEventStreamRef)stream
@@ -269,6 +279,21 @@ static void translateEvent(ConstFSEventStreamRef stream,
 - (IBAction) browseUploadedScreenshots:(id)sender
 {
     [[NSWorkspace sharedWorkspace] openFile:[info uploadPath]];
+}
+
+- (IBAction) openFeedback:(id)sender
+{
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://grabbox.devsoft.no/contact/?src=nag"]];
+}
+
+- (IBAction) openDonatePref:(id)sender
+{
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://grabbox.devsoft.no/donate/?src=pref"]];
+}
+
+- (IBAction) openDonateNag:(id)sender
+{
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://grabbox.devsoft.no/donate/?src=nag"]];
 }
 
 - (IBAction) restartLater:(id)sender

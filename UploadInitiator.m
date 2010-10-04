@@ -102,6 +102,9 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     }
     else
     {
+        int numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
+        [[NSUserDefaults standardUserDefaults] setInteger:(numberOfScreenshots + 1)
+                                                   forKey:@"NumberOfScreenshotsUploaded"];
         NSString *dropboxUrl = [URLShortener shortenURLForFile:shortName
                                                         withId:[self dropboxId]];
         [UploadInitiator copyURL:dropboxUrl
