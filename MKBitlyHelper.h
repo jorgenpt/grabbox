@@ -18,5 +18,5 @@
 
 -(MKBitlyHelper*) initWithLoginName: (NSString*) f_loginName andAPIKey: (NSString*) f_apiKey;
 - (NSString*) shortenURL: (NSString*) f_longURL;
-- (NSString*) expandURL: (NSString*) f_shortURL;
+
 @end
