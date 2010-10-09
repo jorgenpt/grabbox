@@ -63,7 +63,7 @@
 		8E7B6C2511EC433B00112165 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7B6C2411EC433B00112165 /* Preferences.m */; };
 		8EAAE7F41256675800798872 /* Menubar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EAAE7F31256675800798872 /* Menubar.m */; };
 		8EF11A931256C2F700ACB3B1 /* URLShortener.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF11A921256C2F700ACB3B1 /* URLShortener.m */; };
-		8EF11AAD1256C9E500ACB3B1 /* MKBitlyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF11AAC1256C9E500ACB3B1 /* MKBitlyHelper.m */; };
+		8EF11AAD1256C9E500ACB3B1 /* BitlyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF11AAC1256C9E500ACB3B1 /* BitlyHelper.m */; };
 		8EF11B201256CDEA00ACB3B1 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF11B171256CDEA00ACB3B1 /* NSObject+SBJSON.m */; };
 		8EF11B211256CDEA00ACB3B1 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF11B191256CDEA00ACB3B1 /* NSString+SBJSON.m */; };
 		8EF11B221256CDEA00ACB3B1 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EF11B1B1256CDEA00ACB3B1 /* SBJsonBase.m */; };
@@ -166,8 +166,8 @@
 		8EAAE7F31256675800798872 /* Menubar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menubar.m; sourceTree = "<group>"; };
 		8EF11A911256C2F700ACB3B1 /* URLShortener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLShortener.h; sourceTree = "<group>"; };
 		8EF11A921256C2F700ACB3B1 /* URLShortener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLShortener.m; sourceTree = "<group>"; };
-		8EF11AAB1256C9E500ACB3B1 /* MKBitlyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKBitlyHelper.h; sourceTree = "<group>"; };
-		8EF11AAC1256C9E500ACB3B1 /* MKBitlyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKBitlyHelper.m; sourceTree = "<group>"; };
+		8EF11AAB1256C9E500ACB3B1 /* BitlyHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitlyHelper.h; sourceTree = "<group>"; };
+		8EF11AAC1256C9E500ACB3B1 /* BitlyHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitlyHelper.m; sourceTree = "<group>"; };
 		8EF11B151256CDEA00ACB3B1 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSON.h; path = JSON/JSON.h; sourceTree = "<group>"; };
 		8EF11B161256CDEA00ACB3B1 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+SBJSON.h"; path = "JSON/NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		8EF11B171256CDEA00ACB3B1 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+SBJSON.m"; path = "JSON/NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -201,6 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				8EF11AC31256CB1100ACB3B1 /* JSON */,
+				8EF11AAB1256C9E500ACB3B1 /* BitlyHelper.h */,
+				8EF11AAC1256C9E500ACB3B1 /* BitlyHelper.m */,
 				8E1A63E911EFB63A00C3379F /* DropboxDetector.h */,
 				8E1A63EA11EFB63A00C3379F /* DropboxDetector.m */,
 				8E51825711E7CE3A00D15CAB /* FSRefConversions.h */,
@@ -217,8 +219,6 @@
 				8E4A509F11E9155500A0A743 /* InformationGatherer.m */,
 				8EAAE7F21256675800798872 /* Menubar.h */,
 				8EAAE7F31256675800798872 /* Menubar.m */,
-				8EF11AAB1256C9E500ACB3B1 /* MKBitlyHelper.h */,
-				8EF11AAC1256C9E500ACB3B1 /* MKBitlyHelper.m */,
 				8E60861611E6D1B600881A1C /* Notifier.h */,
 				8E60861711E6D1B600881A1C /* Notifier.m */,
 				8E3A3221125034CF00E9D0F6 /* NSDataAdditions.h */,
@@ -481,7 +481,7 @@
 				8E3A3220125034BD00E9D0F6 /* NSDataAdditions.m in Sources */,
 				8EAAE7F41256675800798872 /* Menubar.m in Sources */,
 				8EF11A931256C2F700ACB3B1 /* URLShortener.m in Sources */,
-				8EF11AAD1256C9E500ACB3B1 /* MKBitlyHelper.m in Sources */,
+				8EF11AAD1256C9E500ACB3B1 /* BitlyHelper.m in Sources */,
 				8EF11B201256CDEA00ACB3B1 /* NSObject+SBJSON.m in Sources */,
 				8EF11B211256CDEA00ACB3B1 /* NSString+SBJSON.m in Sources */,
 				8EF11B221256CDEA00ACB3B1 /* SBJsonBase.m in Sources */,
