@@ -61,8 +61,6 @@ static InformationGatherer* defaultInstance = nil;
         if (defaultInstance == nil) {
             if (self = [super init]) {
                 [self setDirContents:[self files]];
-                if (!dirContents)
-                    return nil;
                 [self setScreenshotPath:nil];
                 [self setUploadPath:nil];
                 [self setPublicPath:nil];
@@ -96,11 +94,23 @@ static InformationGatherer* defaultInstance = nil;
                            persistentDomainForName:@"com.apple.screencapture"];
     NSString* foundPath = [dict objectForKey:@"location"];
     if (!foundPath)
-        foundPath = @"~/Desktop";
+        foundPath = [@"~/Desktop" stringByStandardizingPath];
+    else
+    {
+        BOOL isDir = FALSE;
+        foundPath = [foundPath stringByStandardizingPath];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:foundPath
+                                                  isDirectory:&isDir] || !isDir)
+        {
+            NSLog(@"Path specified in com.apple.screencapture location does not exist. Falling back to ~/Desktop.");
+            foundPath = [@"~/Desktop" stringByStandardizingPath];
+        }
+    }
 
-    [self setScreenshotPath:[foundPath stringByStandardizingPath]];
+    DLog(@"screenshotPath: %@", foundPath);
+    [self setScreenshotPath:foundPath];
 
-    return screenshotPath;
+    return [self screenshotPath];
 }
 
 - (NSString *)uploadPath
@@ -301,7 +311,7 @@ static InformationGatherer* defaultInstance = nil;
     if (!dirList)
     {
         NSLog(@"Failed getting dirlist: %@", [error localizedDescription]);
-        return nil;
+        return [NSSet set];
     }
 
     return [NSSet setWithArray:dirList];
