@@ -12,13 +12,13 @@
 
 @implementation MKBitlyHelper
 
-static NSString *BITLYAPIURL = @"http://api.bit.ly/%@?version=2.0.1&login=%@&apiKey=%@&";
+static NSString *BITLYAPIURL = @"http://api.bit.ly/v3/%@?login=%@&apiKey=%@&";
 
 -(MKBitlyHelper*) initWithLoginName: (NSString*) f_loginName andAPIKey: (NSString*) f_apiKey {
 
 	loginName = [f_loginName copy];
 	apiKey = [f_apiKey copy];
-	
+
 	return self;
 }
 
@@ -26,41 +26,43 @@ static NSString *BITLYAPIURL = @"http://api.bit.ly/%@?version=2.0.1&login=%@&api
 {
 	NSString *urlWithoutParams = [NSString stringWithFormat:BITLYAPIURL, @"shorten", loginName, apiKey];	
 	NSString *parameters = [NSString stringWithFormat:@"longUrl=%@", [f_longURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-	NSString *finalURL = [urlWithoutParams stringByAppendingString:parameters];
+	NSURL *url = [NSURL URLWithString:[urlWithoutParams stringByAppendingString:parameters]];
 	
-	NSURL *url = [NSURL URLWithString:finalURL];
-	
-	NSMutableURLRequest *req = [[[NSMutableURLRequest alloc] initWithURL:url] autorelease];
-	
+    DLog(@"Shortening with url: %@", url);
+
+	NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
+
 	NSHTTPURLResponse* urlResponse = nil;  
 	NSError *error = [[[NSError alloc] init] autorelease];  
 	
-	NSData *data = [NSURLConnection sendSynchronousRequest:req returningResponse:&urlResponse error:&error];	
+	NSData *data = [NSURLConnection sendSynchronousRequest:req
+                                         returningResponse:&urlResponse
+                                                     error:&error];	
 		
 	if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300)
 	{
-		SBJsonParser *jsonParser = [SBJsonParser new];
-		NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+		SBJsonParser *jsonParser = [[SBJsonParser new] autorelease];
+		NSString *jsonString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 		NSDictionary *dict = (NSDictionary*)[jsonParser objectWithString:jsonString];
-		[jsonString release];
-		[jsonParser release];
+		NSNumber *statusCode = [dict objectForKey:@"status_code"];
 		
-		NSString *statusCode = [dict objectForKey:@"statusCode"];
-		
-		if([statusCode isEqualToString:@"OK"])
+		if([statusCode intValue] == 200)
 		{
-			// retrieve shortURL from results
-			//NSLog([dict description]);
-			NSString *shortURL = [[[dict objectForKey:@"results"] 
-								   objectForKey:f_longURL] 
-								  objectForKey:@"shortUrl"];
+			NSString *shortURL = [[dict objectForKey:@"data"] objectForKey:@"url"];
+            DLog(@"Got OK! ShortURL: %@", shortURL);
 			return shortURL;
 		}
-		else return nil;
-
+		else
+        {
+            NSLog(@"Could not shorten using bit.ly: %@ %@", statusCode, [dict objectForKey:@"status_txt"]);
+            return nil;
+        }
 	}
 	else
+    {
+        NSLog(@"Could not shorten using bit.ly: %@", urlResponse);
 		return nil;
+    }
 }
 
 @end
