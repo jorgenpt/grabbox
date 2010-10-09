@@ -258,8 +258,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
         UploadInitiator* up = [UploadInitiator uploadFile:entry
                                                    atPath:screenshotPath
-                                                   toPath:[info uploadPath]
-                                                   withId:[self dropboxId]];
+                                                   toPath:[info uploadPath]];
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PromptBeforeUploading"])
         {
             [Growler messageWithTitle:@"Should we upload the screenshot?"

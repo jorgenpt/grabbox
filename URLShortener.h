@@ -11,6 +11,6 @@
 
 @interface URLShortener : NSObject
 
-+ (NSString*) shortenURLForFile:(NSString*)file withId:(int)dropboxId;
++ (NSString*) shortenURLForFile:(NSString*)file;
 
 @end

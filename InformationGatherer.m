@@ -109,6 +109,8 @@ static InformationGatherer* defaultInstance = nil;
         return uploadPath;
 
     NSString* path = [[[self publicPath] stringByAppendingPathComponent:@"Screenshots"] stringByStandardizingPath];
+
+    DLog(@"uploadPath: %@", path);
     [self setUploadPath:path];
     return [self uploadPath];
 
@@ -131,18 +133,20 @@ static InformationGatherer* defaultInstance = nil;
 #endif
 
     {
+        DLog(@"Found Dropbox DB, checking for config.");
         if (sqlite3_prepare_v2(db, [sqlStatement UTF8String], -1, &statement, 0) == SQLITE_OK)
         {
             if (sqlite3_step(statement) == SQLITE_ROW)
             {
                 result = [NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 0)];
+                DLog(@"Found dropbox_path row, %@.", result);
 
                 /* Convert from Pickle
                  * XXX: THIS IS NOT SAFE! Pickle formats are internal and change without warning!
                  * (Though I don't think it does very often)
                  */
                 NSData* data = [NSData dataWithBase64EncodedString:result];
-                result = [[[NSString alloc] autorelease] initWithData:data encoding:NSUTF8StringEncoding];
+                result = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
                 result = [[[result componentsSeparatedByString:@"\n"] objectAtIndex:0] substringFromIndex:1];
             }
             sqlite3_finalize(statement);
@@ -151,6 +155,7 @@ static InformationGatherer* defaultInstance = nil;
     }
 
     result = [[result stringByAppendingPathComponent:@"Public"] stringByStandardizingPath];
+    DLog(@"publicPath: %@", result);
     [self setPublicPath:result];
     return [self publicPath];
 }
@@ -170,7 +175,7 @@ static InformationGatherer* defaultInstance = nil;
         stringKeySC = @"Picture";
     }
 
-    NSString* screenshotPattern;
+    NSString* screenshotPattern = nil;
     NSMutableDictionary* bundleLanguages = [NSMutableDictionary dictionary];
     for (NSString* locale in [systemUIServer localizations])
     {

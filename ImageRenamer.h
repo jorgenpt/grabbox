@@ -15,7 +15,6 @@
     NSTextField *name;
     NSImage *image;
     NSString *path;
-    NSString *url;
 }
 
 @property (assign) IBOutlet NSWindow *window;
@@ -23,13 +22,10 @@
 @property (assign) IBOutlet NSTextField *name;
 @property (nonatomic, retain) NSImage *image;
 @property (nonatomic, retain) NSString *path;
-@property (nonatomic, retain) NSString *url;
 
-+ (id) renamerForFile:(NSString *)path
-                atURL:(NSString *)url;
++ (id) renamerForFile:(NSString *)path;
 
-- (id) initForFile:(NSString *)path
-             atURL:(NSString *)url;
+- (id) initForFile:(NSString *)path;
 - (void) dealloc;
 
 - (void) awakeFromNib;

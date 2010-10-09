@@ -9,6 +9,7 @@
 #import "ImageRenamer.h"
 #import "Growler.h"
 #import "UploadInitiator.h"
+#import "URLShortener.h"
 
 @implementation ImageRenamer
 
@@ -16,22 +17,18 @@
 @synthesize imageView;
 @synthesize image;
 @synthesize path;
-@synthesize url;
 @synthesize name;
 
 + (id) renamerForFile:(NSString *)path
-                atURL:(NSString *)url
 {
-    return [[[self alloc] initForFile:path atURL:url] autorelease];
+    return [[[self alloc] initForFile:path] autorelease];
 }
 
 - (id) initForFile:(NSString *)filePath
-             atURL:(NSString *)remoteUrl
 {
     if (self = [super init])
     {
         [self setPath:filePath];
-        [self setUrl:remoteUrl];
     }
     return self;
 }
@@ -40,7 +37,6 @@
 {
     [self setImage:nil];
     [self setPath:nil];
-    [self setUrl:nil];
 
     [super dealloc];
 }
@@ -119,11 +115,8 @@
         NSString* originalFilename = [[self path] lastPathComponent];
         NSString* extension = [originalFilename pathExtension];
         NSString* filename = [inputFilename stringByAppendingPathExtension:extension];
-        NSRange replaceRange = NSMakeRange([[self url] length] - [originalFilename length],
-                                           [originalFilename length]);
         NSString* newPath = [[[self path] stringByDeletingLastPathComponent] stringByAppendingPathComponent:filename];
-        NSString* newUrl = [[self url] stringByReplacingCharactersInRange:replaceRange
-                                                               withString:filename];
+        NSString* newUrl = [URLShortener shortenURLForFile:filename];
         NSFileManager* fm = [NSFileManager defaultManager];
         NSError* error;
         BOOL moveOk = [fm moveItemAtPath:[self path]

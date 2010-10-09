@@ -17,7 +17,6 @@
 @synthesize srcFile;
 @synthesize srcPath;
 @synthesize destPath;
-@synthesize dropboxId;
 @synthesize detectors;
 
 NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
@@ -25,15 +24,13 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
 + (id) uploadFile:(NSString *)file
            atPath:(NSString *)source
            toPath:(NSString *)destination
-           withId:(int)dropId
 {
-    return [[[self alloc] initForFile:file atPath:source toPath:destination withId:dropId] autorelease];
+    return [[[self alloc] initForFile:file atPath:source toPath:destination] autorelease];
 }
 
 - (id) initForFile:(NSString *)file
             atPath:(NSString *)source
             toPath:(NSString *)destination
-            withId:(int)dropId
 {
     if (self = [super init])
     {
@@ -41,7 +38,6 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
         [self setSrcPath:source];
         [self setDestPath:destination];
         [self setDetectors:[NSMutableArray array]];
-        [self setDropboxId:dropId];
     }
     return self;
 }
@@ -105,8 +101,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
         int numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
         [[NSUserDefaults standardUserDefaults] setInteger:(numberOfScreenshots + 1)
                                                    forKey:@"NumberOfScreenshotsUploaded"];
-        NSString *dropboxUrl = [URLShortener shortenURLForFile:shortName
-                                                        withId:[self dropboxId]];
+        NSString *dropboxUrl = [URLShortener shortenURLForFile:shortName];
         [UploadInitiator copyURL:dropboxUrl
                      basedOnFile:destination
                       wasRenamed:NO];
@@ -144,7 +139,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
         }
         else
         {
-            ImageRenamer* renamer = [ImageRenamer renamerForFile:path atURL:url];
+            ImageRenamer* renamer = [ImageRenamer renamerForFile:path];
             GrowlerDelegateContext* context = [GrowlerDelegateContext contextWithDelegate:renamer data:nil];
             [Growler messageWithTitle:@"Screenshot uploaded!"
                           description:@"The screenshot has been uploaded and a link put in your clipboard. Click here to give the file a more descriptive name!"

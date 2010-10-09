@@ -17,27 +17,23 @@
     NSString *srcPath;
     NSString *destPath;
     NSMutableArray *detectors;
-    int dropboxId;
 }
 
 @property (nonatomic, retain) NSString* srcFile;
 @property (nonatomic, retain) NSString* srcPath;
 @property (nonatomic, retain) NSString* destPath;
 @property (nonatomic, retain) NSMutableArray* detectors;
-@property int dropboxId;
 
 + (id) uploadFile:(NSString *)file
            atPath:(NSString *)source
-           toPath:(NSString *)destination
-           withId:(int)dropId;
+           toPath:(NSString *)destination;
 + (void) copyURL:(NSString *)url
      basedOnFile:(NSString *)path
       wasRenamed:(BOOL)renamed;
 
 - (id) initForFile:(NSString *)file
             atPath:(NSString *)source
-            toPath:(NSString *)destination
-            withId:(int)dropId;
+            toPath:(NSString *)destination;
 - (void) dealloc;
 
 - (void) assertDropboxRunningAndUpload;

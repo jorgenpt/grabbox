@@ -7,12 +7,14 @@
 //
 
 #import "URLShortener.h"
-#import "MKBitlyHelper.h"
+#import "BitlyHelper.h"
+#import "GrabBoxAppDelegate.h"
 
 @implementation URLShortener
 
-+ (NSString*) shortenURLForFile:(NSString*)file withId:(int)dropboxId
++ (NSString*) shortenURLForFile:(NSString*)file
 {
+    int dropboxId = [(GrabBoxAppDelegate*)[NSApp delegate] dropboxId];
     int service = [[NSUserDefaults standardUserDefaults] integerForKey:@"URLShortener"];
     NSString *escapedFile = [file stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     NSString *directURL = [NSString stringWithFormat:@"http://dl.dropbox.com/u/%d/Screenshots/%@", dropboxId, escapedFile];
@@ -24,8 +26,8 @@
             return [NSString stringWithFormat:@"http://o7.no/%d/%@", dropboxId, escapedFile];
         case 2:
         {
-            MKBitlyHelper *bitlyHelper = [[[MKBitlyHelper alloc] initWithLoginName:@"jorgenpt"
-                                                                         andAPIKey:@"R_3a2a07cb1af817ab7de18d17e7f0f57f"] autorelease];
+            BitlyHelper *bitlyHelper = [BitlyHelper helperWithLogin:@"jorgenpt"
+                                                          andAPIKey:@"R_3a2a07cb1af817ab7de18d17e7f0f57f"];
             NSString *shortURL = [bitlyHelper shortenURL:directURL];
             if (!shortURL)
                 return directURL;
