@@ -19,7 +19,7 @@ static NSString *BITLYAPIURL = @"http://api.bit.ly/v3/%@?login=%@&apiKey=%@&";
 + (id) helperWithLogin:(NSString*)login
              andAPIKey:(NSString*)key
 {
-    return [[self alloc] initWithLogin:login andAPIKey:key];
+    return [[[self alloc] initWithLogin:login andAPIKey:key] autorelease];
 }
 
 - (id) initWithLogin:(NSString*)login
