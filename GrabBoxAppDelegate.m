@@ -249,10 +249,11 @@ static void translateEvent(ConstFSEventStreamRef stream,
         return;
     }
 
+    NSString* pattern = [[info localizedScreenshotPattern] decomposedStringWithCanonicalMapping];
     for (NSString* entry in newEntries) {
-        if (![entry isLike:[info localizedScreenshotPattern]])
+        if (![[entry decomposedStringWithCanonicalMapping] isLike:pattern])
         {
-            DLog(@"Found file '%@', but does not match  %@'", entry, [info localizedScreenshotPattern]);
+            DLog(@"Found file '%@', but does not match '%@'", entry, pattern);
             continue;
         }
 

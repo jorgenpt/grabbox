@@ -34,4 +34,8 @@
 - (NSSet *)files;
 - (BOOL)isSnowLeopardOrNewer;
 
++ (NSDictionary *)getStringsTable:(NSString *)table
+                       fromBundle:(NSBundle *)bundle
+                  forLocalization:(NSString *)localization;
+
 @end

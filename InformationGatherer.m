@@ -170,22 +170,75 @@ static InformationGatherer* defaultInstance = nil;
     return [self publicPath];
 }
 
++ (NSDictionary *)getStringsTable:(NSString *)table
+                       fromBundle:(NSBundle *)bundle
+                  forLocalization:(NSString *)localization
+{
+    NSString *error;
+    NSString *tablePath = [bundle pathForResource:table
+                                           ofType:@"strings"
+                                      inDirectory:@""
+                                  forLocalization:localization];
+    if (!tablePath)
+    {
+        NSLog(@"%@ doesn't have %@.strings.", localization, table);
+        return nil;
+    }
+    
+    NSData* data = [NSData dataWithContentsOfFile:tablePath];
+    if (!data)
+    {
+        NSLog(@"Couldn't load %@.lproj/%@.strings.", localization, table);
+        return nil;
+    }
+
+    NSDictionary* strings = [NSPropertyListSerialization propertyListFromData:data
+                                                             mutabilityOption:NSPropertyListImmutable
+                                                                       format:NULL
+                                                             errorDescription:&error];
+    if (!strings)
+    {
+        NSLog(@"Couldn't parse %@.lproj/%@.strings: %@", localization, table, error);
+        return nil;
+    }
+    
+    return strings;
+}
+
 - (NSString *)localizedScreenshotPattern
 {
     if (localizedScreenshotPattern)
         return localizedScreenshotPattern;
+    
+    NSString* stringKeyName;
+    NSString* stringKeyFormat;
+    NSString* screenshotPattern = nil;
 
-    NSBundle* systemUIServer = [NSBundle bundleWithPath:@"/System/Library/CoreServices/SystemUIServer.app"];
-    NSString* error;
-    NSString* stringKeySC = @"Screen shot";
-    NSString* stringKeyFormat = @"%@ %@ at %@";
-
-    if (![self isSnowLeopardOrNewer])
+    /* These are the keys we look up for localization. */
+    if ([self isSnowLeopardOrNewer])
     {
-        stringKeySC = @"Picture";
+        stringKeyName = @"Screen shot";
+        stringKeyFormat = @"%@ %@ at %@";   
+    }
+    else
+    {
+        stringKeyName = @"Picture";
+        stringKeyFormat = @"%@ %@";
     }
 
-    NSString* screenshotPattern = nil;
+    /* Look up the SystemUIServer bundle - we'll be reading its localization strings. */
+    NSBundle* systemUIServer = [NSBundle bundleWithPath:@"/System/Library/CoreServices/SystemUIServer.app"];
+    if (!systemUIServer)
+    {
+        /* If we can't load the bundle stuff, something is severely wrong. Default to something sane, but log it. */
+        NSLog(@"ERROR: Could not load bundle for /System/Library/CoreServices/SystemUIServer.app");
+        screenshotPattern = [NSString stringWithFormat:stringKeyFormat, stringKeyName, @"*", @"*"];
+        screenshotPattern = [screenshotPattern stringByAppendingString:@".*"];
+        [self setLocalizedScreenshotPattern:screenshotPattern];
+        return [self localizedScreenshotPattern];
+    }
+
+    /* Dictionary so we can do lookup for preferred locale -> localizations of SystemUIServer. */
     NSMutableDictionary* bundleLanguages = [NSMutableDictionary dictionary];
     for (NSString* locale in [systemUIServer localizations])
     {
@@ -193,83 +246,84 @@ static InformationGatherer* defaultInstance = nil;
                             forKey:[NSLocale canonicalLocaleIdentifierFromString:locale]];
     }
 
+    /* Go through each preferred language in order of preference. */
     NSArray* languages = [NSLocale preferredLanguages];
     for (NSString* language in languages)
     {
         DLog(@"Trying language (before canonicalization): %@", language);
         language = [NSLocale canonicalLocaleIdentifierFromString:language];
         DLog(@"Trying language (after canonicalization):  %@", language);
+        
+        /* If we can't look it up, it means its not in SystemUIServer. Try next preferred. */
         NSString* lproj = [bundleLanguages objectForKey:language];
         if (!lproj)
         {
-            NSLog(@"No lproj for %@, trying next preferred language.", language);
+            NSLog(@"No lproj for %@, trying next preferred language (this isn't necessarily bad).", language);
             continue;
         }
 
-        NSString *tableSC = [systemUIServer pathForResource:@"ScreenCapture"
-                                                     ofType:@"strings"
-                                                inDirectory:@""
-                                            forLocalization:lproj];
-        NSString *tableLoc = [systemUIServer pathForResource:@"Localizable"
-                                                      ofType:@"strings"
-                                                 inDirectory:@""
-                                             forLocalization:lproj];
-        if (!tableSC || !tableLoc)
+        /* Table of localized strings (ScreenCapture) */
+        NSDictionary *tableSC = [InformationGatherer getStringsTable:@"ScreenCapture"
+                                                          fromBundle:systemUIServer
+                                                     forLocalization:lproj];
+        if (!tableSC)
         {
-            NSLog(@"%@ doesn't have both ScreenCapture.strings and Localizable.strings, trying next preferred language.", lproj);
+            NSLog(@"Lookup failed, trying next language (this isn't necessarily bad).");
             continue;
         }
 
-        NSData* data = [NSData dataWithContentsOfFile:tableSC];
-        NSDictionary* strings = [NSPropertyListSerialization propertyListFromData:data
-                                                                 mutabilityOption:NSPropertyListImmutable
-                                                                           format:NULL
-                                                                 errorDescription:&error];
-        if (!strings)
+        /* This is "Picture" or "Screen shot" in your native tongue. */
+        NSString* localizedName = [tableSC objectForKey:stringKeyName];
+        if (!localizedName)
         {
-            NSLog(@"Couldn't load %@ (%@), trying next preferred language: %@", lproj, tableSC, error);
+            NSLog(@"No value for '%@' in %@, trying next preferred language (this isn't necessarily bad).", stringKeyName, lproj);
             continue;
         }
 
-        NSString* localizedSC = [strings objectForKey:stringKeySC];
-        if (!localizedSC)
+        /* This is the format string used to combine either a number with the name (10.5)
+         * or a date with the name (10.6).
+         */
+        NSString* localizedFormat;
+        if ([self isSnowLeopardOrNewer])
         {
-            NSLog(@"No value for '%@' in %@ (%@), trying next preferred language.", stringKeySC, lproj, tableSC);
-            continue;
+            /* For 10.6, we open Localizable.strings to get the date format thingamajig. */
+            NSDictionary *tableLoc = [InformationGatherer getStringsTable:@"Localizable"
+                                                               fromBundle:systemUIServer
+                                                          forLocalization:lproj];
+            if (!tableLoc)
+            {
+                NSLog(@"Lookup failed, trying next language (this isn't necessarily bad).");
+                continue;
+            }
+            
+            localizedFormat = [tableLoc objectForKey:stringKeyFormat];
         }
-
-        data = [NSData dataWithContentsOfFile:tableLoc];
-        strings = [NSPropertyListSerialization propertyListFromData:data
-                                                   mutabilityOption:NSPropertyListImmutable
-                                                             format:NULL
-                                                   errorDescription:&error];
-        if (!strings)
+        else
         {
-            NSLog(@"Couldn't load %@ (%@), trying next preferred language: %@", lproj, tableLoc, error);
-            continue;
+            /* For 10.5, we just look it up in the ScreenCapture.strings. */
+            localizedFormat = [tableSC objectForKey:stringKeyFormat];
         }
 
-        NSString* localizedFormat = [strings objectForKey:stringKeyFormat];
+        /* If all went well, produce the final pattern to match against. */
         if (localizedFormat)
         {
-            screenshotPattern = [NSString stringWithFormat:localizedFormat, localizedSC, @"*", @"*"];
+            screenshotPattern = [NSString stringWithFormat:localizedFormat, localizedName, @"*", @"*"];
             break;
         }
         else
         {
-            NSLog(@"No value for '%@' in %@ (%@), trying next preferred language.", stringKeyFormat, lproj, tableLoc);
+            NSLog(@"No value for '%@' in %@, trying next preferred language (this isn't necessarily bad).", stringKeyFormat, lproj);
         }
     }
 
+    /* If we can't find one, default to something sane. */
     if (!screenshotPattern)
     {
-        NSLog(@"ERROR: screenshotName is nil-string.");
-        screenshotPattern = @"NO PATTERN FOUND";
+        NSLog(@"ERROR: screenshotName not found, defaulting.");
+        screenshotPattern = [NSString stringWithFormat:stringKeyFormat, stringKeyName, @"*", @"*"];
     }
-    else
-    {
-        screenshotPattern = [screenshotPattern stringByAppendingString:@".*"];
-    }
+
+    screenshotPattern = [screenshotPattern stringByAppendingString:@".*"];
 
     DLog(@"Pattern is %@", screenshotPattern);
 
