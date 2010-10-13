@@ -52,6 +52,7 @@
              fromDetector:(DropboxDetector *)detector;
 
 - (IBAction) browseUploadedScreenshots:(id)sender;
+- (IBAction) uploadFromPasteboard:(id)sender;
 - (IBAction) openFeedback:(id)sender;
 - (IBAction) openDonatePref:(id)sender;
 - (IBAction) openDonateNag:(id)sender;

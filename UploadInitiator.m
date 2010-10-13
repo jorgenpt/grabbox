@@ -58,6 +58,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     [[self detectors] addObject:detector];
     [detector checkIfRunning];
 }
+
 - (void) uploadWithRetries:(int)retries
 {
     NSError* error;

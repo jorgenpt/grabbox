@@ -281,6 +281,62 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [[NSWorkspace sharedWorkspace] openFile:[info uploadPath]];
 }
 
+- (IBAction) uploadFromPasteboard:(id)sender
+{
+    NSImage* image = [[NSImage alloc] initWithPasteboard:[NSPasteboard generalPasteboard]];
+    if (!image)
+    {
+        [Growler errorWithTitle:@"GrabBox could not upload from clipboard!"
+                    description:@"No image found in the clipboard."];
+        return;
+    }
+
+    NSError* error;
+    NSFileManager* fm = [NSFileManager defaultManager];
+    BOOL mkdirOk = [fm createDirectoryAtPath:[info uploadPath]
+                 withIntermediateDirectories:YES
+                                  attributes:nil
+                                       error:&error];
+    if (!mkdirOk)
+    {
+        [Growler errorWithTitle:@"GrabBox could not upload file!"
+                    description:[error localizedDescription]];
+        NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
+        return;
+    }
+
+    NSArray* representations = [image representations];
+    NSBitmapImageRep *bits = nil;
+    for (NSImageRep* rep in representations)
+    {
+        if ([rep isKindOfClass:[NSBitmapImageRep class]])
+        {
+            bits = (NSBitmapImageRep*)rep;
+            break;
+        }
+    }
+    
+    if (!bits)
+    {
+        [Growler errorWithTitle:@"GrabBox could not upload from clipboard!"
+                    description:@"No compatible image found in the clipboard."];
+        return;
+    }
+
+    NSData *data = [bits representationUsingType:NSPNGFileType
+                                      properties:nil];
+
+    char template[] = "/tmp/GrabBoxClipboard.XXXXXX.png";
+    NSString *filename = [NSString stringWithCString:mktemp(template)
+                                            encoding:NSISOLatin1StringEncoding];
+    [data writeToFile:filename atomically:NO];
+    
+    UploadInitiator* up = [UploadInitiator uploadFile:[filename lastPathComponent]
+                                               atPath:[filename stringByDeletingLastPathComponent]
+                                               toPath:[info uploadPath]];
+    [up assertDropboxRunningAndUpload];
+}
+
 - (IBAction) openFeedback:(id)sender
 {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://grabbox.devsoft.no/contact/?src=nag"]];
