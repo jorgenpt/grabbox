@@ -9,7 +9,12 @@
 #import <Cocoa/Cocoa.h>
 
 @interface Preferences : NSObject {
+    NSWindow* preferences;
 }
+@property (assign) IBOutlet NSWindow *preferences;
+
+- (BOOL) usingCompressedScreenshots;
+- (void) setUsingCompressedScreenshots:(BOOL)state;
 
 - (BOOL) willLaunchAtLogin;
 - (void) setWillLaunchAtLogin:(BOOL)state;
