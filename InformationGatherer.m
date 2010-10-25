@@ -184,7 +184,7 @@ static InformationGatherer* defaultInstance = nil;
         NSLog(@"%@ doesn't have %@.strings.", localization, table);
         return nil;
     }
-    
+
     NSData* data = [NSData dataWithContentsOfFile:tablePath];
     if (!data)
     {
@@ -201,7 +201,7 @@ static InformationGatherer* defaultInstance = nil;
         NSLog(@"Couldn't parse %@.lproj/%@.strings: %@", localization, table, error);
         return nil;
     }
-    
+
     return strings;
 }
 
@@ -209,16 +209,21 @@ static InformationGatherer* defaultInstance = nil;
 {
     if (localizedScreenshotPattern)
         return localizedScreenshotPattern;
-    
+
     NSString* stringKeyName;
     NSString* stringKeyFormat;
     NSString* screenshotPattern = nil;
+    NSString* nameOverride;
+
+    NSDictionary*  dict = [[NSUserDefaults standardUserDefaults]
+                           persistentDomainForName:@"com.apple.screencapture"];
+    nameOverride = [dict objectForKey:@"name"];
 
     /* These are the keys we look up for localization. */
     if ([self isSnowLeopardOrNewer])
     {
         stringKeyName = @"Screen shot";
-        stringKeyFormat = @"%@ %@ at %@";   
+        stringKeyFormat = @"%@ %@ at %@";
     }
     else
     {
@@ -232,6 +237,8 @@ static InformationGatherer* defaultInstance = nil;
     {
         /* If we can't load the bundle stuff, something is severely wrong. Default to something sane, but log it. */
         NSLog(@"ERROR: Could not load bundle for /System/Library/CoreServices/SystemUIServer.app");
+        if (nameOverride)
+            stringKeyName = nameOverride;
         screenshotPattern = [NSString stringWithFormat:stringKeyFormat, stringKeyName, @"*", @"*"];
         screenshotPattern = [screenshotPattern stringByAppendingString:@".*"];
         [self setLocalizedScreenshotPattern:screenshotPattern];
@@ -253,7 +260,7 @@ static InformationGatherer* defaultInstance = nil;
         DLog(@"Trying language (before canonicalization): %@", language);
         language = [NSLocale canonicalLocaleIdentifierFromString:language];
         DLog(@"Trying language (after canonicalization):  %@", language);
-        
+
         /* If we can't look it up, it means its not in SystemUIServer. Try next preferred. */
         NSString* lproj = [bundleLanguages objectForKey:language];
         if (!lproj)
@@ -274,7 +281,7 @@ static InformationGatherer* defaultInstance = nil;
 
         /* This is "Picture" or "Screen shot" in your native tongue. */
         NSString* localizedName = [tableSC objectForKey:stringKeyName];
-        if (!localizedName)
+        if (!localizedName && !nameOverride)
         {
             NSLog(@"No value for '%@' in %@, trying next preferred language (this isn't necessarily bad).", stringKeyName, lproj);
             continue;
@@ -295,7 +302,7 @@ static InformationGatherer* defaultInstance = nil;
                 NSLog(@"Lookup failed, trying next language (this isn't necessarily bad).");
                 continue;
             }
-            
+
             localizedFormat = [tableLoc objectForKey:stringKeyFormat];
         }
         else
@@ -307,6 +314,8 @@ static InformationGatherer* defaultInstance = nil;
         /* If all went well, produce the final pattern to match against. */
         if (localizedFormat)
         {
+            if (nameOverride)
+                localizedName = nameOverride;
             screenshotPattern = [NSString stringWithFormat:localizedFormat, localizedName, @"*", @"*"];
             break;
         }
@@ -319,7 +328,10 @@ static InformationGatherer* defaultInstance = nil;
     /* If we can't find one, default to something sane. */
     if (!screenshotPattern)
     {
-        NSLog(@"ERROR: screenshotName not found, defaulting.");
+        NSLog(@"ERROR: screenshotPattern not found, defaulting.");
+
+        if (nameOverride)
+            stringKeyName = nameOverride;
         screenshotPattern = [NSString stringWithFormat:stringKeyFormat, stringKeyName, @"*", @"*"];
     }
 
