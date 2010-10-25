@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="880"/>
+			<integer value="892"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -918,7 +918,7 @@
 				<nil key="NSViewClass"/>
 				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
 				<object class="NSView" key="NSWindowView" id="854716300">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1409,7 +1409,6 @@
 						</object>
 					</object>
 					<string key="NSFrameSize">{579, 287}</string>
-					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
@@ -1965,7 +1964,7 @@
 				<nil key="NSViewClass"/>
 				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
 				<object class="NSView" key="NSWindowView" id="494652906">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1984,7 +1983,7 @@
 									<string>NeXT TIFF v4.0 pasteboard type</string>
 								</object>
 							</object>
-							<string key="NSFrame">{{240, 0}, {219, 255}}</string>
+							<string key="NSFrameSize">{459, 260}</string>
 							<reference key="NSSuperview" ref="494652906"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSImageCell" key="NSCell" id="368476505">
@@ -1994,7 +1993,7 @@
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">icontrans</string>
 								</object>
-								<int key="NSAlign">0</int>
+								<int key="NSAlign">7</int>
 								<int key="NSScale">2</int>
 								<int key="NSStyle">0</int>
 								<bool key="NSAnimates">NO</bool>
@@ -2049,7 +2048,7 @@
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="412476397"/>
 								<reference key="NSControlView" ref="493753220"/>
-								<int key="NSButtonFlags">-2041822977</int>
+								<int key="NSButtonFlags">139215103</int>
 								<int key="NSButtonFlags2">129</int>
 								<reference key="NSNormalImage" ref="214729607"/>
 								<string key="NSAlternateContents"/>
@@ -2070,7 +2069,7 @@
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="412476397"/>
 								<reference key="NSControlView" ref="149177116"/>
-								<int key="NSButtonFlags">-2041822977</int>
+								<int key="NSButtonFlags">139215103</int>
 								<int key="NSButtonFlags2">129</int>
 								<object class="NSCustomResource" key="NSNormalImage">
 									<string key="NSClassName">NSImage</string>
@@ -2104,6 +2103,7 @@
 						</object>
 					</object>
 					<string key="NSFrameSize">{459, 260}</string>
+					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
