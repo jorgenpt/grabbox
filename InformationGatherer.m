@@ -12,6 +12,12 @@
 
 #include <sqlite3.h>
 
+#if (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5)
+# define SQLITE_OPEN_BEST(path, db) sqlite3_open((path), (db))
+#else
+# define SQLITE_OPEN_BEST(path, db) sqlite3_open_v2((path), (db), SQLITE_OPEN_READONLY, NULL)
+#endif
+
 static InformationGatherer* defaultInstance = nil;
 
 @interface InformationGatherer ()
@@ -131,17 +137,22 @@ static InformationGatherer* defaultInstance = nil;
     if (publicPath)
         return publicPath;
     NSString* result = [@"~/Dropbox" stringByStandardizingPath];
-    NSString* path = [@"~/.dropbox/dropbox.db" stringByStandardizingPath];
+    NSString* path = [@"~/.dropbox/config.db" stringByStandardizingPath];
+    NSString* alternatePath = [@"~/.dropbox/dropbox.db" stringByStandardizingPath];
     NSString* sqlStatement = @"select value from config where key = 'dropbox_path'";
+    BOOL oldConfig = NO;
 
     sqlite3 *db;
     sqlite3_stmt *statement;
-#if (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5)
-    if (sqlite3_open([path UTF8String], &db) == SQLITE_OK)
-#else
-    if (sqlite3_open_v2([path UTF8String], &db, SQLITE_OPEN_READONLY, NULL) == SQLITE_OK)
-#endif
+    int openResult = SQLITE_OPEN_BEST([path UTF8String], &db);
+    if (openResult != SQLITE_OK)
+    {
+        DLog(@"Could not open %@, trying %@ instead.", path, alternatePath);
+        openResult = SQLITE_OPEN_BEST([alternatePath UTF8String], &db);
+        oldConfig = YES;
+    }
 
+    if (openResult == SQLITE_OK)
     {
         DLog(@"Found Dropbox DB, checking for config.");
         if (sqlite3_prepare_v2(db, [sqlStatement UTF8String], -1, &statement, 0) == SQLITE_OK)
@@ -151,13 +162,16 @@ static InformationGatherer* defaultInstance = nil;
                 result = [NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 0)];
                 DLog(@"Found dropbox_path row, %@.", result);
 
-                /* Convert from Pickle
-                 * XXX: THIS IS NOT SAFE! Pickle formats are internal and change without warning!
-                 * (Though I don't think it does very often)
-                 */
-                NSData* data = [NSData dataWithBase64EncodedString:result];
-                result = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-                result = [[[result componentsSeparatedByString:@"\n"] objectAtIndex:0] substringFromIndex:1];
+                if (oldConfig)
+                {
+                    /* Convert from Pickle
+                     * XXX: THIS IS NOT SAFE! Pickle formats are internal and change without warning!
+                     * (Though I don't think it does very often)
+                     */
+                    NSData* data = [NSData dataWithBase64EncodedString:result];
+                    result = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+                    result = [[[result componentsSeparatedByString:@"\n"] objectAtIndex:0] substringFromIndex:1];
+                }
             }
             sqlite3_finalize(statement);
         }
