@@ -36,3 +36,7 @@ X Switch to menubar picture.
 X New screenshots (Preferences)
 X Favicon
 X Update twitter avatar
+- Add URL shorteners:
+ - is.gd (http://is.gd/api_info.php)
+ - goo.gl
+- Add options or at least userdefaults for bit.ly userinfo.
