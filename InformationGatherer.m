@@ -147,7 +147,7 @@ static InformationGatherer* defaultInstance = nil;
     int openResult = SQLITE_OPEN_BEST([path UTF8String], &db);
     if (openResult != SQLITE_OK)
     {
-        DLog(@"Could not open %@, trying %@ instead.", path, alternatePath);
+        DLog(@"Could not open %@, trying %@ instead (assuming Dropbox <1.0 config format).", path, alternatePath);
         openResult = SQLITE_OPEN_BEST([alternatePath UTF8String], &db);
         oldConfig = YES;
     }
@@ -164,6 +164,8 @@ static InformationGatherer* defaultInstance = nil;
 
                 if (oldConfig)
                 {
+                    DLog(@"Old-style configuration data, trying to deserialize Pickle data.");
+
                     /* Convert from Pickle
                      * XXX: THIS IS NOT SAFE! Pickle formats are internal and change without warning!
                      * (Though I don't think it does very often)
