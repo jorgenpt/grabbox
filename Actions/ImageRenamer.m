@@ -146,8 +146,8 @@
             }
             else
             {
-                [Growler errorWithTitle:@"GrabBox could not rename file!"
-                            description:[error localizedDescription]];
+                [[Growler sharedInstance] errorWithTitle:@"GrabBox could not rename file!"
+                                             description:[error localizedDescription]];
             }
         }
     }

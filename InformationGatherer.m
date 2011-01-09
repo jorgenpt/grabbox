@@ -8,7 +8,7 @@
 
 #import "InformationGatherer.h"
 
-#import "NSDataAdditions.h"
+#import "NSData+Base64.h"
 
 #include <sqlite3.h>
 

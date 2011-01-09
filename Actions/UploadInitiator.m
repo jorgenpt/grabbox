@@ -92,8 +92,8 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
         }
         else
         {
-            [Growler errorWithTitle:@"GrabBox could not upload file!"
-                        description:[error localizedDescription]];
+            [[Growler sharedInstance] errorWithTitle:@"GrabBox could not upload file!"
+                                         description:[error localizedDescription]];
             NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
         }
     }
@@ -121,32 +121,32 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
         NSString *errorDescription = [NSString stringWithFormat:@"Could not put URL '%@' into the clipboard, click here to try this operation again.", url];
         GrowlerDelegateContext *context = [GrowlerDelegateContext contextWithDelegate:self
                                                                                  data:url];
-        [Growler messageWithTitle:@"Could not update pasteboard!"
-                      description:errorDescription
-                             name:@"Error"
-                  delegateContext:context
-                           sticky:YES];
+        [[Growler sharedInstance] messageWithTitle:@"Could not update pasteboard!"
+                                       description:errorDescription
+                                              name:@"Error"
+                                   delegateContext:context
+                                            sticky:YES];
         NSLog(@"ERROR: Couldn't put url into pasteboard.");
     }
     else
     {
         if (renamed)
         {
-            [Growler messageWithTitle:@"Screenshot renamed!"
-                          description:@"The screenshot has been renamed and an updated link put in your clipboard."
-                                 name:@"Screenshot Renamed"
-                      delegateContext:nil
-                               sticky:NO];
+            [[Growler sharedInstance] messageWithTitle:@"Screenshot renamed!"
+                                           description:@"The screenshot has been renamed and an updated link put in your clipboard."
+                                                  name:@"Screenshot Renamed"
+                                       delegateContext:nil
+                                                sticky:NO];
         }
         else
         {
             ImageRenamer* renamer = [ImageRenamer renamerForFile:path];
             GrowlerDelegateContext* context = [GrowlerDelegateContext contextWithDelegate:renamer data:nil];
-            [Growler messageWithTitle:@"Screenshot uploaded!"
-                          description:@"The screenshot has been uploaded and a link put in your clipboard. Click here to give the file a more descriptive name!"
-                                 name:@"URL Copied"
-                      delegateContext:context
-                               sticky:NO];
+            [[Growler sharedInstance] messageWithTitle:@"Screenshot uploaded!"
+                                           description:@"The screenshot has been uploaded and a link put in your clipboard. Click here to give the file a more descriptive name!"
+                                                  name:@"URL Copied"
+                                       delegateContext:context
+                                                sticky:NO];
         }
     }
 }

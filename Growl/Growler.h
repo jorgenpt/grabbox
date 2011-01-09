@@ -15,22 +15,50 @@
     NSMutableDictionary* contexts;
 }
 
-+ (void) errorWithTitle:(NSString *)title
+@property (nonatomic, retain) NSMutableDictionary* contexts;
+
+#pragma mark
+#pragma mark Singleton management code
+#pragma mark -
+
++ (id) sharedInstance;
+
+- (id) init;
+- (id) copyWithZone:(NSZone *)zone;
+- (id) retain;
+- (NSUInteger) retainCount;
+- (void) release;
+- (id) autorelease;
+
+#pragma mark
+#pragma mark -
+#pragma mark Messaging
+
+- (void) errorWithTitle:(NSString *)title
             description:(NSString *)description;
-+ (void) messageWithTitle:(NSString *)title
+- (void) messageWithTitle:(NSString *)title
               description:(NSString *)description
                      name:(NSString *)notificationName
           delegateContext:(GrowlerDelegateContext *)context;
-+ (void) messageWithTitle:(NSString *)title
+- (void) messageWithTitle:(NSString *)title
               description:(NSString *)description
                      name:(NSString *)notificationName
           delegateContext:(GrowlerDelegateContext *)context
                    sticky:(BOOL)stickiness;
 
-- (NSNumber*) addContext:(id)context;
-- (GrowlerDelegateContext*) retrieveContextByKey:(id) contextKey;
+#pragma mark
+#pragma mark -
+#pragma mark Context management
 
-- (void) awakeFromNib;
+- (NSNumber *) addContext:(id)context;
+- (GrowlerDelegateContext *) retrieveContextByKey:(id)contextKey;
+
+#pragma mark
+#pragma mark -
+#pragma mark Growl callbacks
+
+- (NSDictionary *) registrationDictionaryForGrowl;
+
 - (void) growlNotificationWasClicked:(id)context;
 - (void) growlNotificationTimedOut:(id)context;
 

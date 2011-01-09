@@ -8,9 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
+typedef enum {
+    SHORTENER_NONE = 0,
+    SHORTENER_BITLY = 2,
+} Shortener;
 
 @interface URLShortener : NSObject
 
-+ (NSString*) shortenURLForFile:(NSString*)file;
++ (NSString *) shortenURLForFile:(NSString *)file;
 
 @end

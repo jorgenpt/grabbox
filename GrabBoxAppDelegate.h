@@ -6,6 +6,9 @@
 //  Copyright 2010 devSoft. All rights reserved.
 //
 
+#define CONFIG(name) (@#name)
+#define BUNDLE_IDENTIFIER @"no.devsoft.GrabBox"
+
 #import <Cocoa/Cocoa.h>
 #import <Sparkle/Sparkle.h>
 
