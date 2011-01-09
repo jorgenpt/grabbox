@@ -8,8 +8,6 @@
 
 #import "Growler.h"
 
-#import "GrabBoxAppDelegate.h"
-
 @implementation Growler
 
 @synthesize contexts;
