@@ -200,7 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				8EFFCB5912D8F75A00201A9A /* Actions */,
-				8E7934A912DA3F460057D5ED /* Growl */,
 				8EFFCB6B12D8F86C00201A9A /* Utilities */,
 				8E79350012DA42710057D5ED /* Interface */,
 				8E1A63E911EFB63A00C3379F /* DropboxDetector.h */,
@@ -373,6 +372,7 @@
 		8EFFCB6B12D8F86C00201A9A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				8E7934A912DA3F460057D5ED /* Growl */,
 				8EFFCB7512D8F89F00201A9A /* JSON */,
 				8E51825711E7CE3A00D15CAB /* FSRefConversions.h */,
 				8E51825811E7CE3A00D15CAB /* FSRefConversions.m */,
