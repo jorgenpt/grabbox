@@ -202,24 +202,13 @@
 				8EFFCB5912D8F75A00201A9A /* Actions */,
 				8E7934A912DA3F460057D5ED /* Growl */,
 				8EFFCB6B12D8F86C00201A9A /* Utilities */,
+				8E79350012DA42710057D5ED /* Interface */,
 				8E1A63E911EFB63A00C3379F /* DropboxDetector.h */,
 				8E1A63EA11EFB63A00C3379F /* DropboxDetector.m */,
-				8E51825711E7CE3A00D15CAB /* FSRefConversions.h */,
-				8E51825811E7CE3A00D15CAB /* FSRefConversions.m */,
 				256AC3D80F4B6AC300CF3369 /* GrabBoxAppDelegate.h */,
 				256AC3D90F4B6AC300CF3369 /* GrabBoxAppDelegate.m */,
 				8E4A509E11E9155500A0A743 /* InformationGatherer.h */,
 				8E4A509F11E9155500A0A743 /* InformationGatherer.m */,
-				8EAAE7F21256675800798872 /* Menubar.h */,
-				8EAAE7F31256675800798872 /* Menubar.m */,
-				8E60861611E6D1B600881A1C /* Notifier.h */,
-				8E60861711E6D1B600881A1C /* Notifier.m */,
-				8E7B6C2311EC433B00112165 /* Preferences.h */,
-				8E7B6C2411EC433B00112165 /* Preferences.m */,
-				8E7385D711F3C5EC0051276B /* ProcessIsRunningWithBundleID.c */,
-				8E7385D611F3C5EC0051276B /* ProcessIsRunningWithBundleID.h */,
-				8E4A508F11E9105700A0A743 /* Setup.h */,
-				8E4A509011E9105700A0A743 /* Setup.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -355,6 +344,19 @@
 			path = Growl;
 			sourceTree = "<group>";
 		};
+		8E79350012DA42710057D5ED /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				8EAAE7F21256675800798872 /* Menubar.h */,
+				8EAAE7F31256675800798872 /* Menubar.m */,
+				8E7B6C2311EC433B00112165 /* Preferences.h */,
+				8E7B6C2411EC433B00112165 /* Preferences.m */,
+				8E4A508F11E9105700A0A743 /* Setup.h */,
+				8E4A509011E9105700A0A743 /* Setup.m */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
 		8EFFCB5912D8F75A00201A9A /* Actions */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,10 +374,16 @@
 			isa = PBXGroup;
 			children = (
 				8EFFCB7512D8F89F00201A9A /* JSON */,
+				8E51825711E7CE3A00D15CAB /* FSRefConversions.h */,
+				8E51825811E7CE3A00D15CAB /* FSRefConversions.m */,
+				8E60861611E6D1B600881A1C /* Notifier.h */,
+				8E60861711E6D1B600881A1C /* Notifier.m */,
 				8EFFCB6C12D8F86C00201A9A /* NSString+URLParameters.h */,
 				8EFFCB6D12D8F86C00201A9A /* NSString+URLParameters.m */,
 				8EFFCB9512D8F98300201A9A /* NSData+Base64.h */,
 				8EFFCB9612D8F98300201A9A /* NSData+Base64.m */,
+				8E7385D711F3C5EC0051276B /* ProcessIsRunningWithBundleID.c */,
+				8E7385D611F3C5EC0051276B /* ProcessIsRunningWithBundleID.h */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
