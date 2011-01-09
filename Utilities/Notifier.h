@@ -7,13 +7,17 @@
 //
 
 @interface Notifier : NSObject {
-    NSArray *paths; //Actually just one.
+    NSArray *paths; // Actually just one.
     FSEventStreamRef stream;
     struct FSEventStreamContext context;
 }
 
-+ (id) notifierWithCallback:(FSEventStreamCallback)newCallback path:(NSString *)newPath callbackArgument:(void *)info;
-- (id) initWithCallback:(FSEventStreamCallback)newCallback path:(NSString *)newPath callbackArgument:(void *)info;
++ (id) notifierWithCallback:(FSEventStreamCallback)newCallback
+                       path:(NSString *)newPath
+           callbackArgument:(void *)info;
+- (id) initWithCallback:(FSEventStreamCallback)newCallback
+                   path:(NSString *)newPath
+       callbackArgument:(void *)info;
 
 - (void) start;
 - (void) stop;
