@@ -227,11 +227,11 @@ static InformationGatherer* defaultInstance = nil;
     NSString* stringKeyName;
     NSString* stringKeyFormat;
     NSString* screenshotPattern = nil;
-    NSString* nameOverride;
 
     NSDictionary*  dict = [[NSUserDefaults standardUserDefaults]
                            persistentDomainForName:@"com.apple.screencapture"];
-    nameOverride = [dict objectForKey:@"name"];
+    NSString* nameOverride = [dict objectForKey:@"name"];
+    DLog(@"nameOverride: %@", nameOverride);
 
     /* These are the keys we look up for localization. */
     if ([self isSnowLeopardOrNewer])

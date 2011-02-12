@@ -218,6 +218,11 @@ static void translateEvent(ConstFSEventStreamRef stream,
         OSErr comparison = FSCompareFSRefs(&screenshotPathRef, &pathRef);
         if (comparison == diffVolErr || comparison == errFSRefsDifferent)
         {
+            CFURLRef theURL = CFURLCreateFromFSRef(kCFAllocatorDefault, &pathRef);
+            NSString* thePath = [(NSURL *)theURL path];
+            CFRelease(theURL);         
+            DLog(@"Event for %@ is not a match, ignoring.", thePath);
+
             continue;
         }
 
@@ -232,7 +237,10 @@ static void translateEvent(ConstFSEventStreamRef stream,
     }
 
     if (!screenshotDirChanged)
+    {
+        DLog(@"Got FSEvent, but no change to %@", screenshotPath);
         return;
+    }
 
     NSSet* newEntries = [info createdFiles];
     NSError* error;
@@ -257,11 +265,13 @@ static void translateEvent(ConstFSEventStreamRef stream,
             continue;
         }
 
+        DLog(@"Found file! Attempting to upload.");
         UploadInitiator* up = [UploadInitiator uploadFile:entry
                                                    atPath:screenshotPath
                                                    toPath:[info uploadPath]];
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PromptBeforeUploading"])
         {
+            DLog(@"Growling to prompt.");
             [Growler messageWithTitle:@"Should we upload the screenshot?"
                           description:@"If you'd like the screenshot you just took to be uploaded and a link put in your clipboard, click here."
                                  name:@"Upload Screenshot?"
@@ -270,6 +280,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
         }
         else
         {
+            DLog(@"Asserting that Dropbox is running, then uploading.");
             [up assertDropboxRunningAndUpload];
         }
 

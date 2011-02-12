@@ -43,9 +43,11 @@
 }
 
 - (void) start {
+    DLog(@"Starting notifier.");
     FSEventStreamStart(stream);
 }
 - (void) stop {
+    DLog(@"Stopping notifier.");
     FSEventStreamStop(stream);
 }
 

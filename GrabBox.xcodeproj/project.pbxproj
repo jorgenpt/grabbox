@@ -117,7 +117,6 @@
 		8E49CF2011ED0DFA0041CE70 /* ImageRenamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageRenamer.h; sourceTree = "<group>"; };
 		8E49CF2111ED0DFA0041CE70 /* ImageRenamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageRenamer.m; sourceTree = "<group>"; };
 		8E49CF4C11ED14640041CE70 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ImageRenamer.xib; sourceTree = "<group>"; };
-		8E4A508B11E9086700A0A743 /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		8E4A508F11E9105700A0A743 /* Setup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Setup.h; sourceTree = "<group>"; };
 		8E4A509011E9105700A0A743 /* Setup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Setup.m; sourceTree = "<group>"; };
 		8E4A509E11E9155500A0A743 /* InformationGatherer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationGatherer.h; sourceTree = "<group>"; };
@@ -273,7 +272,6 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
-				8E4A508B11E9086700A0A743 /* TODO.txt */,
 				8E4E78E811EE2E7A00EB0CAD /* Webpage */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
