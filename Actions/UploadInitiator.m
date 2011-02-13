@@ -14,12 +14,60 @@
 
 @implementation UploadInitiator
 
+@synthesize restClient;
+@synthesize retries;
 @synthesize srcFile;
 @synthesize srcPath;
+@synthesize destFile;
 @synthesize destPath;
-@synthesize detectors;
 
 NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
+
++ (void) copyURL:(NSString *)url
+     basedOnFile:(NSString *)path
+      wasRenamed:(BOOL)renamed
+{
+    NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
+    [pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
+    
+    if (![pasteboard setString:url forType:NSStringPboardType])
+    {
+        NSString *errorDescription = [NSString stringWithFormat:@"Could not put URL '%@' into the clipboard, click here to try this operation again.", url];
+        GrowlerGrowl *copyError = [GrowlerGrowl growlErrorWithTitle:@"Could not update pasteboard!"
+                                                        description:errorDescription];
+        copyError.sticky = YES;
+        [Growler growl:copyError
+             withBlock:^(GrowlerGrowlAction action) {
+                 if (action == GrowlerGrowlClicked)
+                     [self copyURL:url basedOnFile:path wasRenamed:renamed];
+             }];
+        NSLog(@"ERROR: Couldn't put url into pasteboard.");
+    }
+    else
+    {
+        if (renamed)
+        {
+            GrowlerGrowl *success = [GrowlerGrowl growlWithName:@"Screenshot Renamed"
+                                                          title:@"Screenshot renamed!"
+                                                    description:@"The screenshot has been renamed and an updated link put in your clipboard."];
+            [Growler growl:success];
+        }
+        else
+        {
+            GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"URL Copied"
+                                                         title:@"Screenshot uploaded!"
+                                                   description:@"The screenshot has been uploaded and a link put in your clipboard. Click here to give the file a more descriptive name!"];
+            [Growler growl:prompt
+                 withBlock:^(GrowlerGrowlAction action) {
+                     if (action == GrowlerGrowlClicked)
+                     {
+                         ImageRenamer* renamer = [ImageRenamer renamerForFile:path];
+                         [[renamer retain] showRenamer];
+                     }
+                 }];
+        }
+    }
+}
 
 + (id) uploadFile:(NSString *)file
            atPath:(NSString *)source
@@ -35,127 +83,130 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     self = [super init];
     if (self)
     {
+        [self setRestClient:[DBRestClient restClientWithSharedSession]];
+        if (!restClient)
+        {
+            [self release];
+            return nil;
+        }
+        [restClient setDelegate:self];        
+
+        [self setRetries:5];
         [self setSrcFile:file];
-        [self setSrcPath:source];
+        [self setSrcPath:[NSString pathWithComponents:[NSArray arrayWithObjects: source, file, nil]]];
+        [self setDestFile:nil];
         [self setDestPath:destination];
-        [self setDetectors:[NSMutableArray array]];
     }
     return self;
 }
 
 - (void) dealloc
 {
+    [self setRestClient:nil];
     [self setSrcFile:nil];
     [self setSrcPath:nil];
     [self setDestPath:nil];
-    [self setDetectors:nil];
 
     [super dealloc];
 }
 
-- (void) assertDropboxRunningAndUpload
+- (void) upload
 {
-/*    DropboxDetector* detector = [DropboxDetector dropboxDetectorWithDelegate:self];
-    [[self detectors] addObject:detector];
-    [detector checkIfRunning];*/
-}
-
-- (void) uploadWithRetries:(int)retries
-{
-    NSError* error;
     NSString* shortName = [self getNextFilenameWithExtension:[[self srcFile] pathExtension]];
     if (!shortName)
         shortName = [self srcFile];
 
-    NSFileManager* fm = [NSFileManager defaultManager];
-    NSString* sourcePath = [NSString pathWithComponents:[NSArray arrayWithObjects: [self srcPath], [self srcFile], nil]];
+    [self setDestFile:shortName];
     NSString* destination = [NSString pathWithComponents:[NSArray arrayWithObjects: [self destPath], shortName, nil]];
 
-    BOOL uploadOk;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"DoNotDeleteScreenshot"])
+    DLog(@"Trying upload, destination: %@", destination);
+    [restClient loadMetadata:destination];
+}
+
+#pragma mark DBRestClientDelegate callbacks
+
+- (void)restClient:(DBRestClient*)client
+    loadedMetadata:(DBMetadata*)metadata
+{
+    [self setRetries:retries - 1];
+    DLog(@"Suggested filename exists, retries left: %d", retries);
+
+    if (retries > 0)
     {
-        uploadOk = [fm copyItemAtPath:sourcePath
-                               toPath:destination
-                                error:&error];
+        [self upload];
     }
     else
     {
-        uploadOk = [fm moveItemAtPath:sourcePath
-                               toPath:destination
-                                error:&error];
-    }
+        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file!"
+                                                         description:@"Could not find a unique filename"];
+        [Growler growl:errorGrowl];
 
-    if (!uploadOk)
+        NSLog(@"ERROR: Could not find a unique filename!");
+    }
+}
+
+- (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error
+{
+    if (error.code == 404)
     {
-        if (retries > 0 && [fm fileExistsAtPath:destination])
+        DLog(@"Destination file did not exist, so going ahead with upload.");
+        [restClient uploadFile:destFile
+                        toPath:destPath
+                      fromPath:srcPath];
+    }
+    else
+    {
+        [self setRetries:retries - 1];
+        DLog(@"Metadata request failed, retries left: %d", retries);
+        if (retries > 0)
         {
-            [self uploadWithRetries:(retries - 1)];
+            [self upload];
         }
         else
         {
             GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file!"
-                                                             description:[error localizedDescription]];
+                                                             description:[NSString stringWithFormat:@"Received status code %d", [error code]]];
             [Growler growl:errorGrowl];
             NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
         }
     }
-    else
-    {
-        int numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
-        [[NSUserDefaults standardUserDefaults] setInteger:(numberOfScreenshots + 1)
-                                                   forKey:@"NumberOfScreenshotsUploaded"];
-        NSString *dropboxUrl = [URLShortener shortenURLForFile:shortName];
-        [UploadInitiator copyURL:dropboxUrl
-                     basedOnFile:destination
-                      wasRenamed:NO];
-    }
+
+}
+- (void)restClient:(DBRestClient*)client
+      uploadedFile:(NSString*)uploadedPath
+              from:(NSString*)source
+{
+    DLog(@"Upload complete, %@ -> %@", source, uploadedPath);
+    int numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
+    [[NSUserDefaults standardUserDefaults] setInteger:(numberOfScreenshots + 1)
+                                               forKey:@"NumberOfScreenshotsUploaded"];
+    NSString *dropboxUrl = [URLShortener shortenURLForFile:[self destFile]];
+    [UploadInitiator copyURL:dropboxUrl
+                 basedOnFile:uploadedPath
+                  wasRenamed:NO];    
 }
 
-+ (void) copyURL:(NSString *)url
-     basedOnFile:(NSString *)path
-      wasRenamed:(BOOL)renamed
+- (void)restClient:(DBRestClient*)client uploadProgress:(CGFloat)progress 
+           forFile:(NSString*)dest from:(NSString*)source
 {
-    NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
-    [pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
+    DLog(@"%@ -> %@: %.1f", source, dest, progress*100.0);
+}
 
-    if (![pasteboard setString:url forType:NSStringPboardType])
+- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error
+{
+    [self setRetries:retries - 1];
+    DLog(@"Upload request failed, retries left: %d", retries);    
+    if (retries > 0)
     {
-        NSString *errorDescription = [NSString stringWithFormat:@"Could not put URL '%@' into the clipboard, click here to try this operation again.", url];
-        GrowlerGrowl *copyError = [GrowlerGrowl growlErrorWithTitle:@"Could not update pasteboard!"
-                                                        description:errorDescription];
-        copyError.sticky = YES;
-        [Growler growl:copyError
-             withBlock:^(GrowlerGrowlAction action) {
-                 if (action == GrowlerGrowlClicked)
-                     [self copyURL:url basedOnFile:path wasRenamed:renamed];
-             }];
-       NSLog(@"ERROR: Couldn't put url into pasteboard.");
+        [self upload];
     }
     else
     {
-        if (renamed)
-        {
-            GrowlerGrowl *success = [GrowlerGrowl growlWithName:@"Screenshot Renamed"
-                                                          title:@"Screenshot renamed!"
-                                                    description:@"The screenshot has been renamed and an updated link put in your clipboard."];
-            [Growler growl:success];
-        }
-        else
-        {
-            GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"URL Copied"
-                                                          title:@"Screenshot uploaded!"
-                                                    description:@"The screenshot has been uploaded and a link put in your clipboard. Click here to give the file a more descriptive name!"];
-
-            [Growler growl:prompt
-                 withBlock:^(GrowlerGrowlAction action) {
-                     if (action == GrowlerGrowlClicked)
-                     {
-                         ImageRenamer* renamer = [ImageRenamer renamerForFile:path];
-                         [[renamer retain] showRenamer];
-                     }
-                 }];
-        }
-    }
+        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file!"
+                                                         description:[NSString stringWithFormat:@"Received status code %d", [error code]]];
+        [Growler growl:errorGrowl];
+        NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
+    }    
 }
 
 - (NSString *) getRandomStringOfLength:(int)length
@@ -173,60 +224,12 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
 
 - (NSString *) getNextFilenameWithExtension:(NSString *)ext
 {
-    NSFileManager* fm = [NSFileManager defaultManager];
-
-    NSMutableArray* prefixes = [NSMutableArray array];
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"UseRandomFilename"])
-    {
-        NSString *output, *filename;
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"UseLongRandomFilename"])
-            output = [self getRandomStringOfLength:12];
-        else 
-            output = [self getRandomStringOfLength:4];
-        filename = [output stringByAppendingFormat:@".%@", ext];
-        
-        NSString* path = [NSString pathWithComponents:[NSArray arrayWithObjects:[self destPath], filename, nil]];
-        if (![fm fileExistsAtPath:path])
-            return filename;
-        else
-        {
-            // If the file exists, we start out with the random string,
-            // and try appending things to it - like normal filename generation.
-            [prefixes addObject:output];
-        }
-    }
-    else
-    {
-        [prefixes addObject:@""];
-    }
-
-    for (int c = 0; c < [prefixes count]; ++c)
-    {
-        NSString* prefix = [prefixes objectAtIndex:c];
-        if ([prefix length] > MAX_NAME_LENGTH)
-            return nil;
-
-        for (int i = 0; i < [urlCharacters length]; i++)
-        {
-            NSString* filename = [prefix stringByAppendingString:[urlCharacters substringWithRange:NSMakeRange(i, 1)]];
-            [prefixes addObject:filename];
-            filename = [filename stringByAppendingFormat:@".%@", ext];
-
-            NSString* path = [NSString pathWithComponents:[NSArray arrayWithObjects:[self destPath], filename, nil]];
-            if (![fm fileExistsAtPath:path])
-                return filename;
-        }
-    }
-
-    return nil;
+    NSString *output;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"UseLongRandomFilename"])
+        output = [self getRandomStringOfLength:12];
+    else 
+        output = [self getRandomStringOfLength:6];
+    return [output stringByAppendingFormat:@".%@", ext];
 }
-
-/*- (void) dropboxIsRunning:(BOOL)running
-             fromDetector:(DropboxDetector *)detector;
-{
-    if (running)
-        [self uploadWithRetries:3];
-    [[self detectors] removeObject:detector];
-}*/
 
 @end

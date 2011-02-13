@@ -7,37 +7,38 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "GrowlerDelegate.h"
 
 #define MAX_NAME_LENGTH 32
 
-@interface UploadInitiator : NSObject {
+@interface UploadInitiator : NSObject < DBRestClientDelegate> {
+    DBRestClient *restClient;
+    int retries;
     NSString *srcFile;
     NSString *srcPath;
+    NSString *destFile;
     NSString *destPath;
-    NSMutableArray *detectors;
 }
 
+@property (nonatomic, retain) DBRestClient *restClient;
+@property (nonatomic, assign) int retries;
 @property (nonatomic, retain) NSString* srcFile;
 @property (nonatomic, retain) NSString* srcPath;
+@property (nonatomic, retain) NSString* destFile;
 @property (nonatomic, retain) NSString* destPath;
-@property (nonatomic, retain) NSMutableArray* detectors;
 
-+ (id) uploadFile:(NSString *)file
-           atPath:(NSString *)source
-           toPath:(NSString *)destination;
 + (void) copyURL:(NSString *)url
      basedOnFile:(NSString *)path
       wasRenamed:(BOOL)renamed;
++ (id) uploadFile:(NSString *)file
+           atPath:(NSString *)source
+           toPath:(NSString *)destination;
 
 - (id) initForFile:(NSString *)file
             atPath:(NSString *)source
             toPath:(NSString *)destination;
 - (void) dealloc;
 
-- (void) assertDropboxRunningAndUpload;
-- (void) uploadWithRetries:(int)retries;
+- (void) upload;
 - (NSString *) getNextFilenameWithExtension:(NSString *)ext;
-/*- (void) dropboxIsRunning:(BOOL)running
-             fromDetector:(DropboxDetector *)detector;*/
+
 @end

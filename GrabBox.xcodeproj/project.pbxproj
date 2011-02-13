@@ -47,7 +47,6 @@
 		8E60861811E6D1B600881A1C /* Notifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E60861711E6D1B600881A1C /* Notifier.m */; };
 		8E61221E13074A2200DA90D0 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E61221D13074A2200DA90D0 /* Dropbox.framework */; };
 		8E61222213074A3A00DA90D0 /* Dropbox.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E61221D13074A2200DA90D0 /* Dropbox.framework */; };
-		8E7385D811F3C5ED0051276B /* ProcessIsRunningWithBundleID.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E7385D711F3C5EC0051276B /* ProcessIsRunningWithBundleID.c */; };
 		8E7385EA11F3C7900051276B /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7385E911F3C7900051276B /* Carbon.framework */; };
 		8E7B686911EBD1BA00112165 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B686811EBD1BA00112165 /* Sparkle.framework */; };
 		8E7B688F11EBD26500112165 /* Sparkle.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B686811EBD1BA00112165 /* Sparkle.framework */; };
@@ -138,8 +137,6 @@
 		8E60861611E6D1B600881A1C /* Notifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifier.h; sourceTree = "<group>"; };
 		8E60861711E6D1B600881A1C /* Notifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notifier.m; sourceTree = "<group>"; };
 		8E61221D13074A2200DA90D0 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = /Users/jorgenpt/Projects/DropboxFramework/build/Release/Dropbox.framework; sourceTree = "<absolute>"; };
-		8E7385D611F3C5EC0051276B /* ProcessIsRunningWithBundleID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessIsRunningWithBundleID.h; sourceTree = "<group>"; };
-		8E7385D711F3C5EC0051276B /* ProcessIsRunningWithBundleID.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ProcessIsRunningWithBundleID.c; sourceTree = "<group>"; };
 		8E7385E911F3C7900051276B /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		8E7B686811EBD1BA00112165 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		8E7B6B2D11EC19A500112165 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
@@ -371,8 +368,6 @@
 				8EFFCB6D12D8F86C00201A9A /* NSString+URLParameters.m */,
 				8EFFCB9512D8F98300201A9A /* NSData+Base64.h */,
 				8EFFCB9612D8F98300201A9A /* NSData+Base64.m */,
-				8E7385D711F3C5EC0051276B /* ProcessIsRunningWithBundleID.c */,
-				8E7385D611F3C5EC0051276B /* ProcessIsRunningWithBundleID.h */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -493,7 +488,6 @@
 				8E51825911E7CE3A00D15CAB /* FSRefConversions.m in Sources */,
 				8E4A50A011E9155500A0A743 /* InformationGatherer.m in Sources */,
 				8E7B6C2511EC433B00112165 /* Preferences.m in Sources */,
-				8E7385D811F3C5ED0051276B /* ProcessIsRunningWithBundleID.c in Sources */,
 				8EAAE7F41256675800798872 /* Menubar.m in Sources */,
 				8EFFCB6012D8F75A00201A9A /* ImageRenamer.m in Sources */,
 				8EFFCB6112D8F75A00201A9A /* UploadInitiator.m in Sources */,

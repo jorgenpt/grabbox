@@ -24,8 +24,12 @@
 @synthesize restartWindow;
 @synthesize nagWindow;
 @synthesize menubar;
+
 @synthesize info;
 @synthesize notifier;
+
+@synthesize restClient;
+@synthesize account;
 @synthesize loginController;
 @synthesize canInteract;
 
@@ -139,11 +143,12 @@ static void translateEvent(ConstFSEventStreamRef stream,
                                                   consumerSecret:consumerSecret] autorelease];
 	[session setDelegate:self];
 	[DBSession setSharedSession:session];
+    [self setRestClient:[DBRestClient restClientWithSharedSession]];
+    [restClient setDelegate:self];
 
     if ([session isLinked])
     {
-        [self startMonitoring];
-        [self setCanInteract:YES];
+        [restClient loadAccountInfo];
     }
     else
     {
@@ -237,7 +242,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
         UploadInitiator* up = [UploadInitiator uploadFile:entry
                                                    atPath:screenshotPath
-                                                   toPath:[info uploadPath]];
+                                                   toPath:@"/Public/Screenshots"];
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PromptBeforeUploading"])
         {
             GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"Upload Screenshot?"
@@ -248,12 +253,12 @@ static void translateEvent(ConstFSEventStreamRef stream,
             [Growler growl:prompt
                  withBlock:^(GrowlerGrowlAction action) {
                      if (action == GrowlerGrowlClicked)
-                         [up uploadWithRetries:3];
+                         [up upload];
                  }];
         }
         else
         {
-            [up assertDropboxRunningAndUpload];
+            [up upload];
         }
 
     }
@@ -261,7 +266,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (IBAction) browseUploadedScreenshots:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openFile:[info uploadPath]];
+//    [[NSWorkspace sharedWorkspace] openFile:[info uploadPath]];
 }
 
 - (IBAction) uploadFromPasteboard:(id)sender
@@ -299,15 +304,31 @@ static void translateEvent(ConstFSEventStreamRef stream,
     NSData *data = [bits representationUsingType:NSPNGFileType
                                       properties:nil];
 
-    char template[] = "/tmp/GrabBoxClipboard.XXXXXX.png";
+    NSError *error;
+    BOOL moveOk;
+    char template[] = "/tmp/GrabBoxClipboard.XXXXXX";
     NSString *filename = [NSString stringWithCString:mktemp(template)
                                             encoding:NSISOLatin1StringEncoding];
+    NSString *pngFilename = [filename stringByAppendingString:@".png"];
     [data writeToFile:filename atomically:NO];
+    moveOk = [[NSFileManager defaultManager] moveItemAtPath:filename
+                                                     toPath:pngFilename
+                                                      error:&error];
     
-    UploadInitiator* up = [UploadInitiator uploadFile:[filename lastPathComponent]
-                                               atPath:[filename stringByDeletingLastPathComponent]
-                                               toPath:[info uploadPath]];
-    [up assertDropboxRunningAndUpload];
+    if (moveOk)
+    {
+        UploadInitiator* up = [UploadInitiator uploadFile:[pngFilename lastPathComponent]
+                                                   atPath:[pngFilename stringByDeletingLastPathComponent]
+                                                   toPath:@"/Public/Screenshots"];
+        [up upload];
+    }
+    else
+    {
+        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload from clipboard!"
+                                                         description:[error localizedDescription]];
+        [Growler growl:errorGrowl];
+        NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
+    }
 }
 
 - (IBAction) openFeedback:(id)sender
@@ -349,7 +370,11 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void) sessionDidReceiveAuthorizationFailure:(DBSession *)session
 {
+    NSLog(@"Received authorization failure, disabling app then prompt for link!");
+    [self setAccount:nil];
     [self stopMonitoring];
+    [self setCanInteract:NO];
+    
     [self promptForLink];
 }
 
@@ -357,13 +382,31 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void) controllerDidComplete:(DBLoginController *)window
 {
+    DLog(@"Account linked, trying to load account info.");
     [self setLoginController:nil];
-    [self startMonitoring];
-    [self setCanInteract:YES];
+    [restClient loadAccountInfo];
 }
 
 - (void) controllerDidCancel:(DBLoginController *)window
 {
+    DLog(@"Cancelled account link window, terminating.");
+    [NSApp terminate:self];
+}
+
+#pragma mark DBRestClient delegate methods
+
+- (void)restClient:(DBRestClient*)client
+ loadedAccountInfo:(DBAccountInfo*)accountInfo
+{
+    DLog(@"Got account info, starting FS monitoring and enabling interaction!");
+    [self setAccount:accountInfo];
+    [self startMonitoring];
+    [self setCanInteract:YES];
+}
+
+- (void)restClient:(DBRestClient*)client loadAccountInfoFailedWithError:(NSError*)error
+{
+    NSLog(@"ERROR: Failed retrieving account info: %ld", error.code);
     [NSApp terminate:self];
 }
 

@@ -26,10 +26,10 @@ static NSString *BITLY_APIURL = @"http://api.bit.ly/v3/%@?login=%@&apiKey=%@&",
 
 + (NSString *) shortenURLForFile:(NSString *)file
 {
-    int dropboxId = [(GrabBoxAppDelegate*)[NSApp delegate] dropboxId];
+    NSString *dropboxId = [[(GrabBoxAppDelegate*)[NSApp delegate] account] userId];
     int service = [[NSUserDefaults standardUserDefaults] integerForKey:CONFIG(URLShortener)];
     NSString *escapedFile = [file stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-    NSString *directURL = [NSString stringWithFormat:@"http://dl.dropbox.com/u/%d/Screenshots/%@", dropboxId, escapedFile];
+    NSString *directURL = [NSString stringWithFormat:@"http://dl.dropbox.com/u/%@/Screenshots/%@", dropboxId, escapedFile];
     NSString *shortURL = nil;
 
     DLog(@"Shortening with service %i.", service);

@@ -13,13 +13,16 @@
 #import "InformationGatherer.h"
 #import "Menubar.h"
 
-@interface GrabBoxAppDelegate : NSObject <DBSessionDelegate, DBCommonControllerDelegate> {
+@interface GrabBoxAppDelegate : NSObject <DBSessionDelegate, DBCommonControllerDelegate, DBRestClientDelegate> {
     NSWindow* setupWindow;
     NSWindow* restartWindow;
     NSWindow* nagWindow;
     Menubar* menubar;
     InformationGatherer* info;
     Notifier* notifier;
+
+    DBRestClient *restClient;
+    DBAccountInfo *account;
     DBLoginController *loginController;
     BOOL canInteract;
 }
@@ -29,8 +32,9 @@
 @property (assign) IBOutlet NSWindow* nagWindow;
 @property (assign) IBOutlet Menubar* menubar;
 
+@property (nonatomic, retain) DBRestClient *restClient;
+@property (nonatomic, retain) DBAccountInfo *account;
 @property (assign) BOOL canInteract;
-
 @property (nonatomic, retain) DBLoginController *loginController;
 
 
