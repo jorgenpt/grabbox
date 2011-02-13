@@ -11,12 +11,10 @@
 
 #import "Growler.h"
 #import "UploadInitiator.h"
-#import "DropboxDetector.h"
 
 @interface GrabBoxAppDelegate ()
 @property (nonatomic, assign) InformationGatherer* info;
 @property (nonatomic, retain) Notifier* notifier;
-@property (nonatomic, retain) NSMutableArray* detectors;
 @end
 
 
@@ -28,7 +26,8 @@
 @synthesize menubar;
 @synthesize info;
 @synthesize notifier;
-@synthesize detectors;
+@synthesize loginController;
+@synthesize canInteract;
 
 static void translateEvent(ConstFSEventStreamRef stream,
                            void *clientCallBackInfo,
@@ -55,7 +54,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [self setNotifier:[Notifier notifierWithCallback:translateEvent
                                                 path:[info screenshotPath]
                                     callbackArgument:self]];
-    [self setDetectors:[NSMutableArray array]];
 
     BOOL showInDock = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowInDock"];
     if (!showInDock)
@@ -68,19 +66,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
 {
     [self setInfo:nil];
     [self setNotifier:nil];
-    [self setDetectors:nil];
+    [self setLoginController:nil];
 
     [super dealloc];
-}
-
-- (int) dropboxId
-{
-    return [[NSUserDefaults standardUserDefaults] integerForKey:@"DropboxId"];
-}
-
-- (void) setDropboxId:(int) toId
-{
-    [[NSUserDefaults standardUserDefaults] setInteger:toId forKey:@"DropboxId"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
@@ -142,38 +130,26 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    NSString *consumerKey = @"<INSERT DROPBOX CONSUMER KEY>";
+	NSString *consumerSecret = @"<INSERT DROPBOX CONSUMER SECRET>";
+
     [[SUUpdater sharedUpdater] setDelegate:self];
 
-    if ([self dropboxId] == 0)
-    {
-        DropboxDetector* detector = [DropboxDetector dropboxDetectorWithDelegate:self];
-        [[self detectors] addObject:detector];
-        [detector checkIfRunning];
-    }
-    else
-        [self startMonitoring];
-}
+	DBSession *session =  [[[DBSession alloc] initWithConsumerKey:consumerKey
+                                                  consumerSecret:consumerSecret] autorelease];
+	[session setDelegate:self];
+	[DBSession setSharedSession:session];
 
-- (void) dropboxIsRunning:(BOOL)running
-             fromDetector:(DropboxDetector *)detector;
-{
-    if (running)
+    if ([session isLinked])
     {
-        if ([self dropboxId] == 0)
-        {
-            [NSApp activateIgnoringOtherApps:YES];
-            [NSApp runModalForWindow:setupWindow];
-        }
-        else
-        {
-            [self startMonitoring];
-        }
+        [self startMonitoring];
+        [self setCanInteract:YES];
     }
     else
     {
-        [NSApp terminate:self];
+        [self promptForLink];
+        [self setCanInteract:NO];
     }
-    [[self detectors] removeObject:detector];
 }
 
 - (void) startMonitoring
@@ -189,6 +165,19 @@ static void translateEvent(ConstFSEventStreamRef stream,
         [[NSUserDefaults standardUserDefaults] setBool:YES
                                                 forKey:@"HasBeenNagged"];
     }
+}
+
+- (void) stopMonitoring
+{
+    [notifier stop];
+}
+
+- (void) promptForLink
+{
+    [self setLoginController:[[[DBLoginController alloc] init] autorelease]];
+    [loginController setDelegate:self];
+    [loginController presentFrom:self];
+    [NSApp activateIgnoringOtherApps:YES];
 }
 
 - (void) eventForStream:(ConstFSEventStreamRef)stream
@@ -238,21 +227,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
         return;
 
     NSSet* newEntries = [info createdFiles];
-    NSError* error;
-    NSFileManager* fm = [NSFileManager defaultManager];
-    BOOL mkdirOk = [fm createDirectoryAtPath:[info uploadPath]
-                 withIntermediateDirectories:YES
-                                  attributes:nil
-                                       error:&error];
-    if (!mkdirOk)
-    {
-        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not copy file!"
-                                                         description:[error localizedDescription]];
-        [Growler growl:errorGrowl];
-        NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
-        return;
-    }
-
     NSString* pattern = [[info localizedScreenshotPattern] decomposedStringWithCanonicalMapping];
     for (NSString* entry in newEntries) {
         if (![[entry decomposedStringWithCanonicalMapping] isLike:pattern])
@@ -299,21 +273,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
                                                          description:@"No image found in the clipboard."];
         [Growler growl:errorGrowl];
         NSLog(@"ERROR: No image found in the clipboard.");
-        return;
-    }
-
-    NSError* error;
-    NSFileManager* fm = [NSFileManager defaultManager];
-    BOOL mkdirOk = [fm createDirectoryAtPath:[info uploadPath]
-                 withIntermediateDirectories:YES
-                                  attributes:nil
-                                       error:&error];
-    if (!mkdirOk)
-    {
-        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file!"
-                                                         description:[error localizedDescription]];
-        [Growler growl:errorGrowl];
-        NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
         return;
     }
 
@@ -384,6 +343,28 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
     [NSTask launchedTaskWithLaunchPath:launcherTarget arguments:[NSArray arrayWithObjects:appPath, processID, nil]];
     [NSApp terminate:sender];
+}
+
+#pragma mark DBSession delegate methods
+
+- (void) sessionDidReceiveAuthorizationFailure:(DBSession *)session
+{
+    [self stopMonitoring];
+    [self promptForLink];
+}
+
+#pragma mark DBLoginController delegate methods
+
+- (void) controllerDidComplete:(DBLoginController *)window
+{
+    [self setLoginController:nil];
+    [self startMonitoring];
+    [self setCanInteract:YES];
+}
+
+- (void) controllerDidCancel:(DBLoginController *)window
+{
+    [NSApp terminate:self];
 }
 
 @end

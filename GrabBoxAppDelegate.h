@@ -11,17 +11,17 @@
 
 #import "Notifier.h"
 #import "InformationGatherer.h"
-#import "DropboxDetector.h"
 #import "Menubar.h"
 
-@interface GrabBoxAppDelegate : NSObject <DropboxDetectorDelegate> {
+@interface GrabBoxAppDelegate : NSObject <DBSessionDelegate, DBCommonControllerDelegate> {
     NSWindow* setupWindow;
     NSWindow* restartWindow;
     NSWindow* nagWindow;
     Menubar* menubar;
     InformationGatherer* info;
     Notifier* notifier;
-    NSMutableArray* detectors;
+    DBLoginController *loginController;
+    BOOL canInteract;
 }
 
 @property (assign) IBOutlet NSWindow* setupWindow;
@@ -29,17 +29,22 @@
 @property (assign) IBOutlet NSWindow* nagWindow;
 @property (assign) IBOutlet Menubar* menubar;
 
+@property (assign) BOOL canInteract;
+
+@property (nonatomic, retain) DBLoginController *loginController;
+
 
 - (void) awakeFromNib;
 - (void) dealloc;
-
-- (void) setDropboxId:(int)toId;
-- (int) dropboxId;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
                         change:(NSDictionary *)change context:(void *)context;
 
 - (void) startMonitoring;
+- (void) stopMonitoring;
+
+- (void) promptForLink;
+
 - (void) eventForStream:(ConstFSEventStreamRef)stream
                   paths:(NSArray *)paths
                   flags:(const FSEventStreamEventFlags[])flags
@@ -48,8 +53,6 @@
                  sendingSystemProfile:(BOOL)sendingProfile;
 - (void) applicationWillFinishLaunching:(NSNotification *)aNotification;
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification;
-- (void) dropboxIsRunning:(BOOL)running
-             fromDetector:(DropboxDetector *)detector;
 
 - (IBAction) browseUploadedScreenshots:(id)sender;
 - (IBAction) uploadFromPasteboard:(id)sender;

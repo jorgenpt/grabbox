@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string>GrabBox.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>no.devsoft.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>no.devsoft.${PRODUCT_NAME:rfc1034identifier}_plus</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

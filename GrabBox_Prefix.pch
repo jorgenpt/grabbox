@@ -4,9 +4,7 @@
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
-    #if (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5)
-        extern NSString *const NSImageNameCaution;
-    #endif
+    #import <Dropbox/Dropbox.h>
 #endif
 
 #ifdef DEBUG
@@ -16,4 +14,4 @@
 #endif
 
 #define CONFIG(name) (@#name)
-#define BUNDLE_IDENTIFIER @"no.devsoft.GrabBox"
+#define BUNDLE_IDENTIFIER @"no.devsoft.GrabBox_plus"

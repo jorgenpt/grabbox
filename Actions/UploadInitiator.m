@@ -55,9 +55,9 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
 
 - (void) assertDropboxRunningAndUpload
 {
-    DropboxDetector* detector = [DropboxDetector dropboxDetectorWithDelegate:self];
+/*    DropboxDetector* detector = [DropboxDetector dropboxDetectorWithDelegate:self];
     [[self detectors] addObject:detector];
-    [detector checkIfRunning];
+    [detector checkIfRunning];*/
 }
 
 - (void) uploadWithRetries:(int)retries
@@ -221,11 +221,12 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     return nil;
 }
 
-- (void) dropboxIsRunning:(BOOL)running
+/*- (void) dropboxIsRunning:(BOOL)running
              fromDetector:(DropboxDetector *)detector;
 {
     if (running)
         [self uploadWithRetries:3];
     [[self detectors] removeObject:detector];
-}
+}*/
+
 @end

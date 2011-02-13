@@ -10,8 +10,6 @@
 
 @interface InformationGatherer : NSObject {
     NSString* screenshotPath;
-    NSString* uploadPath;
-    NSString* publicPath;
     NSString* localizedScreenshotPattern;
     BOOL isSnowLeopardOrNewer;
     NSSet* dirContents;
@@ -20,8 +18,6 @@
 + (id) defaultGatherer;
 
 - (NSString *)screenshotPath;
-- (NSString *)publicPath;
-- (NSString *)uploadPath;
 - (NSString *)localizedScreenshotPattern;
 - (NSSet *)createdFiles;
 - (NSSet *)files;
