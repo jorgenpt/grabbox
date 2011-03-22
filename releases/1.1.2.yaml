@@ -1,0 +1,8 @@
+date:       Sat, 09 Oct 2010 15:53:01 -0700
+signature:  MC4CFQC5A6QQH0IZCWpHDQ+9QEbAy2pUPgIVAM5UfgvEocU6LyM0zQbaNPkH8BfB
+changelog:
+    bugfixes:
+        - Make bit.ly URL shortening work when renaming screenshots.
+        - Fix some minor memory leaks.
+    changes:
+        - Switch to bit.ly API v3 (from v2).

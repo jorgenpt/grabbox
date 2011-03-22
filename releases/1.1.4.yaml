@@ -1,0 +1,6 @@
+date:       Sat, 29 Jan 2011 11:53:19 -0800
+signature:  MCwCFEoWO/AtJ3v6n6mlprKrneAzFMeKAhRPm6xq3yOHUFL/9TezYvZkTWnPdg==
+changelog:
+    bugfixes:
+        - It now works even if you change the screenshot name (com.apple.screencapture - name).
+        - Compatibility with Dropbox v1.0 and custom Dropbox paths.

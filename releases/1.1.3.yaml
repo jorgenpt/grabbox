@@ -1,0 +1,7 @@
+date:       Sun, 10 Oct 2010 13:50:03 -0700
+signature:  MC0CFQDSax0rfDCKOJFDnyhI4MlHPMKSSgIUTOCM9gnk6sp2hsDAoWNQz4yZxAk=
+changelog:
+    bugfixes:
+        - Fix a minor memory leak.
+        - Make it work on OS X 10.5 again.
+        - Make it work in French, Swedish, etc (all languages should work).
