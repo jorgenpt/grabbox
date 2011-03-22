@@ -1,6 +1,9 @@
 build/
 *.xcodeproj/*.pbxuser
 *.xcodeproj/*.perspectivev3
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+
 .DS_Store
 webpage/appcast.xml
 webpage/releasenotes.html
