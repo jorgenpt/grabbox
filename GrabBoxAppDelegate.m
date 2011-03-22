@@ -133,9 +133,11 @@ static void translateEvent(ConstFSEventStreamRef stream,
         if (returnCode != 0)
         {
             NSLog(@"Could not bring the application to front. Error %d. Using menubar.", returnCode);
-            [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:@"ShowInDock"];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ShowInDock"];
         }
     }
+
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SUSendProfileInfo"];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -184,7 +186,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
     {
         [[self nagWindow] makeKeyAndOrderFront:self];
         [NSApp activateIgnoringOtherApps:YES];
-        [[NSUserDefaults standardUserDefaults] setBool:TRUE
+        [[NSUserDefaults standardUserDefaults] setBool:YES
                                                 forKey:@"HasBeenNagged"];
     }
 }
