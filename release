@@ -1,2 +1,2 @@
 #!/bin/bash
-xcodebuild -target Distribution -configuration Release
+xcodebuild -target Distribution -configuration Release -parallelizeTargets "$@" build
