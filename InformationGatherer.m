@@ -12,7 +12,7 @@
 
 #include <sqlite3.h>
 
-#if (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5)
+#if (MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_5)
 # define SQLITE_OPEN_BEST(path, db) sqlite3_open((path), (db))
 #else
 # define SQLITE_OPEN_BEST(path, db) sqlite3_open_v2((path), (db), SQLITE_OPEN_READONLY, NULL)
@@ -363,7 +363,7 @@ static InformationGatherer* defaultInstance = nil;
     if (!newContents)
         return nil;
 
-#if (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_5)
+#if (MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_5)
     NSMutableSet* newEntries = [NSMutableSet set];
     for (id obj in newContents)
     {

@@ -109,26 +109,38 @@
 - (void) checkClipboard:(NSTimer *) timer
 {
     NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
-#if (MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5)
+    NSString *urlString = nil;
+    DLog(@"Checking clipboard for updates.");
+
+#if (MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_5)
+    urlString = [pasteboard stringForType:NSStringPboardType];
+#else
     NSArray *classes = [NSArray arrayWithObjects:[NSString class], nil];
     NSDictionary *options = [NSDictionary dictionary];
     NSArray *copiedItems = [pasteboard readObjectsForClasses:classes options:options];
-    if (!copiedItems)
-        return;
-
-    NSURL *url = [NSURL URLWithString:[copiedItems objectAtIndex:0]];
-#else
-    NSURL *url = [NSURL URLWithString:[pasteboard stringForType:NSStringPboardType]];
+    if (copiedItems && [copiedItems count] > 0)
+        urlString = [copiedItems objectAtIndex:0];
 #endif
-    if (!url)
+
+    if (!urlString)
+    {
+        DLog(@"No urlString.");
         return;
+    }
+
+    NSURL *url = [NSURL URLWithString:urlString];
+    if (!url)
+    {
+        DLog(@"urlString '%@' is not valid.", urlString);
+        return;
+    }
 
     if ([[url host] hasSuffix:@".dropbox.com"])
     {
-#if (MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5)
-        NSArray* components = [url pathComponents];
-#else
+#if (MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_5)
         NSArray* components = [[url path] pathComponents];
+#else
+        NSArray* components = [url pathComponents];
 #endif
         NSString* dirComponent = [components objectAtIndex:1];
         if (![dirComponent isEqualToString:@"u"])
@@ -145,6 +157,10 @@
         {
             [linkOk setState:NSOffState];
         }
+    }
+    else
+    {
+        DLog(@"urlString '%@' is not under host *.dropbox.com.", urlString);
     }
 }
 
