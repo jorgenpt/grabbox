@@ -1,5 +1,5 @@
-date:       Sun, 17 Apr 2011 22:51:00 -0700
-signature:  MCwCFDaXOLVu6WtRr1TH2/FEvseg31RAAhQspQNeIlJnZGb1ffKdr92vpqDfnA==
+date:       Sun, 17 Apr 2011 23:31:59 -0700
+signature:  MC4CFQDXpt6wx7AI4zKQvRzmlAlF2XmdsAIVAJKhly5ftfzzBkB1YM74HGovpvjn
 changelog:
     bugfixes:
         - Fixed a problem with Dropbox URL detection on Setup dialog.
