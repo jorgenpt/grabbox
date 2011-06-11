@@ -50,8 +50,6 @@
 		8E60861811E6D1B600881A1C /* Notifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E60861711E6D1B600881A1C /* Notifier.m */; };
 		8E7385D811F3C5ED0051276B /* ProcessIsRunningWithBundleID.c in Sources */ = {isa = PBXBuildFile; fileRef = 8E7385D711F3C5EC0051276B /* ProcessIsRunningWithBundleID.c */; };
 		8E7385EA11F3C7900051276B /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7385E911F3C7900051276B /* Carbon.framework */; };
-		8E7934AE12DA3F460057D5ED /* Growler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7934AB12DA3F460057D5ED /* Growler.m */; };
-		8E7934AF12DA3F460057D5ED /* GrowlerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7934AD12DA3F460057D5ED /* GrowlerDelegate.m */; };
 		8E7B686911EBD1BA00112165 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B686811EBD1BA00112165 /* Sparkle.framework */; };
 		8E7B688F11EBD26500112165 /* Sparkle.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B686811EBD1BA00112165 /* Sparkle.framework */; };
 		8E7B6A7911EBFF1E00112165 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B6A7811EBFF1E00112165 /* libsqlite3.dylib */; };
@@ -59,6 +57,8 @@
 		8E7B6B3611EC19A700112165 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B6B2D11EC19A500112165 /* Growl.framework */; };
 		8E7B6C2511EC433B00112165 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7B6C2411EC433B00112165 /* Preferences.m */; };
 		8EAAE7F41256675800798872 /* Menubar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EAAE7F31256675800798872 /* Menubar.m */; };
+		8ED2912813A41A66005F10D3 /* Growler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED2910E13A41A65005F10D3 /* Growler.m */; };
+		8ED2912913A41A66005F10D3 /* GrowlerGrowl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED2911013A41A65005F10D3 /* GrowlerGrowl.m */; };
 		8EFFCB6012D8F75A00201A9A /* ImageRenamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB5B12D8F75A00201A9A /* ImageRenamer.m */; };
 		8EFFCB6112D8F75A00201A9A /* UploadInitiator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB5D12D8F75A00201A9A /* UploadInitiator.m */; };
 		8EFFCB6212D8F75A00201A9A /* URLShortener.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB5F12D8F75A00201A9A /* URLShortener.m */; };
@@ -146,10 +146,6 @@
 		8E7385D611F3C5EC0051276B /* ProcessIsRunningWithBundleID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessIsRunningWithBundleID.h; sourceTree = "<group>"; };
 		8E7385D711F3C5EC0051276B /* ProcessIsRunningWithBundleID.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ProcessIsRunningWithBundleID.c; sourceTree = "<group>"; };
 		8E7385E911F3C7900051276B /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
-		8E7934AA12DA3F460057D5ED /* Growler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Growler.h; sourceTree = "<group>"; };
-		8E7934AB12DA3F460057D5ED /* Growler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Growler.m; sourceTree = "<group>"; };
-		8E7934AC12DA3F460057D5ED /* GrowlerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowlerDelegate.h; sourceTree = "<group>"; };
-		8E7934AD12DA3F460057D5ED /* GrowlerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowlerDelegate.m; sourceTree = "<group>"; };
 		8E7B686811EBD1BA00112165 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		8E7B6A7811EBFF1E00112165 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		8E7B6B2D11EC19A500112165 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
@@ -157,6 +153,10 @@
 		8E7B6C2411EC433B00112165 /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 		8EAAE7F21256675800798872 /* Menubar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menubar.h; sourceTree = "<group>"; };
 		8EAAE7F31256675800798872 /* Menubar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menubar.m; sourceTree = "<group>"; };
+		8ED2910D13A41A65005F10D3 /* Growler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Growler.h; sourceTree = "<group>"; };
+		8ED2910E13A41A65005F10D3 /* Growler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Growler.m; sourceTree = "<group>"; };
+		8ED2910F13A41A65005F10D3 /* GrowlerGrowl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowlerGrowl.h; sourceTree = "<group>"; };
+		8ED2911013A41A65005F10D3 /* GrowlerGrowl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowlerGrowl.m; sourceTree = "<group>"; };
 		8EFFCB5A12D8F75A00201A9A /* ImageRenamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageRenamer.h; sourceTree = "<group>"; };
 		8EFFCB5B12D8F75A00201A9A /* ImageRenamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageRenamer.m; sourceTree = "<group>"; };
 		8EFFCB5C12D8F75A00201A9A /* UploadInitiator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadInitiator.h; sourceTree = "<group>"; };
@@ -332,17 +332,6 @@
 			path = updates;
 			sourceTree = "<group>";
 		};
-		8E7934A912DA3F460057D5ED /* Growl */ = {
-			isa = PBXGroup;
-			children = (
-				8E7934AA12DA3F460057D5ED /* Growler.h */,
-				8E7934AB12DA3F460057D5ED /* Growler.m */,
-				8E7934AC12DA3F460057D5ED /* GrowlerDelegate.h */,
-				8E7934AD12DA3F460057D5ED /* GrowlerDelegate.m */,
-			);
-			path = Growl;
-			sourceTree = "<group>";
-		};
 		8E79350012DA42710057D5ED /* Interface */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +343,17 @@
 				8E4A509011E9105700A0A743 /* Setup.m */,
 			);
 			path = Interface;
+			sourceTree = "<group>";
+		};
+		8ED290E713A41A65005F10D3 /* Growler */ = {
+			isa = PBXGroup;
+			children = (
+				8ED2910D13A41A65005F10D3 /* Growler.h */,
+				8ED2910E13A41A65005F10D3 /* Growler.m */,
+				8ED2910F13A41A65005F10D3 /* GrowlerGrowl.h */,
+				8ED2911013A41A65005F10D3 /* GrowlerGrowl.m */,
+			);
+			path = Growler;
 			sourceTree = "<group>";
 		};
 		8EFFCB5912D8F75A00201A9A /* Actions */ = {
@@ -372,7 +372,7 @@
 		8EFFCB6B12D8F86C00201A9A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				8E7934A912DA3F460057D5ED /* Growl */,
+				8ED290E713A41A65005F10D3 /* Growler */,
 				8EFFCB7512D8F89F00201A9A /* JSON */,
 				8E51825711E7CE3A00D15CAB /* FSRefConversions.h */,
 				8E51825811E7CE3A00D15CAB /* FSRefConversions.m */,
@@ -519,8 +519,8 @@
 				8EFFCB8412D8F89F00201A9A /* SBJsonParser.m in Sources */,
 				8EFFCB8512D8F89F00201A9A /* SBJsonWriter.m in Sources */,
 				8EFFCB9712D8F98300201A9A /* NSData+Base64.m in Sources */,
-				8E7934AE12DA3F460057D5ED /* Growler.m in Sources */,
-				8E7934AF12DA3F460057D5ED /* GrowlerDelegate.m in Sources */,
+				8ED2912813A41A66005F10D3 /* Growler.m in Sources */,
+				8ED2912913A41A66005F10D3 /* GrowlerGrowl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

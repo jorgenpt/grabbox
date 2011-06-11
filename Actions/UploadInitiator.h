@@ -7,12 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "GrowlerDelegate.h"
+#import "Growler.h"
 #import "DropboxDetector.h"
 
 #define MAX_NAME_LENGTH 32
 
-@interface UploadInitiator : NSObject <GrowlerDelegate, DropboxDetectorDelegate> {
+@interface UploadInitiator : NSObject <DropboxDetectorDelegate> {
     NSString *srcFile;
     NSString *srcPath;
     NSString *destPath;
@@ -38,8 +38,6 @@
 
 - (void) assertDropboxRunningAndUpload;
 - (void) uploadWithRetries:(int)retries;
-- (void) growlClickedWithData:(id)data;
-- (void) growlTimedOutWithData:(id)data;
 - (NSString *) getNextFilenameWithExtension:(NSString *)ext;
 - (void) dropboxIsRunning:(BOOL)running
              fromDetector:(DropboxDetector *)detector;

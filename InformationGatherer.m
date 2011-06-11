@@ -46,8 +46,8 @@ static InformationGatherer* defaultInstance = nil;
         if (defaultInstance == nil)
             [[self alloc] init];
     }
-    return defaultInstance;
 
+    return defaultInstance;
 }
 
 + (id)allocWithZone:(NSZone *)zone

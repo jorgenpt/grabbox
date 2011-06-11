@@ -200,8 +200,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
     FSRef screenshotPathRef;
     if (![screenshotPath getFSRef:&screenshotPathRef])
     {
-        [[Growler sharedInstance] errorWithTitle:@"GrabBox could not get Screen Grab path!"
-                                     description:@"Could not find directory to monitor for screenshots."];
+        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not get Screen Grab path!"
+                                                         description:@"Could not find directory to monitor for screenshots."];
+        [Growler growl:errorGrowl];
         NSLog(@"ERROR: Failed getting FSRef for screenshotPath '%@'", screenshotPath);
         return;
     }
@@ -245,8 +246,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
                                        error:&error];
     if (!mkdirOk)
     {
-        [[Growler sharedInstance] errorWithTitle:@"GrabBox could not copy file!"
-                                     description:[error localizedDescription]];
+        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not copy file!"
+                                                         description:[error localizedDescription]];
+        [Growler growl:errorGrowl];
         NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
         return;
     }
@@ -264,11 +266,16 @@ static void translateEvent(ConstFSEventStreamRef stream,
                                                    toPath:[info uploadPath]];
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PromptBeforeUploading"])
         {
-            [[Growler sharedInstance] messageWithTitle:@"Should we upload the screenshot?"
-                                           description:@"If you'd like the screenshot you just took to be uploaded and a link put in your clipboard, click here."
-                                                  name:@"Upload Screenshot?"
-                                       delegateContext:[GrowlerDelegateContext contextWithDelegate:up data:nil]
-                                                sticky:YES];
+            GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"Upload Screenshot?"
+                                                         title:@"Should we upload the screenshot?"
+                                                   description:@"If you'd like the screenshot you just took to be uploaded and a link put in your clipboard, click here."];
+            prompt.sticky = YES;
+
+            [Growler growl:prompt
+                 withBlock:^(GrowlerGrowlAction action) {
+                     if (action == GrowlerGrowlClicked)
+                         [up uploadWithRetries:3];
+                 }];
         }
         else
         {
@@ -285,11 +292,13 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (IBAction) uploadFromPasteboard:(id)sender
 {
-    NSImage* image = [[NSImage alloc] initWithPasteboard:[NSPasteboard generalPasteboard]];
+    NSImage* image = [[[NSImage alloc] initWithPasteboard:[NSPasteboard generalPasteboard]] autorelease];
     if (!image)
     {
-        [[Growler sharedInstance] errorWithTitle:@"GrabBox could not upload from clipboard!"
-                                     description:@"No image found in the clipboard."];
+        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload from clipboard!"
+                                                         description:@"No image found in the clipboard."];
+        [Growler growl:errorGrowl];
+        NSLog(@"ERROR: No image found in the clipboard.");
         return;
     }
 
@@ -301,8 +310,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
                                        error:&error];
     if (!mkdirOk)
     {
-        [[Growler sharedInstance] errorWithTitle:@"GrabBox could not upload file!"
-                                     description:[error localizedDescription]];
+        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file!"
+                                                         description:[error localizedDescription]];
+        [Growler growl:errorGrowl];
         NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
         return;
     }
@@ -320,8 +330,10 @@ static void translateEvent(ConstFSEventStreamRef stream,
     
     if (!bits)
     {
-        [[Growler sharedInstance] errorWithTitle:@"GrabBox could not upload from clipboard!"
-                                     description:@"No compatible image found in the clipboard."];
+        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload from clipboard!"
+                                                         description:@"No compatible image found in the clipboard."];
+        [Growler growl:errorGrowl];
+        NSLog(@"ERROR: No compatible image found in the clipboard.");
         return;
     }
 

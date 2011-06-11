@@ -93,15 +93,6 @@
     return YES;
 }
 
-- (void) growlClickedWithData:(id)data
-{
-    [[self retain] showRenamer];
-}
-
-- (void) growlTimedOutWithData:(id)data
-{
-}
-
 - (void) showRenamer
 {
     [NSBundle loadNibNamed:@"ImageRenamer" owner:self];
@@ -146,8 +137,10 @@
             }
             else
             {
-                [[Growler sharedInstance] errorWithTitle:@"GrabBox could not rename file!"
-                                             description:[error localizedDescription]];
+                GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not rename file!"
+                                                                 description:[error localizedDescription]];
+                [Growler growl:errorGrowl];
+                NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
             }
         }
     }

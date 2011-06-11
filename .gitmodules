@@ -1,0 +1,3 @@
+[submodule "Utilities/Growler"]
+	path = Utilities/Growler
+	url = git@github.com:jorgenpt/Growler.git

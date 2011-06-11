@@ -7,9 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "GrowlerDelegate.h"
 
-@interface ImageRenamer : NSObject <GrowlerDelegate> {
+@interface ImageRenamer : NSObject {
     NSWindow *window;
     NSImageView *imageView;
     NSTextField *name;
@@ -30,9 +29,6 @@
 
 - (void) awakeFromNib;
 - (BOOL) windowShouldClose;
-
-- (void) growlClickedWithData:(id)data;
-- (void) growlTimedOutWithData:(id)data;
 
 - (void) showRenamer;
 - (IBAction) clickedOk:(id)sender;

@@ -32,7 +32,8 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
             atPath:(NSString *)source
             toPath:(NSString *)destination
 {
-    if (self = [super init])
+    self = [super init];
+    if (self)
     {
         [self setSrcFile:file];
         [self setSrcPath:source];
@@ -92,8 +93,9 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
         }
         else
         {
-            [[Growler sharedInstance] errorWithTitle:@"GrabBox could not upload file!"
-                                         description:[error localizedDescription]];
+            GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file!"
+                                                             description:[error localizedDescription]];
+            [Growler growl:errorGrowl];
             NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
         }
     }
@@ -119,45 +121,41 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     if (![pasteboard setString:url forType:NSStringPboardType])
     {
         NSString *errorDescription = [NSString stringWithFormat:@"Could not put URL '%@' into the clipboard, click here to try this operation again.", url];
-        GrowlerDelegateContext *context = [GrowlerDelegateContext contextWithDelegate:self
-                                                                                 data:url];
-        [[Growler sharedInstance] messageWithTitle:@"Could not update pasteboard!"
-                                       description:errorDescription
-                                              name:@"Error"
-                                   delegateContext:context
-                                            sticky:YES];
-        NSLog(@"ERROR: Couldn't put url into pasteboard.");
+        GrowlerGrowl *copyError = [GrowlerGrowl growlErrorWithTitle:@"Could not update pasteboard!"
+                                                        description:errorDescription];
+        copyError.sticky = YES;
+        [Growler growl:copyError
+             withBlock:^(GrowlerGrowlAction action) {
+                 if (action == GrowlerGrowlClicked)
+                     [self copyURL:url basedOnFile:path wasRenamed:renamed];
+             }];
+       NSLog(@"ERROR: Couldn't put url into pasteboard.");
     }
     else
     {
         if (renamed)
         {
-            [[Growler sharedInstance] messageWithTitle:@"Screenshot renamed!"
-                                           description:@"The screenshot has been renamed and an updated link put in your clipboard."
-                                                  name:@"Screenshot Renamed"
-                                       delegateContext:nil
-                                                sticky:NO];
+            GrowlerGrowl *success = [GrowlerGrowl growlWithName:@"Screenshot Renamed"
+                                                          title:@"Screenshot renamed!"
+                                                    description:@"The screenshot has been renamed and an updated link put in your clipboard."];
+            [Growler growl:success];
         }
         else
         {
-            ImageRenamer* renamer = [ImageRenamer renamerForFile:path];
-            GrowlerDelegateContext* context = [GrowlerDelegateContext contextWithDelegate:renamer data:nil];
-            [[Growler sharedInstance] messageWithTitle:@"Screenshot uploaded!"
-                                           description:@"The screenshot has been uploaded and a link put in your clipboard. Click here to give the file a more descriptive name!"
-                                                  name:@"URL Copied"
-                                       delegateContext:context
-                                                sticky:NO];
+            GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"URL Copied"
+                                                          title:@"Screenshot uploaded!"
+                                                    description:@"The screenshot has been uploaded and a link put in your clipboard. Click here to give the file a more descriptive name!"];
+
+            [Growler growl:prompt
+                 withBlock:^(GrowlerGrowlAction action) {
+                     if (action == GrowlerGrowlClicked)
+                     {
+                         ImageRenamer* renamer = [ImageRenamer renamerForFile:path];
+                         [[renamer retain] showRenamer];
+                     }
+                 }];
         }
     }
-}
-
-- (void) growlClickedWithData:(id)data
-{
-    [self uploadWithRetries:3];
-}
-
-- (void) growlTimedOutWithData:(id)data
-{
 }
 
 - (NSString *) getRandomStringOfLength:(int)length
