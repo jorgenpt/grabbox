@@ -19,13 +19,6 @@
 
 + (id) defaultGatherer;
 
-- (id) init;
-- (id) copyWithZone:(NSZone *)zone;
-- (id) retain;
-- (NSUInteger) retainCount;
-- (void) release;
-- (id) autorelease;
-
 - (NSString *)screenshotPath;
 - (NSString *)publicPath;
 - (NSString *)uploadPath;

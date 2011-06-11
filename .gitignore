@@ -1,9 +1,16 @@
+# Xcode
 build/
 *.xcodeproj/*.pbxuser
 *.xcodeproj/*.perspectivev3
 *.xcodeproj/project.xcworkspace/xcuserdata/
 *.xcodeproj/xcuserdata/
 
+# vim
+*.swp
+
+# OS X
 .DS_Store
+
+# Stuff polish generates
 webpage/appcast.xml
 webpage/releasenotes.html

@@ -39,19 +39,30 @@ static InformationGatherer* defaultInstance = nil;
 @synthesize isSnowLeopardOrNewer;
 @synthesize dirContents;
 
+#pragma mark -
+#pragma mark Singleton management code
+
+/* "The runtime sends initialize to each class in a program exactly one time
+ * just before the class, or any class that inherits from it, is sent its first
+ * message from within the program. (Thus the method may never be invoked if the
+ * class is not used.) The runtime sends the initialize message to classes in a
+ * thread-safe manner. Superclasses receive this message before their
+ * subclasses."
+ */
++ (void)initialize
+{
+    if (defaultInstance == nil)
+        defaultInstance = [[self alloc] init];
+}
+
 + (id) defaultGatherer
 {
-    @synchronized(self)
-    {
-        if (defaultInstance == nil)
-            [[self alloc] init];
-    }
-
     return defaultInstance;
 }
 
-+ (id)allocWithZone:(NSZone *)zone
++ (id) allocWithZone:(NSZone *)zone
 {
+    /* Make sure we're not allocated more than once. */
     @synchronized(self) {
         if (defaultInstance == nil) {
             return [super allocWithZone:zone];
@@ -60,35 +71,39 @@ static InformationGatherer* defaultInstance = nil;
     return defaultInstance;
 }
 
-- (id)init
+- (id) init
 {
-    Class myClass = [self class];
-    @synchronized(myClass) {
-        if (defaultInstance == nil) {
-            if (self = [super init]) {
-                [self setDirContents:[self files]];
-                [self setScreenshotPath:nil];
-                [self setUploadPath:nil];
-                [self setPublicPath:nil];
+    if (defaultInstance == nil)
+    {
+        self = [super init];
+        if (self)
+        {
+            [self setDirContents:[self files]];
+            [self setScreenshotPath:nil];
+            [self setUploadPath:nil];
+            [self setPublicPath:nil];
 
-                SInt32 MacVersion;
-                if (Gestalt(gestaltSystemVersion, &MacVersion) == noErr && MacVersion < 0x1060)
-                    [self setIsSnowLeopardOrNewer:NO];
-                else
-                    [self setIsSnowLeopardOrNewer:YES];
-
-                defaultInstance = self;
-            }
+            SInt32 MacVersion;
+            if (Gestalt(gestaltSystemVersion, &MacVersion) == noErr && MacVersion < 0x1060)
+                [self setIsSnowLeopardOrNewer:NO];
+            else
+                [self setIsSnowLeopardOrNewer:YES];
         }
+        return self;
     }
+
     return defaultInstance;
 }
 
+/* Make sure there is always one instance, and make sure it's never free'd. */
 - (id) copyWithZone:(NSZone *)zone { return self; }
 - (id) retain { return self; }
 - (NSUInteger) retainCount { return UINT_MAX; }
 - (void) release {}
 - (id) autorelease { return self; }
+
+#pragma mark -
+#pragma mark Information gathering
 
 - (NSString *)screenshotPath
 {
