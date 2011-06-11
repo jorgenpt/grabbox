@@ -96,7 +96,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
             GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file!"
                                                              description:[error localizedDescription]];
             [Growler growl:errorGrowl];
-            NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
+            NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
         }
     }
     else

@@ -249,7 +249,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
         GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not copy file!"
                                                          description:[error localizedDescription]];
         [Growler growl:errorGrowl];
-        NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
+        NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
         return;
     }
 
@@ -313,7 +313,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
         GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file!"
                                                          description:[error localizedDescription]];
         [Growler growl:errorGrowl];
-        NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
+        NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
         return;
     }
 

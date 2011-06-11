@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Growler.h"
 #import "DropboxDetector.h"
 
 #define MAX_NAME_LENGTH 32

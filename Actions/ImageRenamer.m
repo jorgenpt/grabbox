@@ -26,7 +26,8 @@
 
 - (id) initForFile:(NSString *)filePath
 {
-    if (self = [super init])
+    self = [super init];
+    if (self)
     {
         [self setPath:filePath];
     }
@@ -140,7 +141,7 @@
                 GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not rename file!"
                                                                  description:[error localizedDescription]];
                 [Growler growl:errorGrowl];
-                NSLog(@"ERROR: %@ (%i)", [error localizedDescription], [error code]);
+                NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
             }
         }
     }
