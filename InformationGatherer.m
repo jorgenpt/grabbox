@@ -268,9 +268,20 @@ static InformationGatherer* defaultInstance = nil;
     if (!newContents)
         return nil;
 
+#if (MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_5)
+    NSMutableSet* newEntries = [NSMutableSet set];
+    for (id obj in newContents)
+    {
+        if ([dirContents member:obj] == nil)
+        {
+            [newEntries addObject:obj];
+        }
+    }
+#else
     NSSet* newEntries = [newContents objectsPassingTest:^ BOOL (id obj, BOOL* stop) {
         return [dirContents member:obj] == nil;
     }];
+#endif
 
     [self setDirContents:newContents];
     return newEntries;
