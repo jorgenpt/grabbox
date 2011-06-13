@@ -13,10 +13,25 @@
 #import "UploadInitiator.h"
 
 @interface GrabBoxAppDelegate ()
+
 @property (nonatomic, assign) InformationGatherer* info;
 @property (nonatomic, retain) Notifier* notifier;
-@end
+@property (nonatomic, retain) DBRestClient *restClient;
+@property (assign) BOOL canInteract;
+@property (nonatomic, retain) DBLoginController *loginController;
 
+- (void) startMonitoring;
+- (void) stopMonitoring;
+
+- (void) promptForLink;
+
+- (void) eventForStream:(ConstFSEventStreamRef)stream
+                  paths:(NSArray *)paths
+                  flags:(const FSEventStreamEventFlags[])flags
+                    ids:(const FSEventStreamEventId[]) ids;
+- (void) uploadScreenshot:(NSString *)file;
+
+@end
 
 @implementation GrabBoxAppDelegate
 
@@ -240,27 +255,31 @@ static void translateEvent(ConstFSEventStreamRef stream,
             continue;
         }
 
-        UploadInitiator* up = [UploadInitiator uploadFile:entry
-                                                   atPath:screenshotPath
-                                                   toPath:@"/Public/Screenshots"];
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PromptBeforeUploading"])
-        {
-            GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"Upload Screenshot?"
-                                                         title:@"Should we upload the screenshot?"
-                                                   description:@"If you'd like the screenshot you just took to be uploaded and a link put in your clipboard, click here."];
-            prompt.sticky = YES;
+        [self uploadScreenshot:entry];
+    }
+}
 
-            [Growler growl:prompt
-                 withBlock:^(GrowlerGrowlAction action) {
-                     if (action == GrowlerGrowlClicked)
-                         [up upload];
-                 }];
-        }
-        else
-        {
-            [up upload];
-        }
+- (void) uploadScreenshot:(NSString *)file
+{
+    UploadInitiator* up = [UploadInitiator uploadFile:file
+                                               atPath:[info screenshotPath]
+                                               toPath:@"/Public/Screenshots"];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PromptBeforeUploading"])
+    {
+        GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"Upload Screenshot?"
+                                                     title:@"Should we upload the screenshot?"
+                                               description:@"If you'd like the screenshot you just took to be uploaded and a link put in your clipboard, click here."];
+        prompt.sticky = YES;
 
+        [Growler growl:prompt
+             withBlock:^(GrowlerGrowlAction action) {
+                 if (action == GrowlerGrowlClicked)
+                     [up upload];
+             }];
+    }
+    else
+    {
+        [up upload];
     }
 }
 

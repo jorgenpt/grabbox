@@ -32,31 +32,7 @@
 @property (assign) IBOutlet NSWindow* nagWindow;
 @property (assign) IBOutlet Menubar* menubar;
 
-@property (nonatomic, retain) DBRestClient *restClient;
 @property (nonatomic, retain) DBAccountInfo *account;
-@property (assign) BOOL canInteract;
-@property (nonatomic, retain) DBLoginController *loginController;
-
-
-- (void) awakeFromNib;
-- (void) dealloc;
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
-                        change:(NSDictionary *)change context:(void *)context;
-
-- (void) startMonitoring;
-- (void) stopMonitoring;
-
-- (void) promptForLink;
-
-- (void) eventForStream:(ConstFSEventStreamRef)stream
-                  paths:(NSArray *)paths
-                  flags:(const FSEventStreamEventFlags[])flags
-                    ids:(const FSEventStreamEventId[]) ids;
-- (NSArray *)feedParametersForUpdater:(SUUpdater *)updater
-                 sendingSystemProfile:(BOOL)sendingProfile;
-- (void) applicationWillFinishLaunching:(NSNotification *)aNotification;
-- (void) applicationDidFinishLaunching:(NSNotification *)aNotification;
 
 - (IBAction) browseUploadedScreenshots:(id)sender;
 - (IBAction) uploadFromPasteboard:(id)sender;
