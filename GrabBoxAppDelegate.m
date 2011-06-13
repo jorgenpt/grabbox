@@ -275,11 +275,15 @@ static void translateEvent(ConstFSEventStreamRef stream,
         [Growler growl:prompt
              withBlock:^(GrowlerGrowlAction action) {
                  if (action == GrowlerGrowlClicked)
+                 {
+                     [up moveToWorkQueue];
                      [up upload];
+                 }
              }];
     }
     else
     {
+        [up moveToWorkQueue];
         [up upload];
     }
 }

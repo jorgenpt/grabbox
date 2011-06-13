@@ -12,6 +12,20 @@
 #import "ImageRenamer.h"
 #import "URLShortener.h"
 
+@interface UploadInitiator ()
+
+@property (nonatomic, retain) DBRestClient *restClient;
+@property (nonatomic, assign) int retries;
+@property (nonatomic, retain) NSString* srcFile;
+@property (nonatomic, retain) NSString* srcPath;
+@property (nonatomic, retain) NSString* destFile;
+@property (nonatomic, retain) NSString* destPath;
+
+- (NSString *) nextFilenameWithExtension:(NSString *)ext;
+- (NSString *) randomStringOfLength:(int)length;
+
+@end
+
 @implementation UploadInitiator
 
 @synthesize restClient;
@@ -76,9 +90,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     return [[[self alloc] initForFile:file atPath:source toPath:destination] autorelease];
 }
 
-- (id) initForFile:(NSString *)file
-            atPath:(NSString *)source
-            toPath:(NSString *)destination
+- (id) init
 {
     self = [super init];
     if (self)
@@ -89,12 +101,27 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
             [self release];
             return nil;
         }
-        [restClient setDelegate:self];        
 
+        [restClient setDelegate:self];
         [self setRetries:5];
+        [self setSrcFile:nil];
+        [self setSrcPath:nil];
+        [self setDestFile:nil];
+        [self setDestPath:nil];
+    }
+    
+    return self;
+}
+
+- (id) initForFile:(NSString *)file
+            atPath:(NSString *)source
+            toPath:(NSString *)destination
+{
+    self = [self init];
+    if (self)
+    {
         [self setSrcFile:file];
         [self setSrcPath:[NSString pathWithComponents:[NSArray arrayWithObjects: source, file, nil]]];
-        [self setDestFile:nil];
         [self setDestPath:destination];
     }
     return self;
@@ -110,9 +137,28 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     [super dealloc];
 }
 
+- (void) moveToWorkQueue
+{
+    NSString* newPath = [[[InformationGatherer defaultGatherer] workQueuePath] stringByAppendingPathComponent:srcFile];
+    DLog(@"Trying to move %@ -> %@", srcPath, newPath);
+    NSError *error;
+    BOOL moveOk = [[NSFileManager defaultManager] moveItemAtPath:srcPath
+                                                          toPath:newPath
+                                                           error:&error];
+    if (moveOk)
+    {
+        [self setSrcPath:newPath];
+    } 
+    else
+    {
+        NSLog(@"Could not move file '%@' to workqueue location '%@', trying to upload from current location: %@ (%ld)",
+              srcPath, newPath, [error localizedDescription], [error code]);
+    }
+}
+
 - (void) upload
 {
-    NSString* shortName = [self getNextFilenameWithExtension:[[self srcFile] pathExtension]];
+    NSString* shortName = [self nextFilenameWithExtension:[[self srcFile] pathExtension]];
     if (!shortName)
         shortName = [self srcFile];
 
@@ -209,7 +255,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     }    
 }
 
-- (NSString *) getRandomStringOfLength:(int)length
+- (NSString *) randomStringOfLength:(int)length
 {
     NSMutableString* output = [NSMutableString string];
     
@@ -222,13 +268,13 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     return output;
 }
 
-- (NSString *) getNextFilenameWithExtension:(NSString *)ext
+- (NSString *) nextFilenameWithExtension:(NSString *)ext
 {
     NSString *output;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"UseLongRandomFilename"])
-        output = [self getRandomStringOfLength:12];
+        output = [self randomStringOfLength:12];
     else 
-        output = [self getRandomStringOfLength:6];
+        output = [self randomStringOfLength:6];
     return [output stringByAppendingFormat:@".%@", ext];
 }
 
