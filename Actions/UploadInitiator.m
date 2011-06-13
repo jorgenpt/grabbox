@@ -14,8 +14,9 @@
 
 @interface UploadInitiator ()
 
-@property (nonatomic, retain) DBRestClient *restClient;
 @property (nonatomic, assign) int retries;
+
+@property (nonatomic, retain) DBRestClient *restClient;
 @property (nonatomic, retain) NSString* srcFile;
 @property (nonatomic, retain) NSString* srcPath;
 @property (nonatomic, retain) NSString* destFile;
@@ -132,6 +133,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     [self setRestClient:nil];
     [self setSrcFile:nil];
     [self setSrcPath:nil];
+    [self setDestFile:nil];
     [self setDestPath:nil];
 
     [super dealloc];

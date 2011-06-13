@@ -11,6 +11,6 @@
 @interface NSString (FSRefConversions)
 
 + (NSString *) stringWithFSRef:(const FSRef *)aFSRef;
-- (BOOL) getFSRef:(FSRef *)aFSRef;
+- (BOOL) fsRef:(FSRef *)aFSRef;
 
 @end

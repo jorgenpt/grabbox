@@ -8,11 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
-#define MAX_NAME_LENGTH 32
-
-@interface UploadInitiator : NSObject < DBRestClientDelegate> {
-    DBRestClient *restClient;
+@interface UploadInitiator : NSObject <DBRestClientDelegate> {
     int retries;
+
+    DBRestClient *restClient;
     NSString *srcFile;
     NSString *srcPath;
     NSString *destFile;

@@ -208,7 +208,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 {
     NSString* screenshotPath = [info screenshotPath];
     FSRef screenshotPathRef;
-    if (![screenshotPath getFSRef:&screenshotPathRef])
+    if (![screenshotPath fsRef:&screenshotPathRef])
     {
         GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not get Screen Grab path!"
                                                          description:@"Could not find directory to monitor for screenshots."];
@@ -222,7 +222,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
     for (NSString* path in paths)
     {
         FSRef pathRef;
-        if (![path getFSRef:&pathRef])
+        if (![path fsRef:&pathRef])
         {
             NSLog(@"ERROR: Failed getting FSRef for path '%@'", path);
             continue;
