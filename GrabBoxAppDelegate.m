@@ -290,6 +290,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (IBAction) browseUploadedScreenshots:(id)sender
 {
+    // TODO: Support this?
+    // https://www.dropbox.com/browse_plain/Public/Screenshots
 //    [[NSWorkspace sharedWorkspace] openFile:[info uploadPath]];
 }
 

@@ -191,8 +191,8 @@
 			isa = PBXGroup;
 			children = (
 				8EFFCB5912D8F75A00201A9A /* Actions */,
-				8EFFCB6B12D8F86C00201A9A /* Utilities */,
 				8E79350012DA42710057D5ED /* Interface */,
+				8EFFCB6B12D8F86C00201A9A /* Utilities */,
 				256AC3D80F4B6AC300CF3369 /* GrabBoxAppDelegate.h */,
 				256AC3D90F4B6AC300CF3369 /* GrabBoxAppDelegate.m */,
 				8E4A509E11E9155500A0A743 /* InformationGatherer.h */,
