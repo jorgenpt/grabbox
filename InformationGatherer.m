@@ -14,9 +14,8 @@ static InformationGatherer* defaultInstance = nil;
 
 @interface InformationGatherer ()
 @property (nonatomic, retain) NSString* screenshotPath;
-@property (nonatomic, retain) NSString* uploadPath;
-@property (nonatomic, retain) NSString* publicPath;
 @property (nonatomic, retain) NSString* localizedScreenshotPattern;
+@property (nonatomic, retain) NSString* workQueuePath;
 @property (nonatomic, assign) BOOL isSnowLeopardOrNewer;
 @property (nonatomic, retain) NSSet* dirContents;
 
@@ -25,8 +24,7 @@ static InformationGatherer* defaultInstance = nil;
 @implementation InformationGatherer
 
 @synthesize screenshotPath;
-@synthesize uploadPath;
-@synthesize publicPath;
+@synthesize workQueuePath;
 @synthesize localizedScreenshotPattern;
 @synthesize isSnowLeopardOrNewer;
 @synthesize dirContents;
@@ -72,8 +70,6 @@ static InformationGatherer* defaultInstance = nil;
         {
             [self setDirContents:[self files]];
             [self setScreenshotPath:nil];
-            [self setUploadPath:nil];
-            [self setPublicPath:nil];
 
             SInt32 MacVersion;
             if (Gestalt(gestaltSystemVersion, &MacVersion) == noErr && MacVersion < 0x1060)
@@ -260,6 +256,25 @@ static InformationGatherer* defaultInstance = nil;
 
     [self setLocalizedScreenshotPattern:screenshotPattern];
     return [self localizedScreenshotPattern];
+}
+
+- (NSString *)workQueuePath
+{
+    if (workQueuePath)
+        return workQueuePath;
+
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    if ([paths count])
+    {
+        NSString *bundleName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+        [self setWorkQueuePath:[[paths objectAtIndex:0] stringByAppendingPathComponent:bundleName]];
+    }
+    else
+    {
+        [self setWorkQueuePath:NSTemporaryDirectory()];
+    }
+    
+    return workQueuePath;
 }
 
 - (NSSet *)createdFiles

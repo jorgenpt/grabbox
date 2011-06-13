@@ -11,6 +11,7 @@
 @interface InformationGatherer : NSObject {
     NSString* screenshotPath;
     NSString* localizedScreenshotPattern;
+    NSString* workQueuePath;
     BOOL isSnowLeopardOrNewer;
     NSSet* dirContents;
 }
@@ -19,6 +20,7 @@
 
 - (NSString *)screenshotPath;
 - (NSString *)localizedScreenshotPattern;
+- (NSString *)workQueuePath;
 - (NSSet *)createdFiles;
 - (NSSet *)files;
 - (BOOL)isSnowLeopardOrNewer;

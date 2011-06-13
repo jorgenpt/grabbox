@@ -30,6 +30,7 @@
                   flags:(const FSEventStreamEventFlags[])flags
                     ids:(const FSEventStreamEventId[]) ids;
 - (void) uploadScreenshot:(NSString *)file;
+- (NSString *) workQueueFilenameForClipboardData;
 
 @end
 
@@ -324,30 +325,36 @@ static void translateEvent(ConstFSEventStreamRef stream,
                                       properties:nil];
 
     NSError *error;
-    BOOL moveOk;
-    char template[] = "/tmp/GrabBoxClipboard.XXXXXX";
-    NSString *filename = [NSString stringWithCString:mktemp(template)
-                                            encoding:NSISOLatin1StringEncoding];
-    NSString *pngFilename = [filename stringByAppendingString:@".png"];
-    [data writeToFile:filename atomically:NO];
-    moveOk = [[NSFileManager defaultManager] moveItemAtPath:filename
-                                                     toPath:pngFilename
-                                                      error:&error];
-    
-    if (moveOk)
+    NSString *filename = [self workQueueFilenameForClipboardData];
+    if (![data writeToFile:filename options:0 error:&error])
     {
-        UploadInitiator* up = [UploadInitiator uploadFile:[pngFilename lastPathComponent]
-                                                   atPath:[pngFilename stringByDeletingLastPathComponent]
+        UploadInitiator* up = [UploadInitiator uploadFile:[filename lastPathComponent]
+                                                   atPath:[filename stringByDeletingLastPathComponent]
                                                    toPath:@"/Public/Screenshots"];
         [up upload];
     }
     else
     {
-        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload from clipboard!"
+        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not write clipboard to disk!"
                                                          description:[error localizedDescription]];
         [Growler growl:errorGrowl];
         NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
     }
+}
+
+- (NSString *) workQueueFilenameForClipboardData
+{
+    NSString *template = [NSString stringWithFormat:@"%@/GrabBoxClipboard.XXXXXX.png", [info workQueuePath]];
+    NSUInteger numberOfBytes = [template lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    char *templateBytes = (char *)malloc(numberOfBytes);
+    memcpy(templateBytes, [template UTF8String], numberOfBytes);
+
+    mkstemps(templateBytes, strlen(".png"));
+    NSString *filename = [NSString stringWithCString:templateBytes
+                                            encoding:NSUTF8StringEncoding];
+    free(templateBytes);
+
+    return filename;
 }
 
 - (IBAction) openFeedback:(id)sender
