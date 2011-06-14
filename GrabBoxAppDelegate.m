@@ -16,10 +16,12 @@
 
 @property (nonatomic, assign) InformationGatherer* info;
 @property (nonatomic, retain) Notifier* notifier;
+@property (nonatomic, retain) UploadManager *manager;
 @property (nonatomic, retain) DBRestClient *restClient;
 @property (assign) BOOL canInteract;
 @property (nonatomic, retain) DBLoginController *loginController;
 
+- (void) loggedIn;
 - (void) startMonitoring;
 - (void) stopMonitoring;
 
@@ -43,6 +45,7 @@
 
 @synthesize info;
 @synthesize notifier;
+@synthesize manager;
 
 @synthesize restClient;
 @synthesize account;
@@ -74,6 +77,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [self setNotifier:[Notifier notifierWithCallback:translateEvent
                                                 path:[info screenshotPath]
                                     callbackArgument:self]];
+    [self setManager:[[[UploadManager alloc] init] autorelease]];
 
     BOOL showInDock = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowInDock"];
     if (!showInDock)
@@ -173,6 +177,19 @@ static void translateEvent(ConstFSEventStreamRef stream,
     }
 }
 
+- (void) loggedIn
+{
+    [self startMonitoring];
+    [self setCanInteract:YES];
+    for (NSString *entry in [info filesInDirectory:[info workQueuePath]])
+    {
+        UploadInitiator* up = [UploadInitiator uploadInitiatorForFile:entry
+                                                               atPath:[info workQueuePath]
+                                                               toPath:@"/Public/Screenshots"];
+        [manager scheduleUpload:up];
+    }
+}
+
 - (void) startMonitoring
 {
     [notifier start];
@@ -262,9 +279,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void) uploadScreenshot:(NSString *)file
 {
-    UploadInitiator* up = [UploadInitiator uploadFile:file
-                                               atPath:[info screenshotPath]
-                                               toPath:@"/Public/Screenshots"];
+    UploadInitiator* up = [UploadInitiator uploadInitiatorForFile:file
+                                                           atPath:[info screenshotPath]
+                                                           toPath:@"/Public/Screenshots"];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PromptBeforeUploading"])
     {
         GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"Upload Screenshot?"
@@ -277,14 +294,14 @@ static void translateEvent(ConstFSEventStreamRef stream,
                  if (action == GrowlerGrowlClicked)
                  {
                      [up moveToWorkQueue];
-                     [up upload];
+                     [manager scheduleUpload:up];
                  }
              }];
     }
     else
     {
         [up moveToWorkQueue];
-        [up upload];
+        [manager scheduleUpload:up];
     }
 }
 
@@ -334,10 +351,10 @@ static void translateEvent(ConstFSEventStreamRef stream,
     NSString *filename = [self workQueueFilenameForClipboardData];
     if (![data writeToFile:filename options:0 error:&error])
     {
-        UploadInitiator* up = [UploadInitiator uploadFile:[filename lastPathComponent]
-                                                   atPath:[filename stringByDeletingLastPathComponent]
-                                                   toPath:@"/Public/Screenshots"];
-        [up upload];
+        UploadInitiator* up = [UploadInitiator uploadInitiatorForFile:[filename lastPathComponent]
+                                                               atPath:[filename stringByDeletingLastPathComponent]
+                                                               toPath:@"/Public/Screenshots"];
+        [manager scheduleUpload:up];
     }
     else
     {
@@ -432,9 +449,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
 {
     DLog(@"Got account info, starting FS monitoring and enabling interaction!");
     [self setAccount:accountInfo];
-    [self startMonitoring];
-    [self setCanInteract:YES];
+    [self loggedIn];
 }
+
 
 - (void)restClient:(DBRestClient*)client loadAccountInfoFailedWithError:(NSError*)error
 {

@@ -22,6 +22,7 @@
 - (NSString *)localizedScreenshotPattern;
 - (NSString *)workQueuePath;
 - (NSSet *)createdFiles;
+- (NSSet *)filesInDirectory:(NSString *)path;
 - (NSSet *)files;
 - (BOOL)isSnowLeopardOrNewer;
 

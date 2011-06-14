@@ -12,6 +12,7 @@
 #import "Notifier.h"
 #import "InformationGatherer.h"
 #import "Menubar.h"
+#import "UploadManager.h"
 
 @interface GrabBoxAppDelegate : NSObject <DBSessionDelegate, DBCommonControllerDelegate, DBRestClientDelegate> {
     NSWindow* setupWindow;
@@ -20,6 +21,7 @@
     Menubar* menubar;
     InformationGatherer* info;
     Notifier* notifier;
+    UploadManager *manager;
 
     DBRestClient *restClient;
     DBAccountInfo *account;

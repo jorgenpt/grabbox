@@ -12,6 +12,8 @@
 #import "ImageRenamer.h"
 #import "URLShortener.h"
 
+#import "UploadManager.h"
+
 @interface UploadInitiator ()
 
 @property (nonatomic, assign) int retries;
@@ -24,13 +26,16 @@
 
 - (NSString *) nextFilenameWithExtension:(NSString *)ext;
 - (NSString *) randomStringOfLength:(int)length;
-
+- (void) upload;
 @end
 
 @implementation UploadInitiator
 
-@synthesize restClient;
+@synthesize delegate;
+
 @synthesize retries;
+
+@synthesize restClient;
 @synthesize srcFile;
 @synthesize srcPath;
 @synthesize destFile;
@@ -84,9 +89,10 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     }
 }
 
-+ (id) uploadFile:(NSString *)file
-           atPath:(NSString *)source
-           toPath:(NSString *)destination
++ (id) uploadInitiatorForFile:(NSString *)file
+                       atPath:(NSString *)source
+                       toPath:(NSString *)destination
+
 {
     return [[[self alloc] initForFile:file atPath:source toPath:destination] autorelease];
 }
@@ -130,6 +136,8 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
 
 - (void) dealloc
 {
+    DLog(@"Deallocating uploader for %@ -> %@", srcPath, destPath);
+
     [self setRestClient:nil];
     [self setSrcFile:nil];
     [self setSrcPath:nil];
@@ -167,7 +175,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     [self setDestFile:shortName];
     NSString* destination = [NSString pathWithComponents:[NSArray arrayWithObjects: [self destPath], shortName, nil]];
 
-    DLog(@"Trying upload, destination: %@", destination);
+    DLog(@"Trying upload of '%@', destination '%@'", srcPath, destination);
     [restClient loadMetadata:destination];
 }
 
@@ -190,6 +198,9 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
         [Growler growl:errorGrowl];
 
         NSLog(@"ERROR: Could not find a unique filename!");
+
+        if ([delegate respondsToSelector:@selector(uploaderDone:)])
+            [delegate uploaderDone:self];
     }
 }
 
@@ -208,7 +219,10 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
         DLog(@"Metadata request failed, retries left: %d", retries);
         if (retries > 0)
         {
-            [self upload];
+            if ([delegate respondsToSelector:@selector(scheduleUpload:)])
+                [delegate scheduleUpload:self];
+            else
+                NSLog(@"Delegate %@ does not respond to scheduleUpload!", delegate);
         }
         else
         {
@@ -216,6 +230,8 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
                                                              description:[NSString stringWithFormat:@"Received status code %d", [error code]]];
             [Growler growl:errorGrowl];
             NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
+            if ([delegate respondsToSelector:@selector(uploaderDone:)])
+                [delegate uploaderDone:self];
         }
     }
 
@@ -246,7 +262,10 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     DLog(@"Upload request failed, retries left: %d", retries);    
     if (retries > 0)
     {
-        [self upload];
+        if ([delegate respondsToSelector:@selector(scheduleUpload:)])
+            [delegate scheduleUpload:self];
+        else
+            NSLog(@"Delegate %@ does not respond to scheduleUpload!", delegate);
     }
     else
     {
@@ -254,6 +273,8 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
                                                          description:[NSString stringWithFormat:@"Received status code %d", [error code]]];
         [Growler growl:errorGrowl];
         NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
+        if ([delegate respondsToSelector:@selector(uploaderDone:)])
+            [delegate uploaderDone:self];
     }    
 }
 

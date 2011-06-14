@@ -13,6 +13,7 @@
 static InformationGatherer* defaultInstance = nil;
 
 @interface InformationGatherer ()
+
 @property (nonatomic, retain) NSString* screenshotPath;
 @property (nonatomic, retain) NSString* localizedScreenshotPattern;
 @property (nonatomic, retain) NSString* workQueuePath;
@@ -263,17 +264,32 @@ static InformationGatherer* defaultInstance = nil;
     if (workQueuePath)
         return workQueuePath;
 
+    NSString *base = nil;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     if ([paths count])
     {
         NSString *bundleName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
-        [self setWorkQueuePath:[[paths objectAtIndex:0] stringByAppendingPathComponent:bundleName]];
+        base = [[paths objectAtIndex:0] stringByAppendingPathComponent:bundleName];
     }
     else
     {
-        [self setWorkQueuePath:NSTemporaryDirectory()];
+        base = NSTemporaryDirectory();
     }
     
+    if (base)
+    {
+        NSError *error;
+        [self setWorkQueuePath:[base stringByAppendingPathComponent:@"WorkQueue"]];
+        if (![[NSFileManager defaultManager] createDirectoryAtPath:workQueuePath
+                                       withIntermediateDirectories:YES
+                                                        attributes:nil
+                                                             error:&error])
+        {
+            NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
+            [self setWorkQueuePath:nil];
+        }
+    }
+
     return workQueuePath;
 }
 
@@ -302,19 +318,24 @@ static InformationGatherer* defaultInstance = nil;
     return newEntries;
 }
 
-- (NSSet *)files
+- (NSSet *)filesInDirectory:(NSString *)path
 {
     NSError* error;
     NSFileManager* fm = [NSFileManager defaultManager];
-    NSArray* dirList = [fm contentsOfDirectoryAtPath:[self screenshotPath]
+    NSArray* dirList = [fm contentsOfDirectoryAtPath:path
                                                error:&error];
     if (!dirList)
     {
         NSLog(@"Failed getting dirlist: %@", [error localizedDescription]);
         return [NSSet set];
     }
-
+    
     return [NSSet setWithArray:dirList];
+}
+
+- (NSSet *)files
+{
+    return [self filesInDirectory:[self screenshotPath]];
 }
 
 @end

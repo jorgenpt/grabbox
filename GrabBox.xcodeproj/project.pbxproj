@@ -27,6 +27,9 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		8E368D1613A5F51800EB0D90 /* NetworkReachabilityNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E368D1513A5F51800EB0D90 /* NetworkReachabilityNotifier.m */; };
+		8E368D1813A5FA4E00EB0D90 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E368D1713A5FA4E00EB0D90 /* SystemConfiguration.framework */; };
+		8E368D1B13A6E7C000EB0D90 /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E368D1A13A6E7C000EB0D90 /* UploadManager.m */; };
 		8E49CF4D11ED14640041CE70 /* ImageRenamer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E49CF4B11ED14640041CE70 /* ImageRenamer.xib */; };
 		8E4A50A011E9155500A0A743 /* InformationGatherer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4A509F11E9155500A0A743 /* InformationGatherer.m */; };
 		8E4D88281258754A003A64EA /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D88241258754A003A64EA /* Credits.rtf */; };
@@ -108,6 +111,11 @@
 		8D1107320486CEB800E47090 /* GrabBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2AF34111F04B8D00A29A61 /* favicon.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = favicon.ico; sourceTree = "<group>"; };
 		8E2AF34711F04BAD00A29A61 /* GrabBox 0.5.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "GrabBox 0.5.zip"; sourceTree = "<group>"; };
+		8E368D1413A5F51800EB0D90 /* NetworkReachabilityNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkReachabilityNotifier.h; sourceTree = "<group>"; };
+		8E368D1513A5F51800EB0D90 /* NetworkReachabilityNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkReachabilityNotifier.m; sourceTree = "<group>"; };
+		8E368D1713A5FA4E00EB0D90 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
+		8E368D1913A6E7C000EB0D90 /* UploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadManager.h; sourceTree = "<group>"; };
+		8E368D1A13A6E7C000EB0D90 /* UploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadManager.m; sourceTree = "<group>"; };
 		8E49CF4C11ED14640041CE70 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ImageRenamer.xib; sourceTree = "<group>"; };
 		8E4A509E11E9155500A0A743 /* InformationGatherer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationGatherer.h; sourceTree = "<group>"; };
 		8E4A509F11E9155500A0A743 /* InformationGatherer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationGatherer.m; sourceTree = "<group>"; };
@@ -176,6 +184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E368D1813A5FA4E00EB0D90 /* SystemConfiguration.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				8E7B686911EBD1BA00112165 /* Sparkle.framework in Frameworks */,
 				8E7B6B2E11EC19A500112165 /* Growl.framework in Frameworks */,
@@ -197,6 +206,8 @@
 				256AC3D90F4B6AC300CF3369 /* GrabBoxAppDelegate.m */,
 				8E4A509E11E9155500A0A743 /* InformationGatherer.h */,
 				8E4A509F11E9155500A0A743 /* InformationGatherer.m */,
+				8E368D1913A6E7C000EB0D90 /* UploadManager.h */,
+				8E368D1A13A6E7C000EB0D90 /* UploadManager.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -204,6 +215,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E368D1713A5FA4E00EB0D90 /* SystemConfiguration.framework */,
 				8E7B6B2D11EC19A500112165 /* Growl.framework */,
 				8E7B686811EBD1BA00112165 /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
@@ -368,6 +380,8 @@
 				8EFFCB6D12D8F86C00201A9A /* NSString+URLParameters.m */,
 				8EFFCB9512D8F98300201A9A /* NSData+Base64.h */,
 				8EFFCB9612D8F98300201A9A /* NSData+Base64.m */,
+				8E368D1413A5F51800EB0D90 /* NetworkReachabilityNotifier.h */,
+				8E368D1513A5F51800EB0D90 /* NetworkReachabilityNotifier.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -501,6 +515,8 @@
 				8EFFCB9712D8F98300201A9A /* NSData+Base64.m in Sources */,
 				8ED2912813A41A66005F10D3 /* Growler.m in Sources */,
 				8ED2912913A41A66005F10D3 /* GrowlerGrowl.m in Sources */,
+				8E368D1613A5F51800EB0D90 /* NetworkReachabilityNotifier.m in Sources */,
+				8E368D1B13A6E7C000EB0D90 /* UploadManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

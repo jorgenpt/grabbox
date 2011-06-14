@@ -8,7 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 
+@interface NSObject (UploadInitiatorDelegateInformalProtocol)
+- (void) upload:(id)uploader;
+- (void) scheduleUpload:(id)uploader;
+- (void) uploaderDone:(id)uploader;
+@end
+
 @interface UploadInitiator : NSObject <DBRestClientDelegate> {
+    id delegate;
+
     int retries;
 
     DBRestClient *restClient;
@@ -18,19 +26,23 @@
     NSString *destPath;
 }
 
+@property (assign) id delegate;
+
 + (void) copyURL:(NSString *)url
      basedOnFile:(NSString *)path
       wasRenamed:(BOOL)renamed;
 
-+ (id) uploadFile:(NSString *)file
-           atPath:(NSString *)source
-           toPath:(NSString *)destination;
++ (id) uploadInitiatorForFile:(NSString *)file
+                       atPath:(NSString *)source
+                       toPath:(NSString *)destination;
 
 - (id) initForFile:(NSString *)file
             atPath:(NSString *)source
             toPath:(NSString *)destination;
 
 - (void) moveToWorkQueue;
+
+- (NSString *) srcPath;
 - (void) upload;
 
 @end
