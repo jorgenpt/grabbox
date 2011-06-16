@@ -93,6 +93,7 @@
 - (void) uploaderDone:(id)uploader
 {
     [uploader setDelegate:nil];
+    [[uploader retain] autorelease];
     [uploads removeObjectForKey:[uploader srcPath]];
 }
 @end
