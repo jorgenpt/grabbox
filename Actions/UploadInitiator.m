@@ -260,7 +260,16 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     NSString *dropboxUrl = [URLShortener shortenURLForFile:[self destFile]];
     [UploadInitiator copyURL:dropboxUrl
                  basedOnFile:uploadedPath
-                  wasRenamed:NO];    
+                  wasRenamed:NO];
+
+    NSError *error;
+    BOOL deletedOk = [[NSFileManager defaultManager] removeItemAtPath:source
+                                                                    error:&error];
+    if (!deletedOk)
+        NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
+
+    if ([delegate respondsToSelector:@selector(uploaderDone:)])
+        [delegate uploaderDone:self];
 }
 
 - (void)restClient:(DBRestClient*)client uploadProgress:(CGFloat)progress 
