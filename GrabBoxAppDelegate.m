@@ -183,6 +183,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [self setCanInteract:YES];
     for (NSString *entry in [info filesInDirectory:[info workQueuePath]])
     {
+        if ([entry hasPrefix:@"."])
+            continue;
+
         UploadInitiator* up = [UploadInitiator uploadInitiatorForFile:entry
                                                                atPath:[info workQueuePath]
                                                                toPath:@"/Public/Screenshots"];
