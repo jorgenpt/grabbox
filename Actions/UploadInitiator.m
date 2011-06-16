@@ -152,9 +152,22 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     NSString* newPath = [[[InformationGatherer defaultGatherer] workQueuePath] stringByAppendingPathComponent:srcFile];
     DLog(@"Trying to move %@ -> %@", srcPath, newPath);
     NSError *error;
-    BOOL moveOk = [[NSFileManager defaultManager] moveItemAtPath:srcPath
-                                                          toPath:newPath
-                                                           error:&error];
+    BOOL moveOk;
+
+    BOOL shouldLeaveIntact = [[NSUserDefaults standardUserDefaults] boolForKey:@"DoNotDeleteScreenshot"];
+    if (shouldLeaveIntact)
+    {
+        moveOk = [[NSFileManager defaultManager] copyItemAtPath:srcPath
+                                                         toPath:newPath
+                                                          error:&error];
+    }
+    else
+    {
+        moveOk = [[NSFileManager defaultManager] moveItemAtPath:srcPath
+                                                         toPath:newPath
+                                                          error:&error];
+    }
+
     if (moveOk)
     {
         [self setSrcPath:newPath];
