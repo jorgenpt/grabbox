@@ -222,9 +222,9 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     if (error.code == 404)
     {
         DLog(@"Destination file did not exist, so going ahead with upload.");
-        [restClient uploadFile:destFile
-                        toPath:destPath
-                      fromPath:srcPath];
+        [client uploadFile:destFile
+                    toPath:destPath
+                  fromPath:srcPath];
     }
     else
     {
