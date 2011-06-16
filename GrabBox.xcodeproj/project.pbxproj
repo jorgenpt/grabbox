@@ -48,13 +48,13 @@
 		8E5EFF9412592B3700D36662 /* give_feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E5EFF9312592B3700D36662 /* give_feedback.png */; };
 		8E5EFF9812592CBE00D36662 /* icontrans.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E5EFF9712592CBE00D36662 /* icontrans.png */; };
 		8E60861811E6D1B600881A1C /* Notifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E60861711E6D1B600881A1C /* Notifier.m */; };
-		8E61221E13074A2200DA90D0 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E61221D13074A2200DA90D0 /* Dropbox.framework */; };
-		8E61222213074A3A00DA90D0 /* Dropbox.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E61221D13074A2200DA90D0 /* Dropbox.framework */; };
+		8E6F572413AAC73400B39EC9 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E6F572313AAC73400B39EC9 /* Dropbox.framework */; };
+		8E6F572E13AAC7B800B39EC9 /* Dropbox.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E6F572313AAC73400B39EC9 /* Dropbox.framework */; };
+		8E6F572F13AAC7BB00B39EC9 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B6B2D11EC19A500112165 /* Growl.framework */; };
+		8E6F573013AAC7BE00B39EC9 /* Sparkle.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B686811EBD1BA00112165 /* Sparkle.framework */; };
 		8E7385EA11F3C7900051276B /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7385E911F3C7900051276B /* Carbon.framework */; };
 		8E7B686911EBD1BA00112165 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B686811EBD1BA00112165 /* Sparkle.framework */; };
-		8E7B688F11EBD26500112165 /* Sparkle.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B686811EBD1BA00112165 /* Sparkle.framework */; };
 		8E7B6B2E11EC19A500112165 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B6B2D11EC19A500112165 /* Growl.framework */; };
-		8E7B6B3611EC19A700112165 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B6B2D11EC19A500112165 /* Growl.framework */; };
 		8E7B6C2511EC433B00112165 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7B6C2411EC433B00112165 /* Preferences.m */; };
 		8EAAE7F41256675800798872 /* Menubar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EAAE7F31256675800798872 /* Menubar.m */; };
 		8ED2912813A41A66005F10D3 /* Growler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED2910E13A41A65005F10D3 /* Growler.m */; };
@@ -88,9 +88,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8E61222213074A3A00DA90D0 /* Dropbox.framework in Copy Supporting Frameworks */,
-				8E7B6B3611EC19A700112165 /* Growl.framework in Copy Supporting Frameworks */,
-				8E7B688F11EBD26500112165 /* Sparkle.framework in Copy Supporting Frameworks */,
+				8E6F572E13AAC7B800B39EC9 /* Dropbox.framework in Copy Supporting Frameworks */,
+				8E6F572F13AAC7BB00B39EC9 /* Growl.framework in Copy Supporting Frameworks */,
+				8E6F573013AAC7BE00B39EC9 /* Sparkle.framework in Copy Supporting Frameworks */,
 			);
 			name = "Copy Supporting Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,7 +144,7 @@
 		8E5EFF9712592CBE00D36662 /* icontrans.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icontrans.png; path = Resources/Images/icontrans.png; sourceTree = "<group>"; };
 		8E60861611E6D1B600881A1C /* Notifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifier.h; sourceTree = "<group>"; };
 		8E60861711E6D1B600881A1C /* Notifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notifier.m; sourceTree = "<group>"; };
-		8E61221D13074A2200DA90D0 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = /Users/jorgenpt/Projects/DropboxFramework/build/Release/Dropbox.framework; sourceTree = "<absolute>"; };
+		8E6F572313AAC73400B39EC9 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
 		8E7385E911F3C7900051276B /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		8E7B686811EBD1BA00112165 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		8E7B6B2D11EC19A500112165 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
@@ -184,12 +184,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E6F572413AAC73400B39EC9 /* Dropbox.framework in Frameworks */,
 				8E368D1813A5FA4E00EB0D90 /* SystemConfiguration.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				8E7B686911EBD1BA00112165 /* Sparkle.framework in Frameworks */,
 				8E7B6B2E11EC19A500112165 /* Growl.framework in Frameworks */,
 				8E7385EA11F3C7900051276B /* Carbon.framework in Frameworks */,
-				8E61221E13074A2200DA90D0 /* Dropbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,11 +215,11 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E6F572313AAC73400B39EC9 /* Dropbox.framework */,
 				8E368D1713A5FA4E00EB0D90 /* SystemConfiguration.framework */,
 				8E7B6B2D11EC19A500112165 /* Growl.framework */,
 				8E7B686811EBD1BA00112165 /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
-				8E61221D13074A2200DA90D0 /* Dropbox.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -581,7 +581,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/../DropboxFramework/build/Release\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -630,7 +629,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/../DropboxFramework/build/Release\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -647,7 +645,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/../DropboxFramework/build/Release\"",
 				);
 				INFOPLIST_FILE = "Resources/GrabBox-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
