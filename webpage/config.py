@@ -1,7 +1,7 @@
-app_name            = 'GrabBox'
+app_name            = 'GrabBox2'
 app_url             = 'http://grabbox.devsoft.no'
 language            = 'en'
-appcast_url         = app_url + '/appcast.xml'
+appcast_url         = app_url + '/appcast2beta.xml'
 appcast_title       = app_name +"'s Changelog"
 appcast_description = 'Most recent changes.'
 release_info_dir    = '../releases'
