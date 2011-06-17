@@ -36,7 +36,7 @@
 		8E4D88291258754A003A64EA /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D88251258754A003A64EA /* Growl Registration Ticket.growlRegDict */; };
 		8E4D882A1258754A003A64EA /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D88261258754A003A64EA /* dsa_pub.pem */; };
 		8E4D883912587584003A64EA /* dropbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D883212587584003A64EA /* dropbox.png */; };
-		8E4D883A12587584003A64EA /* GrabBox.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D883312587584003A64EA /* GrabBox.icns */; };
+		8E4D883A12587584003A64EA /* GrabBox2.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D883312587584003A64EA /* GrabBox2.icns */; };
 		8E4D883B12587584003A64EA /* howto.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D883412587584003A64EA /* howto.png */; };
 		8E4D883C12587584003A64EA /* link_ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D883512587584003A64EA /* link_ok.png */; };
 		8E4D883D12587584003A64EA /* link_waiting.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D883612587584003A64EA /* link_waiting.png */; };
@@ -108,7 +108,7 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		8D1107320486CEB800E47090 /* GrabBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* GrabBox2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabBox2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2AF34111F04B8D00A29A61 /* favicon.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = favicon.ico; sourceTree = "<group>"; };
 		8E2AF34711F04BAD00A29A61 /* GrabBox 0.5.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "GrabBox 0.5.zip"; sourceTree = "<group>"; };
 		8E368D1413A5F51800EB0D90 /* NetworkReachabilityNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkReachabilityNotifier.h; sourceTree = "<group>"; };
@@ -119,12 +119,12 @@
 		8E49CF4C11ED14640041CE70 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ImageRenamer.xib; sourceTree = "<group>"; };
 		8E4A509E11E9155500A0A743 /* InformationGatherer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationGatherer.h; sourceTree = "<group>"; };
 		8E4A509F11E9155500A0A743 /* InformationGatherer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationGatherer.m; sourceTree = "<group>"; };
-		8E4D88231258754A003A64EA /* GrabBox-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GrabBox-Info.plist"; path = "Resources/GrabBox-Info.plist"; sourceTree = "<group>"; };
+		8E4D88231258754A003A64EA /* GrabBox2-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GrabBox2-Info.plist"; path = "Resources/GrabBox2-Info.plist"; sourceTree = "<group>"; };
 		8E4D88241258754A003A64EA /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Credits.rtf; path = Resources/Credits.rtf; sourceTree = "<group>"; };
 		8E4D88251258754A003A64EA /* Growl Registration Ticket.growlRegDict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Growl Registration Ticket.growlRegDict"; path = "Resources/Growl Registration Ticket.growlRegDict"; sourceTree = "<group>"; };
 		8E4D88261258754A003A64EA /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = Resources/dsa_pub.pem; sourceTree = "<group>"; };
 		8E4D883212587584003A64EA /* dropbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dropbox.png; path = Resources/Images/dropbox.png; sourceTree = "<group>"; };
-		8E4D883312587584003A64EA /* GrabBox.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = GrabBox.icns; path = Resources/Images/GrabBox.icns; sourceTree = "<group>"; };
+		8E4D883312587584003A64EA /* GrabBox2.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = GrabBox2.icns; path = Resources/Images/GrabBox2.icns; sourceTree = "<group>"; };
 		8E4D883412587584003A64EA /* howto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = howto.png; path = Resources/Images/howto.png; sourceTree = "<group>"; };
 		8E4D883512587584003A64EA /* link_ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = link_ok.png; path = Resources/Images/link_ok.png; sourceTree = "<group>"; };
 		8E4D883612587584003A64EA /* link_waiting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = link_waiting.png; path = Resources/Images/link_waiting.png; sourceTree = "<group>"; };
@@ -238,7 +238,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D1107320486CEB800E47090 /* GrabBox.app */,
+				8D1107320486CEB800E47090 /* GrabBox2.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -271,7 +271,7 @@
 				8E2AF15511F01D2100A29A61 /* Images */,
 				8E4D88251258754A003A64EA /* Growl Registration Ticket.growlRegDict */,
 				8E4D88261258754A003A64EA /* dsa_pub.pem */,
-				8E4D88231258754A003A64EA /* GrabBox-Info.plist */,
+				8E4D88231258754A003A64EA /* GrabBox2-Info.plist */,
 				8E4D88241258754A003A64EA /* Credits.rtf */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				8E49CF4B11ED14640041CE70 /* ImageRenamer.xib */,
@@ -297,7 +297,7 @@
 				8E5EFF7A125918BD00D36662 /* donate.png */,
 				8E5EFF7B125918BD00D36662 /* switch_to_menubar.png */,
 				8E4D883212587584003A64EA /* dropbox.png */,
-				8E4D883312587584003A64EA /* GrabBox.icns */,
+				8E4D883312587584003A64EA /* GrabBox2.icns */,
 				8E4D883412587584003A64EA /* howto.png */,
 				8E4D883512587584003A64EA /* link_ok.png */,
 				8E4D883612587584003A64EA /* link_waiting.png */,
@@ -407,9 +407,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D1107260486CEB800E47090 /* GrabBox */ = {
+		8D1107260486CEB800E47090 /* GrabBox2 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "GrabBox" */;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "GrabBox2" */;
 			buildPhases = (
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
@@ -420,10 +420,10 @@
 			);
 			dependencies = (
 			);
-			name = GrabBox;
+			name = GrabBox2;
 			productInstallPath = "$(HOME)/Applications";
 			productName = GrabBox;
-			productReference = 8D1107320486CEB800E47090 /* GrabBox.app */;
+			productReference = 8D1107320486CEB800E47090 /* GrabBox2.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -431,7 +431,7 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GrabBox" */;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GrabBox2" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -442,7 +442,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D1107260486CEB800E47090 /* GrabBox */,
+				8D1107260486CEB800E47090 /* GrabBox2 */,
 				8E7B689911EBD8BC00112165 /* Distribution */,
 			);
 		};
@@ -460,7 +460,7 @@
 				8E4D88291258754A003A64EA /* Growl Registration Ticket.growlRegDict in Resources */,
 				8E4D882A1258754A003A64EA /* dsa_pub.pem in Resources */,
 				8E4D883912587584003A64EA /* dropbox.png in Resources */,
-				8E4D883A12587584003A64EA /* GrabBox.icns in Resources */,
+				8E4D883A12587584003A64EA /* GrabBox2.icns in Resources */,
 				8E4D883B12587584003A64EA /* howto.png in Resources */,
 				8E4D883C12587584003A64EA /* link_ok.png in Resources */,
 				8E4D883D12587584003A64EA /* link_waiting.png in Resources */,
@@ -525,7 +525,7 @@
 /* Begin PBXTargetDependency section */
 		8E7B689D11EBD8C000112165 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8D1107260486CEB800E47090 /* GrabBox */;
+			target = 8D1107260486CEB800E47090 /* GrabBox2 */;
 			targetProxy = 8E7B689C11EBD8C000112165 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -584,9 +584,9 @@
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				INFOPLIST_FILE = "Resources/GrabBox-Info.plist";
+				INFOPLIST_FILE = "Resources/GrabBox2-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = GrabBox;
+				PRODUCT_NAME = GrabBox2;
 			};
 			name = "Debug for distribution";
 		};
@@ -632,9 +632,9 @@
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				INFOPLIST_FILE = "Resources/GrabBox-Info.plist";
+				INFOPLIST_FILE = "Resources/GrabBox2-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = GrabBox;
+				PRODUCT_NAME = GrabBox2;
 			};
 			name = Debug;
 		};
@@ -646,9 +646,9 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
-				INFOPLIST_FILE = "Resources/GrabBox-Info.plist";
+				INFOPLIST_FILE = "Resources/GrabBox2-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = GrabBox;
+				PRODUCT_NAME = GrabBox2;
 			};
 			name = Release;
 		};
@@ -696,7 +696,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "GrabBox" */ = {
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "GrabBox2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4B08A954540054247B /* Debug */,
@@ -706,7 +706,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GrabBox" */ = {
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GrabBox2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:GrabBox.xcodeproj">
+      location = "self:GrabBox2.xcodeproj">
    </FileRef>
 </Workspace>
