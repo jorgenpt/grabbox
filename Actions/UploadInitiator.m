@@ -43,29 +43,26 @@
 
 NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
 
-+ (void) copyURL:(NSString *)url
-     basedOnFile:(NSString *)path
-      wasRenamed:(BOOL)renamed
++ (void) pasteboardURLForPath:(NSString *)path
+                  basedOnFile:(NSString *)file
 {
     NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
     [pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
     
+    NSString *url = [URLShortener shortenURLForFile:path];
     if (![pasteboard setString:url forType:NSStringPboardType])
     {
-        NSString *errorDescription = [NSString stringWithFormat:@"Could not put URL '%@' into the clipboard, click here to try this operation again.", url];
+        NSString *errorDescription = [NSString stringWithFormat:@"Could not put URL '%@' into the clipboard", url];
         GrowlerGrowl *copyError = [GrowlerGrowl growlErrorWithTitle:@"Could not update pasteboard!"
                                                         description:errorDescription];
         copyError.sticky = YES;
-        [Growler growl:copyError
-             withBlock:^(GrowlerGrowlAction action) {
-                 if (action == GrowlerGrowlClicked)
-                     [self copyURL:url basedOnFile:path wasRenamed:renamed];
-             }];
-        NSLog(@"ERROR: Couldn't put url into pasteboard.");
+        [Growler growl:copyError];
+
+        NSLog(@"ERROR: Couldn't put url '%@' into pasteboard.", url);
     }
     else
     {
-        if (renamed)
+        if (!file)
         {
             GrowlerGrowl *success = [GrowlerGrowl growlWithName:@"Screenshot Renamed"
                                                           title:@"Screenshot renamed!"
@@ -77,13 +74,12 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
             GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"URL Copied"
                                                          title:@"Screenshot uploaded!"
                                                    description:@"The screenshot has been uploaded and a link put in your clipboard. Click here to give the file a more descriptive name!"];
+
+            ImageRenamer* renamer = [ImageRenamer renamerForPath:path withFile:file];
             [Growler growl:prompt
                  withBlock:^(GrowlerGrowlAction action) {
                      if (action == GrowlerGrowlClicked)
-                     {
-                         ImageRenamer* renamer = [ImageRenamer renamerForFile:path];
-                         [[renamer retain] showRenamer];
-                     }
+                         [renamer showRenamer];
                  }];
         }
     }
@@ -136,8 +132,6 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
 
 - (void) dealloc
 {
-    DLog(@"Deallocating uploader for %@ -> %@", srcPath, destPath);
-
     [self setRestClient:nil];
     [self setSrcFile:nil];
     [self setSrcPath:nil];
@@ -150,19 +144,20 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
 - (void) moveToWorkQueue
 {
     NSString* newPath = [[[InformationGatherer defaultGatherer] workQueuePath] stringByAppendingPathComponent:srcFile];
-    DLog(@"Trying to move %@ -> %@", srcPath, newPath);
     NSError *error;
     BOOL moveOk;
 
     BOOL shouldLeaveIntact = [[NSUserDefaults standardUserDefaults] boolForKey:@"DoNotDeleteScreenshot"];
     if (shouldLeaveIntact)
     {
+        DLog(@"Trying to copy %@ -> %@", srcPath, newPath);
         moveOk = [[NSFileManager defaultManager] copyItemAtPath:srcPath
                                                          toPath:newPath
                                                           error:&error];
     }
     else
     {
+        DLog(@"Trying to move %@ -> %@", srcPath, newPath);
         moveOk = [[NSFileManager defaultManager] moveItemAtPath:srcPath
                                                          toPath:newPath
                                                           error:&error];
@@ -190,6 +185,29 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
 
     DLog(@"Trying upload of '%@', destination '%@'", srcPath, destination);
     [restClient loadMetadata:destination];
+}
+
+- (NSString *) randomStringOfLength:(int)length
+{
+    NSMutableString* output = [NSMutableString string];
+    
+    for (int i = 0; i < length; ++i)
+    {
+        int character = drand48() * [urlCharacters length]; 
+        [output appendString:[urlCharacters substringWithRange:NSMakeRange(character, 1)]];
+    }
+    
+    return output;
+}
+
+- (NSString *) nextFilenameWithExtension:(NSString *)ext
+{
+    NSString *output;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"UseLongRandomFilename"])
+        output = [self randomStringOfLength:12];
+    else 
+        output = [self randomStringOfLength:6];
+    return [output stringByAppendingFormat:@".%@", ext];
 }
 
 #pragma mark DBRestClientDelegate callbacks
@@ -247,8 +265,8 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
                 [delegate uploaderDone:self];
         }
     }
-
 }
+
 - (void)restClient:(DBRestClient*)client
       uploadedFile:(NSString*)uploadedPath
               from:(NSString*)source
@@ -257,14 +275,12 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     int numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
     [[NSUserDefaults standardUserDefaults] setInteger:(numberOfScreenshots + 1)
                                                forKey:@"NumberOfScreenshotsUploaded"];
-    NSString *dropboxUrl = [URLShortener shortenURLForFile:[self destFile]];
-    [UploadInitiator copyURL:dropboxUrl
-                 basedOnFile:uploadedPath
-                  wasRenamed:NO];
+    [UploadInitiator pasteboardURLForPath:uploadedPath
+                              basedOnFile:source];
 
     NSError *error;
     BOOL deletedOk = [[NSFileManager defaultManager] removeItemAtPath:source
-                                                                    error:&error];
+                                                                error:&error];
     if (!deletedOk)
         NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
 
@@ -298,29 +314,6 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
         if ([delegate respondsToSelector:@selector(uploaderDone:)])
             [delegate uploaderDone:self];
     }    
-}
-
-- (NSString *) randomStringOfLength:(int)length
-{
-    NSMutableString* output = [NSMutableString string];
-    
-    for (int i = 0; i < length; ++i)
-    {
-        int character = drand48() * [urlCharacters length]; 
-        [output appendString:[urlCharacters substringWithRange:NSMakeRange(character, 1)]];
-    }
-    
-    return output;
-}
-
-- (NSString *) nextFilenameWithExtension:(NSString *)ext
-{
-    NSString *output;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"UseLongRandomFilename"])
-        output = [self randomStringOfLength:12];
-    else 
-        output = [self randomStringOfLength:6];
-    return [output stringByAppendingFormat:@".%@", ext];
 }
 
 @end

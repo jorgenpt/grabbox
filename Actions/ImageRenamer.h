@@ -8,7 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ImageRenamer : NSObject {
+@interface ImageRenamer : NSObject <DBRestClientDelegate> {
+    DBRestClient *restClient;
+
     NSWindow *window;
     NSImageView *imageView;
     NSTextField *name;
@@ -19,16 +21,10 @@
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSImageView *imageView;
 @property (assign) IBOutlet NSTextField *name;
-@property (nonatomic, retain) NSImage *image;
-@property (nonatomic, retain) NSString *path;
 
-+ (id) renamerForFile:(NSString *)path;
++ (id) renamerForPath:(NSString *)path withFile:(NSString *)filePath;
 
-- (id) initForFile:(NSString *)path;
-- (void) dealloc;
-
-- (void) awakeFromNib;
-- (BOOL) windowShouldClose;
+- (id) initForPath:(NSString *)path withFile:(NSString *)filePath;
 
 - (void) showRenamer;
 - (IBAction) clickedOk:(id)sender;

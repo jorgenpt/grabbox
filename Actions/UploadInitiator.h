@@ -28,9 +28,8 @@
 
 @property (assign) id delegate;
 
-+ (void) copyURL:(NSString *)url
-     basedOnFile:(NSString *)path
-      wasRenamed:(BOOL)renamed;
++ (void) pasteboardURLForPath:(NSString *)path
+                  basedOnFile:(NSString *)file;
 
 + (id) uploadInitiatorForFile:(NSString *)file
                        atPath:(NSString *)source
@@ -41,8 +40,8 @@
             toPath:(NSString *)destination;
 
 - (void) moveToWorkQueue;
+- (void) upload;
 
 - (NSString *) srcPath;
-- (void) upload;
 
 @end

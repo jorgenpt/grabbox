@@ -11,31 +11,64 @@
 #import "UploadInitiator.h"
 #import "URLShortener.h"
 
+@interface ImageRenamer ()
+@property (nonatomic, retain) DBRestClient *restClient;
+@property (nonatomic, retain) NSImage *image;
+@property (nonatomic, retain) NSString *path;
+@end
+
 @implementation ImageRenamer
+
+@synthesize restClient;
+
+@synthesize image;
+@synthesize path;
 
 @synthesize window;
 @synthesize imageView;
-@synthesize image;
-@synthesize path;
 @synthesize name;
 
-+ (id) renamerForFile:(NSString *)path
++ (id) renamerForPath:(NSString *)remotePath withFile:(NSString *)localPath
 {
-    return [[[self alloc] initForFile:path] autorelease];
+    return [[[self alloc] initForPath:remotePath withFile:localPath] autorelease];
 }
 
-- (id) initForFile:(NSString *)filePath
+- (id) init
 {
     self = [super init];
     if (self)
     {
-        [self setPath:filePath];
+        [self setRestClient:[DBRestClient restClientWithSharedSession]];
+        if (!restClient)
+        {
+            [self release];
+            return nil;
+        }
+
+        [restClient setDelegate:self];
+        [self setPath:nil];
+        [self setImage:nil];
+    }
+
+    return self;
+}
+
+- (id) initForPath:(NSString *)remotePath withFile:(NSString *)localPath
+{
+    self = [self init];
+    if (self)
+    {
+        [self setPath:remotePath];
+        [self setImage:[[[NSImage alloc] initWithContentsOfFile:localPath] autorelease]];
     }
     return self;
 }
 
+
 - (void) dealloc
 {
+    [restClient setDelegate:nil];
+    [self setRestClient:nil];
     [self setImage:nil];
     [self setPath:nil];
 
@@ -44,8 +77,6 @@
 
 - (void) awakeFromNib
 {
-    [self setImage:[[[NSImage alloc] initWithContentsOfFile:path] autorelease]];
-
     NSRect windowRect = [[self window] frame];
 
     NSSize maxSize = [[NSScreen mainScreen] visibleFrame].size;
@@ -96,7 +127,7 @@
 
 - (void) showRenamer
 {
-    [NSBundle loadNibNamed:@"ImageRenamer" owner:self];
+    [NSBundle loadNibNamed:@"ImageRenamer" owner:[self retain]];
 }
 
 - (IBAction) clickedOk:(id)sender
@@ -108,44 +139,64 @@
         NSString* extension = [originalFilename pathExtension];
         NSString* filename = [inputFilename stringByAppendingPathExtension:extension];
         NSString* newPath = [[[self path] stringByDeletingLastPathComponent] stringByAppendingPathComponent:filename];
-        NSString* newUrl = [URLShortener shortenURLForFile:filename];
-        NSFileManager* fm = [NSFileManager defaultManager];
-        NSError* error;
-        BOOL moveOk = [fm moveItemAtPath:[self path]
-                                  toPath:newPath
-                                   error:&error];
-        if (moveOk)
-        {
-            [UploadInitiator copyURL:newUrl
-                         basedOnFile:newPath
-                           wasRenamed:YES];
-        }
-        else
-        {
-            if ([fm fileExistsAtPath:newPath])
-            {
-                NSAlert* alert = [NSAlert alertWithMessageText:nil
-                                                 defaultButton:nil
-                                               alternateButton:nil
-                                                   otherButton:nil
-                                     informativeTextWithFormat:@"The filename '%@' is in use, please choose another name.", inputFilename];
-                [alert setIcon:[NSImage imageNamed:NSImageNameCaution]];
-                [alert beginSheetModalForWindow:[self window]
-                                  modalDelegate:nil
-                                 didEndSelector:nil
-                                    contextInfo:nil];
-                return;
-            }
-            else
-            {
-                GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not rename file!"
-                                                                 description:[error localizedDescription]];
-                [Growler growl:errorGrowl];
-                NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
-            }
-        }
+
+        [restClient loadMetadata:newPath];
+    } else {
+        [[self window] performClose:self];
     }
-    
+}
+
+#pragma mark DBRestClientDelegate callbacks
+
+- (void)restClient:(DBRestClient*)client
+    loadedMetadata:(DBMetadata*)metadata
+{
+    NSAlert* alert = [NSAlert alertWithMessageText:nil
+                                     defaultButton:nil
+                                   alternateButton:nil
+                                       otherButton:nil
+                         informativeTextWithFormat:@"The filename is in use, please choose another name."];
+    [alert setIcon:[NSImage imageNamed:NSImageNameCaution]];
+    [alert beginSheetModalForWindow:[self window]
+                      modalDelegate:nil
+                     didEndSelector:nil
+                        contextInfo:nil];
+}
+
+- (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error
+{
+    NSString *newPath = [error.userInfo objectForKey:@"path"];
+    if (error.code == 404 && newPath)
+    {
+        DLog(@"Destination file did not exist, so going ahead with move.");
+        [client moveFrom:path
+                  toPath:newPath];
+    }
+    else
+    {
+        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not rename file!"
+                                                         description:[error localizedDescription]];
+        [Growler growl:errorGrowl];
+        NSLog(@"ERROR: %@ %@ (%ld)", newPath, [error localizedDescription], [error code]);
+        [[self window] performClose:self];
+    }
+}
+
+- (void)restClient:(DBRestClient*)client
+         movedPath:(NSString *)path
+            toPath:(NSString *)newPath
+{
+    [self setPath:newPath];
+    [UploadInitiator pasteboardURLForPath:newPath basedOnFile:nil];
+    [[self window] performClose:self];
+}
+
+- (void)restClient:(DBRestClient*)client movePathFailedWithError:(NSError*)error
+{
+    GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not rename file!"
+                                                     description:[error localizedDescription]];
+    [Growler growl:errorGrowl];
+    NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
     [[self window] performClose:self];
 }
 
