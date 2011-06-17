@@ -12,5 +12,5 @@ build/
 .DS_Store
 
 # Stuff polish generates
-webpage/appcast.xml
-webpage/releasenotes.html
+webpage/appcast*.xml
+webpage/releasenotes*.html
