@@ -1,9 +1,0 @@
-date:       Fri, 16 Jul 2010 11:25:27 -0700
-signature:  MCwCFG++zM3YmsiTEoSZxaW/UrH45o+JAhR5HcG0t4gdhMRFM8qebrc+LM4Mew==
-changelog:
-    changes:
-        - Replaced instructional image in Setup dialog with something less confusing.
-        - Make program send current version when requesting update feed, so we can show cumulative release notes.
-        - Change website, including update feed, to <a href='http://grabbox.devsoft.no'>http://grabbox.devsoft.no</a>.
-    bugfixes:
-        - Make the application take focus when an event triggered by the user (indirectly or directly) occurs.

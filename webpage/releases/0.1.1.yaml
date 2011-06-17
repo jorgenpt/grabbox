@@ -1,6 +1,0 @@
-date:       Mon, 12 Jul 2010 16:52:14 -0700
-signature:  MC4CFQDLwzkcDFT3gvf+F913ORxhHqfDPQIVALcw0bleTn7bKAHQ/iTZnENzQuzz
-changelog:  
-    bugfixes:
-        - Make the program not crash when it does its only feature.
-        - Suppress the prompt for automatic checking of new updates.

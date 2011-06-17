@@ -1,9 +1,0 @@
-date:       Sun, 03 Oct 2010 18:15:20 -0700
-signature:  MCwCFEVpCSMdQRg91pEcIzH/9VfpoJtzAhRwhTGGK9Tan57RFqLayjDonxGGUQ==
-changelog:
-    changes:
-        - New, pretty icon from Patrick Schneider.
-        - Add support for running in menubar instead of dock.
-        - You can now choose random filename and long random filename.
-        - bit.ly is now an option for URL shortening.
-        - Option to leave original screenshot intact.
