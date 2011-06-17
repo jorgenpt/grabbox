@@ -49,7 +49,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
     [pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
     
-    NSString *url = [URLShortener shortenURLForFile:path];
+    NSString *url = [URLShortener urlForPath:path];
     if (![pasteboard setString:url forType:NSStringPboardType])
     {
         NSString *errorDescription = [NSString stringWithFormat:@"Could not put URL '%@' into the clipboard", url];

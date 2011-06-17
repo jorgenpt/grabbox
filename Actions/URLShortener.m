@@ -12,6 +12,8 @@
 #import "NSString+URLParameters.h"
 #import "JSON.h"
 
+NSString *const dropboxPublicPrefix = @"/Public/";
+
 @interface URLShortener ()
 
 + (NSString *) bitlyShorten:(NSString *)url;
@@ -24,12 +26,16 @@ static NSString *BITLY_APIURL = @"http://api.bit.ly/v3/%@?login=%@&apiKey=%@&",
                 *BITLY_LOGIN = @"jorgenpt",
                 *BITLY_APIKEY = @"R_3a2a07cb1af817ab7de18d17e7f0f57f";
 
-+ (NSString *) shortenURLForFile:(NSString *)file
++ (NSString *) urlForPath:(NSString *)path
 {
     NSString *dropboxId = [[(GrabBoxAppDelegate*)[NSApp delegate] account] userId];
     int service = [[NSUserDefaults standardUserDefaults] integerForKey:CONFIG(URLShortener)];
-    NSString *escapedFile = [file stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-    NSString *directURL = [NSString stringWithFormat:@"http://dl.dropbox.com/u/%@/Screenshots/%@", dropboxId, escapedFile];
+    if ([path hasPrefix:dropboxPublicPrefix])
+        path = [path substringFromIndex:[dropboxPublicPrefix length]];
+    // TODO: Handle non-prefixed URLs with yet-to-come API?
+
+    NSString *escapedPath = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *directURL = [NSString stringWithFormat:@"http://dl.dropbox.com/u/%@/%@", dropboxId, escapedPath];
     NSString *shortURL = nil;
 
     DLog(@"Shortening with service %i.", service);
