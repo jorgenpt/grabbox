@@ -1,0 +1,12 @@
+app_name            = 'GrabBox'
+app_url             = 'http://grabbox.devsoft.no'
+language            = 'en'
+appcast_url         = app_url + '/appcast.xml'
+appcast_title       = app_name +"'s Changelog"
+appcast_description = 'Most recent changes.'
+release_info_dir    = '../releases'
+release_name        = app_name + ' %s.zip'
+release_dir         = 'updates'
+release_url         = app_url + '/updates'
+release_notes       = app_url + '/releasenotes.html'
+template_dir        = 'templates'
