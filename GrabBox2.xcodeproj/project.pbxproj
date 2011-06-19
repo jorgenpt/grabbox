@@ -48,14 +48,16 @@
 		8E5EFF9412592B3700D36662 /* give_feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E5EFF9312592B3700D36662 /* give_feedback.png */; };
 		8E5EFF9812592CBE00D36662 /* icontrans.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E5EFF9712592CBE00D36662 /* icontrans.png */; };
 		8E60861811E6D1B600881A1C /* Notifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E60861711E6D1B600881A1C /* Notifier.m */; };
-		8E6F572413AAC73400B39EC9 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E6F572313AAC73400B39EC9 /* Dropbox.framework */; };
-		8E6F572E13AAC7B800B39EC9 /* Dropbox.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E6F572313AAC73400B39EC9 /* Dropbox.framework */; };
-		8E6F572F13AAC7BB00B39EC9 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B6B2D11EC19A500112165 /* Growl.framework */; };
-		8E6F573013AAC7BE00B39EC9 /* Sparkle.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B686811EBD1BA00112165 /* Sparkle.framework */; };
 		8E7385EA11F3C7900051276B /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7385E911F3C7900051276B /* Carbon.framework */; };
-		8E7B686911EBD1BA00112165 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B686811EBD1BA00112165 /* Sparkle.framework */; };
-		8E7B6B2E11EC19A500112165 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7B6B2D11EC19A500112165 /* Growl.framework */; };
 		8E7B6C2511EC433B00112165 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7B6C2411EC433B00112165 /* Preferences.m */; };
+		8EA8A29213AEA8CF00AD7769 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA8A28E13AEA8CF00AD7769 /* Dropbox.framework */; };
+		8EA8A29313AEA8CF00AD7769 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA8A28F13AEA8CF00AD7769 /* Growl.framework */; };
+		8EA8A29413AEA8CF00AD7769 /* ObjectiveMetrics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA8A29013AEA8CF00AD7769 /* ObjectiveMetrics.framework */; };
+		8EA8A29513AEA8CF00AD7769 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA8A29113AEA8CF00AD7769 /* Sparkle.framework */; };
+		8EA8A29613AEA8E000AD7769 /* Dropbox.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA8A28E13AEA8CF00AD7769 /* Dropbox.framework */; };
+		8EA8A29713AEA8E000AD7769 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA8A28F13AEA8CF00AD7769 /* Growl.framework */; };
+		8EA8A29813AEA8E000AD7769 /* ObjectiveMetrics.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA8A29013AEA8CF00AD7769 /* ObjectiveMetrics.framework */; };
+		8EA8A29913AEA8E000AD7769 /* Sparkle.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA8A29113AEA8CF00AD7769 /* Sparkle.framework */; };
 		8EAAE7F41256675800798872 /* Menubar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EAAE7F31256675800798872 /* Menubar.m */; };
 		8ED2912813A41A66005F10D3 /* Growler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED2910E13A41A65005F10D3 /* Growler.m */; };
 		8ED2912913A41A66005F10D3 /* GrowlerGrowl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED2911013A41A65005F10D3 /* GrowlerGrowl.m */; };
@@ -88,9 +90,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8E6F572E13AAC7B800B39EC9 /* Dropbox.framework in Copy Supporting Frameworks */,
-				8E6F572F13AAC7BB00B39EC9 /* Growl.framework in Copy Supporting Frameworks */,
-				8E6F573013AAC7BE00B39EC9 /* Sparkle.framework in Copy Supporting Frameworks */,
+				8EA8A29613AEA8E000AD7769 /* Dropbox.framework in Copy Supporting Frameworks */,
+				8EA8A29713AEA8E000AD7769 /* Growl.framework in Copy Supporting Frameworks */,
+				8EA8A29813AEA8E000AD7769 /* ObjectiveMetrics.framework in Copy Supporting Frameworks */,
+				8EA8A29913AEA8E000AD7769 /* Sparkle.framework in Copy Supporting Frameworks */,
 			);
 			name = "Copy Supporting Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,12 +147,13 @@
 		8E5EFF9712592CBE00D36662 /* icontrans.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icontrans.png; path = Resources/Images/icontrans.png; sourceTree = "<group>"; };
 		8E60861611E6D1B600881A1C /* Notifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifier.h; sourceTree = "<group>"; };
 		8E60861711E6D1B600881A1C /* Notifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notifier.m; sourceTree = "<group>"; };
-		8E6F572313AAC73400B39EC9 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
 		8E7385E911F3C7900051276B /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
-		8E7B686811EBD1BA00112165 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
-		8E7B6B2D11EC19A500112165 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		8E7B6C2311EC433B00112165 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
 		8E7B6C2411EC433B00112165 /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
+		8EA8A28E13AEA8CF00AD7769 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
+		8EA8A28F13AEA8CF00AD7769 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
+		8EA8A29013AEA8CF00AD7769 /* ObjectiveMetrics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ObjectiveMetrics.framework; sourceTree = "<group>"; };
+		8EA8A29113AEA8CF00AD7769 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		8EAAE7F21256675800798872 /* Menubar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menubar.h; sourceTree = "<group>"; };
 		8EAAE7F31256675800798872 /* Menubar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menubar.m; sourceTree = "<group>"; };
 		8ED2910D13A41A65005F10D3 /* Growler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Growler.h; sourceTree = "<group>"; };
@@ -184,12 +188,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E6F572413AAC73400B39EC9 /* Dropbox.framework in Frameworks */,
 				8E368D1813A5FA4E00EB0D90 /* SystemConfiguration.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
-				8E7B686911EBD1BA00112165 /* Sparkle.framework in Frameworks */,
-				8E7B6B2E11EC19A500112165 /* Growl.framework in Frameworks */,
 				8E7385EA11F3C7900051276B /* Carbon.framework in Frameworks */,
+				8EA8A29213AEA8CF00AD7769 /* Dropbox.framework in Frameworks */,
+				8EA8A29313AEA8CF00AD7769 /* Growl.framework in Frameworks */,
+				8EA8A29413AEA8CF00AD7769 /* ObjectiveMetrics.framework in Frameworks */,
+				8EA8A29513AEA8CF00AD7769 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,13 +220,15 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8E6F572313AAC73400B39EC9 /* Dropbox.framework */,
+				8EA8A28E13AEA8CF00AD7769 /* Dropbox.framework */,
+				8EA8A28F13AEA8CF00AD7769 /* Growl.framework */,
+				8EA8A29013AEA8CF00AD7769 /* ObjectiveMetrics.framework */,
+				8EA8A29113AEA8CF00AD7769 /* Sparkle.framework */,
 				8E368D1713A5FA4E00EB0D90 /* SystemConfiguration.framework */,
-				8E7B6B2D11EC19A500112165 /* Growl.framework */,
-				8E7B686811EBD1BA00112165 /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
+			path = Frameworks;
 			sourceTree = "<group>";
 		};
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
@@ -581,6 +588,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -629,6 +637,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -645,6 +654,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Frameworks\"",
 				);
 				INFOPLIST_FILE = "Resources/GrabBox2-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
