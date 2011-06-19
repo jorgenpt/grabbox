@@ -34,11 +34,13 @@
   Finalize the current app session. Only valid a single time after a call to
   startApp.
   It is implicitly called when the app sends a
-  NSApplicationWillTerminateNotification.  Finalizing the app session will
+  NSApplicationWillTerminateNotification or
+  UIApplicationWillTerminateNotification.  Finalizing the app session will
   attempt to send all queued messages. If it fails, they will be attempted sent
   at the next app startup.
 
   @see NSApplicationWillTerminateNotification
+  @see UIApplicationWillTerminateNotification
  */
 - (void)stopApp;
 
@@ -84,9 +86,10 @@
   Track a log entry.
   This is a batched event that will be sent when the app exits.
 
-  @param theMessage The message you want to log.
+  @param format The message you want to log.
+  @param ... Format-specific arguments.
  */
-- (void)trackLog:(NSString *)theMessage;
+- (void)trackLog:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
 
 /**
   Track a custom data entry.
