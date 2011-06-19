@@ -43,6 +43,19 @@ static NSString *BITLY_APIURL = @"http://api.bit.ly/v3/%@?login=%@&apiKey=%@&",
     {
         case SHORTENER_BITLY:
             shortURL = [self bitlyShorten:directURL];
+            [[DMTracker defaultTracker] trackEventInCategory:@"Features"
+                                                    withName:@"URL Shortener"
+                                                       value:@"bit.ly"];
+            break;
+        case SHORTENER_NONE:
+            [[DMTracker defaultTracker] trackEventInCategory:@"Features"
+                                                    withName:@"URL Shortener"
+                                                       value:@"None"];
+            break;
+        default:
+            [[DMTracker defaultTracker] trackEventInCategory:@"Features"
+                                                    withName:@"URL Shortener"
+                                                       value:@"Invalid"];
             break;
     }
 

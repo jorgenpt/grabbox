@@ -3,15 +3,28 @@
 //
 
 #ifdef __OBJC__
-    #import <Cocoa/Cocoa.h>
-    #import <Dropbox/Dropbox.h>
-#endif
 
-#ifdef DEBUG
-#   define DLog(fmt, ...) NSLog((@"%s, line %d: " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
-#else
-#   define DLog(...)
+#   import <Cocoa/Cocoa.h>
+#   import <Dropbox/Dropbox.h>
+#   import <ObjectiveMetrics/ObjectiveMetrics.h>
+
+#   define LineLog(fmt, ...) do { \
+        NSLog((@"%s: " fmt), __PRETTY_FUNCTION__, ##__VA_ARGS__); \
+    } while (0)
+#   define DMLog(fmt, ...) do { \
+        [[DMTracker defaultTracker] trackLog:(@"%s: " fmt), __PRETTY_FUNCTION__, ##__VA_ARGS__]; \
+    } while (0)
+#   define ErrorLog(fmt, ...) do { \
+        LineLog(@"ERROR: " fmt, ##__VA_ARGS__); \
+        DMLog(@"ERROR: " fmt, ##__VA_ARGS__); \
+    } while (0)
+
+#   ifdef DEBUG
+#       define DLog(fmt, ...) LineLog(fmt, ##__VA_ARGS__)
+#   else
+#       define DLog(...)
+#   endif
 #endif
 
 #define CONFIG(name) (@#name)
-#define BUNDLE_IDENTIFIER @"no.devsoft.GrabBox_plus"
+#define BUNDLE_IDENTIFIER @"no.devsoft.GrabBox2"

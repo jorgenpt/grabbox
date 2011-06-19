@@ -23,7 +23,7 @@
     self = [super init];
     if (self) {
         [self setUploads:[NSMutableDictionary dictionary]];
-        queue = dispatch_queue_create("no.devSoft.GrabBox.uploaderQueue", NULL);
+        queue = dispatch_queue_create("no.devSoft.GrabBox2.uploaderQueue", NULL);
         dispatch_set_target_queue(queue, dispatch_get_main_queue());
         
         [self setQueueIsSuspended:NO];

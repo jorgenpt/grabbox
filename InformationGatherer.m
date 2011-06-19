@@ -249,7 +249,7 @@ static InformationGatherer* defaultInstance = nil;
     else
     {
         /* If we can't load the bundle stuff, something is severely wrong. We default to something sane, but log it. */
-        NSLog(@"ERROR: Could not load bundle for /System/Library/CoreServices/SystemUIServer.app");
+        ErrorLog(@"Could not load bundle for /System/Library/CoreServices/SystemUIServer.app");
     }
 
     screenshotPattern = [[NSString stringWithFormat:format, name, @"*", @"*"] stringByAppendingString:@".*"];
@@ -285,7 +285,7 @@ static InformationGatherer* defaultInstance = nil;
                                                         attributes:nil
                                                              error:&error])
         {
-            NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
+            ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
             [self setWorkQueuePath:nil];
         }
     }

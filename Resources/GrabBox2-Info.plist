@@ -10,6 +10,8 @@
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
 	<string>GrabBox2</string>
+	<key>DMAppId</key>
+	<string>4d6c1e92d9340b04d7000000</string>
 	<key>CFBundleIdentifier</key>
 	<string>no.devsoft.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>

@@ -108,7 +108,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
             OSStatus returnCode = TransformProcessType(&psn, kProcessTransformToForegroundApplication);
             if (returnCode != 0)
             {
-                NSLog(@"ERROR: Could not bring the application to front. Error %d. Leaving in menubar.", returnCode);
+                ErrorLog(@"Could not bring the application to front. Error %d. Leaving in menubar.", returnCode);
             }
             else
             {
@@ -150,6 +150,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
     }
 
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SUSendProfileInfo"];
+    [[DMTracker defaultTracker] startApp];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -196,9 +197,10 @@ static void translateEvent(ConstFSEventStreamRef stream,
 - (void) startMonitoring
 {
     [notifier start];
+    /* TODO: Not needed!
+    
     BOOL hasBeenNagged = [[NSUserDefaults standardUserDefaults] boolForKey:@"HasBeenNagged"];
     int numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
-
     if (!hasBeenNagged && numberOfScreenshots >= 15)
     {
         [[self nagWindow] makeKeyAndOrderFront:self];
@@ -206,6 +208,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
         [[NSUserDefaults standardUserDefaults] setBool:YES
                                                 forKey:@"HasBeenNagged"];
     }
+     */
 }
 
 - (void) stopMonitoring
@@ -233,7 +236,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
         GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not get Screen Grab path!"
                                                          description:@"Could not find directory to monitor for screenshots."];
         [Growler growl:errorGrowl];
-        NSLog(@"ERROR: Failed getting FSRef for screenshotPath '%@'", screenshotPath);
+        ErrorLog(@"Failed getting FSRef for screenshotPath '%@'", screenshotPath);
         return;
     }
 
@@ -244,7 +247,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
         FSRef pathRef;
         if (![path fsRef:&pathRef])
         {
-            NSLog(@"ERROR: Failed getting FSRef for path '%@'", path);
+            ErrorLog(@"Failed getting FSRef for path '%@'", path);
             continue;
         }
 
@@ -256,7 +259,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
         if (comparison != noErr)
         {
-            NSLog(@"ERROR: Failed comparing FSRef for path (%@) and screenshotPath (%@): %i", path, screenshotPath, comparison);
+            ErrorLog(@"Failed comparing FSRef for path (%@) and screenshotPath (%@): %i", path, screenshotPath, comparison);
             continue;
         }
 
@@ -287,6 +290,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
                                                            toPath:@"/Public/Screenshots"];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PromptBeforeUploading"])
     {
+        [[DMTracker defaultTracker] trackEventInCategory:@"Features"
+                                                withName:@"Prompt"];
         GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"Upload Screenshot?"
                                                      title:@"Should we upload the screenshot?"
                                                description:@"If you'd like the screenshot you just took to be uploaded and a link put in your clipboard, click here."];
@@ -296,6 +301,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
              withBlock:^(GrowlerGrowlAction action) {
                  if (action == GrowlerGrowlClicked)
                  {
+                     [[DMTracker defaultTracker] trackEventInCategory:@"Features"
+                                                             withName:@"Prompt Clicked"];
                      [up moveToWorkQueue];
                      [manager scheduleUpload:up];
                  }
@@ -310,6 +317,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (IBAction) browseUploadedScreenshots:(id)sender
 {
+    [[DMTracker defaultTracker] trackEventInCategory:@"Features"
+                                            withName:@"Browse Uploads"];
     // TODO: Support this?
     // https://www.dropbox.com/browse_plain/Public/Screenshots
 //    [[NSWorkspace sharedWorkspace] openFile:[info uploadPath]];
@@ -323,7 +332,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
         GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload from clipboard!"
                                                          description:@"No image found in the clipboard."];
         [Growler growl:errorGrowl];
-        NSLog(@"ERROR: No image found in the clipboard.");
+        ErrorLog(@"No image found in the clipboard.");
         return;
     }
 
@@ -343,7 +352,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
         GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload from clipboard!"
                                                          description:@"No compatible image found in the clipboard."];
         [Growler growl:errorGrowl];
-        NSLog(@"ERROR: No compatible image found in the clipboard.");
+        ErrorLog(@"No compatible image found in the clipboard.");
         return;
     }
 
@@ -364,7 +373,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
         GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not write clipboard to disk!"
                                                          description:[error localizedDescription]];
         [Growler growl:errorGrowl];
-        NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
+        ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
     }
 }
 
@@ -458,7 +467,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void)restClient:(DBRestClient*)client loadAccountInfoFailedWithError:(NSError*)error
 {
-    NSLog(@"ERROR: Failed retrieving account info: %ld", error.code);
+    ErrorLog(@"Failed retrieving account info: %ld", error.code);
     [NSApp terminate:self];
 }
 

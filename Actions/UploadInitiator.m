@@ -58,7 +58,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
         copyError.sticky = YES;
         [Growler growl:copyError];
 
-        NSLog(@"ERROR: Couldn't put url '%@' into pasteboard.", url);
+        ErrorLog(@"Couldn't put url '%@' into pasteboard.", url);
     }
     else
     {
@@ -183,6 +183,9 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     [self setDestFile:shortName];
     NSString* destination = [NSString pathWithComponents:[NSArray arrayWithObjects: [self destPath], shortName, nil]];
 
+    [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
+                                            withName:@"Upload"];
+
     DLog(@"Trying upload of '%@', destination '%@'", srcPath, destination);
     [restClient loadMetadata:destination];
 }
@@ -228,7 +231,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
                                                          description:@"Could not find a unique filename"];
         [Growler growl:errorGrowl];
 
-        NSLog(@"ERROR: Could not find a unique filename!");
+        ErrorLog(@"Could not find a unique filename!");
 
         if ([delegate respondsToSelector:@selector(uploaderDone:)])
             [delegate uploaderDone:self];
@@ -260,7 +263,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
             GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file!"
                                                              description:[NSString stringWithFormat:@"Received status code %d", [error code]]];
             [Growler growl:errorGrowl];
-            NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
+            ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
             if ([delegate respondsToSelector:@selector(uploaderDone:)])
                 [delegate uploaderDone:self];
         }
@@ -282,7 +285,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
     BOOL deletedOk = [[NSFileManager defaultManager] removeItemAtPath:source
                                                                 error:&error];
     if (!deletedOk)
-        NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
+        ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
 
     if ([delegate respondsToSelector:@selector(uploaderDone:)])
         [delegate uploaderDone:self];
@@ -310,7 +313,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
         GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file!"
                                                          description:[NSString stringWithFormat:@"Received status code %d", [error code]]];
         [Growler growl:errorGrowl];
-        NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
+        ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
         if ([delegate respondsToSelector:@selector(uploaderDone:)])
             [delegate uploaderDone:self];
     }    

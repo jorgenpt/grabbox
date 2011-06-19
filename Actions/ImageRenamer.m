@@ -127,6 +127,9 @@
 
 - (void) showRenamer
 {
+    [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
+                                            withName:@"Rename"];
+
     [NSBundle loadNibNamed:@"ImageRenamer" owner:[self retain]];
 }
 
@@ -142,6 +145,8 @@
 
         [restClient loadMetadata:newPath];
     } else {
+        [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
+                                                withName:@"Rename Cancelled"];
         [[self window] performClose:self];
     }
 }
@@ -177,7 +182,7 @@
         GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not rename file!"
                                                          description:[error localizedDescription]];
         [Growler growl:errorGrowl];
-        NSLog(@"ERROR: %@ %@ (%ld)", newPath, [error localizedDescription], [error code]);
+        ErrorLog(@"%@ %@ (%ld)", newPath, [error localizedDescription], [error code]);
         [[self window] performClose:self];
     }
 }
@@ -196,7 +201,7 @@
     GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not rename file!"
                                                      description:[error localizedDescription]];
     [Growler growl:errorGrowl];
-    NSLog(@"ERROR: %@ (%ld)", [error localizedDescription], [error code]);
+    ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
     [[self window] performClose:self];
 }
 
