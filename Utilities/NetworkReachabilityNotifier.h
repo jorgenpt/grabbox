@@ -17,7 +17,7 @@ typedef void (^NetworkReachabilityChangedCallback)(SCNetworkReachabilityFlags fl
     NetworkReachabilityChangedCallback callback;
 }
 
-@property (retain) NetworkReachabilityChangedCallback callback;
+@property (copy) NetworkReachabilityChangedCallback callback;
 
 - (BOOL)schedule;
 - (BOOL)unschedule;
