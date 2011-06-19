@@ -151,6 +151,17 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SUSendProfileInfo"];
     [[DMTracker defaultTracker] startApp];
+    
+    NSString* value = (NSString*)CFPreferencesCopyValue(CFSTR("type"), CFSTR("com.apple.screencapture"),
+                                                        kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
+    [value autorelease];
+
+    if (value == nil || ![value isKindOfClass:[NSString class]])
+        value = @"Not set / invalid value";
+    
+    [[DMTracker defaultTracker] trackEventInCategory:@"Features"
+                                            withName:@"Screencapture type"
+                                               value:value];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification

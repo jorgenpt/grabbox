@@ -156,6 +156,8 @@
 - (void)restClient:(DBRestClient*)client
     loadedMetadata:(DBMetadata*)metadata
 {
+    [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
+                                            withName:@"Rename File Exists"];
     NSAlert* alert = [NSAlert alertWithMessageText:nil
                                      defaultButton:nil
                                    alternateButton:nil
