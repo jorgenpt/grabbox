@@ -218,6 +218,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void) promptForLink
 {
+    [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
+                                            withName:@"Account Link Prompt"];
     [self setLoginController:[[[DBLoginController alloc] init] autorelease]];
     [loginController setDelegate:self];
     [loginController presentFrom:self];
@@ -326,6 +328,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (IBAction) uploadFromPasteboard:(id)sender
 {
+    [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
+                                            withName:@"Clipboard Upload"];
     NSImage* image = [[[NSImage alloc] initWithPasteboard:[NSPasteboard generalPasteboard]] autorelease];
     if (!image)
     {
@@ -431,6 +435,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void) sessionDidReceiveAuthorizationFailure:(DBSession *)session
 {
+    [[DMTracker defaultTracker] trackEventInCategory:@"Oddities"
+                                            withName:@"Authorization Failure"];
     NSLog(@"Received authorization failure, disabling app then prompt for link!");
     [self setAccount:nil];
     [self stopMonitoring];
@@ -450,6 +456,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void) controllerDidCancel:(DBLoginController *)window
 {
+    [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
+                                            withName:@"Account Link Cancelled"];
     DLog(@"Cancelled account link window, terminating.");
     [NSApp terminate:self];
 }

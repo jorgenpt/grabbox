@@ -112,6 +112,8 @@ static InformationGatherer* defaultInstance = nil;
         if (![[NSFileManager defaultManager] fileExistsAtPath:foundPath
                                                   isDirectory:&isDir] || !isDir)
         {
+            [[DMTracker defaultTracker] trackEventInCategory:@"Oddities"
+                                                    withName:@"Invalid com.apple.screencapture"];
             NSLog(@"Path specified in com.apple.screencapture location does not exist. Falling back to ~/Desktop.");
             foundPath = [@"~/Desktop" stringByStandardizingPath];
         }
@@ -141,7 +143,7 @@ static InformationGatherer* defaultInstance = nil;
     NSData* data = [NSData dataWithContentsOfFile:tablePath];
     if (!data)
     {
-        NSLog(@"Couldn't load %@.lproj/%@.strings.", localization, tableName);
+        ErrorLog(@"Couldn't load %@.lproj/%@.strings.", localization, tableName);
         return nil;
     }
 
@@ -151,7 +153,7 @@ static InformationGatherer* defaultInstance = nil;
                                                            errorDescription:&error];
     if (!table)
     {
-        NSLog(@"Couldn't parse %@.lproj/%@.strings: %@", localization, tableName, error);
+        ErrorLog(@"Couldn't parse %@.lproj/%@.strings: %@", localization, tableName, error);
         return nil;
     }
 
@@ -206,7 +208,7 @@ static InformationGatherer* defaultInstance = nil;
         NSLog(@"No value for '%@' in %@, trying next preferred language (this isn't necessarily bad).", string, lproj);
     }
 
-    NSLog(@"Could not look up a localization for %@ in table %@!", string, tableName);
+    ErrorLog(@"Could not look up a localization for %@ in table %@!", string, tableName);
     return string;
 }
 
@@ -326,7 +328,7 @@ static InformationGatherer* defaultInstance = nil;
                                                error:&error];
     if (!dirList)
     {
-        NSLog(@"Failed getting dirlist: %@", [error localizedDescription]);
+        ErrorLog(@"Failed getting dirlist: %@", [error localizedDescription]);
         return [NSSet set];
     }
     
