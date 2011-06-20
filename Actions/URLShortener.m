@@ -100,7 +100,8 @@ static NSString * const IsgdAPIURL = @"http://is.gd/create.php?format=json&url=%
         [parameters addObject:[NSString stringWithKey:@"x_apiKey" value:xApiKey]];
     }
 
-    NSURL *requestUrl = [NSURL URLWithString:[urlWithoutParams stringByAppendingString:[parameters componentsJoinedByString:@"&"]]];
+    NSString *urlWithParams = [urlWithoutParams stringByAppendingString:[parameters componentsJoinedByString:@"&"]];
+    NSURL *requestUrl = [NSURL URLWithString:urlWithParams];
     
     DLog(@"Shortening with url: %@", requestUrl);
     
@@ -141,13 +142,10 @@ static NSString * const IsgdAPIURL = @"http://is.gd/create.php?format=json&url=%
 
 + (NSString *) googlShorten:(NSString *)url
 {
-    NSString *urlWithoutParams = [NSString stringWithFormat:GooglAPIURL, GoogleAPIKey];
-
     // TODO: ClientLogin? http://code.google.com/apis/urlshortener/v1/authentication.html#token
-    NSURL *requestUrl = [NSURL URLWithString:urlWithoutParams];
-    DLog(@"Shortening with url: %@", requestUrl);
-    
+    NSURL *requestUrl = [NSURL URLWithString:[NSString stringWithFormat:GooglAPIURL, GoogleAPIKey]];
     NSDictionary *arguments = [NSDictionary dictionaryWithObject:url forKey:@"longUrl"];
+    DLog(@"Shortening with url: %@ arguments: %@", requestUrl, arguments);
 
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:requestUrl];
     [req setHTTPMethod:@"POST"];
@@ -171,7 +169,7 @@ static NSString * const IsgdAPIURL = @"http://is.gd/create.php?format=json&url=%
     }
     else
     {
-        NSLog(@"Could not shorten using goo.gl: %@", urlResponse);
+        ErrorLog(@"Could not shorten using goo.gl: %@", urlResponse);
         return nil;
     }
 }
