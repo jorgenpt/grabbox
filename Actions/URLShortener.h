@@ -11,6 +11,7 @@
 typedef enum {
     SHORTENER_NONE = 0,
     SHORTENER_BITLY = 2,
+    SHORTENER_GOOGL = 3,
 } Shortener;
 
 @interface URLShortener : NSObject

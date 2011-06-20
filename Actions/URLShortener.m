@@ -17,14 +17,19 @@ NSString *const dropboxPublicPrefix = @"/Public/";
 @interface URLShortener ()
 
 + (NSString *) bitlyShorten:(NSString *)url;
++ (NSString *) googlShorten:(NSString *)url;
 
 @end
 
 @implementation URLShortener
 
-static NSString *BITLY_APIURL = @"http://api.bit.ly/v3/%@?login=%@&apiKey=%@&",
-                *BITLY_LOGIN = @"jorgenpt",
-                *BITLY_APIKEY = @"R_3a2a07cb1af817ab7de18d17e7f0f57f";
+static NSString * const BitlyAPIURL = @"http://api.bit.ly/v3/%@?login=%@&apiKey=%@&",
+                * const BitlyAPIKey = @"R_3a2a07cb1af817ab7de18d17e7f0f57f",
+                * const BitlyLogin  = @"jorgenpt";
+
+
+static NSString * const GooglAPIURL  = @"https://www.googleapis.com/urlshortener/v1/url?key=%@",
+                * const GoogleAPIKey = @"AIzaSyBUiAwd0JJaKz3iSSfZAGv4Vk69Mw2ubGk";
 
 + (NSString *) urlForPath:(NSString *)path
 {
@@ -47,6 +52,12 @@ static NSString *BITLY_APIURL = @"http://api.bit.ly/v3/%@?login=%@&apiKey=%@&",
                                                     withName:@"URL Shortener"
                                                        value:@"bit.ly"];
             break;
+        case SHORTENER_GOOGL:
+            shortURL = [self googlShorten:directURL];
+            [[DMTracker defaultTracker] trackEventInCategory:@"Features"
+                                                    withName:@"URL Shortener"
+                                                       value:@"goo.gl"];
+            break;
         case SHORTENER_NONE:
             [[DMTracker defaultTracker] trackEventInCategory:@"Features"
                                                     withName:@"URL Shortener"
@@ -68,7 +79,7 @@ static NSString *BITLY_APIURL = @"http://api.bit.ly/v3/%@?login=%@&apiKey=%@&",
 + (NSString *) bitlyShorten:(NSString *)url
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *urlWithoutParams = [NSString stringWithFormat:BITLY_APIURL, @"shorten", BITLY_LOGIN, BITLY_APIKEY];
+    NSString *urlWithoutParams = [NSString stringWithFormat:BitlyAPIURL, @"shorten", BitlyLogin, BitlyAPIKey];
     NSMutableArray *parameters = [NSMutableArray array];
     [parameters addObject:[NSString stringWithKey:@"longUrl" value:url]];
     
@@ -82,12 +93,12 @@ static NSString *BITLY_APIURL = @"http://api.bit.ly/v3/%@?login=%@&apiKey=%@&",
 
     NSURL *requestUrl = [NSURL URLWithString:[urlWithoutParams stringByAppendingString:[parameters componentsJoinedByString:@"&"]]];
     
-    DLog(@"Shortening with url: %@", url);
+    DLog(@"Shortening with url: %@", requestUrl);
     
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:requestUrl];
     
     NSHTTPURLResponse *urlResponse = nil;  
-    NSError *error = [[[NSError alloc] init] autorelease];  
+    NSError *error = nil;
     
     NSData *data = [NSURLConnection sendSynchronousRequest:req
                                          returningResponse:&urlResponse
@@ -108,13 +119,50 @@ static NSString *BITLY_APIURL = @"http://api.bit.ly/v3/%@?login=%@&apiKey=%@&",
         }
         else
         {
-            NSLog(@"Could not shorten using bit.ly: %@ %@", statusCode, [dict objectForKey:@"status_txt"]);
+            ErrorLog(@"Could not shorten using bit.ly: %@ %@", statusCode, [dict objectForKey:@"status_txt"]);
             return nil;
         }
     }
     else
     {
-        NSLog(@"Could not shorten using bit.ly: %@", urlResponse);
+        ErrorLog(@"Could not shorten using bit.ly: %@", urlResponse);
+        return nil;
+    }
+}
+
++ (NSString *) googlShorten:(NSString *)url
+{
+    NSString *urlWithoutParams = [NSString stringWithFormat:GooglAPIURL, GoogleAPIKey];
+
+    // TODO: ClientLogin? http://code.google.com/apis/urlshortener/v1/authentication.html#token
+    NSURL *requestUrl = [NSURL URLWithString:urlWithoutParams];
+    DLog(@"Shortening with url: %@", requestUrl);
+    
+    NSDictionary *arguments = [NSDictionary dictionaryWithObject:url forKey:@"longUrl"];
+
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:requestUrl];
+    [req setHTTPMethod:@"POST"];
+    [req setHTTPBody:[[arguments JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding]];
+    [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    NSHTTPURLResponse *urlResponse = nil;  
+    NSError *error = nil;  
+    
+    NSData *data = [NSURLConnection sendSynchronousRequest:req
+                                         returningResponse:&urlResponse
+                                                     error:&error];
+    
+    if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300)
+    {
+        SBJsonParser *jsonParser = [[SBJsonParser new] autorelease];
+        NSString *jsonString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+        NSDictionary *dict = (NSDictionary*)[jsonParser objectWithString:jsonString];
+        DLog(@"Got OK! Response: %@", dict);
+        return [dict objectForKey:@"id"];
+    }
+    else
+    {
+        NSLog(@"Could not shorten using goo.gl: %@", urlResponse);
         return nil;
     }
 }
