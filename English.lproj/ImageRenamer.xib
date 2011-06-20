@@ -16,6 +16,7 @@
 			<string>NSView</string>
 			<string>NSWindowTemplate</string>
 			<string>NSTextFieldCell</string>
+			<string>NSProgressIndicator</string>
 			<string>NSImageCell</string>
 			<string>NSButtonCell</string>
 			<string>NSImageView</string>
@@ -191,7 +192,6 @@
 							<string key="NSFrame">{{298, 13}, {96, 32}}</string>
 							<reference key="NSSuperview" ref="334290846"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="245139607">
@@ -207,6 +207,16 @@
 								<int key="NSPeriodicDelay">200</int>
 								<int key="NSPeriodicInterval">25</int>
 							</object>
+						</object>
+						<object class="NSProgressIndicator" id="107733375">
+							<reference key="NSNextResponder" ref="334290846"/>
+							<int key="NSvFlags">1313</int>
+							<object class="NSPSMatrix" key="NSDrawMatrix"/>
+							<string key="NSFrame">{{330, 15}, {32, 32}}</string>
+							<reference key="NSSuperview" ref="334290846"/>
+							<reference key="NSWindow"/>
+							<int key="NSpiFlags">28682</int>
+							<double key="NSMaxValue">100</double>
 						</object>
 					</object>
 					<string key="NSFrame">{{7, 11}, {408, 322}}</string>
@@ -263,6 +273,22 @@
 					</object>
 					<int key="connectionID">21</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">spinner</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="107733375"/>
+					</object>
+					<int key="connectionID">26</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">renameButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="257343270"/>
+					</object>
+					<int key="connectionID">27</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -310,6 +336,7 @@
 							<reference ref="243218689"/>
 							<reference ref="1025435270"/>
 							<reference ref="257343270"/>
+							<reference ref="107733375"/>
 						</object>
 						<reference key="parent" ref="913586973"/>
 					</object>
@@ -383,6 +410,11 @@
 						<reference key="object" ref="245139607"/>
 						<reference key="parent" ref="257343270"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">25</int>
+						<reference key="object" ref="107733375"/>
+						<reference key="parent" ref="334290846"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -397,6 +429,7 @@
 					<string>12.IBPluginDependency</string>
 					<string>13.IBPluginDependency</string>
 					<string>14.IBPluginDependency</string>
+					<string>25.IBPluginDependency</string>
 					<string>3.IBEditorWindowLastContentRect</string>
 					<string>3.IBPluginDependency</string>
 					<string>3.IBWindowTemplateEditedContentRect</string>
@@ -410,6 +443,7 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -442,7 +476,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">24</int>
+			<int key="maxID">27</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -467,12 +501,16 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>imageView</string>
 							<string>name</string>
+							<string>renameButton</string>
+							<string>spinner</string>
 							<string>window</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSImageView</string>
 							<string>NSTextField</string>
+							<string>NSButton</string>
+							<string>NSProgressIndicator</string>
 							<string>NSWindow</string>
 						</object>
 					</object>
@@ -482,6 +520,8 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>imageView</string>
 							<string>name</string>
+							<string>renameButton</string>
+							<string>spinner</string>
 							<string>window</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -493,6 +533,14 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">name</string>
 								<string key="candidateClassName">NSTextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">renameButton</string>
+								<string key="candidateClassName">NSButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">spinner</string>
+								<string key="candidateClassName">NSProgressIndicator</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">window</string>

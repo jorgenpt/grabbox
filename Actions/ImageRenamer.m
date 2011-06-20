@@ -25,6 +25,8 @@
 @synthesize path;
 
 @synthesize window;
+@synthesize renameButton;
+@synthesize spinner;
 @synthesize imageView;
 @synthesize name;
 
@@ -143,6 +145,9 @@
         NSString* filename = [inputFilename stringByAppendingPathExtension:extension];
         NSString* newPath = [[[self path] stringByDeletingLastPathComponent] stringByAppendingPathComponent:filename];
 
+        [spinner startAnimation:self];
+        [renameButton setHidden:YES];
+
         [restClient loadMetadata:newPath];
     } else {
         [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
@@ -158,6 +163,9 @@
 {
     [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
                                             withName:@"Rename File Exists"];
+
+    [renameButton setHidden:NO];
+    [spinner stopAnimation:self];
     NSAlert* alert = [NSAlert alertWithMessageText:nil
                                      defaultButton:nil
                                    alternateButton:nil

@@ -11,14 +11,19 @@
 @interface ImageRenamer : NSObject <DBRestClientDelegate> {
     DBRestClient *restClient;
 
-    NSWindow *window;
-    NSImageView *imageView;
-    NSTextField *name;
     NSImage *image;
     NSString *path;
+
+    NSWindow *window;
+    NSButton *renameButton;
+    NSProgressIndicator *spinner;
+    NSImageView *imageView;
+    NSTextField *name;
 }
 
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSButton *renameButton;
+@property (assign) IBOutlet NSProgressIndicator *spinner;
 @property (assign) IBOutlet NSImageView *imageView;
 @property (assign) IBOutlet NSTextField *name;
 
