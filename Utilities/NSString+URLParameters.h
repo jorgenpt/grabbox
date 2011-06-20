@@ -10,6 +10,9 @@
 
 @interface NSString (URLParameters)
 
+- (NSString *) stringByAddingPercentEscapesAndEscapeCharactersInString:(NSString *)escape;
+- (NSString *) stringByAddingPercentEscapesForQuery;
+
 + (id) stringWithKey:(NSString *)key
                value:(NSString *)value;
 

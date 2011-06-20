@@ -18,6 +18,7 @@ NSString *const dropboxPublicPrefix = @"/Public/";
 
 + (NSString *) bitlyShorten:(NSString *)url;
 + (NSString *) googlShorten:(NSString *)url;
++ (NSString *) isgdShorten:(NSString *)url;
 
 @end
 
@@ -31,6 +32,8 @@ static NSString * const BitlyAPIURL = @"http://api.bit.ly/v3/%@?login=%@&apiKey=
 static NSString * const GooglAPIURL  = @"https://www.googleapis.com/urlshortener/v1/url?key=%@",
                 * const GoogleAPIKey = @"AIzaSyBUiAwd0JJaKz3iSSfZAGv4Vk69Mw2ubGk";
 
+static NSString * const IsgdAPIURL = @"http://is.gd/create.php?format=json&url=%@";
+
 + (NSString *) urlForPath:(NSString *)path
 {
     NSString *dropboxId = [[(GrabBoxAppDelegate*)[NSApp delegate] account] userId];
@@ -39,11 +42,11 @@ static NSString * const GooglAPIURL  = @"https://www.googleapis.com/urlshortener
         path = [path substringFromIndex:[dropboxPublicPrefix length]];
     // TODO: Handle non-prefixed URLs with yet-to-come API?
 
-    NSString *escapedPath = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *escapedPath = [path stringByAddingPercentEscapesAndEscapeCharactersInString:@":?#[]@!$&’()*+,;="];
     NSString *directURL = [NSString stringWithFormat:@"http://dl.dropbox.com/u/%@/%@", dropboxId, escapedPath];
     NSString *shortURL = nil;
 
-    DLog(@"Shortening with service %i.", service);
+    DLog(@"Shortening with service %i (%@).", service, directURL);
     switch (service)
     {
         case SHORTENER_BITLY:
@@ -57,6 +60,12 @@ static NSString * const GooglAPIURL  = @"https://www.googleapis.com/urlshortener
             [[DMTracker defaultTracker] trackEventInCategory:@"Features"
                                                     withName:@"URL Shortener"
                                                        value:@"goo.gl"];
+            break;
+        case SHORTENER_ISGD:
+            shortURL = [self isgdShorten:directURL];
+            [[DMTracker defaultTracker] trackEventInCategory:@"Features"
+                                                    withName:@"URL Shortener"
+                                                       value:@"is.gd"];
             break;
         case SHORTENER_NONE:
             [[DMTracker defaultTracker] trackEventInCategory:@"Features"
@@ -163,6 +172,47 @@ static NSString * const GooglAPIURL  = @"https://www.googleapis.com/urlshortener
     else
     {
         NSLog(@"Could not shorten using goo.gl: %@", urlResponse);
+        return nil;
+    }
+}
+
++ (NSString *) isgdShorten:(NSString *)url
+{
+    NSString *encodedUrl =  [url stringByAddingPercentEscapesForQuery];
+    NSURL *requestUrl = [NSURL URLWithString:[NSString stringWithFormat:IsgdAPIURL, encodedUrl]];
+    DLog(@"Shortening with url: %@", requestUrl);
+
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:requestUrl];
+    
+    NSHTTPURLResponse *urlResponse = nil;  
+    NSError *error = nil;
+    
+    NSData *data = [NSURLConnection sendSynchronousRequest:req
+                                         returningResponse:&urlResponse
+                                                     error:&error];
+    
+    if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300)
+    {
+        SBJsonParser *jsonParser = [[SBJsonParser new] autorelease];
+        NSString *jsonString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+        NSDictionary *dict = (NSDictionary*)[jsonParser objectWithString:jsonString];
+        NSNumber *errorCode = [dict objectForKey:@"errorcode"];
+        
+        if (!errorCode)
+        {
+            NSString *shortURL = [dict objectForKey:@"shorturl"];
+            DLog(@"Got OK! ShortURL: %@", shortURL);
+            return shortURL;
+        }
+        else
+        {
+            ErrorLog(@"Could not shorten using is.gd: %@ %@", errorCode, [dict objectForKey:@"errormessage"]);
+            return nil;
+        }
+    }
+    else
+    {
+        ErrorLog(@"Could not shorten using is.gd: %@", urlResponse);
         return nil;
     }
 }

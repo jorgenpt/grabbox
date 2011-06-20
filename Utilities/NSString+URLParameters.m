@@ -11,11 +11,26 @@
 
 @implementation NSString (URLParameters)
 
+- (NSString *) stringByAddingPercentEscapesAndEscapeCharactersInString:(NSString *)escape
+{
+    NSString *result = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                                 (CFStringRef)self,
+                                                                                 NULL,
+                                                                                 (CFStringRef)escape,
+                                                                                 kCFStringEncodingUTF8));
+    return [result autorelease];
+}
+
+- (NSString *) stringByAddingPercentEscapesForQuery
+{
+    return [self stringByAddingPercentEscapesAndEscapeCharactersInString:@":/?#[]@!$&’()*+,;="];
+}
+
 + (id) stringWithKey:(NSString *)key
                value:(NSString *)value
 {
-    key = [key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    value = [value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    key = [key stringByAddingPercentEscapesForQuery];
+    value = [value stringByAddingPercentEscapesForQuery];
     return [NSString stringWithFormat:@"%@=%@", key, value];
 }
 
