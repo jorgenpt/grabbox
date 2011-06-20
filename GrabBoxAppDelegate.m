@@ -150,6 +150,11 @@ static void translateEvent(ConstFSEventStreamRef stream,
     }
 
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SUSendProfileInfo"];
+
+#if defined(DEBUG)
+    [[DMTracker defaultTracker] disable];
+#endif
+
     [[DMTracker defaultTracker] startApp];
     
     NSString* value = (NSString*)CFPreferencesCopyValue(CFSTR("type"), CFSTR("com.apple.screencapture"),

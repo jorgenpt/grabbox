@@ -8,14 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
-@class DMTrackingQueue;
+@protocol DMTrackingQueueProtocol
+
+- (NSUInteger)count;
+- (NSDictionary *)eventAtIndex:(NSUInteger)index;
+
+- (void)add:(NSDictionary *)event;
+- (void)send:(NSDictionary *)event;
+
+- (void)flush;
+- (BOOL)blockingFlush;
+
+@end
 
 /**
   A class representing an ongoing application session for tracking purposes.
  */
 @interface DMTracker : NSObject {
 @private
-    DMTrackingQueue *queue;
+    id<DMTrackingQueueProtocol> queue;
     NSString *session;
     int flow;
 }
@@ -29,6 +40,11 @@
   Initialize the tracker for a new session with your app.
  */
 - (void)startApp;
+
+/**
+  Discard all requests to the tracker.
+ */
+- (void)disable;
 
 /**
   Finalize the current app session. Only valid a single time after a call to
