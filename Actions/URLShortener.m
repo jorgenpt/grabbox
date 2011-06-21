@@ -19,6 +19,7 @@ NSString *const dropboxPublicPrefix = @"/Public/";
 + (NSString *) bitlyShorten:(NSString *)url;
 + (NSString *) googlShorten:(NSString *)url;
 + (NSString *) isgdShorten:(NSString *)url;
++ (NSString *) tinyurlShorten:(NSString *)url;
 
 @end
 
@@ -33,6 +34,8 @@ static NSString * const GooglAPIURL  = @"https://www.googleapis.com/urlshortener
                 * const GoogleAPIKey = @"AIzaSyBUiAwd0JJaKz3iSSfZAGv4Vk69Mw2ubGk";
 
 static NSString * const IsgdAPIURL = @"http://is.gd/create.php?format=json&url=%@";
+
+static NSString * const TinyurlApiURL = @"http://tinyurl.com/api-create.php?url=%@";
 
 + (NSString *) urlForPath:(NSString *)path
 {
@@ -67,6 +70,12 @@ static NSString * const IsgdAPIURL = @"http://is.gd/create.php?format=json&url=%
                                                     withName:@"URL Shortener"
                                                        value:@"is.gd"];
             break;
+        case SHORTENER_TINYURL:
+            shortURL = [self tinyurlShorten:directURL];
+            [[DMTracker defaultTracker] trackEventInCategory:@"Features"
+                                                    withName:@"URL Shortener"
+                                                       value:@"tinyurl.com"];
+            break;
         case SHORTENER_NONE:
             [[DMTracker defaultTracker] trackEventInCategory:@"Features"
                                                     withName:@"URL Shortener"
@@ -91,7 +100,7 @@ static NSString * const IsgdAPIURL = @"http://is.gd/create.php?format=json&url=%
     NSString *urlWithoutParams = [NSString stringWithFormat:BitlyAPIURL, @"shorten", BitlyLogin, BitlyAPIKey];
     NSMutableArray *parameters = [NSMutableArray array];
     [parameters addObject:[NSString stringWithKey:@"longUrl" value:url]];
-    
+
     NSString *xLogin = [defaults stringForKey:CONFIG(BitlyLogin)],
              *xApiKey = [defaults stringForKey:CONFIG(BitlyApiKey)];
     if ([xLogin length] && [xApiKey length])
@@ -102,25 +111,25 @@ static NSString * const IsgdAPIURL = @"http://is.gd/create.php?format=json&url=%
 
     NSString *urlWithParams = [urlWithoutParams stringByAppendingString:[parameters componentsJoinedByString:@"&"]];
     NSURL *requestUrl = [NSURL URLWithString:urlWithParams];
-    
+
     DLog(@"Shortening with url: %@", requestUrl);
-    
+
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:requestUrl];
-    
-    NSHTTPURLResponse *urlResponse = nil;  
+
+    NSHTTPURLResponse *urlResponse = nil;
     NSError *error = nil;
-    
+
     NSData *data = [NSURLConnection sendSynchronousRequest:req
                                          returningResponse:&urlResponse
                                                      error:&error];
-    
+
     if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300)
     {
         SBJsonParser *jsonParser = [[SBJsonParser new] autorelease];
         NSString *jsonString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
         NSDictionary *dict = (NSDictionary*)[jsonParser objectWithString:jsonString];
         NSNumber *statusCode = [dict objectForKey:@"status_code"];
-        
+
         if ([statusCode intValue] == 200)
         {
             NSString *shortURL = [[dict objectForKey:@"data"] objectForKey:@"url"];
@@ -151,14 +160,14 @@ static NSString * const IsgdAPIURL = @"http://is.gd/create.php?format=json&url=%
     [req setHTTPMethod:@"POST"];
     [req setHTTPBody:[[arguments JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding]];
     [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
-    NSHTTPURLResponse *urlResponse = nil;  
-    NSError *error = nil;  
-    
+
+    NSHTTPURLResponse *urlResponse = nil;
+    NSError *error = nil;
+
     NSData *data = [NSURLConnection sendSynchronousRequest:req
                                          returningResponse:&urlResponse
                                                      error:&error];
-    
+
     if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300)
     {
         SBJsonParser *jsonParser = [[SBJsonParser new] autorelease];
@@ -176,26 +185,25 @@ static NSString * const IsgdAPIURL = @"http://is.gd/create.php?format=json&url=%
 
 + (NSString *) isgdShorten:(NSString *)url
 {
-    NSString *encodedUrl =  [url stringByAddingPercentEscapesForQuery];
-    NSURL *requestUrl = [NSURL URLWithString:[NSString stringWithFormat:IsgdAPIURL, encodedUrl]];
+    NSURL *requestUrl = [NSURL URLWithString:[NSString stringWithFormat:IsgdAPIURL, url]];
     DLog(@"Shortening with url: %@", requestUrl);
 
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:requestUrl];
-    
-    NSHTTPURLResponse *urlResponse = nil;  
+
+    NSHTTPURLResponse *urlResponse = nil;
     NSError *error = nil;
-    
+
     NSData *data = [NSURLConnection sendSynchronousRequest:req
                                          returningResponse:&urlResponse
                                                      error:&error];
-    
+
     if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300)
     {
         SBJsonParser *jsonParser = [[SBJsonParser new] autorelease];
         NSString *jsonString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
         NSDictionary *dict = (NSDictionary*)[jsonParser objectWithString:jsonString];
         NSNumber *errorCode = [dict objectForKey:@"errorcode"];
-        
+
         if (!errorCode)
         {
             NSString *shortURL = [dict objectForKey:@"shorturl"];
@@ -211,6 +219,42 @@ static NSString * const IsgdAPIURL = @"http://is.gd/create.php?format=json&url=%
     else
     {
         ErrorLog(@"Could not shorten using is.gd: %@", urlResponse);
+        return nil;
+    }
+}
+
++ (NSString *) tinyurlShorten:(NSString *)url
+{
+    NSURL *requestUrl = [NSURL URLWithString:[NSString stringWithFormat:TinyurlApiURL, url]];
+    DLog(@"Shortening with url: %@", requestUrl);
+
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:requestUrl];
+
+    NSHTTPURLResponse *urlResponse = nil;
+    NSError *error = nil;
+
+    NSData *data = [NSURLConnection sendSynchronousRequest:req
+                                         returningResponse:&urlResponse
+                                                     error:&error];
+
+    if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300)
+    {
+        NSString *shortURL = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+
+        if ([shortURL hasPrefix:@"http://"])
+        {
+            DLog(@"Got OK! ShortURL: %@", shortURL);
+            return shortURL;
+        }
+        else
+        {
+            ErrorLog(@"Could not shorten using tinyurl.com: %@", shortURL);
+            return nil;
+        }
+    }
+    else
+    {
+        ErrorLog(@"Could not shorten using tinyurl.com: %@", urlResponse);
         return nil;
     }
 }

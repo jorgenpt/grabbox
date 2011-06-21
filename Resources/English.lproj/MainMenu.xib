@@ -1177,6 +1177,17 @@
 															<int key="NSTag">4</int>
 															<reference key="NSTarget" ref="130693819"/>
 														</object>
+														<object class="NSMenuItem" id="594492931">
+															<reference key="NSMenu" ref="355113635"/>
+															<string key="NSTitle">tinyurl.com</string>
+															<string key="NSKeyEquiv"/>
+															<int key="NSMnemonicLoc">2147483647</int>
+															<reference key="NSOnImage" ref="35465992"/>
+															<reference key="NSMixedImage" ref="502551668"/>
+															<string key="NSAction">_popUpItemAction:</string>
+															<int key="NSTag">5</int>
+															<reference key="NSTarget" ref="130693819"/>
+														</object>
 													</object>
 													<reference key="NSMenuFont" ref="412476397"/>
 												</object>
@@ -2915,6 +2926,7 @@
 							<reference ref="408489291"/>
 							<reference ref="237936890"/>
 							<reference ref="846957051"/>
+							<reference ref="594492931"/>
 						</object>
 						<reference key="parent" ref="130693819"/>
 					</object>
@@ -3421,6 +3433,11 @@
 						<reference key="object" ref="846957051"/>
 						<reference key="parent" ref="355113635"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1024</int>
+						<reference key="object" ref="594492931"/>
+						<reference key="parent" ref="355113635"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -3432,6 +3449,7 @@
 					<string>-3.IBPluginDependency</string>
 					<string>1022.IBPluginDependency</string>
 					<string>1023.IBPluginDependency</string>
+					<string>1024.IBPluginDependency</string>
 					<string>129.IBPluginDependency</string>
 					<string>129.ImportedFromIB2</string>
 					<string>130.IBPluginDependency</string>
@@ -3677,6 +3695,7 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3944,7 +3963,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1023</int>
+			<int key="maxID">1024</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
