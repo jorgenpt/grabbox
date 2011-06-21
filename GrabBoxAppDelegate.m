@@ -137,7 +137,15 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void) applicationWillFinishLaunching:(NSNotification *)aNotification
 {
-    BOOL showInDock = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowInDock"];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+
+	NSString *defaultsPath = [[NSBundle mainBundle] pathForResource:@"Defaults"
+                                                          ofType:@"plist"];
+    NSDictionary *defaults = [NSDictionary dictionaryWithContentsOfFile:defaultsPath];
+    if (defaults)
+        [userDefaults registerDefaults:defaults];
+
+    BOOL showInDock = [userDefaults boolForKey:@"ShowInDock"];
     if (showInDock)
     {
         ProcessSerialNumber psn = { 0, kCurrentProcess };
@@ -149,21 +157,21 @@ static void translateEvent(ConstFSEventStreamRef stream,
         }
     }
 
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"SUSendProfileInfo"];
+    [userDefaults setBool:YES forKey:@"SUSendProfileInfo"];
 
 #if defined(DEBUG)
     [[DMTracker defaultTracker] disable];
 #endif
 
     [[DMTracker defaultTracker] startApp];
-    
+
     NSString* value = (NSString*)CFPreferencesCopyValue(CFSTR("type"), CFSTR("com.apple.screencapture"),
                                                         kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     [value autorelease];
 
     if (value == nil || ![value isKindOfClass:[NSString class]])
         value = @"Not set / invalid value";
-    
+
     [[DMTracker defaultTracker] trackEventInCategory:@"Features"
                                             withName:@"Screencapture type"
                                                value:value];
@@ -214,7 +222,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 {
     [notifier start];
     /* TODO: Not needed!
-    
+
     BOOL hasBeenNagged = [[NSUserDefaults standardUserDefaults] boolForKey:@"HasBeenNagged"];
     int numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
     if (!hasBeenNagged && numberOfScreenshots >= 15)
@@ -366,7 +374,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
             break;
         }
     }
-    
+
     if (!bits)
     {
         GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload from clipboard!"
@@ -457,7 +465,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [self setAccount:nil];
     [self stopMonitoring];
     [self setCanInteract:NO];
-    
+
     [self promptForLink];
 }
 
