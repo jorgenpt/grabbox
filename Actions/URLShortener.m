@@ -185,7 +185,8 @@ static NSString * const TinyurlApiURL = @"http://tinyurl.com/api-create.php?url=
 
 + (NSString *) isgdShorten:(NSString *)url
 {
-    NSURL *requestUrl = [NSURL URLWithString:[NSString stringWithFormat:IsgdAPIURL, url]];
+    NSString *encodedUrl = [url stringByAddingPercentEscapesForQuery];
+    NSURL *requestUrl = [NSURL URLWithString:[NSString stringWithFormat:IsgdAPIURL, encodedUrl]];
     DLog(@"Shortening with url: %@", requestUrl);
 
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:requestUrl];
