@@ -25,7 +25,7 @@
         [self setUploads:[NSMutableDictionary dictionary]];
         queue = dispatch_queue_create("no.devSoft.GrabBox2.uploaderQueue", NULL);
         dispatch_set_target_queue(queue, dispatch_get_main_queue());
-        
+
         [self setQueueIsSuspended:NO];
 
         __block id manager = self;
@@ -38,7 +38,7 @@
                 reachable = NO;
             else if ((flags & kSCNetworkReachabilityFlagsConnectionRequired) != 0)
                 reachable = NO;
-            
+
             if (reachable)
             {
                 DLog(@"Reachable, queueIsSuspended: %i", [manager queueIsSuspended]);
@@ -54,13 +54,13 @@
                 [manager setQueueIsSuspended:YES];
             }
         }];
-        
+
         DLog(@"Polling notifier.");
         [notifier poll];
         DLog(@"Scheduling notifier.");
         [notifier schedule];
     }
-    
+
     return self;
 }
 
@@ -74,7 +74,7 @@
 }
 
 
-- (void) scheduleUpload:(UploadInitiator *)uploader
+- (void) scheduleUpload:(Uploader *)uploader
 {
     [uploads setObject:uploader
                 forKey:[uploader srcPath]];
@@ -82,7 +82,7 @@
     dispatch_async(queue, ^{ [uploader upload]; });
 }
 
-- (void) upload:(UploadInitiator *)uploader
+- (void) upload:(Uploader *)uploader
 {
     [uploads setObject:uploader
                 forKey:[uploader srcPath]];

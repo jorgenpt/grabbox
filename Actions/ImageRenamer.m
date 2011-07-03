@@ -8,7 +8,7 @@
 
 #import "ImageRenamer.h"
 #import "Growler.h"
-#import "UploadInitiator.h"
+#import "Uploader.h"
 #import "URLShortener.h"
 
 @interface ImageRenamer ()
@@ -202,7 +202,13 @@
             toPath:(NSString *)newPath
 {
     [self setPath:newPath];
-    [UploadInitiator pasteboardURLForPath:newPath basedOnFile:nil];
+    if ([Uploader pasteboardURLForPath:newPath basedOnFile:nil])
+    {
+        GrowlerGrowl *success = [GrowlerGrowl growlWithName:@"Screenshot Renamed"
+                                                      title:@"Screenshot renamed!"
+                                                description:@"The screenshot has been renamed and an updated link put in your clipboard."];
+        [Growler growl:success];
+    }
     [[self window] performClose:self];
 }
 

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "UploadInitiator.h"
+#import "Uploader.h"
 #import "NetworkReachabilityNotifier.h"
 
 @interface UploadManager : NSObject {
@@ -19,8 +19,8 @@
     NSMutableDictionary *uploads;
 }
 
-- (void) scheduleUpload:(UploadInitiator *)uploader;
-- (void) upload:(UploadInitiator *)uploader;
+- (void) scheduleUpload:(Uploader *)uploader;
+- (void) upload:(Uploader *)uploader;
 - (void) uploaderDone:(id)uploader;
 
 @end

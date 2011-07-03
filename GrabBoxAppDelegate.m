@@ -10,7 +10,7 @@
 #import "FSRefConversions.h"
 
 #import "Growler.h"
-#import "UploadInitiator.h"
+#import "Uploader.h"
 
 @interface GrabBoxAppDelegate ()
 
@@ -211,9 +211,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
         if ([entry hasPrefix:@"."])
             continue;
 
-        UploadInitiator* up = [UploadInitiator uploadInitiatorForFile:entry
-                                                               atPath:[info workQueuePath]
-                                                               toPath:@"/Public/Screenshots"];
+        Uploader* up = [Uploader uploaderForFile:entry
+                                     inDirectory:[info workQueuePath]];
         [manager scheduleUpload:up];
     }
 }
@@ -311,9 +310,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void) uploadScreenshot:(NSString *)file
 {
-    UploadInitiator* up = [UploadInitiator uploadInitiatorForFile:file
-                                                           atPath:[info screenshotPath]
-                                                           toPath:@"/Public/Screenshots"];
+    Uploader* up = [Uploader uploaderForFile:file
+                                 inDirectory:[info screenshotPath]];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PromptBeforeUploading"])
     {
         [[DMTracker defaultTracker] trackEventInCategory:@"Features"
@@ -391,9 +389,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
     NSString *filename = [self workQueueFilenameForClipboardData];
     if (![data writeToFile:filename options:0 error:&error])
     {
-        UploadInitiator* up = [UploadInitiator uploadInitiatorForFile:[filename lastPathComponent]
-                                                               atPath:[filename stringByDeletingLastPathComponent]
-                                                               toPath:@"/Public/Screenshots"];
+        Uploader* up = [Uploader uploaderForFile:[filename lastPathComponent]
+                                     inDirectory:[filename stringByDeletingLastPathComponent]];
         [manager scheduleUpload:up];
     }
     else

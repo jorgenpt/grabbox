@@ -1,5 +1,5 @@
 //
-//  UploadInitiator.h
+//  Uploader.h
 //  GrabBox
 //
 //  Created by Jørgen P. Tjernø on 7/12/10.
@@ -8,36 +8,34 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface NSObject (UploadInitiatorDelegateInformalProtocol)
+@interface NSObject (UploaderDelegateInformalProtocol)
 - (void) upload:(id)uploader;
 - (void) scheduleUpload:(id)uploader;
 - (void) uploaderDone:(id)uploader;
 @end
 
-@interface UploadInitiator : NSObject <DBRestClientDelegate> {
+@interface Uploader : NSObject {
     id delegate;
-
     int retries;
-
-    DBRestClient *restClient;
     NSString *srcFile;
     NSString *srcPath;
-    NSString *destFile;
-    NSString *destPath;
 }
 
 @property (assign) id delegate;
+@property (nonatomic, assign) int retries;
+@property (nonatomic, retain) NSString* srcFile;
+@property (nonatomic, retain) NSString* srcPath;
 
-+ (void) pasteboardURLForPath:(NSString *)path
++ (BOOL) pasteboardURLForPath:(NSString *)path
                   basedOnFile:(NSString *)file;
 
-+ (id) uploadInitiatorForFile:(NSString *)file
-                       atPath:(NSString *)source
-                       toPath:(NSString *)destination;
++ (NSString *) randomStringOfLength:(int)length;
+
++ (id) uploaderForFile:(NSString *)file
+           inDirectory:(NSString *)source;
 
 - (id) initForFile:(NSString *)file
-            atPath:(NSString *)source
-            toPath:(NSString *)destination;
+       inDirectory:(NSString *)source;
 
 - (void) moveToWorkQueue;
 - (void) upload;
