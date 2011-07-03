@@ -69,6 +69,8 @@ NSString * const dropboxPath = @"/Public/Screenshots";
 
 - (void) upload
 {
+    [super upload];
+
     NSString* shortName = srcFile;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"UseRandomFilename"])
     {
