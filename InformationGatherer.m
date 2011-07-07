@@ -17,7 +17,7 @@ static InformationGatherer* defaultInstance = nil;
 @property (nonatomic, retain) NSString* screenshotPath;
 @property (nonatomic, retain) NSString* localizedScreenshotPattern;
 @property (nonatomic, retain) NSString* workQueuePath;
-@property (nonatomic, assign) BOOL isSnowLeopardOrNewer;
+@property (nonatomic, assign) SInt32 osVersion;
 @property (nonatomic, retain) NSSet* dirContents;
 
 @end
@@ -27,7 +27,7 @@ static InformationGatherer* defaultInstance = nil;
 @synthesize screenshotPath;
 @synthesize workQueuePath;
 @synthesize localizedScreenshotPattern;
-@synthesize isSnowLeopardOrNewer;
+@synthesize osVersion;
 @synthesize dirContents;
 
 #pragma mark -
@@ -73,10 +73,10 @@ static InformationGatherer* defaultInstance = nil;
             [self setScreenshotPath:nil];
 
             SInt32 MacVersion;
-            if (Gestalt(gestaltSystemVersion, &MacVersion) == noErr && MacVersion < 0x1060)
-                [self setIsSnowLeopardOrNewer:NO];
+            if (Gestalt(gestaltSystemVersion, &MacVersion) == noErr)
+                [self setOsVersion:MacVersion];
             else
-                [self setIsSnowLeopardOrNewer:YES];
+                ErrorLog(@"Could not query OS version.");
         }
         return self;
     }
@@ -217,19 +217,23 @@ static InformationGatherer* defaultInstance = nil;
     if (localizedScreenshotPattern)
         return localizedScreenshotPattern;
 
-    NSString *name, *format, *formatTable;
+    NSString *name;
+    NSString *format = @"%@ %@ at %@";
+    NSString *formatTable = @"ScreenCapture";
     NSString* screenshotPattern = nil;
 
     /* These are the keys we look up for localization. */
-    if ([self isSnowLeopardOrNewer])
+    if (osVersion >= 0x1070)
     {
-        formatTable = @"Localizable";
+        name = @"Screen Shot";
+    }
+    else if (osVersion >= 0x1060)
+    {
         name = @"Screen shot";
-        format = @"%@ %@ at %@";
+        formatTable = @"Localizable";
     }
     else
     {
-        formatTable = @"ScreenCapture";
         name = @"Picture";
         format = @"%@ %@";
     }

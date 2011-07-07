@@ -12,7 +12,7 @@
     NSString* screenshotPath;
     NSString* localizedScreenshotPattern;
     NSString* workQueuePath;
-    BOOL isSnowLeopardOrNewer;
+    SInt32 osVersion;
     NSSet* dirContents;
 }
 
@@ -24,6 +24,5 @@
 - (NSSet *)createdFiles;
 - (NSSet *)filesInDirectory:(NSString *)path;
 - (NSSet *)files;
-- (BOOL)isSnowLeopardOrNewer;
 
 @end
