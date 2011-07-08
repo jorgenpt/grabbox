@@ -110,8 +110,6 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107320486CEB800E47090 /* GrabBox2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabBox2.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E2AF34111F04B8D00A29A61 /* favicon.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = favicon.ico; sourceTree = "<group>"; };
-		8E2AF34711F04BAD00A29A61 /* GrabBox 0.5.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "GrabBox 0.5.zip"; sourceTree = "<group>"; };
 		8E368D1413A5F51800EB0D90 /* NetworkReachabilityNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkReachabilityNotifier.h; sourceTree = "<group>"; };
 		8E368D1513A5F51800EB0D90 /* NetworkReachabilityNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkReachabilityNotifier.m; sourceTree = "<group>"; };
 		8E368D1713A5FA4E00EB0D90 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
@@ -120,12 +118,6 @@
 		8E49CF4C11ED14640041CE70 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ImageRenamer.xib; sourceTree = "<group>"; };
 		8E4A509E11E9155500A0A743 /* InformationGatherer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationGatherer.h; sourceTree = "<group>"; };
 		8E4A509F11E9155500A0A743 /* InformationGatherer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = InformationGatherer.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		8E4E78EA11EE2E7A00EB0CAD /* grabbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grabbox.png; sourceTree = "<group>"; };
-		8E4E78F411EE2E7A00EB0CAD /* GrabBox 0.1.1.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "GrabBox 0.1.1.zip"; sourceTree = "<group>"; };
-		8E4E78F711EE2E7A00EB0CAD /* GrabBox 0.2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "GrabBox 0.2.zip"; sourceTree = "<group>"; };
-		8E4E78F911EE2E7A00EB0CAD /* GrabBox 0.3.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "GrabBox 0.3.zip"; sourceTree = "<group>"; };
-		8E4E78FB11EE2E7A00EB0CAD /* GrabBox 0.4.1.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "GrabBox 0.4.1.zip"; sourceTree = "<group>"; };
-		8E4E78FD11EE2E7A00EB0CAD /* GrabBox 0.4.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "GrabBox 0.4.zip"; sourceTree = "<group>"; };
 		8E51825711E7CE3A00D15CAB /* FSRefConversions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSRefConversions.h; sourceTree = "<group>"; };
 		8E51825811E7CE3A00D15CAB /* FSRefConversions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSRefConversions.m; sourceTree = "<group>"; };
 		8E60861611E6D1B600881A1C /* Notifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifier.h; sourceTree = "<group>"; };
@@ -254,7 +246,6 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
-				8E4E78E811EE2E7A00EB0CAD /* Webpage */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 			);
@@ -309,31 +300,6 @@
 				8EF627E513B050CE0013A4B4 /* switch_to_menubar.png */,
 			);
 			path = Images;
-			sourceTree = "<group>";
-		};
-		8E4E78E811EE2E7A00EB0CAD /* Webpage */ = {
-			isa = PBXGroup;
-			children = (
-				8E4E78F211EE2E7A00EB0CAD /* Updates */,
-				8E2AF34111F04B8D00A29A61 /* favicon.ico */,
-				8E4E78EA11EE2E7A00EB0CAD /* grabbox.png */,
-			);
-			name = Webpage;
-			path = webpage;
-			sourceTree = "<group>";
-		};
-		8E4E78F211EE2E7A00EB0CAD /* Updates */ = {
-			isa = PBXGroup;
-			children = (
-				8E4E78F411EE2E7A00EB0CAD /* GrabBox 0.1.1.zip */,
-				8E4E78F711EE2E7A00EB0CAD /* GrabBox 0.2.zip */,
-				8E4E78F911EE2E7A00EB0CAD /* GrabBox 0.3.zip */,
-				8E4E78FB11EE2E7A00EB0CAD /* GrabBox 0.4.1.zip */,
-				8E4E78FD11EE2E7A00EB0CAD /* GrabBox 0.4.zip */,
-				8E2AF34711F04BAD00A29A61 /* GrabBox 0.5.zip */,
-			);
-			name = Updates;
-			path = updates;
 			sourceTree = "<group>";
 		};
 		8E79350012DA42710057D5ED /* Interface */ = {
