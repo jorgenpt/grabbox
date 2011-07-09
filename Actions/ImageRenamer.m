@@ -121,7 +121,7 @@
     [NSApp activateIgnoringOtherApps:YES];
 }
 
-- (BOOL) windowShouldClose
+- (BOOL) windowShouldClose:(id)sender
 {
     [self autorelease];
     return YES;

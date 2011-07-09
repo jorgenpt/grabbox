@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ImageRenamer : NSObject <DBRestClientDelegate> {
+@interface ImageRenamer : NSObject <DBRestClientDelegate, NSWindowDelegate> {
     DBRestClient *restClient;
 
     NSImage *image;
