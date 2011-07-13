@@ -11,8 +11,6 @@
 #import "Uploader.h"
 #import "ASIFormDataRequest.h"
 
-@interface ImgurUploader : Uploader {
-    ASIFormDataRequest *request;
-}
+@interface ImgurUploader : Uploader
 
 @end

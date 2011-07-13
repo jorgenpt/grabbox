@@ -150,7 +150,7 @@ NSString * const dropboxPath = @"/Public/Screenshots";
     int numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
     [[NSUserDefaults standardUserDefaults] setInteger:(numberOfScreenshots + 1)
                                                forKey:@"NumberOfScreenshotsUploaded"];
-    if ([Uploader pasteboardURLForPath:uploadedPath basedOnFile:source])
+    if ([Uploader pasteboardURLForPath:uploadedPath])
     {
         GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"URL Copied"
                                                      title:@"Screenshot uploaded!"

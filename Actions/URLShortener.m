@@ -29,7 +29,6 @@ static NSString * const BitlyAPIURL = @"http://api.bit.ly/v3/%@?login=%@&apiKey=
                 * const BitlyAPIKey = @"R_3a2a07cb1af817ab7de18d17e7f0f57f",
                 * const BitlyLogin  = @"jorgenpt";
 
-
 static NSString * const GooglAPIURL  = @"https://www.googleapis.com/urlshortener/v1/url?key=%@",
                 * const GoogleAPIKey = @"AIzaSyBUiAwd0JJaKz3iSSfZAGv4Vk69Mw2ubGk";
 
@@ -45,8 +44,12 @@ static NSString * const TinyurlApiURL = @"http://tinyurl.com/api-create.php?url=
         path = [path substringFromIndex:[dropboxPublicPrefix length]];
     // TODO: Handle non-prefixed URLs with yet-to-come API?
 
+#if 0
     NSString *escapedPath = [path stringByAddingPercentEscapesAndEscapeCharactersInString:@":?#[]@!$&’()*+,;="];
     NSString *directURL = [NSString stringWithFormat:@"http://dl.dropbox.com/u/%@/%@", dropboxId, escapedPath];
+#else
+    NSString *directURL = [path stringByAddingPercentEscapesAndEscapeCharactersInString:@"?#[]@!$&’()*+,;="];
+#endif
     NSString *shortURL = nil;
 
     DLog(@"Shortening with service %i (%@).", service, directURL);

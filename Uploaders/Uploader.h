@@ -26,8 +26,7 @@
 @property (nonatomic, retain) NSString* srcFile;
 @property (nonatomic, retain) NSString* srcPath;
 
-+ (BOOL) pasteboardURLForPath:(NSString *)path
-                  basedOnFile:(NSString *)file;
++ (BOOL) pasteboardURLForPath:(NSString *)path;
 
 + (NSString *) randomStringOfLength:(int)length;
 

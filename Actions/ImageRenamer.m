@@ -202,7 +202,7 @@
             toPath:(NSString *)newPath
 {
     [self setPath:newPath];
-    if ([Uploader pasteboardURLForPath:newPath basedOnFile:nil])
+    if ([Uploader pasteboardURLForPath:newPath])
     {
         GrowlerGrowl *success = [GrowlerGrowl growlWithName:@"Screenshot Renamed"
                                                       title:@"Screenshot renamed!"

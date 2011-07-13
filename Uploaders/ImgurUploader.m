@@ -8,33 +8,13 @@
 
 #import "ImgurUploader.h"
 
-@interface ImgurUploader ()
-@property (retain) ASIFormDataRequest *request;
-@end
+#import "JSON.h"
+#import "Growler.h"
+
+static NSString * const ImgurAPIURL = @"http://api.imgur.com/2/%@",
+                * const ImgurAPIKey = @"568fcea194ed217fc88321929ca436b5";
 
 @implementation ImgurUploader
-
-@synthesize request;
-
-- (id) init
-{
-    self = [super init];
-    if (self)
-    {
-        [self setRequest:nil];
-/*        [self setRestClient:[DBRestClient restClientWithSharedSession]];
-        if (!restClient)
-        {
-            [self release];
-            return nil;
-        }
-        
-        [restClient setDelegate:self];
-        [self setDestFilename:nil];*/
-    }
-    
-    return self;
-}
 
 - (id) initForFile:(NSString *)file
        inDirectory:(NSString *)source
@@ -48,10 +28,83 @@
     return self;
 }
 
-- (void)dealloc
+- (void) upload
 {
-    [self setRequest:nil];
-    [super dealloc];
+    [super upload];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:ImgurAPIURL, @"upload.json"]];
+
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setPostValue:ImgurAPIKey
+                   forKey:@"key"];
+    [request setPostValue:@"file" 
+                   forKey:@"type"];
+    [request setPostValue:[srcFile stringByDeletingPathExtension] 
+                   forKey:@"title"];
+    [request setFile:srcPath 
+              forKey:@"image"];
+
+    DLog(@"Trying upload of '%@'", srcPath);
+    [request setDelegate:self];
+    [request startAsynchronous];
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    // Use when fetching text data
+    NSString *responseString = [request responseString];
+    SBJsonParser *jsonParser = [[SBJsonParser new] autorelease];
+    NSDictionary *dict = (NSDictionary *)[jsonParser objectWithString:responseString];
+
+    if ([request responseStatusCode] >= 200 && [request responseStatusCode] < 300)
+    {
+        NSDictionary *upload = [dict objectForKey:@"upload"];
+        NSDictionary *links = [upload objectForKey:@"links"];
+        if ([Uploader pasteboardURLForPath:[links objectForKey:@"original"]])
+        {
+            GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"URL Copied"
+                                                         title:@"Screenshot uploaded!"
+                                                   description:@"The screenshot has been uploaded and a link put in your clipboard. Click here to give the file a more descriptive name!"];
+            [Growler growl:prompt];
+        }
+    }
+    else
+    {
+        NSDictionary *error = [dict objectForKey:@"error"];
+        ErrorLog(@"Could not upload using imgur (%@): %@", [error objectForKey:@"request"], [error objectForKey:@"message"]);
+    }
+
+    NSError *error;
+    BOOL deletedOk = [[NSFileManager defaultManager] removeItemAtPath:srcPath
+                                                                error:&error];
+    if (!deletedOk)
+        ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
+    
+    if ([delegate respondsToSelector:@selector(uploaderDone:)])
+        [delegate uploaderDone:self];
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    NSError *error = [request error];
+    [self setRetries:retries - 1];
+    DLog(@"Upload request failed, retries left: %d", retries);
+    if (retries > 0)
+    {
+        if ([delegate respondsToSelector:@selector(scheduleUpload:)])
+            [delegate scheduleUpload:self];
+        else
+            NSLog(@"Delegate %@ does not respond to scheduleUpload!", delegate);
+    }
+    else
+    {
+        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to imgur!"
+                                                         description:[NSString stringWithFormat:@"Received status code %d", [error code]]];
+        [Growler growl:errorGrowl];
+        ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
+        if ([delegate respondsToSelector:@selector(uploaderDone:)])
+            [delegate uploaderDone:self];
+    }
 }
 
 @end

@@ -12,7 +12,7 @@
 #import "ImageRenamer.h"
 #import "URLShortener.h"
 
-#import "DropboxUploader.h"
+#import "ImgurUploader.h"
 #import "UploadManager.h"
 
 @implementation Uploader
@@ -27,7 +27,6 @@
 NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
 
 + (BOOL) pasteboardURLForPath:(NSString *)path
-                  basedOnFile:(NSString *)file
 {
     NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
     [pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
@@ -64,7 +63,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
 + (id) uploaderForFile:(NSString *)file
            inDirectory:(NSString *)source
 {
-    return [[[DropboxUploader alloc] initForFile:file inDirectory:source] autorelease];
+    return [[[ImgurUploader alloc] initForFile:file inDirectory:source] autorelease];
 }
 
 - (id) init
