@@ -14,7 +14,7 @@
 #import "Menubar.h"
 #import "UploadManager.h"
 
-@interface GrabBoxAppDelegate : NSObject <DBSessionDelegate, DBCommonControllerDelegate, DBRestClientDelegate> {
+@interface GrabBoxAppDelegate : NSObject {
     NSWindow* setupWindow;
     NSWindow* restartWindow;
     NSWindow* nagWindow;
@@ -23,9 +23,6 @@
     Notifier* notifier;
     UploadManager *manager;
 
-    DBRestClient *restClient;
-    DBAccountInfo *account;
-    DBLoginController *loginController;
     BOOL canInteract;
 }
 
@@ -34,7 +31,7 @@
 @property (assign) IBOutlet NSWindow* nagWindow;
 @property (assign) IBOutlet Menubar* menubar;
 
-@property (nonatomic, retain) DBAccountInfo *account;
+@property (assign) BOOL canInteract;
 
 - (IBAction) browseUploadedScreenshots:(id)sender;
 - (IBAction) uploadFromPasteboard:(id)sender;

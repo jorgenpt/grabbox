@@ -8,7 +8,8 @@
 
 #import "ImageRenamer.h"
 #import "Growler.h"
-#import "Uploader.h"
+#import "UploaderFactory.h"
+#import "DropboxUploader.h"
 #import "URLShortener.h"
 
 @interface ImageRenamer ()
@@ -202,7 +203,7 @@
             toPath:(NSString *)newPath
 {
     [self setPath:newPath];
-    if ([Uploader pasteboardURLForPath:newPath])
+    if ([Uploader pasteboardURL:[DropboxUploader urlForPath:newPath]])
     {
         GrowlerGrowl *success = [GrowlerGrowl growlWithName:@"Screenshot Renamed"
                                                       title:@"Screenshot renamed!"

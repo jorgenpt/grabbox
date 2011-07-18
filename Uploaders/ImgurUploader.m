@@ -44,7 +44,7 @@ static NSString * const ImgurAPIURL = @"http://api.imgur.com/2/%@",
     [request setFile:srcPath 
               forKey:@"image"];
 
-    DLog(@"Trying upload of '%@'", srcPath);
+    DLog(@"Trying upload of '%@' via %@", srcPath, url);
     [request setDelegate:self];
     [request startAsynchronous];
 }
@@ -60,26 +60,28 @@ static NSString * const ImgurAPIURL = @"http://api.imgur.com/2/%@",
     {
         NSDictionary *upload = [dict objectForKey:@"upload"];
         NSDictionary *links = [upload objectForKey:@"links"];
-        if ([Uploader pasteboardURLForPath:[links objectForKey:@"original"]])
+        if ([Uploader pasteboardURL:[links objectForKey:@"original"]])
         {
             GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"URL Copied"
                                                          title:@"Screenshot uploaded!"
                                                    description:@"The screenshot has been uploaded and a link put in your clipboard. Click here to give the file a more descriptive name!"];
             [Growler growl:prompt];
         }
+        
+        NSError *error;
+        BOOL deletedOk = [[NSFileManager defaultManager] removeItemAtPath:srcPath
+                                                                    error:&error];
+        if (!deletedOk)
+            ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
     }
     else
     {
-        NSDictionary *error = [dict objectForKey:@"error"];
-        ErrorLog(@"Could not upload using imgur (%@): %@", [error objectForKey:@"request"], [error objectForKey:@"message"]);
+        ErrorLog(@"Could not upload using imgur (%d): %@", [request responseStatusCode], responseString);
+        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to imgur!"
+                                                         description:[NSString stringWithFormat:@"Received status code %d", [request responseStatusCode]]];
+        [Growler growl:errorGrowl];
     }
 
-    NSError *error;
-    BOOL deletedOk = [[NSFileManager defaultManager] removeItemAtPath:srcPath
-                                                                error:&error];
-    if (!deletedOk)
-        ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
-    
     if ([delegate respondsToSelector:@selector(uploaderDone:)])
         [delegate uploaderDone:self];
 }

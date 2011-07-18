@@ -21,8 +21,10 @@
                    path:(NSString *)newPath
        callbackArgument:(void *)info
 {
-    if (self = [super init])
+    self = [super init];
+    if (self)
     {
+        isRunning = NO;
         paths = [[NSArray arrayWithObject:newPath] retain];
         context.version = 0L;
         context.info = info;
@@ -53,12 +55,20 @@
 
 - (void) start
 {
-    FSEventStreamStart(stream);
+    if (!isRunning)
+    {
+        FSEventStreamStart(stream);
+        isRunning = YES;
+    }
 }
 
 - (void) stop
 {
-    FSEventStreamStop(stream);
+    if (isRunning)
+    {
+        FSEventStreamStop(stream);
+        isRunning = NO;
+    }
 }
 
 @end

@@ -10,6 +10,7 @@
     NSArray *paths; // Actually just one.
     FSEventStreamRef stream;
     struct FSEventStreamContext context;
+    BOOL isRunning;
 }
 
 + (id) notifierWithCallback:(FSEventStreamCallback)newCallback

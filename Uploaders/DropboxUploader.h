@@ -15,4 +15,6 @@
     NSString *destFilename;
 }
 
++ (NSString *) urlForPath:(NSString *)path;
+
 @end

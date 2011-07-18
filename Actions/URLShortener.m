@@ -12,8 +12,6 @@
 #import "NSString+URLParameters.h"
 #import "JSON.h"
 
-NSString *const dropboxPublicPrefix = @"/Public/";
-
 @interface URLShortener ()
 
 + (NSString *) bitlyShorten:(NSString *)url;
@@ -36,20 +34,10 @@ static NSString * const IsgdAPIURL = @"http://is.gd/create.php?format=json&url=%
 
 static NSString * const TinyurlApiURL = @"http://tinyurl.com/api-create.php?url=%@";
 
-+ (NSString *) urlForPath:(NSString *)path
++ (NSString *) shortURLForURL:(NSString *)url
 {
-    NSString *dropboxId = [[(GrabBoxAppDelegate*)[NSApp delegate] account] userId];
     int service = [[NSUserDefaults standardUserDefaults] integerForKey:CONFIG(URLShortener)];
-    if ([path hasPrefix:dropboxPublicPrefix])
-        path = [path substringFromIndex:[dropboxPublicPrefix length]];
-    // TODO: Handle non-prefixed URLs with yet-to-come API?
-
-#if 0
-    NSString *escapedPath = [path stringByAddingPercentEscapesAndEscapeCharactersInString:@":?#[]@!$&’()*+,;="];
-    NSString *directURL = [NSString stringWithFormat:@"http://dl.dropbox.com/u/%@/%@", dropboxId, escapedPath];
-#else
-    NSString *directURL = [path stringByAddingPercentEscapesAndEscapeCharactersInString:@"?#[]@!$&’()*+,;="];
-#endif
+    NSString *directURL = [url stringByAddingPercentEscapesAndEscapeCharactersInString:@"?#[]@!$&’()*+,;="];
     NSString *shortURL = nil;
 
     DLog(@"Shortening with service %i (%@).", service, directURL);

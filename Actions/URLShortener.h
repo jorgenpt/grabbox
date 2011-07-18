@@ -18,6 +18,6 @@ typedef enum {
 
 @interface URLShortener : NSObject
 
-+ (NSString *) urlForPath:(NSString *)path;
++ (NSString *) shortURLForURL:(NSString *)url;
 
 @end

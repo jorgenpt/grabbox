@@ -10,27 +10,22 @@
 #import "FSRefConversions.h"
 
 #import "Growler.h"
-#import "Uploader.h"
+#import "UploaderFactory.h"
 
 @interface GrabBoxAppDelegate ()
 
 @property (nonatomic, assign) InformationGatherer* info;
 @property (nonatomic, retain) Notifier* notifier;
 @property (nonatomic, retain) UploadManager *manager;
-@property (nonatomic, retain) DBRestClient *restClient;
-@property (assign) BOOL canInteract;
-@property (nonatomic, retain) DBLoginController *loginController;
 
-- (void) loggedIn;
 - (void) startMonitoring;
 - (void) stopMonitoring;
-
-- (void) promptForLink;
 
 - (void) eventForStream:(ConstFSEventStreamRef)stream
                   paths:(NSArray *)paths
                   flags:(const FSEventStreamEventFlags[])flags
                     ids:(const FSEventStreamEventId[]) ids;
+
 - (void) uploadScreenshot:(NSString *)file;
 - (NSString *) workQueueFilenameForClipboardData;
 
@@ -47,9 +42,6 @@
 @synthesize notifier;
 @synthesize manager;
 
-@synthesize restClient;
-@synthesize account;
-@synthesize loginController;
 @synthesize canInteract;
 
 static void translateEvent(ConstFSEventStreamRef stream,
@@ -72,6 +64,15 @@ static void translateEvent(ConstFSEventStreamRef stream,
                                                               forKeyPath:@"values.ShowInDock"
                                                                  options:0
                                                                  context:NULL];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(uploaderAvailable:)
+                                                 name:GBUploaderAvailableNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(uploaderUnavailable:)
+                                                 name:GBUploaderUnavailableNotification
+                                               object:nil];
 
     [self setInfo:[InformationGatherer defaultGatherer]];
     [self setNotifier:[Notifier notifierWithCallback:translateEvent
@@ -90,12 +91,11 @@ static void translateEvent(ConstFSEventStreamRef stream,
 {
     [self setInfo:nil];
     [self setNotifier:nil];
-    [self setLoginController:nil];
 
     [super dealloc];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
                         change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"values.ShowInDock"])
@@ -177,32 +177,13 @@ static void translateEvent(ConstFSEventStreamRef stream,
                                                value:value];
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+- (void) uploaderUnavailable:(NSNotification *)aNotification
 {
-    NSString *consumerKey = @"<INSERT DROPBOX CONSUMER KEY>";
-	NSString *consumerSecret = @"<INSERT DROPBOX CONSUMER SECRET>";
-
-    [[SUUpdater sharedUpdater] setDelegate:self];
-
-	DBSession *session =  [[[DBSession alloc] initWithConsumerKey:consumerKey
-                                                  consumerSecret:consumerSecret] autorelease];
-	[session setDelegate:self];
-	[DBSession setSharedSession:session];
-    [self setRestClient:[DBRestClient restClientWithSharedSession]];
-    [restClient setDelegate:self];
-
-    if ([session isLinked])
-    {
-        [restClient loadAccountInfo];
-    }
-    else
-    {
-        [self promptForLink];
-        [self setCanInteract:NO];
-    }
+    [self stopMonitoring];
+    [self setCanInteract:NO];
 }
 
-- (void) loggedIn
+- (void) uploaderAvailable:(NSNotification *)aNotification
 {
     [self startMonitoring];
     [self setCanInteract:YES];
@@ -210,11 +191,18 @@ static void translateEvent(ConstFSEventStreamRef stream,
     {
         if ([entry hasPrefix:@"."])
             continue;
-
-        Uploader* up = [Uploader uploaderForFile:entry
-                                     inDirectory:[info workQueuePath]];
+        
+        Uploader* up = [[UploaderFactory defaultFactory] uploaderForFile:entry
+                                                             inDirectory:[info workQueuePath]];
         [manager scheduleUpload:up];
     }
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
+    [[SUUpdater sharedUpdater] setDelegate:self];
+    [self uploaderUnavailable:nil];
+    [[UploaderFactory defaultFactory] loadSettings];
 }
 
 - (void) startMonitoring
@@ -237,16 +225,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
 - (void) stopMonitoring
 {
     [notifier stop];
-}
-
-- (void) promptForLink
-{
-    [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
-                                            withName:@"Account Link Prompt"];
-    [self setLoginController:[[[DBLoginController alloc] init] autorelease]];
-    [loginController setDelegate:self];
-    [loginController presentFrom:self];
-    [NSApp activateIgnoringOtherApps:YES];
 }
 
 - (void) eventForStream:(ConstFSEventStreamRef)stream
@@ -310,8 +288,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void) uploadScreenshot:(NSString *)file
 {
-    Uploader* up = [Uploader uploaderForFile:file
-                                 inDirectory:[info screenshotPath]];
+    Uploader* up = [[UploaderFactory defaultFactory] uploaderForFile:file
+                                                         inDirectory:[info screenshotPath]];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PromptBeforeUploading"])
     {
         [[DMTracker defaultTracker] trackEventInCategory:@"Features"
@@ -389,8 +367,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
     NSString *filename = [self workQueueFilenameForClipboardData];
     if (![data writeToFile:filename options:0 error:&error])
     {
-        Uploader* up = [Uploader uploaderForFile:[filename lastPathComponent]
-                                     inDirectory:[filename stringByDeletingLastPathComponent]];
+        Uploader* up = [[UploaderFactory defaultFactory] uploaderForFile:[filename lastPathComponent]
+                                                             inDirectory:[filename stringByDeletingLastPathComponent]];
         [manager scheduleUpload:up];
     }
     else
@@ -450,54 +428,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
     [NSTask launchedTaskWithLaunchPath:launcherTarget arguments:[NSArray arrayWithObjects:appPath, processID, nil]];
     [NSApp terminate:sender];
-}
-
-#pragma mark DBSession delegate methods
-
-- (void) sessionDidReceiveAuthorizationFailure:(DBSession *)session
-{
-    [[DMTracker defaultTracker] trackEventInCategory:@"Oddities"
-                                            withName:@"Authorization Failure"];
-    NSLog(@"Received authorization failure, disabling app then prompt for link!");
-    [self setAccount:nil];
-    [self stopMonitoring];
-    [self setCanInteract:NO];
-
-    [self promptForLink];
-}
-
-#pragma mark DBLoginController delegate methods
-
-- (void) controllerDidComplete:(DBLoginController *)window
-{
-    DLog(@"Account linked, trying to load account info.");
-    [self setLoginController:nil];
-    [restClient loadAccountInfo];
-}
-
-- (void) controllerDidCancel:(DBLoginController *)window
-{
-    [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
-                                            withName:@"Account Link Cancelled"];
-    DLog(@"Cancelled account link window, terminating.");
-    [NSApp terminate:self];
-}
-
-#pragma mark DBRestClient delegate methods
-
-- (void)restClient:(DBRestClient*)client
- loadedAccountInfo:(DBAccountInfo*)accountInfo
-{
-    DLog(@"Got account info, starting FS monitoring and enabling interaction!");
-    [self setAccount:accountInfo];
-    [self loggedIn];
-}
-
-
-- (void)restClient:(DBRestClient*)client loadAccountInfoFailedWithError:(NSError*)error
-{
-    ErrorLog(@"Failed retrieving account info: %ld", error.code);
-    [NSApp terminate:self];
 }
 
 @end

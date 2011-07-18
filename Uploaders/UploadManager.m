@@ -73,7 +73,6 @@
     [super dealloc];
 }
 
-
 - (void) scheduleUpload:(Uploader *)uploader
 {
     [uploads setObject:uploader

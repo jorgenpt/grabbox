@@ -26,21 +26,21 @@
 
 NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
 
-+ (BOOL) pasteboardURLForPath:(NSString *)path
++ (BOOL) pasteboardURL:(NSString *)url
 {
     NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
     [pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
 
-    NSString *url = [URLShortener urlForPath:path];
-    if (![pasteboard setString:url forType:NSStringPboardType])
+    NSString *shortURL = [URLShortener shortURLForURL:url];
+    if (![pasteboard setString:shortURL forType:NSStringPboardType])
     {
-        NSString *errorDescription = [NSString stringWithFormat:@"Could not put URL '%@' into the clipboard", url];
+        NSString *errorDescription = [NSString stringWithFormat:@"Could not put URL '%@' into the clipboard", shortURL];
         GrowlerGrowl *copyError = [GrowlerGrowl growlErrorWithTitle:@"Could not update pasteboard!"
                                                         description:errorDescription];
         copyError.sticky = YES;
         [Growler growl:copyError];
 
-        ErrorLog(@"Couldn't put url '%@' into pasteboard.", url);
+        ErrorLog(@"Couldn't put url '%@' into pasteboard.", shortURL);
         return NO;
     }
 

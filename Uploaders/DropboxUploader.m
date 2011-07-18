@@ -13,8 +13,12 @@
 #import "URLShortener.h"
 
 #import "UploadManager.h"
+#import "UploaderFactory.h"
 
-NSString * const dropboxPath = @"/Public/Screenshots";
+#import "NSString+URLParameters.h"
+
+static NSString * const dropboxPath = @"/Public/Screenshots";
+static NSString * const dropboxPublicPrefix = @"/Public/";
 
 @interface DropboxUploader ()
 
@@ -27,6 +31,18 @@ NSString * const dropboxPath = @"/Public/Screenshots";
 
 @synthesize restClient;
 @synthesize destFilename;
+
++ (NSString *) urlForPath:(NSString *)path
+{
+    NSString *dropboxId = [[[UploaderFactory defaultFactory] account] userId];
+    
+    // TODO: Handle non-prefixed URLs with yet-to-come API?
+    if ([path hasPrefix:dropboxPublicPrefix])
+        path = [path substringFromIndex:[dropboxPublicPrefix length]];
+
+    return [NSString stringWithFormat:@"http://dl.dropbox.com/u/%@/%@", dropboxId, path];
+
+}
 
 - (id) init
 {
@@ -99,7 +115,7 @@ NSString * const dropboxPath = @"/Public/Screenshots";
     }
     else
     {
-        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file!"
+        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to Dropbox!"
                                                          description:@"Could not find a unique filename"];
         [Growler growl:errorGrowl];
 
@@ -132,7 +148,7 @@ NSString * const dropboxPath = @"/Public/Screenshots";
         }
         else
         {
-            GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file!"
+            GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to Dropbox!"
                                                              description:[NSString stringWithFormat:@"Received status code %d", [error code]]];
             [Growler growl:errorGrowl];
             ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
@@ -150,7 +166,7 @@ NSString * const dropboxPath = @"/Public/Screenshots";
     int numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
     [[NSUserDefaults standardUserDefaults] setInteger:(numberOfScreenshots + 1)
                                                forKey:@"NumberOfScreenshotsUploaded"];
-    if ([Uploader pasteboardURLForPath:uploadedPath])
+    if ([Uploader pasteboardURL:[DropboxUploader urlForPath:uploadedPath]])
     {
         GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"URL Copied"
                                                      title:@"Screenshot uploaded!"
@@ -192,7 +208,7 @@ NSString * const dropboxPath = @"/Public/Screenshots";
     }
     else
     {
-        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file!"
+        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to Dropbox!"
                                                          description:[NSString stringWithFormat:@"Received status code %d", [error code]]];
         [Growler growl:errorGrowl];
         ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);

@@ -8,9 +8,31 @@
 
 #import "Preferences.h"
 
+#import "UploaderFactory.h"
+#import "GrabBoxAppDelegate.h"
+
 @implementation Preferences
 
 @synthesize preferences;
+
+- (void) awakeFromNib
+{
+    [(GrabBoxAppDelegate *)[NSApp delegate] addObserver:self
+                                             forKeyPath:@"canInteract"
+                                                options:0
+                                                context:NULL];
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+                         change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"canInteract"])
+    {
+        BOOL canInteract = [(GrabBoxAppDelegate *)[NSApp delegate] canInteract];
+        if (!canInteract && [preferences isVisible])
+            [preferences orderOut:self];
+    }
+}
 
 - (BOOL) usingCompressedScreenshots
 {
@@ -102,6 +124,11 @@
     }
     CFPreferencesSetAppValue(CFSTR("AutoLaunchedApplicationDictionary"), autoLaunchMutable, CFSTR("loginwindow"));
     CFPreferencesAppSynchronize(CFSTR("loginwindow"));
+}
+
+- (IBAction) changeUploadService:(id)sender
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:CONFIG(Host)];
 }
 
 
