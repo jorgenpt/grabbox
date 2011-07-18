@@ -81,7 +81,6 @@
 		8EFFCB9712D8F98300201A9A /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB9612D8F98300201A9A /* NSData+Base64.m */; };
 		C52B002113D3B8A900D39676 /* UploaderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C52B002013D3B8A900D39676 /* UploaderFactory.m */; };
 		C52B002313D3D47900D39676 /* HostSetup.xib in Resources */ = {isa = PBXBuildFile; fileRef = C52B002213D3D47900D39676 /* HostSetup.xib */; };
-		C52B002513D3D53D00D39676 /* imgur.gif in Resources */ = {isa = PBXBuildFile; fileRef = C52B002413D3D53D00D39676 /* imgur.gif */; };
 		C52B002913D3D84600D39676 /* imgur-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C52B002813D3D84600D39676 /* imgur-small.png */; };
 /* End PBXBuildFile section */
 
@@ -207,7 +206,6 @@
 		C52B001F13D3B8A900D39676 /* UploaderFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploaderFactory.h; sourceTree = "<group>"; };
 		C52B002013D3B8A900D39676 /* UploaderFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploaderFactory.m; sourceTree = "<group>"; };
 		C52B002213D3D47900D39676 /* HostSetup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostSetup.xib; sourceTree = "<group>"; };
-		C52B002413D3D53D00D39676 /* imgur.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = imgur.gif; sourceTree = "<group>"; };
 		C52B002813D3D84600D39676 /* imgur-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imgur-small.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -353,7 +351,6 @@
 			isa = PBXGroup;
 			children = (
 				C52B002813D3D84600D39676 /* imgur-small.png */,
-				C52B002413D3D53D00D39676 /* imgur.gif */,
 				8EF627DB13B050CE0013A4B4 /* donate.png */,
 				8EF627DC13B050CE0013A4B4 /* dropbox.png */,
 				8EF627DD13B050CE0013A4B4 /* give_feedback.png */,
@@ -522,7 +519,6 @@
 				8EF627F813B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict in Resources */,
 				8EF627FB13B0512A0013A4B4 /* MainMenu.xib in Resources */,
 				C52B002313D3D47900D39676 /* HostSetup.xib in Resources */,
-				C52B002513D3D53D00D39676 /* imgur.gif in Resources */,
 				C52B002913D3D84600D39676 /* imgur-small.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
