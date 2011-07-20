@@ -1,2 +1,2 @@
 #!/bin/bash
-xcodebuild -target Distribution -configuration Release -parallelizeTargets "$@" build
+xcodebuild -project GrabBox.xcodeproj -target Distribution -configuration Release -parallelizeTargets "$@" build
