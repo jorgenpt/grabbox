@@ -13,7 +13,7 @@
     NSString* uploadPath;
     NSString* publicPath;
     NSString* localizedScreenshotPattern;
-    BOOL isSnowLeopardOrNewer;
+    SInt32 osVersion;
     NSSet* dirContents;
 }
 
@@ -32,7 +32,6 @@
 - (NSString *)localizedScreenshotPattern;
 - (NSSet *)createdFiles;
 - (NSSet *)files;
-- (BOOL)isSnowLeopardOrNewer;
 
 + (NSDictionary *)getStringsTable:(NSString *)table
                        fromBundle:(NSBundle *)bundle

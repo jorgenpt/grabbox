@@ -25,7 +25,7 @@ static InformationGatherer* defaultInstance = nil;
 @property (nonatomic, retain) NSString* uploadPath;
 @property (nonatomic, retain) NSString* publicPath;
 @property (nonatomic, retain) NSString* localizedScreenshotPattern;
-@property (nonatomic, assign) BOOL isSnowLeopardOrNewer;
+@property (nonatomic, assign) SInt32 osVersion;
 @property (nonatomic, retain) NSSet* dirContents;
 
 @end
@@ -36,7 +36,7 @@ static InformationGatherer* defaultInstance = nil;
 @synthesize uploadPath;
 @synthesize publicPath;
 @synthesize localizedScreenshotPattern;
-@synthesize isSnowLeopardOrNewer;
+@synthesize osVersion;
 @synthesize dirContents;
 
 + (id) defaultGatherer
@@ -72,10 +72,10 @@ static InformationGatherer* defaultInstance = nil;
                 [self setPublicPath:nil];
 
                 SInt32 MacVersion;
-                if (Gestalt(gestaltSystemVersion, &MacVersion) == noErr && MacVersion < 0x1060)
-                    [self setIsSnowLeopardOrNewer:NO];
+                if (Gestalt(gestaltSystemVersion, &MacVersion) == noErr)
+                    [self setOsVersion:MacVersion];
                 else
-                    [self setIsSnowLeopardOrNewer:YES];
+                    NSLog(@"ERROR: Could not query OS version.");
 
                 defaultInstance = self;
             }
@@ -225,7 +225,8 @@ static InformationGatherer* defaultInstance = nil;
         return localizedScreenshotPattern;
 
     NSString* stringKeyName;
-    NSString* stringKeyFormat;
+    NSString* stringKeyFormat = @"%@ %@ at %@";;
+    NSString *formatTable = @"ScreenCapture";
     NSString* screenshotPattern = nil;
 
     NSDictionary*  dict = [[NSUserDefaults standardUserDefaults]
@@ -234,10 +235,14 @@ static InformationGatherer* defaultInstance = nil;
     DLog(@"nameOverride: %@", nameOverride);
 
     /* These are the keys we look up for localization. */
-    if ([self isSnowLeopardOrNewer])
+    if (osVersion >= 0x1070)
+    {
+        stringKeyName = @"Screen Shot";
+    }
+    else if (osVersion >= 0x1060)
     {
         stringKeyName = @"Screen shot";
-        stringKeyFormat = @"%@ %@ at %@";
+        formatTable = @"Localizable";
     }
     else
     {
@@ -304,26 +309,16 @@ static InformationGatherer* defaultInstance = nil;
         /* This is the format string used to combine either a number with the name (10.5)
          * or a date with the name (10.6).
          */
-        NSString* localizedFormat;
-        if ([self isSnowLeopardOrNewer])
+        NSDictionary *tableLoc = [InformationGatherer getStringsTable:formatTable
+                                                           fromBundle:systemUIServer
+                                                      forLocalization:lproj];
+        if (!tableLoc)
         {
-            /* For 10.6, we open Localizable.strings to get the date format thingamajig. */
-            NSDictionary *tableLoc = [InformationGatherer getStringsTable:@"Localizable"
-                                                               fromBundle:systemUIServer
-                                                          forLocalization:lproj];
-            if (!tableLoc)
-            {
-                NSLog(@"Lookup failed, trying next language (this isn't necessarily bad).");
-                continue;
-            }
+            NSLog(@"Lookup failed, trying next language (this isn't necessarily bad).");
+            continue;
+        }
 
-            localizedFormat = [tableLoc objectForKey:stringKeyFormat];
-        }
-        else
-        {
-            /* For 10.5, we just look it up in the ScreenCapture.strings. */
-            localizedFormat = [tableSC objectForKey:stringKeyFormat];
-        }
+        NSString* localizedFormat = [tableLoc objectForKey:stringKeyFormat];
 
         /* If all went well, produce the final pattern to match against. */
         if (localizedFormat)
