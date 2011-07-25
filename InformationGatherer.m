@@ -132,23 +132,21 @@ static InformationGatherer* defaultInstance = nil;
 
 }
 
-- (NSString *)publicPath
+- (NSString *)dropboxPathFromConfig
 {
-    if (publicPath)
-        return publicPath;
-    NSString* result = [@"~/Dropbox" stringByStandardizingPath];
-    NSString* path = [@"~/.dropbox/config.db" stringByStandardizingPath];
-    NSString* alternatePath = [@"~/.dropbox/dropbox.db" stringByStandardizingPath];
-    NSString* sqlStatement = @"select value from config where key = 'dropbox_path'";
+    NSString * const configPath = [@"~/.dropbox/config.db" stringByStandardizingPath];
+    NSString * const alternateConfigPath = [@"~/.dropbox/dropbox.db" stringByStandardizingPath];
+    NSString * const sqlStatement = @"select value from config where key = 'dropbox_path'";
+    NSString * result = nil;
     BOOL oldConfig = NO;
 
     sqlite3 *db;
     sqlite3_stmt *statement;
-    int openResult = SQLITE_OPEN_BEST([path UTF8String], &db);
+    int openResult = SQLITE_OPEN_BEST([configPath UTF8String], &db);
     if (openResult != SQLITE_OK)
     {
-        DLog(@"Could not open %@, trying %@ instead.", path, alternatePath);
-        openResult = SQLITE_OPEN_BEST([alternatePath UTF8String], &db);
+        DLog(@"Could not open %@, trying %@ instead.", configPath, alternateConfigPath);
+        openResult = SQLITE_OPEN_BEST([alternateConfigPath UTF8String], &db);
         oldConfig = YES;
     }
 
@@ -177,6 +175,56 @@ static InformationGatherer* defaultInstance = nil;
         }
         sqlite3_close(db);
     }
+
+    return result;
+}
+
+- (NSString *)dropboxPathFromHost
+{
+    NSString * const hostPath = [@"~/.dropbox/host.db" stringByStandardizingPath];
+
+    if ([[NSFileManager defaultManager] fileExistsAtPath:hostPath])
+    {
+        NSError *error = nil;
+        NSString *hostData = [NSString stringWithContentsOfFile:hostPath
+                                                       encoding:NSUTF8StringEncoding
+                                                          error:&error];
+        if (!error)
+        {
+            NSArray *lines = [hostData componentsSeparatedByString:@"\n"];
+            if ([lines count] >= 2)
+            {
+                NSData* data = [NSData dataWithBase64EncodedString:[lines objectAtIndex:1]];
+                return [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+            }
+            else
+            {
+                NSLog(@"File %@ has too few lines (%@)", hostPath, hostData);
+            }
+        }
+        else
+        {
+            NSLog(@"Couldn't read %@: %@", hostPath, error);
+        }
+    }
+    else
+    {
+        NSLog(@"Couldn't read %@: File does not exist", hostPath);
+    }
+
+    return nil;
+}
+
+- (NSString *)publicPath
+{
+    if (publicPath)
+        return publicPath;
+
+    NSString * result = [self dropboxPathFromHost];
+    if (!result)
+        result = [self dropboxPathFromConfig];
+    if (!result)
+        result = [@"~/Dropbox" stringByStandardizingPath];
 
     result = [[result stringByAppendingPathComponent:@"Public"] stringByStandardizingPath];
     DLog(@"publicPath: %@", result);
