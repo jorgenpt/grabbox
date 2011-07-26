@@ -27,4 +27,9 @@
 #endif
 
 #define CONFIG(name) (@#name)
-#define BUNDLE_IDENTIFIER @"no.devsoft.GrabBox2"
+
+#if defined(MAC_APP_STORE)
+# define BUNDLE_IDENTIFIER @"com.bitspatter.grabbox2"
+#else
+# define BUNDLE_IDENTIFIER @"com.bitspatter.mac.grabbox2"
+#endif
