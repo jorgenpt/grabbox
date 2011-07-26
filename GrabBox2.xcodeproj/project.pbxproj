@@ -25,6 +25,7 @@
 		256AC3DA0F4B6AC300CF3369 /* GrabBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* GrabBoxAppDelegate.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		8E0EEBB213C6E80A00101C34 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E0EEBB113C6E80A00101C34 /* Entitlements.plist */; };
 		8E282D5213C0EA61008E619D /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E282D4813C0EA61008E619D /* ASIDataCompressor.m */; };
 		8E282D5313C0EA61008E619D /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E282D4A13C0EA61008E619D /* ASIDataDecompressor.m */; };
 		8E282D5413C0EA61008E619D /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E282D4C13C0EA61008E619D /* ASIFormDataRequest.m */; };
@@ -186,6 +187,7 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107320486CEB800E47090 /* GrabBox2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabBox2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E0EEBB113C6E80A00101C34 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		8E282D4713C0EA61008E619D /* ASIDataCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataCompressor.h; sourceTree = "<group>"; };
 		8E282D4813C0EA61008E619D /* ASIDataCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataCompressor.m; sourceTree = "<group>"; };
 		8E282D4913C0EA61008E619D /* ASIDataDecompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataDecompressor.h; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 				8EF627F213B050DF0013A4B4 /* dsa_pub.pem */,
 				8EF627D813B050980013A4B4 /* Defaults.plist */,
 				8EF627F313B050DF0013A4B4 /* GrabBox2-Info.plist */,
+				8E0EEBB113C6E80A00101C34 /* Entitlements.plist */,
 				8EF627F413B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				8EF627F913B0512A0013A4B4 /* MainMenu.xib */,
@@ -600,6 +603,7 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				8E49CF4D11ED14640041CE70 /* ImageRenamer.xib in Resources */,
 				8EF627D913B050980013A4B4 /* Defaults.plist in Resources */,
+				8E0EEBB213C6E80A00101C34 /* Entitlements.plist in Resources */,
 				8EF627E613B050CE0013A4B4 /* donate.png in Resources */,
 				8EF627E713B050CE0013A4B4 /* dropbox.png in Resources */,
 				8EF627E813B050CE0013A4B4 /* give_feedback.png in Resources */,
@@ -624,6 +628,7 @@
 			files = (
 				C55D24BA13DF4460003342D3 /* Credits.rtf in Resources */,
 				C55D24AB13DF43BE003342D3 /* Defaults.plist in Resources */,
+				8E0EEBB213C6E80A00101C34 /* Entitlements.plist in Resources */,
 				C55D24AC13DF43BE003342D3 /* Growl Registration Ticket.growlRegDict in Resources */,
 				C55D24AD13DF43BE003342D3 /* InfoPlist.strings in Resources */,
 				C55D24AE13DF43BE003342D3 /* MainMenu.xib in Resources */,
@@ -794,6 +799,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = Resources/Entitlements.plist;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -846,6 +852,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = Resources/Entitlements.plist;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -868,6 +875,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = Resources/Entitlements.plist;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -929,6 +937,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "Resources/Entitlements-Appstore.plist";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -957,6 +966,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "Resources/Entitlements-Appstore.plist";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -985,6 +995,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "Resources/Entitlements-Appstore.plist";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
