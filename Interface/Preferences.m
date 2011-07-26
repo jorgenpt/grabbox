@@ -64,7 +64,7 @@
                                   kCFPreferencesCurrentUser,
                                   kCFPreferencesAnyHost))
     {
-        NSLog(@"Prefernce sync of com.apple.screencapture failed (for compression)");
+        NSLog(@"Preference sync of com.apple.screencapture failed (for compression)");
     }
 
     NSAlert* alert = [NSAlert alertWithMessageText:@"Logout required"
