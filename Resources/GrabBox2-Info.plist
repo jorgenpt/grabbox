@@ -10,36 +10,66 @@
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
 	<string>GrabBox2</string>
+
 	<key>CFBundleIdentifier</key>
-	<string>no.devsoft.${PRODUCT_NAME:rfc1034identifier}</string>
+#ifndef MAC_APP_STORE
+	<string>com.bitspatter.mac.grabbox2</string>
+#else
+	<string>com.bitspatter.grabbox2</string>
+#endif
+
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>0.3.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
 	<array/>
+
+#ifndef MAC_APP_STORE
+	<key>CFBundleShortVersionString</key>
+	<string>0.3.0</string>
 	<key>CFBundleVersion</key>
 	<string>0.3.0</string>
+#else
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
+#endif
+
 	<key>DMAppId</key>
 	<string>4d6c1e92d9340b04d7000000</string>
+
 	<key>LSMinimumSystemVersion</key>
+#ifndef MAC_APP_STORE
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
+#else
+	<string>10.6.6</string>
+#endif
+
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
+
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright 2011, Jørgen P. Tjernø</string>
+	<string>Copyright 2011, bitSpatter</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>NSServices</key>
-	<array/>
+
+#ifndef MAC_APP_STORE
+	<key>SUFeedURL</key>
+	<string>http://iconfactory.com/appcasts/Flare/appcast.xml</string>
+	<key>SUExpectsDSASignature</key>
+	<true/>
+	<key>SUPublicDSAKeyFile</key>
+	<string>dsa_pub.pem</string>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUEnableSystemProfiling</key>
@@ -48,6 +78,8 @@
 	<string>http://grabbox.devsoft.no/profiles/profileInfo2beta.php</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
+#endif
+
 	<key>UTExportedTypeDeclarations</key>
 	<array/>
 	<key>UTImportedTypeDeclarations</key>

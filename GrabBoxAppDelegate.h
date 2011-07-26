@@ -15,9 +15,11 @@
 #import "UploadManager.h"
 
 @interface GrabBoxAppDelegate : NSObject {
-    NSWindow* setupWindow;
-    NSWindow* restartWindow;
+    NSWindow *restartWindow;
+    NSWindow *restartWindowMAS;
     NSWindow* nagWindow;
+    NSMenuItem *checkForUpdatesMenuItem;
+    NSMenuItem *checkForUpdatesMenubarItem;
     Menubar* menubar;
     InformationGatherer* info;
     Notifier* notifier;
@@ -26,9 +28,11 @@
     BOOL canInteract;
 }
 
-@property (assign) IBOutlet NSWindow* setupWindow;
 @property (assign) IBOutlet NSWindow* restartWindow;
+@property (assign) IBOutlet NSWindow* restartWindowMAS;
 @property (assign) IBOutlet NSWindow* nagWindow;
+@property (assign) IBOutlet NSMenuItem *checkForUpdatesMenuItem;
+@property (assign) IBOutlet NSMenuItem *checkForUpdatesMenubarItem;
 @property (assign) IBOutlet Menubar* menubar;
 
 @property (assign) BOOL canInteract;
@@ -40,5 +44,9 @@
 - (IBAction) openDonateNag:(id)sender;
 - (IBAction) restartLater:(id)sender;
 - (IBAction) restartApplication:(id)sender;
+
+#ifndef MAC_APP_STORE
+- (IBAction) checkForUpdates:(id)sender;
+#endif
 
 @end

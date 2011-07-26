@@ -12,6 +12,10 @@
 #import "Growler.h"
 #import "UploaderFactory.h"
 
+#ifndef MAC_APP_STORE
+#import <Sparkle/SUUpdater.h>
+#endif
+
 @interface GrabBoxAppDelegate ()
 
 @property (nonatomic, assign) InformationGatherer* info;
@@ -33,9 +37,11 @@
 
 @implementation GrabBoxAppDelegate
 
-@synthesize setupWindow;
 @synthesize restartWindow;
+@synthesize restartWindowMAS;
 @synthesize nagWindow;
+@synthesize checkForUpdatesMenuItem;
+@synthesize checkForUpdatesMenubarItem;
 @synthesize menubar;
 
 @synthesize info;
@@ -60,6 +66,14 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void) awakeFromNib
 {
+#ifdef MAC_APP_STORE
+    [[checkForUpdatesMenuItem menu] removeItem:checkForUpdatesMenuItem];
+    [[checkForUpdatesMenubarItem menu] removeItem:checkForUpdatesMenubarItem];
+#else
+    [[SUUpdater alloc] init];
+    [[SUUpdater sharedUpdater] setDelegate:self];
+#endif
+
     [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
                                                               forKeyPath:@"values.ShowInDock"
                                                                  options:0
@@ -85,6 +99,13 @@ static void translateEvent(ConstFSEventStreamRef stream,
     {
         [[self menubar] show];
     }
+}
+
+- (IBAction)checkForUpdates:(id)sender
+{
+#ifndef MAC_APP_STORE
+    [[SUUpdater sharedUpdater] checkForUpdates:sender];
+#endif
 }
 
 - (void) dealloc
@@ -123,6 +144,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
     }
 }
 
+#ifndef MAC_APP_STORE
 - (NSArray *)feedParametersForUpdater:(SUUpdater *)updater sendingSystemProfile:(BOOL)sendingProfile
 {
     NSString* appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
@@ -134,6 +156,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
                                   nil];
     return [NSArray arrayWithObject:versionParam];
 }
+#endif
 
 - (void) applicationWillFinishLaunching:(NSNotification *)aNotification
 {
@@ -200,7 +223,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [[SUUpdater sharedUpdater] setDelegate:self];
     [self uploaderUnavailable:nil];
     [[UploaderFactory defaultFactory] loadSettings];
 }
@@ -413,11 +435,12 @@ static void translateEvent(ConstFSEventStreamRef stream,
 - (IBAction) restartLater:(id)sender
 {
     [NSApp stopModal];
-    [[self restartWindow] performClose:self];
+    [[sender window] performClose:self];
 }
 
 - (IBAction) restartApplication:(id)sender
 {
+#ifndef MAC_APP_STORE
     NSString *launcherSource = [[NSBundle bundleForClass:[SUUpdater class]]  pathForResource:@"relaunch" ofType:@""];
     NSString *launcherTarget = [NSTemporaryDirectory() stringByAppendingPathComponent:[launcherSource lastPathComponent]];
     NSString *appPath = [[NSBundle mainBundle] bundlePath];
@@ -428,6 +451,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
     [NSTask launchedTaskWithLaunchPath:launcherTarget arguments:[NSArray arrayWithObjects:appPath, processID, nil]];
     [NSApp terminate:sender];
+#endif
 }
 
 @end
