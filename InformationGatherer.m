@@ -69,8 +69,8 @@ static InformationGatherer* defaultInstance = nil;
         self = [super init];
         if (self)
         {
-            [self setDirContents:[self files]];
             [self setScreenshotPath:nil];
+            [self setDirContents:[self files]];
 
             SInt32 MacVersion;
             if (Gestalt(gestaltSystemVersion, &MacVersion) == noErr)
@@ -94,10 +94,10 @@ static InformationGatherer* defaultInstance = nil;
 #pragma mark -
 #pragma mark Information gathering
 
-- (NSString *)screenshotPath
+- (void) updateScreenshotPath
 {
     if (screenshotPath)
-        return screenshotPath;
+        return;
 
     // Look up ScreenCapture location, or use ~/Desktop as default.
     NSDictionary*  dict = [[NSUserDefaults standardUserDefaults]
@@ -121,8 +121,16 @@ static InformationGatherer* defaultInstance = nil;
 
     DLog(@"screenshotPath: %@", foundPath);
     [self setScreenshotPath:foundPath];
+}
 
-    return [self screenshotPath];
+- (NSString *) screenshotPath
+{
+    if (!screenshotPath)
+    {
+        @synchronized(self) { [self updateScreenshotPath]; }
+    }
+
+    return screenshotPath;
 }
 
 + (NSDictionary *)stringsForTable:(NSString *)tableName
@@ -212,10 +220,10 @@ static InformationGatherer* defaultInstance = nil;
     return string;
 }
 
-- (NSString *)localizedScreenshotPattern
+- (void) updateLocalizedScreenshotPattern
 {
     if (localizedScreenshotPattern)
-        return localizedScreenshotPattern;
+        return;
 
     NSString *name;
     NSString *format = @"%@ %@ at %@";
@@ -262,13 +270,22 @@ static InformationGatherer* defaultInstance = nil;
     DLog(@"Pattern is %@", screenshotPattern);
 
     [self setLocalizedScreenshotPattern:screenshotPattern];
-    return [self localizedScreenshotPattern];
 }
 
-- (NSString *)workQueuePath
+- (NSString *) localizedScreenshotPattern
+{
+    if (!localizedScreenshotPattern)
+    {
+        @synchronized(self) { [self updateLocalizedScreenshotPattern]; }
+    }
+
+    return localizedScreenshotPattern;
+}
+
+- (void) updateWorkQueuePath
 {
     if (workQueuePath)
-        return workQueuePath;
+        return;
 
     NSString *base = nil;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
@@ -294,6 +311,14 @@ static InformationGatherer* defaultInstance = nil;
             ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
             [self setWorkQueuePath:nil];
         }
+    }
+}
+
+- (NSString *) workQueuePath
+{
+    if (!workQueuePath)
+    {
+        @synchronized(self) { [self updateWorkQueuePath]; }
     }
 
     return workQueuePath;
