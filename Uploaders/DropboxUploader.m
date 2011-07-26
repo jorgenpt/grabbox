@@ -163,7 +163,7 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
               from:(NSString*)source
 {
     DLog(@"Upload complete, %@ -> %@", source, uploadedPath);
-    int numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
+    NSInteger numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
     [[NSUserDefaults standardUserDefaults] setInteger:(numberOfScreenshots + 1)
                                                forKey:@"NumberOfScreenshotsUploaded"];
     if ([Uploader pasteboardURL:[DropboxUploader urlForPath:uploadedPath]])

@@ -36,11 +36,11 @@ static NSString * const TinyurlApiURL = @"http://tinyurl.com/api-create.php?url=
 
 + (NSString *) shortURLForURL:(NSString *)url
 {
-    int service = [[NSUserDefaults standardUserDefaults] integerForKey:CONFIG(URLShortener)];
+    NSInteger service = [[NSUserDefaults standardUserDefaults] integerForKey:CONFIG(URLShortener)];
     NSString *directURL = [url stringByAddingPercentEscapesAndEscapeCharactersInString:@"?#[]@!$&’()*+,;="];
     NSString *shortURL = nil;
 
-    DLog(@"Shortening with service %i (%@).", service, directURL);
+    DLog(@"Shortening with service %ld (%@).", service, directURL);
     switch (service)
     {
         case SHORTENER_BITLY:

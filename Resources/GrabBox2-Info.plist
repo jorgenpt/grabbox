@@ -4,18 +4,16 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
-	<key>CFBundleDocumentTypes</key>
-	<array/>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
 	<string>GrabBox2</string>
 
 	<key>CFBundleIdentifier</key>
-#ifndef MAC_APP_STORE
-	<string>com.bitspatter.mac.grabbox2</string>
-#else
+#if defined(MAC_APP_STORE)
 	<string>com.bitspatter.grabbox2</string>
+#else
+	<string>com.bitspatter.mac.grabbox2</string>
 #endif
 
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -26,29 +24,24 @@
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array/>
 
-#ifndef MAC_APP_STORE
+#if defined(MAC_APP_STORE)
 	<key>CFBundleShortVersionString</key>
-	<string>0.3.0</string>
+	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>0.3.0</string>
+	<string>1.0</string>
 #else
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>0.3.0</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>0.3.0</string>
 #endif
 
-	<key>DMAppId</key>
-	<string>4d6c1e92d9340b04d7000000</string>
-
 	<key>LSMinimumSystemVersion</key>
-#ifndef MAC_APP_STORE
-	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
-#else
+#if defined(MAC_APP_STORE)
 	<string>10.6.6</string>
+#else
+	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 #endif
 
 	<key>LSApplicationCategoryType</key>
@@ -63,7 +56,10 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 
-#ifndef MAC_APP_STORE
+	<key>DMAppId</key>
+	<string>4d6c1e92d9340b04d7000000</string>
+
+#if !defined(MAC_APP_STORE)
 	<key>SUFeedURL</key>
 	<string>http://iconfactory.com/appcasts/Flare/appcast.xml</string>
 	<key>SUExpectsDSASignature</key>

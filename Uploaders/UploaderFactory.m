@@ -35,7 +35,7 @@ enum {
 - (void) promptForHost;
 - (void) promptForDropboxLink;
 
-- (void) setupHost:(int)host;
+- (void) setupHost:(NSInteger)host;
 - (void) setupDropbox;
 - (void) setupImgur;
 
@@ -96,7 +96,7 @@ enum {
 
 - (void) awakeFromNib
 {
-    int host = [[NSUserDefaults standardUserDefaults] integerForKey:CONFIG(Host)];
+    NSInteger host = [[NSUserDefaults standardUserDefaults] integerForKey:CONFIG(Host)];
     if (!host)
         host = HostImgur;
 
@@ -147,7 +147,7 @@ enum {
 
 - (void) loadSettings
 {
-    int host = [[NSUserDefaults standardUserDefaults] integerForKey:CONFIG(Host)];
+    NSInteger host = [[NSUserDefaults standardUserDefaults] integerForKey:CONFIG(Host)];
     [[NSNotificationCenter defaultCenter] postNotificationName:GBUploaderUnavailableNotification object:nil];
 
     [self setRestClient:nil];
@@ -163,7 +163,7 @@ enum {
                                     consumerSecret:dropboxConsumerSecret] autorelease];
 }
 
-- (void) setupHost:(int)host
+- (void) setupHost:(NSInteger)host
 {
     switch (host)
     {
