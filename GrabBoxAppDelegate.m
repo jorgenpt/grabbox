@@ -180,7 +180,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
         }
     }
 
+#if !defined(MAC_APP_STORE)
     [userDefaults setBool:YES forKey:@"SUSendProfileInfo"];
+#endif
 
 #if defined(DEBUG)
     [[DMTracker defaultTracker] disable];
