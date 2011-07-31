@@ -195,7 +195,9 @@ static InformationGatherer* defaultInstance = nil;
             if ([lines count] >= 2)
             {
                 NSData* data = [NSData dataWithBase64EncodedString:[lines objectAtIndex:1]];
-                return [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+                NSString *path = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+                DLog(@"Dropbox path from %@: %@", hostPath, path);
+                return path;
             }
             else
             {
@@ -224,7 +226,10 @@ static InformationGatherer* defaultInstance = nil;
     if (!result)
         result = [self dropboxPathFromConfig];
     if (!result)
+    {
         result = [@"~/Dropbox" stringByStandardizingPath];
+        NSLog(@"Could not get Dropbox path, resorting to default: %@", result);
+    }
 
     result = [[result stringByAppendingPathComponent:@"Public"] stringByStandardizingPath];
     DLog(@"publicPath: %@", result);
