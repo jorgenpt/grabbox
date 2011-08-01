@@ -257,6 +257,7 @@ enum {
 
     ignoreUpdates = YES;
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:CONFIG(Host)];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [NSApp terminate:self];
 }
 
