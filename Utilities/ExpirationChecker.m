@@ -17,7 +17,6 @@ BOOL expired()
 #ifdef EXPIRATION_DAYS
     static BOOL expired = NO;
     static dispatch_once_t initOnce;
-
     dispatch_once(&initOnce, ^{
         NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
         NSLocale *dateLocale = [[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease];
@@ -28,7 +27,7 @@ BOOL expired()
         NSDate *expirationDate = [buildDate dateByAddingTimeInterval:60 * 60 * 24 * EXPIRATION_DAYS];
         NSDate *currentDate = [NSDate date];
 
-        DLog(@"Built: %@ Expires: %@ Current: %@", buildDate, expirationDate, currentDate);
+        DLog(@"Built: %@ (%s) Expires: %@ Current: %@", buildDate, __DATE__, expirationDate, currentDate);
         expired = [[currentDate laterDate:expirationDate] isEqualToDate:currentDate];
     });
 

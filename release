@@ -1,2 +1,3 @@
 #!/bin/bash
+touch Utilities/ExpirationChecker.m
 xcodebuild -target Distribution -configuration Release -parallelizeTargets "$@" build
