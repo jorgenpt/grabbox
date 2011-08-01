@@ -33,3 +33,5 @@
 #else
 # define BUNDLE_IDENTIFIER @"com.bitspatter.mac.grabbox2"
 #endif
+
+BOOL expired();

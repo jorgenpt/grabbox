@@ -17,6 +17,7 @@
 @interface GrabBoxAppDelegate : NSObject {
     NSWindow *restartWindow;
     NSWindow *restartWindowMAS;
+    NSWindow *betaExpiredWindow;
     NSWindow* nagWindow;
     NSMenuItem *checkForUpdatesMenuItem;
     NSMenuItem *checkForUpdatesMenubarItem;
@@ -30,6 +31,7 @@
 
 @property (assign) IBOutlet NSWindow* restartWindow;
 @property (assign) IBOutlet NSWindow* restartWindowMAS;
+@property (assign) IBOutlet NSWindow* betaExpiredWindow;
 @property (assign) IBOutlet NSWindow* nagWindow;
 @property (assign) IBOutlet NSMenuItem *checkForUpdatesMenuItem;
 @property (assign) IBOutlet NSMenuItem *checkForUpdatesMenubarItem;

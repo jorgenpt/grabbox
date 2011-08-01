@@ -39,6 +39,7 @@
 
 @synthesize restartWindow;
 @synthesize restartWindowMAS;
+@synthesize betaExpiredWindow;
 @synthesize nagWindow;
 @synthesize checkForUpdatesMenuItem;
 @synthesize checkForUpdatesMenubarItem;
@@ -223,10 +224,14 @@ static void translateEvent(ConstFSEventStreamRef stream,
     }
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+- (void) applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [self uploaderUnavailable:nil];
-    [[UploaderFactory defaultFactory] loadSettings];
+
+    if (expired())
+        [betaExpiredWindow makeKeyAndOrderFront:self];
+    else
+        [[UploaderFactory defaultFactory] loadSettings];
 }
 
 - (void) startMonitoring
@@ -417,6 +422,15 @@ static void translateEvent(ConstFSEventStreamRef stream,
     free(templateBytes);
 
     return filename;
+}
+
+- (void)windowWillClose:(NSNotification *)notification
+{
+    id window = [notification object];
+    if (window == betaExpiredWindow)
+    {
+        [NSApp terminate:self];
+    }
 }
 
 - (IBAction) openFeedback:(id)sender

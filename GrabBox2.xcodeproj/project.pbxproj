@@ -25,6 +25,10 @@
 		256AC3DA0F4B6AC300CF3369 /* GrabBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* GrabBoxAppDelegate.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		8E1D612E13E6235D00F44058 /* ExpirationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E1D612D13E6235D00F44058 /* ExpirationChecker.m */; };
+		8E1D612F13E6235D00F44058 /* ExpirationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E1D612D13E6235D00F44058 /* ExpirationChecker.m */; };
+		8E1D613213E625AF00F44058 /* expired.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1D613113E625AF00F44058 /* expired.png */; };
+		8E1D613313E625AF00F44058 /* expired.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1D613113E625AF00F44058 /* expired.png */; };
 		8E282D5213C0EA61008E619D /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E282D4813C0EA61008E619D /* ASIDataCompressor.m */; };
 		8E282D5313C0EA61008E619D /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E282D4A13C0EA61008E619D /* ASIDataDecompressor.m */; };
 		8E282D5413C0EA61008E619D /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E282D4C13C0EA61008E619D /* ASIFormDataRequest.m */; };
@@ -187,6 +191,8 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107320486CEB800E47090 /* GrabBox2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabBox2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E1D612D13E6235D00F44058 /* ExpirationChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpirationChecker.m; sourceTree = "<group>"; };
+		8E1D613113E625AF00F44058 /* expired.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expired.png; sourceTree = "<group>"; };
 		8E282D4713C0EA61008E619D /* ASIDataCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataCompressor.h; sourceTree = "<group>"; };
 		8E282D4813C0EA61008E619D /* ASIDataCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataCompressor.m; sourceTree = "<group>"; };
 		8E282D4913C0EA61008E619D /* ASIDataDecompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataDecompressor.h; sourceTree = "<group>"; };
@@ -429,6 +435,7 @@
 		8E2AF15511F01D2100A29A61 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8E1D613113E625AF00F44058 /* expired.png */,
 				C52B002813D3D84600D39676 /* imgur-small.png */,
 				8EF627DB13B050CE0013A4B4 /* donate.png */,
 				8EF627DC13B050CE0013A4B4 /* dropbox.png */,
@@ -509,6 +516,7 @@
 				8EFFCB9612D8F98300201A9A /* NSData+Base64.m */,
 				8E368D1413A5F51800EB0D90 /* NetworkReachabilityNotifier.h */,
 				8E368D1513A5F51800EB0D90 /* NetworkReachabilityNotifier.m */,
+				8E1D612D13E6235D00F44058 /* ExpirationChecker.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -619,6 +627,7 @@
 				C52B002313D3D47900D39676 /* HostSetup.xib in Resources */,
 				C52B002913D3D84600D39676 /* imgur-small.png in Resources */,
 				8E63965813DF8131002EC0E0 /* GrabBox2.entitlements in Resources */,
+				8E1D613213E625AF00F44058 /* expired.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,6 +652,7 @@
 				C55D24B713DF43FB003342D3 /* menuicon.png in Resources */,
 				C55D24B813DF43FB003342D3 /* menuiconInverted.png in Resources */,
 				C55D24B913DF43FB003342D3 /* switch_to_menubar.png in Resources */,
+				8E1D613313E625AF00F44058 /* expired.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,6 +708,7 @@
 				8E282D5913C0EA85008E619D /* ASIHTTPRequest.m in Sources */,
 				8E282D6913C0EE65008E619D /* ImgurUploader.m in Sources */,
 				C52B002113D3B8A900D39676 /* UploaderFactory.m in Sources */,
+				8E1D612E13E6235D00F44058 /* ExpirationChecker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -734,6 +745,7 @@
 				C55D248B13DF39E6003342D3 /* NSString+URLParameters.m in Sources */,
 				C55D248C13DF39E6003342D3 /* NSData+Base64.m in Sources */,
 				C55D248D13DF39E6003342D3 /* NetworkReachabilityNotifier.m in Sources */,
+				8E1D612F13E6235D00F44058 /* ExpirationChecker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1059,6 +1071,7 @@
 				C55D247013DF392C003342D3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
