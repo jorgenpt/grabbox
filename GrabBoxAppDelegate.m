@@ -229,7 +229,10 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [self uploaderUnavailable:nil];
 
     if (expired())
+    {
         [betaExpiredWindow makeKeyAndOrderFront:self];
+        [NSApp activateIgnoringOtherApps:YES];
+    }
     else
         [[UploaderFactory defaultFactory] loadSettings];
 }
@@ -426,8 +429,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void)windowWillClose:(NSNotification *)notification
 {
-    id window = [notification object];
-    if (window == betaExpiredWindow)
+    if ([notification object] == betaExpiredWindow)
     {
         [NSApp terminate:self];
     }

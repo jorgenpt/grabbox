@@ -1598,9 +1598,9 @@
 				<string key="NSClassName">NSFontManager</string>
 			</object>
 			<object class="NSWindowTemplate" id="23310471">
-				<int key="NSWindowStyleMask">15</int>
+				<int key="NSWindowStyleMask">7</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{109, 132}, {426, 209}}</string>
+				<string key="NSWindowRect">{{109, 132}, {438, 209}}</string>
 				<int key="NSWTFlags">611845120</int>
 				<string key="NSWindowTitle">Beta Expired</string>
 				<string key="NSWindowClass">NSWindow</string>
@@ -1617,6 +1617,7 @@
 							<string key="NSFrame">{{263, 12}, {149, 32}}</string>
 							<reference key="NSSuperview" ref="428630986"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:161</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="898515812">
@@ -1721,7 +1722,7 @@
 						<object class="NSTextField" id="143277706">
 							<reference key="NSNextResponder" ref="428630986"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{121, 48}, {288, 111}}</string>
+							<string key="NSFrame">{{133, 48}, {288, 111}}</string>
 							<reference key="NSSuperview" ref="428630986"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="600079736"/>
@@ -1739,7 +1740,7 @@
 							</object>
 						</object>
 					</object>
-					<string key="NSFrameSize">{426, 209}</string>
+					<string key="NSFrameSize">{438, 209}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="263027697"/>
@@ -2470,20 +2471,20 @@
 					<int key="connectionID">1066</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">performClose:</string>
-						<reference key="source" ref="23310471"/>
-						<reference key="destination" ref="600079736"/>
-					</object>
-					<int key="connectionID">1067</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">betaExpiredWindow</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="23310471"/>
 					</object>
 					<int key="connectionID">1068</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">terminate:</string>
+						<reference key="source" ref="1050"/>
+						<reference key="destination" ref="600079736"/>
+					</object>
+					<int key="connectionID">1069</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3592,9 +3593,9 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="263027697"/>
 							<reference ref="389844643"/>
-							<reference ref="143277706"/>
 							<reference ref="600079736"/>
 							<reference ref="951165221"/>
+							<reference ref="143277706"/>
 						</object>
 						<reference key="parent" ref="23310471"/>
 					</object>
@@ -4049,7 +4050,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1068</int>
+			<int key="maxID">1069</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
