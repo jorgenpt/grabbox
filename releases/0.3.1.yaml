@@ -1,0 +1,8 @@
+date:       Sun, 31 Jul 2011 19:14:08 -0700
+signature:  MC0CFATesJEI0mwqzrmWorD585IMLVXFAhUAvcH9UkuB7f1bICJf8rXKyH/kYOs=
+changelog:
+    changes:
+        - Run under the Lion sandbox for added security.
+        - Make application slightly smaller.
+    bugfixes:
+        - Minor bugs fixed.
