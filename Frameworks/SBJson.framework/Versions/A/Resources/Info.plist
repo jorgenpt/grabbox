@@ -7,21 +7,21 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>ObjectiveMetrics</string>
+	<string>SBJson</string>
 	<key>CFBundleIdentifier</key>
-	<string>no.devsoft.ObjectiveMetrics</string>
+	<string>org.brautaset.SBJson</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>ObjectiveMetrics</string>
+	<string>SBJson</string>
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1</string>
+	<string>3.0.4</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>34</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -37,6 +37,6 @@
 	<key>DTXcodeBuild</key>
 	<string>4A2002a</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2011 devSoft. All rights reserved.</string>
+	<string>Copyright © 2011 Stig Brautaset. All rights reserved.</string>
 </dict>
 </plist>

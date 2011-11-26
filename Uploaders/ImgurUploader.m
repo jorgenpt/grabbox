@@ -8,7 +8,7 @@
 
 #import "ImgurUploader.h"
 
-#import "JSON.h"
+#import <SBJson/SBJson.h>
 #import "Growler.h"
 
 static NSString * const ImgurAPIURL = @"http://api.imgur.com/2/%@",

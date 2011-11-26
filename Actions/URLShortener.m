@@ -8,9 +8,10 @@
 
 #import "URLShortener.h"
 
+#import <SBJson/SBJson.h>
+
 #import "GrabBoxAppDelegate.h"
 #import "NSString+URLParameters.h"
-#import "JSON.h"
 
 @interface URLShortener ()
 

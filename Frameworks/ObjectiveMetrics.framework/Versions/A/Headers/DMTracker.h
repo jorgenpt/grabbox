@@ -60,6 +60,14 @@
  */
 - (void)stopApp;
 
+/**
+  Manually flush the queue of events, sending them to the server.
+  You can use this for long-running apps instead of using the
+  DMEventQueueMaxSize and DMEventQueueMaxDaysOld keys in your application's
+  Info.plist (default values for them are 100 and 7, respectively).
+ */
+- (void)flushQueue;
+
 #pragma mark -
 
 /**

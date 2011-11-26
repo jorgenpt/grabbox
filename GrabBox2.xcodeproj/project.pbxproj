@@ -75,15 +75,13 @@
 		8EFFCB6012D8F75A00201A9A /* ImageRenamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB5B12D8F75A00201A9A /* ImageRenamer.m */; };
 		8EFFCB6212D8F75A00201A9A /* URLShortener.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB5F12D8F75A00201A9A /* URLShortener.m */; };
 		8EFFCB6E12D8F86C00201A9A /* NSString+URLParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB6D12D8F86C00201A9A /* NSString+URLParameters.m */; };
-		8EFFCB8112D8F89F00201A9A /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB7812D8F89F00201A9A /* NSObject+SBJSON.m */; };
-		8EFFCB8212D8F89F00201A9A /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB7A12D8F89F00201A9A /* NSString+SBJSON.m */; };
-		8EFFCB8312D8F89F00201A9A /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB7C12D8F89F00201A9A /* SBJsonBase.m */; };
-		8EFFCB8412D8F89F00201A9A /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB7E12D8F89F00201A9A /* SBJsonParser.m */; };
-		8EFFCB8512D8F89F00201A9A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB8012D8F89F00201A9A /* SBJsonWriter.m */; };
 		8EFFCB9712D8F98300201A9A /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB9612D8F98300201A9A /* NSData+Base64.m */; };
 		C52B002113D3B8A900D39676 /* UploaderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C52B002013D3B8A900D39676 /* UploaderFactory.m */; };
 		C52B002313D3D47900D39676 /* HostSetup.xib in Resources */ = {isa = PBXBuildFile; fileRef = C52B002213D3D47900D39676 /* HostSetup.xib */; };
 		C52B002913D3D84600D39676 /* imgur-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C52B002813D3D84600D39676 /* imgur-small.png */; };
+		C53A92261481A336007A5DD9 /* SBJson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
+		C53A92271481A359007A5DD9 /* SBJson.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
+		C53A92281481A364007A5DD9 /* SBJson.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
 		C55D245A13DF392C003342D3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D245913DF392C003342D3 /* Cocoa.framework */; };
 		C55D247113DF39BD003342D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		C55D247213DF39C5003342D3 /* GrabBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* GrabBoxAppDelegate.m */; };
@@ -104,11 +102,6 @@
 		C55D248113DF39DD003342D3 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E282D5013C0EA61008E619D /* ASIInputStream.m */; };
 		C55D248213DF39DF003342D3 /* Growler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED2910E13A41A65005F10D3 /* Growler.m */; };
 		C55D248313DF39DF003342D3 /* GrowlerGrowl.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ED2911013A41A65005F10D3 /* GrowlerGrowl.m */; };
-		C55D248413DF39E2003342D3 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB7812D8F89F00201A9A /* NSObject+SBJSON.m */; };
-		C55D248513DF39E2003342D3 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB7A12D8F89F00201A9A /* NSString+SBJSON.m */; };
-		C55D248613DF39E2003342D3 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB7C12D8F89F00201A9A /* SBJsonBase.m */; };
-		C55D248713DF39E2003342D3 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB7E12D8F89F00201A9A /* SBJsonParser.m */; };
-		C55D248813DF39E2003342D3 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB8012D8F89F00201A9A /* SBJsonWriter.m */; };
 		C55D248913DF39E6003342D3 /* FSRefConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E51825811E7CE3A00D15CAB /* FSRefConversions.m */; };
 		C55D248A13DF39E6003342D3 /* Notifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E60861711E6D1B600881A1C /* Notifier.m */; };
 		C55D248B13DF39E6003342D3 /* NSString+URLParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB6D12D8F86C00201A9A /* NSString+URLParameters.m */; };
@@ -130,9 +123,9 @@
 		C55D24A413DF3E0C003342D3 /* ObjectiveMetrics.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */; };
 		C55D24A513DF3E0F003342D3 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; };
 		C55D24A613DF3E11003342D3 /* Dropbox.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D248E13DF3A33003342D3 /* Dropbox.framework */; };
-		C55D24A813DF42E4003342D3 /* ObjectiveMetrics.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */; };
-		C55D24A913DF42E4003342D3 /* Dropbox.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C55D248E13DF3A33003342D3 /* Dropbox.framework */; };
-		C55D24AA13DF42E4003342D3 /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; };
+		C55D24A813DF42E4003342D3 /* ObjectiveMetrics.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */; };
+		C55D24A913DF42E4003342D3 /* Dropbox.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = C55D248E13DF3A33003342D3 /* Dropbox.framework */; };
+		C55D24AA13DF42E4003342D3 /* Growl.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; };
 		C55D24AB13DF43BE003342D3 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627D813B050980013A4B4 /* Defaults.plist */; };
 		C55D24AC13DF43BE003342D3 /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F413B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict */; };
 		C55D24AD13DF43BE003342D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -178,6 +171,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				C55D24A313DF3E09003342D3 /* Sparkle.framework in Copy Supporting Frameworks */,
+				C53A92281481A364007A5DD9 /* SBJson.framework in Copy Supporting Frameworks */,
 				C55D24A413DF3E0C003342D3 /* ObjectiveMetrics.framework in Copy Supporting Frameworks */,
 				C55D24A613DF3E11003342D3 /* Dropbox.framework in Copy Supporting Frameworks */,
 				C55D24A513DF3E0F003342D3 /* Growl.framework in Copy Supporting Frameworks */,
@@ -185,16 +179,18 @@
 			name = "Copy Supporting Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C55D24A713DF42C2003342D3 /* CopyFiles */ = {
+		C55D24A713DF42C2003342D3 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C55D24A813DF42E4003342D3 /* ObjectiveMetrics.framework in CopyFiles */,
-				C55D24A913DF42E4003342D3 /* Dropbox.framework in CopyFiles */,
-				C55D24AA13DF42E4003342D3 /* Growl.framework in CopyFiles */,
+				C55D24A813DF42E4003342D3 /* ObjectiveMetrics.framework in Copy Files */,
+				C53A92271481A359007A5DD9 /* SBJson.framework in Copy Files */,
+				C55D24A913DF42E4003342D3 /* Dropbox.framework in Copy Files */,
+				C55D24AA13DF42E4003342D3 /* Growl.framework in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -273,23 +269,13 @@
 		8EFFCB5F12D8F75A00201A9A /* URLShortener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLShortener.m; sourceTree = "<group>"; };
 		8EFFCB6C12D8F86C00201A9A /* NSString+URLParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLParameters.h"; sourceTree = "<group>"; };
 		8EFFCB6D12D8F86C00201A9A /* NSString+URLParameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLParameters.m"; sourceTree = "<group>"; };
-		8EFFCB7612D8F89F00201A9A /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
-		8EFFCB7712D8F89F00201A9A /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
-		8EFFCB7812D8F89F00201A9A /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
-		8EFFCB7912D8F89F00201A9A /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
-		8EFFCB7A12D8F89F00201A9A /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
-		8EFFCB7B12D8F89F00201A9A /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
-		8EFFCB7C12D8F89F00201A9A /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
-		8EFFCB7D12D8F89F00201A9A /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
-		8EFFCB7E12D8F89F00201A9A /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
-		8EFFCB7F12D8F89F00201A9A /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
-		8EFFCB8012D8F89F00201A9A /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		8EFFCB9512D8F98300201A9A /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		8EFFCB9612D8F98300201A9A /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		C52B001F13D3B8A900D39676 /* UploaderFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploaderFactory.h; sourceTree = "<group>"; };
 		C52B002013D3B8A900D39676 /* UploaderFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploaderFactory.m; sourceTree = "<group>"; };
 		C52B002213D3D47900D39676 /* HostSetup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostSetup.xib; sourceTree = "<group>"; };
 		C52B002813D3D84600D39676 /* imgur-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imgur-small.png"; sourceTree = "<group>"; };
+		C53A92251481A336007A5DD9 /* SBJson.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SBJson.framework; sourceTree = "<group>"; };
 		C55D245713DF392C003342D3 /* GrabBox2 Appstore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GrabBox2 Appstore.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C55D245913DF392C003342D3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C55D248E13DF3A33003342D3 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
@@ -319,6 +305,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C53A92261481A336007A5DD9 /* SBJson.framework in Frameworks */,
 				C55D249713DF3A7D003342D3 /* ObjectiveMetrics.framework in Frameworks */,
 				C55D248F13DF3A33003342D3 /* Dropbox.framework in Frameworks */,
 				C55D249313DF3A62003342D3 /* Growl.framework in Frameworks */,
@@ -349,10 +336,11 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C55D249213DF3A62003342D3 /* Growl.framework */,
+				C53A92251481A336007A5DD9 /* SBJson.framework */,
 				C55D24A113DF3DEE003342D3 /* Sparkle.framework */,
 				C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */,
 				C55D248E13DF3A33003342D3 /* Dropbox.framework */,
-				C55D249213DF3A62003342D3 /* Growl.framework */,
 				C55D249013DF3A52003342D3 /* libz.1.dylib */,
 				C55D249413DF3A6E003342D3 /* SystemConfiguration.framework */,
 				C55D245913DF392C003342D3 /* Cocoa.framework */,
@@ -523,7 +511,6 @@
 			children = (
 				8E282D4613C0EA61008E619D /* ASIHTTPRequest */,
 				8ED290E713A41A65005F10D3 /* Growler */,
-				8EFFCB7512D8F89F00201A9A /* JSON */,
 				8E51825711E7CE3A00D15CAB /* FSRefConversions.h */,
 				8E51825811E7CE3A00D15CAB /* FSRefConversions.m */,
 				8E60861611E6D1B600881A1C /* Notifier.h */,
@@ -537,24 +524,6 @@
 				8E1D612D13E6235D00F44058 /* ExpirationChecker.m */,
 			);
 			path = Utilities;
-			sourceTree = "<group>";
-		};
-		8EFFCB7512D8F89F00201A9A /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-				8EFFCB7612D8F89F00201A9A /* JSON.h */,
-				8EFFCB7712D8F89F00201A9A /* NSObject+SBJSON.h */,
-				8EFFCB7812D8F89F00201A9A /* NSObject+SBJSON.m */,
-				8EFFCB7912D8F89F00201A9A /* NSString+SBJSON.h */,
-				8EFFCB7A12D8F89F00201A9A /* NSString+SBJSON.m */,
-				8EFFCB7B12D8F89F00201A9A /* SBJsonBase.h */,
-				8EFFCB7C12D8F89F00201A9A /* SBJsonBase.m */,
-				8EFFCB7D12D8F89F00201A9A /* SBJsonParser.h */,
-				8EFFCB7E12D8F89F00201A9A /* SBJsonParser.m */,
-				8EFFCB7F12D8F89F00201A9A /* SBJsonWriter.h */,
-				8EFFCB8012D8F89F00201A9A /* SBJsonWriter.m */,
-			);
-			path = JSON;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -587,7 +556,7 @@
 				C55D245313DF392C003342D3 /* Sources */,
 				C55D245413DF392C003342D3 /* Frameworks */,
 				C55D245513DF392C003342D3 /* Resources */,
-				C55D24A713DF42C2003342D3 /* CopyFiles */,
+				C55D24A713DF42C2003342D3 /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -724,11 +693,6 @@
 				8EFFCB6012D8F75A00201A9A /* ImageRenamer.m in Sources */,
 				8EFFCB6212D8F75A00201A9A /* URLShortener.m in Sources */,
 				8EFFCB6E12D8F86C00201A9A /* NSString+URLParameters.m in Sources */,
-				8EFFCB8112D8F89F00201A9A /* NSObject+SBJSON.m in Sources */,
-				8EFFCB8212D8F89F00201A9A /* NSString+SBJSON.m in Sources */,
-				8EFFCB8312D8F89F00201A9A /* SBJsonBase.m in Sources */,
-				8EFFCB8412D8F89F00201A9A /* SBJsonParser.m in Sources */,
-				8EFFCB8512D8F89F00201A9A /* SBJsonWriter.m in Sources */,
 				8EFFCB9712D8F98300201A9A /* NSData+Base64.m in Sources */,
 				8ED2912813A41A66005F10D3 /* Growler.m in Sources */,
 				8ED2912913A41A66005F10D3 /* GrowlerGrowl.m in Sources */,
@@ -770,11 +734,6 @@
 				C55D248113DF39DD003342D3 /* ASIInputStream.m in Sources */,
 				C55D248213DF39DF003342D3 /* Growler.m in Sources */,
 				C55D248313DF39DF003342D3 /* GrowlerGrowl.m in Sources */,
-				C55D248413DF39E2003342D3 /* NSObject+SBJSON.m in Sources */,
-				C55D248513DF39E2003342D3 /* NSString+SBJSON.m in Sources */,
-				C55D248613DF39E2003342D3 /* SBJsonBase.m in Sources */,
-				C55D248713DF39E2003342D3 /* SBJsonParser.m in Sources */,
-				C55D248813DF39E2003342D3 /* SBJsonWriter.m in Sources */,
 				C55D248913DF39E6003342D3 /* FSRefConversions.m in Sources */,
 				C55D248A13DF39E6003342D3 /* Notifier.m in Sources */,
 				C55D248B13DF39E6003342D3 /* NSString+URLParameters.m in Sources */,
@@ -841,6 +800,7 @@
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = "$(GCC_PREPROCESSOR_DEFINITIONS)";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				SDKROOT = "";
 			};
@@ -981,6 +941,7 @@
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = "$(GCC_PREPROCESSOR_DEFINITIONS)";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = "";
@@ -1001,6 +962,7 @@
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
 				INFOPLIST_PREPROCESS = YES;
 				INFOPLIST_PREPROCESSOR_DEFINITIONS = "$(GCC_PREPROCESSOR_DEFINITIONS)";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				SDKROOT = "";
 			};
