@@ -18,6 +18,7 @@
 
 - (void)flush;
 - (BOOL)blockingFlush;
+- (void)discard;
 
 @end
 
@@ -29,7 +30,13 @@
     id<DMTrackingQueueProtocol> queue;
     NSString *session;
     int flow;
+    BOOL autoflush;
 }
+
+/**
+  Whether or not we automatically flush the queue at termination.
+ */
+@property (assign) BOOL autoflush;
 
 /**
   Returns the singleton instance of the DMTracker.
@@ -52,11 +59,13 @@
   It is implicitly called when the app sends a
   NSApplicationWillTerminateNotification or
   UIApplicationWillTerminateNotification.  Finalizing the app session will
-  attempt to send all queued messages. If it fails, they will be attempted sent
+  attempt to send all queued messages if autoflush is enabled (default).
+  If it fails or autoflushing is disabled, they will be attempted sent
   at the next app startup.
 
   @see NSApplicationWillTerminateNotification
   @see UIApplicationWillTerminateNotification
+  @see setAutoflush
  */
 - (void)stopApp;
 
@@ -67,6 +76,15 @@
   Info.plist (default values for them are 100 and 7, respectively).
  */
 - (void)flushQueue;
+
+/**
+  Throw away every event currently in the queue. They will not be
+  received by the server, and this method should be used sparingly.
+
+  Useful for debugging or error recovery when you have bad data.
+ */
+- (void)discardQueue;
+
 
 #pragma mark -
 
