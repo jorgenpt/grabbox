@@ -43,6 +43,18 @@
 #else
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 #endif
+    
+    <key>CFBundleURLTypes</key>
+    <array>
+		<dict>
+            <key>CFBundleURLName</key>
+            <string>GrabBox2/Dropbox Integration URL</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>db-<INSERT DROPBOX CONSUMER KEY></string>
+            </array>
+		</dict>
+    </array>
 
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>

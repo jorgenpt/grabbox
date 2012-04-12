@@ -76,12 +76,17 @@
 		8EFFCB6212D8F75A00201A9A /* URLShortener.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB5F12D8F75A00201A9A /* URLShortener.m */; };
 		8EFFCB6E12D8F86C00201A9A /* NSString+URLParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB6D12D8F86C00201A9A /* NSString+URLParameters.m */; };
 		8EFFCB9712D8F98300201A9A /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB9612D8F98300201A9A /* NSData+Base64.m */; };
+		C50E57B8150D6C1C005F1ABC /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
+		C50E57B9150D6C39005F1ABC /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
+		C50E57BE150D72B8005F1ABC /* SBJson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
+		C50E57BF150D731F005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
+		C50E57C0150D7322005F1ABC /* SBJson.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
+		C50E57C1150D7338005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
 		C52B002113D3B8A900D39676 /* UploaderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C52B002013D3B8A900D39676 /* UploaderFactory.m */; };
 		C52B002313D3D47900D39676 /* HostSetup.xib in Resources */ = {isa = PBXBuildFile; fileRef = C52B002213D3D47900D39676 /* HostSetup.xib */; };
 		C52B002913D3D84600D39676 /* imgur-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C52B002813D3D84600D39676 /* imgur-small.png */; };
 		C53A92261481A336007A5DD9 /* SBJson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
-		C53A92271481A359007A5DD9 /* SBJson.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
-		C53A92281481A364007A5DD9 /* SBJson.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
+		C53A92271481A359007A5DD9 /* SBJson.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
 		C55D245A13DF392C003342D3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D245913DF392C003342D3 /* Cocoa.framework */; };
 		C55D247113DF39BD003342D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		C55D247213DF39C5003342D3 /* GrabBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* GrabBoxAppDelegate.m */; };
@@ -107,7 +112,6 @@
 		C55D248B13DF39E6003342D3 /* NSString+URLParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB6D12D8F86C00201A9A /* NSString+URLParameters.m */; };
 		C55D248C13DF39E6003342D3 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB9612D8F98300201A9A /* NSData+Base64.m */; };
 		C55D248D13DF39E6003342D3 /* NetworkReachabilityNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E368D1513A5F51800EB0D90 /* NetworkReachabilityNotifier.m */; };
-		C55D248F13DF3A33003342D3 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D248E13DF3A33003342D3 /* Dropbox.framework */; };
 		C55D249113DF3A52003342D3 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249013DF3A52003342D3 /* libz.1.dylib */; };
 		C55D249313DF3A62003342D3 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; };
 		C55D249513DF3A6E003342D3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249413DF3A6E003342D3 /* SystemConfiguration.framework */; };
@@ -116,16 +120,13 @@
 		C55D249C13DF3CAC003342D3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249413DF3A6E003342D3 /* SystemConfiguration.framework */; };
 		C55D249D13DF3CAC003342D3 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; };
 		C55D249E13DF3CAC003342D3 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249013DF3A52003342D3 /* libz.1.dylib */; };
-		C55D249F13DF3CAC003342D3 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D248E13DF3A33003342D3 /* Dropbox.framework */; };
 		C55D24A013DF3CB3003342D3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D245913DF392C003342D3 /* Cocoa.framework */; };
 		C55D24A213DF3DEE003342D3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D24A113DF3DEE003342D3 /* Sparkle.framework */; };
 		C55D24A313DF3E09003342D3 /* Sparkle.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D24A113DF3DEE003342D3 /* Sparkle.framework */; };
 		C55D24A413DF3E0C003342D3 /* ObjectiveMetrics.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */; };
 		C55D24A513DF3E0F003342D3 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; };
-		C55D24A613DF3E11003342D3 /* Dropbox.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D248E13DF3A33003342D3 /* Dropbox.framework */; };
-		C55D24A813DF42E4003342D3 /* ObjectiveMetrics.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */; };
-		C55D24A913DF42E4003342D3 /* Dropbox.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = C55D248E13DF3A33003342D3 /* Dropbox.framework */; };
-		C55D24AA13DF42E4003342D3 /* Growl.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; };
+		C55D24A813DF42E4003342D3 /* ObjectiveMetrics.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */; };
+		C55D24AA13DF42E4003342D3 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; };
 		C55D24AB13DF43BE003342D3 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627D813B050980013A4B4 /* Defaults.plist */; };
 		C55D24AC13DF43BE003342D3 /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F413B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict */; };
 		C55D24AD13DF43BE003342D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -170,27 +171,27 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				C50E57BF150D731F005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */,
 				C55D24A313DF3E09003342D3 /* Sparkle.framework in Copy Supporting Frameworks */,
-				C53A92281481A364007A5DD9 /* SBJson.framework in Copy Supporting Frameworks */,
 				C55D24A413DF3E0C003342D3 /* ObjectiveMetrics.framework in Copy Supporting Frameworks */,
-				C55D24A613DF3E11003342D3 /* Dropbox.framework in Copy Supporting Frameworks */,
+				C50E57C0150D7322005F1ABC /* SBJson.framework in Copy Supporting Frameworks */,
 				C55D24A513DF3E0F003342D3 /* Growl.framework in Copy Supporting Frameworks */,
 			);
 			name = "Copy Supporting Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C55D24A713DF42C2003342D3 /* Copy Files */ = {
+		C55D24A713DF42C2003342D3 /* Copy Supporting Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C55D24A813DF42E4003342D3 /* ObjectiveMetrics.framework in Copy Files */,
-				C53A92271481A359007A5DD9 /* SBJson.framework in Copy Files */,
-				C55D24A913DF42E4003342D3 /* Dropbox.framework in Copy Files */,
-				C55D24AA13DF42E4003342D3 /* Growl.framework in Copy Files */,
+				C55D24A813DF42E4003342D3 /* ObjectiveMetrics.framework in Copy Supporting Frameworks */,
+				C53A92271481A359007A5DD9 /* SBJson.framework in Copy Supporting Frameworks */,
+				C50E57C1150D7338005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */,
+				C55D24AA13DF42E4003342D3 /* Growl.framework in Copy Supporting Frameworks */,
 			);
-			name = "Copy Files";
+			name = "Copy Supporting Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -271,6 +272,7 @@
 		8EFFCB6D12D8F86C00201A9A /* NSString+URLParameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLParameters.m"; sourceTree = "<group>"; };
 		8EFFCB9512D8F98300201A9A /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		8EFFCB9612D8F98300201A9A /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxOSX.framework; sourceTree = "<group>"; };
 		C52B001F13D3B8A900D39676 /* UploaderFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploaderFactory.h; sourceTree = "<group>"; };
 		C52B002013D3B8A900D39676 /* UploaderFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploaderFactory.m; sourceTree = "<group>"; };
 		C52B002213D3D47900D39676 /* HostSetup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostSetup.xib; sourceTree = "<group>"; };
@@ -278,7 +280,6 @@
 		C53A92251481A336007A5DD9 /* SBJson.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SBJson.framework; sourceTree = "<group>"; };
 		C55D245713DF392C003342D3 /* GrabBox2 Appstore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GrabBox2 Appstore.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C55D245913DF392C003342D3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		C55D248E13DF3A33003342D3 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
 		C55D249013DF3A52003342D3 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = SDKs/MacOSX10.6.sdk/usr/lib/libz.1.dylib; sourceTree = DEVELOPER_DIR; };
 		C55D249213DF3A62003342D3 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		C55D249413DF3A6E003342D3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = SDKs/MacOSX10.6.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
@@ -293,11 +294,12 @@
 			files = (
 				C55D24A213DF3DEE003342D3 /* Sparkle.framework in Frameworks */,
 				C55D249B13DF3CAC003342D3 /* ObjectiveMetrics.framework in Frameworks */,
-				C55D249F13DF3CAC003342D3 /* Dropbox.framework in Frameworks */,
 				C55D249D13DF3CAC003342D3 /* Growl.framework in Frameworks */,
 				C55D249E13DF3CAC003342D3 /* libz.1.dylib in Frameworks */,
 				C55D249C13DF3CAC003342D3 /* SystemConfiguration.framework in Frameworks */,
 				C55D24A013DF3CB3003342D3 /* Cocoa.framework in Frameworks */,
+				C50E57B8150D6C1C005F1ABC /* DropboxOSX.framework in Frameworks */,
+				C50E57BE150D72B8005F1ABC /* SBJson.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,11 +309,11 @@
 			files = (
 				C53A92261481A336007A5DD9 /* SBJson.framework in Frameworks */,
 				C55D249713DF3A7D003342D3 /* ObjectiveMetrics.framework in Frameworks */,
-				C55D248F13DF3A33003342D3 /* Dropbox.framework in Frameworks */,
 				C55D249313DF3A62003342D3 /* Growl.framework in Frameworks */,
 				C55D249113DF3A52003342D3 /* libz.1.dylib in Frameworks */,
 				C55D249513DF3A6E003342D3 /* SystemConfiguration.framework in Frameworks */,
 				C55D245A13DF392C003342D3 /* Cocoa.framework in Frameworks */,
+				C50E57B9150D6C39005F1ABC /* DropboxOSX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,11 +338,11 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */,
 				C55D249213DF3A62003342D3 /* Growl.framework */,
 				C53A92251481A336007A5DD9 /* SBJson.framework */,
 				C55D24A113DF3DEE003342D3 /* Sparkle.framework */,
 				C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */,
-				C55D248E13DF3A33003342D3 /* Dropbox.framework */,
 				C55D249013DF3A52003342D3 /* libz.1.dylib */,
 				C55D249413DF3A6E003342D3 /* SystemConfiguration.framework */,
 				C55D245913DF392C003342D3 /* Cocoa.framework */,
@@ -556,7 +558,7 @@
 				C55D245313DF392C003342D3 /* Sources */,
 				C55D245413DF392C003342D3 /* Frameworks */,
 				C55D245513DF392C003342D3 /* Resources */,
-				C55D24A713DF42C2003342D3 /* Copy Files */,
+				C55D24A713DF42C2003342D3 /* Copy Supporting Frameworks */,
 			);
 			buildRules = (
 			);
@@ -572,6 +574,9 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GrabBox2" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;

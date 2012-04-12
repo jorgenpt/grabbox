@@ -234,7 +234,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
         [NSApp activateIgnoringOtherApps:YES];
     }
     else
+    {
         [[UploaderFactory defaultFactory] loadSettings];
+    }
 }
 
 - (void) startMonitoring

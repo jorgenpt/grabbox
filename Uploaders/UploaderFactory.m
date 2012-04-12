@@ -29,9 +29,6 @@ enum {
 
 @property (assign) Class uploaderClass;
 
-@property (nonatomic, retain) DBRestClient *restClient;
-@property (nonatomic, retain) DBLoginController *loginController;
-
 - (void) promptForHost;
 - (void) promptForDropboxLink;
 
@@ -39,15 +36,15 @@ enum {
 - (void) setupDropbox;
 - (void) setupImgur;
 
+- (DBRestClient *)restClient;
+
 @end
 
 @implementation UploaderFactory
 
 @synthesize uploaderClass;
 
-@synthesize restClient;
 @synthesize account;
-@synthesize loginController;
 
 @synthesize hostSelecter;
 @synthesize radioGroup;
@@ -77,6 +74,10 @@ enum {
                                                                   forKeyPath:[@"values." stringByAppendingString:CONFIG(Host)]
                                                                      options:0
                                                                      context:NULL];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(applicationDidBecomeActive:)
+                                                     name:NSApplicationDidBecomeActiveNotification
+                                                   object:nil];
     }
 
     return self;
@@ -84,12 +85,13 @@ enum {
 
 - (void) dealloc
 {
-    [self setRestClient:nil];
-    [self setLoginController:nil];
+    [restClient setDelegate:nil];
+    [restClient release];
     [self setAccount:nil];
 
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self
                                                                  forKeyPath:[@"values." stringByAppendingString:CONFIG(Host)]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     [super dealloc];
 }
@@ -150,7 +152,6 @@ enum {
     NSInteger host = [[NSUserDefaults standardUserDefaults] integerForKey:CONFIG(Host)];
     [[NSNotificationCenter defaultCenter] postNotificationName:GBUploaderUnavailableNotification object:nil];
 
-    [self setRestClient:nil];
     [self setAccount:nil];
     [self setUploaderClass:nil];
 
@@ -159,8 +160,9 @@ enum {
 
 - (DBSession *) dropboxSession
 {
-    return [[[DBSession alloc] initWithConsumerKey:dropboxConsumerKey
-                                    consumerSecret:dropboxConsumerSecret] autorelease];
+    return [[[DBSession alloc] initWithAppKey:dropboxConsumerKey
+                                    appSecret:dropboxConsumerSecret
+                                         root:kDBRootDropbox] autorelease];
 }
 
 - (void) setupHost:(NSInteger)host
@@ -179,7 +181,11 @@ enum {
         {
             DBSession *session = [self dropboxSession];
             if ([session isLinked])
-                [session unlink];
+            {
+                [session unlinkAll];
+                [restClient release];
+                restClient = nil;
+            }
             [self promptForHost];
             break;
         }
@@ -192,17 +198,31 @@ enum {
     [session setDelegate:self];
     [DBSession setSharedSession:session];
 
-    [self setRestClient:[DBRestClient restClientWithSharedSession]];
-    [restClient setDelegate:self];
+    NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
+    [em setEventHandler:self
+            andSelector:@selector(getUrl:withReplyEvent:)
+          forEventClass:kInternetEventClass andEventID:kAEGetURL];
+
+    [[self restClient] setDelegate:self];
 
     if ([session isLinked])
     {
-        [restClient loadAccountInfo];
+        [[self restClient] loadAccountInfo];
     }
     else
     {
         [self promptForDropboxLink];
     }
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)aNotification {
+	if ([[self restClient] requestTokenLoaded]) {
+		[[self restClient] loadAccessToken];
+	}
+}
+
+- (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
+	// This gets called when the user clicks Show "App name". You don't need to do anything for Dropbox here
 }
 
 - (void) setupImgur
@@ -220,15 +240,16 @@ enum {
 {
     [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
                                             withName:@"Account Link Prompt"];
-    [self setLoginController:[[[DBLoginController alloc] init] autorelease]];
-    [loginController setDelegate:self];
-    [loginController presentFrom:self];
-    [NSApp activateIgnoringOtherApps:YES];
+    if (![[self restClient] requestTokenLoaded]) {
+        [[self restClient] loadRequestToken];
+    }
 }
+
 
 #pragma mark DBSession delegate methods
 
 - (void) sessionDidReceiveAuthorizationFailure:(DBSession *)session
+                                        userId:(NSString *)userId
 {
     [[DMTracker defaultTracker] trackEventInCategory:@"Oddities"
                                             withName:@"Authorization Failure"];
@@ -240,16 +261,28 @@ enum {
     [self promptForDropboxLink];
 }
 
-#pragma mark DBLoginController delegate methods
+#pragma mark DBRestClientOSXDelegate delegate methods
 
-- (void) controllerDidComplete:(DBLoginController *)window
+- (void)restClientLoadedRequestToken:(DBRestClient *)restClient
 {
-    DLog(@"Account linked, trying to load account info.");
-    [self setLoginController:nil];
-    [restClient loadAccountInfo];
+    NSURL *url = [[self restClient] authorizeURL];
+    [[NSWorkspace sharedWorkspace] openURL:url];
 }
 
-- (void) controllerDidCancel:(DBLoginController *)window
+- (void)restClient:(DBRestClient *)restClient loadRequestTokenFailedWithError:(NSError *)error {
+    DLog(@"loadRequestTokenFailedWithError: %@", error);
+}
+
+- (void)restClientLoadedAccessToken:(DBRestClient *)restClient {
+    [[self restClient] loadAccountInfo];
+}
+
+- (void)restClient:(DBRestClient *)restClient loadAccessTokenFailedWithError:(NSError *)error {
+    DLog(@"loadAccessTokenFailedWithError: %@", error);
+}
+
+
+/*- (void) controllerDidCancel:(DBLoginController *)window
 {
     [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
                                             withName:@"Account Link Cancelled"];
@@ -259,7 +292,7 @@ enum {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:CONFIG(Host)];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [NSApp terminate:self];
-}
+}*/
 
 #pragma mark DBRestClient delegate methods
 
@@ -276,6 +309,14 @@ enum {
 {
     ErrorLog(@"Failed retrieving account info: %ld", error.code);
     [NSApp terminate:self];
+}
+
+- (DBRestClient *)restClient {
+	if (!restClient) {
+		restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+		restClient.delegate = self;
+	}
+	return restClient;
 }
 
 @end

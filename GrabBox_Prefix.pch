@@ -5,7 +5,7 @@
 #ifdef __OBJC__
 
 #   import <Cocoa/Cocoa.h>
-#   import <Dropbox/Dropbox.h>
+#   import <DropboxOSX/DropboxOSX.h>
 #   import <ObjectiveMetrics/ObjectiveMetrics.h>
 
 #   define LineLog(fmt, ...) do { \

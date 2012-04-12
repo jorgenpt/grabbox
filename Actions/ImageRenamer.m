@@ -13,14 +13,12 @@
 #import "URLShortener.h"
 
 @interface ImageRenamer ()
-@property (nonatomic, retain) DBRestClient *restClient;
 @property (nonatomic, retain) NSImage *image;
 @property (nonatomic, retain) NSString *path;
+- (DBRestClient *)restClient;
 @end
 
 @implementation ImageRenamer
-
-@synthesize restClient;
 
 @synthesize image;
 @synthesize path;
@@ -41,14 +39,6 @@
     self = [super init];
     if (self)
     {
-        [self setRestClient:[DBRestClient restClientWithSharedSession]];
-        if (!restClient)
-        {
-            [self release];
-            return nil;
-        }
-
-        [restClient setDelegate:self];
         [self setPath:nil];
         [self setImage:nil];
     }
@@ -71,7 +61,7 @@
 - (void) dealloc
 {
     [restClient setDelegate:nil];
-    [self setRestClient:nil];
+    [restClient release];
     [self setImage:nil];
     [self setPath:nil];
 
@@ -149,7 +139,7 @@
         [spinner startAnimation:self];
         [renameButton setHidden:YES];
 
-        [restClient loadMetadata:newPath];
+        [[self restClient] loadMetadata:newPath];
     } else {
         [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
                                                 withName:@"Rename Cancelled"];
@@ -221,5 +211,14 @@
     ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
     [[self window] performClose:self];
 }
+
+- (DBRestClient *)restClient {
+	if (!restClient) {
+		restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+		restClient.delegate = self;
+	}
+	return restClient;
+}
+
 
 @end

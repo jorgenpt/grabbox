@@ -22,14 +22,13 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
 
 @interface DropboxUploader ()
 
-@property (nonatomic, retain) DBRestClient *restClient;
 @property (nonatomic, retain) NSString* destFilename;
+- (DBRestClient *)restClient;
 
 @end
 
 @implementation DropboxUploader
 
-@synthesize restClient;
 @synthesize destFilename;
 
 + (NSString *) urlForPath:(NSString *)path
@@ -49,14 +48,6 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
     self = [super init];
     if (self)
     {
-        [self setRestClient:[DBRestClient restClientWithSharedSession]];
-        if (!restClient)
-        {
-            [self release];
-            return nil;
-        }
-
-        [restClient setDelegate:self];
         [self setDestFilename:nil];
     }
 
@@ -77,7 +68,8 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
 
 - (void) dealloc
 {
-    [self setRestClient:nil];
+    [restClient setDelegate:nil];
+    [restClient release];
     [self setDestFilename:nil];
 
     [super dealloc];
@@ -98,7 +90,7 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
     NSString* destination = [NSString pathWithComponents:[NSArray arrayWithObjects:dropboxPath, shortName, nil]];
 
     DLog(@"Trying upload of '%@', destination '%@'", srcPath, destination);
-    [restClient loadMetadata:destination];
+    [[self restClient] loadMetadata:destination];
 }
 
 #pragma mark DBRestClientDelegate callbacks
@@ -215,6 +207,14 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
         if ([delegate respondsToSelector:@selector(uploaderDone:)])
             [delegate uploaderDone:self];
     }
+}
+
+- (DBRestClient *)restClient {
+	if (!restClient) {
+		restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+		restClient.delegate = self;
+	}
+	return restClient;
 }
 
 @end

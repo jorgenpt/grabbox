@@ -9,17 +9,15 @@
 #import <Foundation/Foundation.h>
 
 #import "Uploader.h"
-#import <Dropbox/Dropbox.h>
 
 extern NSString * const GBUploaderUnavailableNotification;
 extern NSString * const GBUploaderAvailableNotification;
 
-@interface UploaderFactory : NSObject <DBSessionDelegate, DBCommonControllerDelegate, DBRestClientDelegate> {
+@interface UploaderFactory : NSObject <DBSessionDelegate, DBRestClientDelegate> {
     Class uploaderClass;
 
     DBRestClient *restClient;
     DBAccountInfo *account;
-    DBLoginController *loginController;
 
     NSWindow *hostSelecter;
     NSMatrix *radioGroup;
