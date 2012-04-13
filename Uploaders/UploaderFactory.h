@@ -13,6 +13,16 @@
 extern NSString * const GBUploaderUnavailableNotification;
 extern NSString * const GBUploaderAvailableNotification;
 
+@protocol NSWindowViewContentController <NSObject>
+@optional
+- (NSString *)windowTitle;
+@end
+
+enum {
+    HostImgur = 1,
+    HostDropbox = 2,
+} Host;
+
 @interface UploaderFactory : NSObject <DBSessionDelegate, DBRestClientDelegate> {
     Class uploaderClass;
 
@@ -22,6 +32,7 @@ extern NSString * const GBUploaderAvailableNotification;
     NSWindow *hostSelecter;
     NSMatrix *radioGroup;
     NSButton *advanceButton;
+    NSViewController<NSWindowViewContentController> *currentVC;
 
     BOOL ignoreUpdates;
 }

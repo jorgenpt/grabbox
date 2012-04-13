@@ -145,6 +145,16 @@
 		C55D24BA13DF4460003342D3 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F113B050DF0013A4B4 /* Credits.rtf */; };
 		C55D24BB13DF47DA003342D3 /* GrabBox2.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627DE13B050CE0013A4B4 /* GrabBox2.icns */; };
 		C55D24BC13DF47E4003342D3 /* GrabBox2.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627DE13B050CE0013A4B4 /* GrabBox2.icns */; };
+		C561388F153868450035C08E /* DropboxAuthView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C561388E153868450035C08E /* DropboxAuthView.xib */; };
+		C5613890153868450035C08E /* DropboxAuthView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C561388E153868450035C08E /* DropboxAuthView.xib */; };
+		C561389215386B380035C08E /* API Request Authorization - Dropbox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C561389115386B380035C08E /* API Request Authorization - Dropbox.jpg */; };
+		C561389315386B380035C08E /* API Request Authorization - Dropbox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C561389115386B380035C08E /* API Request Authorization - Dropbox.jpg */; };
+		C561389515386C280035C08E /* WelcomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C561389415386C280035C08E /* WelcomeView.xib */; };
+		C561389615386C280035C08E /* WelcomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C561389415386C280035C08E /* WelcomeView.xib */; };
+		C561389A15389D0A0035C08E /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C561389815389D0A0035C08E /* WelcomeViewController.m */; };
+		C561389B15389D0A0035C08E /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C561389815389D0A0035C08E /* WelcomeViewController.m */; };
+		C56138A11538A1980035C08E /* DropboxAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C561389F1538A1980035C08E /* DropboxAuthViewController.m */; };
+		C56138A21538A1980035C08E /* DropboxAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C561389F1538A1980035C08E /* DropboxAuthViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -285,6 +295,13 @@
 		C55D249413DF3A6E003342D3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = SDKs/MacOSX10.6.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ObjectiveMetrics.framework; sourceTree = "<group>"; };
 		C55D24A113DF3DEE003342D3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		C561388E153868450035C08E /* DropboxAuthView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropboxAuthView.xib; sourceTree = "<group>"; };
+		C561389115386B380035C08E /* API Request Authorization - Dropbox.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "API Request Authorization - Dropbox.jpg"; sourceTree = SOURCE_ROOT; };
+		C561389415386C280035C08E /* WelcomeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeView.xib; sourceTree = "<group>"; };
+		C561389715389D0A0035C08E /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
+		C561389815389D0A0035C08E /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
+		C561389E1538A1980035C08E /* DropboxAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxAuthViewController.h; sourceTree = "<group>"; };
+		C561389F1538A1980035C08E /* DropboxAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxAuthViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -395,6 +412,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C561389115386B380035C08E /* API Request Authorization - Dropbox.jpg */,
 				8E63965713DF8131002EC0E0 /* GrabBox2.entitlements */,
 				8E2AF15511F01D2100A29A61 /* Images */,
 				8EF627F113B050DF0013A4B4 /* Credits.rtf */,
@@ -406,6 +424,8 @@
 				8EF627F913B0512A0013A4B4 /* MainMenu.xib */,
 				8E49CF4B11ED14640041CE70 /* ImageRenamer.xib */,
 				C52B002213D3D47900D39676 /* HostSetup.xib */,
+				C561388E153868450035C08E /* DropboxAuthView.xib */,
+				C561389415386C280035C08E /* WelcomeView.xib */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -465,6 +485,10 @@
 				8EAAE7F31256675800798872 /* Menubar.m */,
 				8E7B6C2311EC433B00112165 /* Preferences.h */,
 				8E7B6C2411EC433B00112165 /* Preferences.m */,
+				C561389715389D0A0035C08E /* WelcomeViewController.h */,
+				C561389815389D0A0035C08E /* WelcomeViewController.m */,
+				C561389E1538A1980035C08E /* DropboxAuthViewController.h */,
+				C561389F1538A1980035C08E /* DropboxAuthViewController.m */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -622,6 +646,9 @@
 				C52B002913D3D84600D39676 /* imgur-small.png in Resources */,
 				8E63965813DF8131002EC0E0 /* GrabBox2.entitlements in Resources */,
 				8E1D613213E625AF00F44058 /* expired.png in Resources */,
+				C561388F153868450035C08E /* DropboxAuthView.xib in Resources */,
+				C561389215386B380035C08E /* API Request Authorization - Dropbox.jpg in Resources */,
+				C561389515386C280035C08E /* WelcomeView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -647,6 +674,9 @@
 				C55D24B813DF43FB003342D3 /* menuiconInverted.png in Resources */,
 				C55D24B913DF43FB003342D3 /* switch_to_menubar.png in Resources */,
 				8E1D613313E625AF00F44058 /* expired.png in Resources */,
+				C5613890153868450035C08E /* DropboxAuthView.xib in Resources */,
+				C561389315386B380035C08E /* API Request Authorization - Dropbox.jpg in Resources */,
+				C561389615386C280035C08E /* WelcomeView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,6 +743,8 @@
 				8E282D6913C0EE65008E619D /* ImgurUploader.m in Sources */,
 				C52B002113D3B8A900D39676 /* UploaderFactory.m in Sources */,
 				8E1D612E13E6235D00F44058 /* ExpirationChecker.m in Sources */,
+				C561389A15389D0A0035C08E /* WelcomeViewController.m in Sources */,
+				C56138A11538A1980035C08E /* DropboxAuthViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,6 +777,8 @@
 				C55D248C13DF39E6003342D3 /* NSData+Base64.m in Sources */,
 				C55D248D13DF39E6003342D3 /* NetworkReachabilityNotifier.m in Sources */,
 				8E1D612F13E6235D00F44058 /* ExpirationChecker.m in Sources */,
+				C561389B15389D0A0035C08E /* WelcomeViewController.m in Sources */,
+				C56138A21538A1980035C08E /* DropboxAuthViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

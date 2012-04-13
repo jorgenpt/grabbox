@@ -10,6 +10,9 @@
 
 #import "GrabBoxAppDelegate.h"
 
+#import "WelcomeViewController.h"
+#import "DropboxAuthViewController.h"
+
 #import "ImgurUploader.h"
 #import "DropboxUploader.h"
 
@@ -20,14 +23,11 @@ static NSString * const dropboxConsumerKey = @"<INSERT DROPBOX CONSUMER KEY>";
 static NSString * const dropboxConsumerSecret = @"<INSERT DROPBOX CONSUMER SECRET>";
 
 static UploaderFactory *defaultFactory = nil;
-enum {
-    HostImgur = 1,
-    HostDropbox = 2,
-} Host;
 
 @interface UploaderFactory ()
 
 @property (assign) Class uploaderClass;
+@property (retain) NSViewController *currentVC;
 
 - (void) promptForHost;
 - (void) promptForDropboxLink;
@@ -43,6 +43,7 @@ enum {
 @implementation UploaderFactory
 
 @synthesize uploaderClass;
+@synthesize currentVC;
 
 @synthesize account;
 
@@ -88,6 +89,7 @@ enum {
     [restClient setDelegate:nil];
     [restClient release];
     [self setAccount:nil];
+    [self setCurrentVC:nil];
 
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self
                                                                  forKeyPath:[@"values." stringByAppendingString:CONFIG(Host)]];
@@ -114,16 +116,24 @@ enum {
     switch (selectedTag)
     {
         case HostDropbox:
+            [self setCurrentVC:[[[DropboxAuthViewController alloc] init] autorelease]];
+            break;
         case HostImgur:
-            [hostSelecter close];
             [[NSUserDefaults standardUserDefaults] setInteger:selectedTag forKey:CONFIG(Host)];
+            [self setCurrentVC:[[[WelcomeViewController alloc] init] autorelease]];
             break;
 
         default:
             // TODO: Handle this better?
             ErrorLog(@"Invalid selected tag: %ld!", selectedTag);
             [NSApp terminate:self];
-            break;
+            return;
+    }
+
+    if (currentVC)
+    {
+        [hostSelecter setContentView:[currentVC view]];
+        [hostSelecter setTitle:[currentVC windowTitle]];
     }
 }
 
@@ -216,9 +226,12 @@ enum {
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)aNotification {
-	if ([[self restClient] requestTokenLoaded]) {
-		[[self restClient] loadAccessToken];
-	}
+    if ([DBSession sharedSession])
+    {
+        if ([[self restClient] requestTokenLoaded]) {
+            [[self restClient] loadAccessToken];
+        }
+    }
 }
 
 - (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
@@ -290,6 +303,11 @@ enum {
     DLog(@"Got account info, starting FS monitoring and enabling interaction!");
     [self setAccount:accountInfo];
     [self setUploaderClass:[DropboxUploader class]];
+
+    [self setCurrentVC:[[[WelcomeViewController alloc] init] autorelease]];
+    [[self hostSelecter] setContentView:[currentVC view]];
+    [[self hostSelecter] setTitle:[currentVC windowTitle]];
+
     [[NSNotificationCenter defaultCenter] postNotificationName:GBUploaderAvailableNotification object:nil];
 }
 
