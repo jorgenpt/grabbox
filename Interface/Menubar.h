@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface Menubar : NSObject {
+@interface Menubar : NSObject<NSMenuDelegate> {
     NSStatusItem* item;
     NSMenu* menu;
     NSWindow* preferencesWindow;

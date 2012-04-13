@@ -18,6 +18,7 @@
 
 NSString * const GBUploaderUnavailableNotification = @"GBUploaderUnavailableNotification";
 NSString * const GBUploaderAvailableNotification = @"GBUploaderAvailableNotification";
+NSString * const GBGainedFocusNotification = @"GBGainedFocusNotification";
 
 static NSString * const dropboxConsumerKey = @"<INSERT DROPBOX CONSUMER KEY>";
 static NSString * const dropboxConsumerSecret = @"<INSERT DROPBOX CONSUMER SECRET>";
@@ -76,8 +77,12 @@ static UploaderFactory *defaultFactory = nil;
                                                                      options:0
                                                                      context:NULL];
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(applicationDidBecomeActive:)
+                                                 selector:@selector(gainedFocus:)
                                                      name:NSApplicationDidBecomeActiveNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(gainedFocus:)
+                                                     name:GBGainedFocusNotification
                                                    object:nil];
     }
 
@@ -225,7 +230,7 @@ static UploaderFactory *defaultFactory = nil;
     }
 }
 
-- (void)applicationDidBecomeActive:(NSNotification *)aNotification {
+- (void)gainedFocus:(NSNotification *)aNotification {
     if ([DBSession sharedSession])
     {
         if ([[self restClient] requestTokenLoaded]) {

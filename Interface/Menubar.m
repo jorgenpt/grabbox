@@ -8,6 +8,8 @@
 
 #import "Menubar.h"
 
+#import "UploaderFactory.h"
+
 
 @implementation Menubar
 
@@ -50,6 +52,12 @@
 {
     [NSApp activateIgnoringOtherApps:YES];
     [[self preferencesWindow] makeKeyAndOrderFront:sender];
+}
+
+- (void)menuWillOpen:(NSMenu *)menu
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:GBGainedFocusNotification
+                                                        object:self];
 }
 
 @end

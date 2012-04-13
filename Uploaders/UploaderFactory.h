@@ -12,6 +12,7 @@
 
 extern NSString * const GBUploaderUnavailableNotification;
 extern NSString * const GBUploaderAvailableNotification;
+extern NSString * const GBGainedFocusNotification;
 
 @protocol NSWindowViewContentController <NSObject>
 @optional
