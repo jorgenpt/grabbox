@@ -205,6 +205,15 @@
 
 - (void)restClient:(DBRestClient*)client movePathFailedWithError:(NSError*)error
 {
+    if (error.code == 401)
+    {
+        // TODO: GH-1: Show error dialog & ask to re-auth.
+        // For now we just force a re-auth.
+        DLog(@"401 from Dropbox when moving file.");
+
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:CONFIG(Host)];
+    }
+
     GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not rename file!"
                                                      description:[error localizedDescription]];
     [Growler growl:errorGrowl];

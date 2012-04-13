@@ -223,6 +223,7 @@ enum {
 
 - (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
 	// This gets called when the user clicks Show "App name". You don't need to do anything for Dropbox here
+    // TODO: GH-2: Show a dialog to confirm
 }
 
 - (void) setupImgur
@@ -281,19 +282,6 @@ enum {
     DLog(@"loadAccessTokenFailedWithError: %@", error);
 }
 
-
-/*- (void) controllerDidCancel:(DBLoginController *)window
-{
-    [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
-                                            withName:@"Account Link Cancelled"];
-    DLog(@"Cancelled account link window, terminating.");
-
-    ignoreUpdates = YES;
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:CONFIG(Host)];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [NSApp terminate:self];
-}*/
-
 #pragma mark DBRestClient delegate methods
 
 - (void)restClient:(DBRestClient*)client
@@ -307,8 +295,34 @@ enum {
 
 - (void)restClient:(DBRestClient*)client loadAccountInfoFailedWithError:(NSError*)error
 {
-    ErrorLog(@"Failed retrieving account info: %ld", error.code);
-    [NSApp terminate:self];
+    // Error codes described here: https://www.dropbox.com/developers/reference/api
+    if (error.code == 401)
+        // "Bad or expired token. This can happen if the user or Dropbox revoked or expired an access token.
+        // To fix, you should re-authenticate the user."
+    {
+        if (account)
+        {
+            // TODO: GH-1: Show error dialog & ask to re-auth.
+            // For now we just force a re-auth.
+            DLog(@"401 from Dropbox when loading account info.");
+
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:CONFIG(Host)];
+        }
+        else
+        {
+            [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
+                                                    withName:@"Bad token on first-run"];
+            DLog(@"401 from Dropbox when loading initial account info.");
+
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:CONFIG(Host)];
+        }
+    }
+    else
+    {
+        // TODO: GH-3: Open an error dialog!
+        ErrorLog(@"Failed retrieving account info: %ld", error.code);
+        [NSApp terminate:self];
+    }
 }
 
 - (DBRestClient *)restClient {

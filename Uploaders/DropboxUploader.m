@@ -127,6 +127,14 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
                     toPath:dropboxPath
                   fromPath:srcPath];
     }
+    else if (error.code == 401)
+    {
+        // TODO: GH-1: Show error dialog & ask to re-auth.
+        // For now we just force a re-auth.
+        DLog(@"401 from Dropbox when loading metadata.");
+
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:CONFIG(Host)];
+    }
     else
     {
         [self setRetries:retries - 1];
@@ -189,23 +197,37 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
 
 - (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error
 {
-    [self setRetries:retries - 1];
-    DLog(@"Upload request failed, retries left: %d", retries);
-    if (retries > 0)
+    if (error.code == 401)
     {
-        if ([delegate respondsToSelector:@selector(scheduleUpload:)])
-            [delegate scheduleUpload:self];
-        else
-            NSLog(@"Delegate %@ does not respond to scheduleUpload!", delegate);
+        if ([delegate respondsToSelector:@selector(uploaderDone:)])
+            [delegate uploaderDone:self];
+
+        // TODO: GH-1: Show error dialog & ask to re-auth.
+        // For now we just force a re-auth.
+        DLog(@"401 from Dropbox when uploading file.");
+
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:CONFIG(Host)];
     }
     else
     {
-        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to Dropbox!"
-                                                         description:[NSString stringWithFormat:@"Received status code %d", [error code]]];
-        [Growler growl:errorGrowl];
-        ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
-        if ([delegate respondsToSelector:@selector(uploaderDone:)])
-            [delegate uploaderDone:self];
+        [self setRetries:retries - 1];
+        DLog(@"Upload request failed, retries left: %d", retries);
+        if (retries > 0)
+        {
+            if ([delegate respondsToSelector:@selector(scheduleUpload:)])
+                [delegate scheduleUpload:self];
+            else
+                NSLog(@"Delegate %@ does not respond to scheduleUpload!", delegate);
+        }
+        else
+        {
+            GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to Dropbox!"
+                                                             description:[NSString stringWithFormat:@"Received status code %d", [error code]]];
+            [Growler growl:errorGrowl];
+            ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
+            if ([delegate respondsToSelector:@selector(uploaderDone:)])
+                [delegate uploaderDone:self];
+        }
     }
 }
 
