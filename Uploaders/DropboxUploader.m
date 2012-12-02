@@ -78,12 +78,8 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
 {
     [super upload];
 
-    NSString* shortName = srcFile;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"UseRandomFilename"])
-    {
-        shortName = [NSString stringWithFormat:@"%@.%@",
-                     [Uploader randomStringOfLength:8], [srcFile pathExtension]];
-    }
+    NSString* shortName = [NSString stringWithFormat:@"%@.%@",
+                           [Uploader randomStringOfLength:8], [srcFile pathExtension]];
 
     [self setDestFilename:shortName];
     NSString* destination = [NSString pathWithComponents:[NSArray arrayWithObjects:dropboxPath, shortName, nil]];

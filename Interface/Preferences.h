@@ -13,9 +13,6 @@
 }
 @property (assign) IBOutlet NSWindow *preferences;
 
-- (BOOL) usingCompressedScreenshots;
-- (void) setUsingCompressedScreenshots:(BOOL)state;
-
 - (BOOL) willLaunchAtLogin;
 - (void) setWillLaunchAtLogin:(BOOL)state;
 

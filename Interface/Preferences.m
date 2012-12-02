@@ -34,50 +34,6 @@
     }
 }
 
-- (BOOL) usingCompressedScreenshots
-{
-    NSString* value = (NSString*)CFPreferencesCopyValue(CFSTR("type"), CFSTR("com.apple.screencapture"),
-                                                        kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
-    [value autorelease];
-
-    return (value != nil
-            && [value isKindOfClass:[NSString class]]
-            && [(NSString *)value isEqualToString:@"jpg"]);
-}
-
-- (void) setUsingCompressedScreenshots:(BOOL)state
-{
-    if (state)
-    {
-        CFPreferencesSetValue(CFSTR("type"), CFSTR("jpg"), CFSTR("com.apple.screencapture"),
-                              kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-        DLog(@"Enabling jpg");
-    }
-    else
-    {
-        CFPreferencesSetValue(CFSTR("type"), NULL, CFSTR("com.apple.screencapture"),
-                              kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
-        DLog(@"Disabling jpg");
-    }
-
-    if (!CFPreferencesSynchronize(CFSTR("com.apple.screencapture"),
-                                  kCFPreferencesCurrentUser,
-                                  kCFPreferencesAnyHost))
-    {
-        NSLog(@"Preference sync of com.apple.screencapture failed (for compression)");
-    }
-
-    NSAlert* alert = [NSAlert alertWithMessageText:@"Logout required"
-                                     defaultButton:nil
-                                   alternateButton:nil
-                                       otherButton:nil
-                         informativeTextWithFormat:@"Changing OS X to use JPEG requires that you log out and in again before it takes effect."];
-    [alert beginSheetModalForWindow:[self preferences]
-                      modalDelegate:nil
-                     didEndSelector:nil
-                        contextInfo:nil];
-}
-
 - (BOOL) willLaunchAtLogin
 {
     NSString* appPath = [[NSBundle mainBundle] bundlePath];
