@@ -302,6 +302,7 @@
 		C561389F1538A1980035C08E /* DropboxAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxAuthViewController.m; sourceTree = "<group>"; };
 		C59CFF05166B04EA00D91C44 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
 		C59CFF07166B04F200D91C44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C59CFF0F166B05EA00D91C44 /* GrabBox2-SU-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GrabBox2-SU-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -412,19 +413,20 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C561389115386B380035C08E /* API Request Authorization - Dropbox.jpg */,
-				8E63965713DF8131002EC0E0 /* GrabBox2.entitlements */,
 				8E2AF15511F01D2100A29A61 /* Images */,
+				C561389115386B380035C08E /* API Request Authorization - Dropbox.jpg */,
 				8EF627F113B050DF0013A4B4 /* Credits.rtf */,
-				8EF627F213B050DF0013A4B4 /* dsa_pub.pem */,
 				8EF627D813B050980013A4B4 /* Defaults.plist */,
+				C561388E153868450035C08E /* DropboxAuthView.xib */,
+				8EF627F213B050DF0013A4B4 /* dsa_pub.pem */,
+				C59CFF0F166B05EA00D91C44 /* GrabBox2-SU-Info.plist */,
 				8EF627F313B050DF0013A4B4 /* GrabBox2-Info.plist */,
+				8E63965713DF8131002EC0E0 /* GrabBox2.entitlements */,
 				8EF627F413B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict */,
+				C52B002213D3D47900D39676 /* HostSetup.xib */,
+				8E49CF4B11ED14640041CE70 /* ImageRenamer.xib */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				8EF627F913B0512A0013A4B4 /* MainMenu.xib */,
-				8E49CF4B11ED14640041CE70 /* ImageRenamer.xib */,
-				C52B002213D3D47900D39676 /* HostSetup.xib */,
-				C561388E153868450035C08E /* DropboxAuthView.xib */,
 				C561389415386C280035C08E /* WelcomeView.xib */,
 			);
 			path = Resources;
@@ -836,9 +838,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
-				INFOPLIST_PREPROCESS = YES;
-				INFOPLIST_PREPROCESSOR_DEFINITIONS = "$(GCC_PREPROCESSOR_DEFINITIONS)";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx10.7;
@@ -858,7 +857,7 @@
 					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
-				INFOPLIST_FILE = "Resources/GrabBox2-Info.plist";
+				INFOPLIST_FILE = "Resources/GrabBox2-SU-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = GrabBox2;
@@ -935,7 +934,7 @@
 					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
-				INFOPLIST_FILE = "Resources/GrabBox2-Info.plist";
+				INFOPLIST_FILE = "Resources/GrabBox2-SU-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = GrabBox2;
@@ -953,7 +952,7 @@
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
-				INFOPLIST_FILE = "Resources/GrabBox2-Info.plist";
+				INFOPLIST_FILE = "Resources/GrabBox2-SU-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = GrabBox2;
@@ -974,9 +973,6 @@
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
-				INFOPLIST_PREPROCESS = YES;
-				INFOPLIST_PREPROCESSOR_DEFINITIONS = "$(GCC_PREPROCESSOR_DEFINITIONS)";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
@@ -995,9 +991,6 @@
 				GCC_PREFIX_HEADER = GrabBox_Prefix.pch;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
-				INFOPLIST_PREPROCESS = YES;
-				INFOPLIST_PREPROCESSOR_DEFINITIONS = "$(GCC_PREPROCESSOR_DEFINITIONS)";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx10.7;
