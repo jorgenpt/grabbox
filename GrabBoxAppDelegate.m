@@ -75,11 +75,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [[SUUpdater sharedUpdater] setDelegate:self];
 #endif
 
-    [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
-                                                              forKeyPath:@"values.ShowInDock"
-                                                                 options:0
-                                                                 context:NULL];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(uploaderAvailable:)
                                                  name:GBUploaderAvailableNotification
@@ -95,11 +90,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
                                     callbackArgument:self]];
     [self setManager:[[[UploadManager alloc] init] autorelease]];
 
-    BOOL showInDock = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowInDock"];
-    if (!showInDock)
-    {
-        [[self menubar] show];
-    }
+    [[self menubar] show];
 }
 
 - (IBAction)checkForUpdates:(id)sender
@@ -115,34 +106,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [self setNotifier:nil];
 
     [super dealloc];
-}
-
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
-                        change:(NSDictionary *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"values.ShowInDock"])
-    {
-        BOOL shouldShowInDock = [[NSUserDefaults standardUserDefaults] boolForKey:@"ShowInDock"];
-        if (shouldShowInDock)
-        {
-
-            ProcessSerialNumber psn = { 0, kCurrentProcess };
-            OSStatus returnCode = TransformProcessType(&psn, kProcessTransformToForegroundApplication);
-            if (returnCode != 0)
-            {
-                ErrorLog(@"Could not bring the application to front. Error %d. Leaving in menubar.", returnCode);
-            }
-            else
-            {
-                [[self menubar] hide];
-            }
-        }
-        else
-        {
-            [NSApp activateIgnoringOtherApps:YES];
-            [NSApp runModalForWindow:restartWindow];
-        }
-    }
 }
 
 #ifndef MAC_APP_STORE
@@ -168,18 +131,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
     NSDictionary *defaults = [NSDictionary dictionaryWithContentsOfFile:defaultsPath];
     if (defaults)
         [userDefaults registerDefaults:defaults];
-
-    BOOL showInDock = [userDefaults boolForKey:@"ShowInDock"];
-    if (showInDock)
-    {
-        ProcessSerialNumber psn = { 0, kCurrentProcess };
-        OSStatus returnCode = TransformProcessType(&psn, kProcessTransformToForegroundApplication);
-        if (returnCode != 0)
-        {
-            NSLog(@"Could not bring the application to front. Error %d. Using menubar.", returnCode);
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ShowInDock"];
-        }
-    }
 
 #if !defined(MAC_APP_STORE)
     [userDefaults setBool:YES forKey:@"SUSendProfileInfo"];
