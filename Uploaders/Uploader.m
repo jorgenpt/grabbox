@@ -23,7 +23,7 @@
 @synthesize srcFile;
 @synthesize srcPath;
 
-NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_~";
+NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
 
 + (BOOL) pasteboardURL:(NSString *)url
 {
