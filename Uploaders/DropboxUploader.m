@@ -125,6 +125,7 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
         DLog(@"Destination file did not exist, so going ahead with upload.");
         [client uploadFile:destFilename
                     toPath:dropboxPath
+             withParentRev:nil
                   fromPath:srcPath];
     }
     else if (error.code == 401)
@@ -149,7 +150,7 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
         else
         {
             GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to Dropbox!"
-                                                             description:[NSString stringWithFormat:@"Received status code %d", [error code]]];
+                                                             description:[NSString stringWithFormat:@"Received status code %ld", (long)[error code]]];
             [Growler growl:errorGrowl];
             ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
             if ([delegate respondsToSelector:@selector(uploaderDone:)])
@@ -222,7 +223,7 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
         else
         {
             GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to Dropbox!"
-                                                             description:[NSString stringWithFormat:@"Received status code %d", [error code]]];
+                                                             description:[NSString stringWithFormat:@"Received status code %ld", (long)[error code]]];
             [Growler growl:errorGrowl];
             ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
             if ([delegate respondsToSelector:@selector(uploaderDone:)])

@@ -19,6 +19,8 @@ typedef void (^NetworkReachabilityChangedCallback)(SCNetworkReachabilityFlags fl
 
 @property (copy) NetworkReachabilityChangedCallback callback;
 
+- (id)initWithName:(NSString *)name;
+
 - (BOOL)schedule;
 - (BOOL)unschedule;
 - (void)poll;

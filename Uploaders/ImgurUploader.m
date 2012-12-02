@@ -101,7 +101,7 @@ static NSString * const ImgurAPIURL = @"http://api.imgur.com/2/%@",
     else
     {
         GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to imgur!"
-                                                         description:[NSString stringWithFormat:@"Received status code %d", [error code]]];
+                                                         description:[NSString stringWithFormat:@"Received status code %ld", (long)[error code]]];
         [Growler growl:errorGrowl];
         ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
         if ([delegate respondsToSelector:@selector(uploaderDone:)])
