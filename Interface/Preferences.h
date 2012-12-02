@@ -8,10 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface Preferences : NSObject {
-    NSWindow* preferences;
-}
-@property (assign) IBOutlet NSWindow *preferences;
+@interface Preferences : NSObject
+
+@property (assign) IBOutlet NSMenuItem *autostartItem;
 
 - (BOOL) willLaunchAtLogin;
 - (void) setWillLaunchAtLogin:(BOOL)state;

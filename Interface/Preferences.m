@@ -17,27 +17,6 @@ static NSString * const kHelperAppIdentifier = @"com.bitspatter.GrabBoxHelper";
 
 @implementation Preferences
 
-@synthesize preferences;
-
-- (void) awakeFromNib
-{
-    [(GrabBoxAppDelegate *)[NSApp delegate] addObserver:self
-                                             forKeyPath:@"canInteract"
-                                                options:0
-                                                context:NULL];
-}
-
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
-                         change:(NSDictionary *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"canInteract"])
-    {
-        BOOL canInteract = [(GrabBoxAppDelegate *)[NSApp delegate] canInteract];
-        if (!canInteract && [preferences isVisible])
-            [preferences orderOut:self];
-    }
-}
-
 - (BOOL) willLaunchAtLogin
 {
     CFArrayRef cfJobDicts = SMCopyAllJobDictionaries(kSMDomainUserLaunchd);
@@ -58,11 +37,14 @@ static NSString * const kHelperAppIdentifier = @"com.bitspatter.GrabBoxHelper";
 {
     NSString *baseDirectory = [[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent];
     if (state && ![baseDirectory hasSuffix:@"/Applications"]) {
+        // TODO: Show an error to the user?
         NSLog(@"Can't enable autostart! Application needs to live in /Applications or ~/Application, lives in %@", baseDirectory);
+        [self.autostartItem setState:NSOffState];
         return;
     }
 
     if (!SMLoginItemSetEnabled((CFStringRef)kHelperAppIdentifier, state)) {
+        [self.autostartItem setState:(state ? NSOffState : NSOnState)];
         NSLog(@"Could not set launch at login state %i, app lives in %@", state, baseDirectory);
     }
 }
