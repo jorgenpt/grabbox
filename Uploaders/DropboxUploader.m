@@ -9,7 +9,6 @@
 #import "DropboxUploader.h"
 #import "Growler.h"
 #import "InformationGatherer.h"
-#import "URLShortener.h"
 
 #import "UploadManager.h"
 #import "UploaderFactory.h"

@@ -9,7 +9,6 @@
 #import "Uploader.h"
 #import "Growler.h"
 #import "InformationGatherer.h"
-#import "URLShortener.h"
 
 #import "ImgurUploader.h"
 #import "UploadManager.h"
@@ -30,16 +29,15 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
     NSPasteboard* pasteboard = [NSPasteboard generalPasteboard];
     [pasteboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
 
-    NSString *shortURL = [URLShortener shortURLForURL:url];
-    if (![pasteboard setString:shortURL forType:NSStringPboardType])
+    if (![pasteboard setString:url forType:NSStringPboardType])
     {
-        NSString *errorDescription = [NSString stringWithFormat:@"Could not put URL '%@' into the clipboard", shortURL];
+        NSString *errorDescription = [NSString stringWithFormat:@"Could not put URL '%@' into the clipboard", url];
         GrowlerGrowl *copyError = [GrowlerGrowl growlErrorWithTitle:@"Could not update pasteboard!"
                                                         description:errorDescription];
         copyError.sticky = YES;
         [Growler growl:copyError];
 
-        ErrorLog(@"Couldn't put url '%@' into pasteboard.", shortURL);
+        ErrorLog(@"Couldn't put url '%@' into pasteboard.", url);
         return NO;
     }
 

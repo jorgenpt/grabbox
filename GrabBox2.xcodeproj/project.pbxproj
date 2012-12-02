@@ -71,7 +71,6 @@
 		8EF627F613B050DF0013A4B4 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F213B050DF0013A4B4 /* dsa_pub.pem */; };
 		8EF627F813B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F413B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict */; };
 		8EF627FB13B0512A0013A4B4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F913B0512A0013A4B4 /* MainMenu.xib */; };
-		8EFFCB6212D8F75A00201A9A /* URLShortener.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB5F12D8F75A00201A9A /* URLShortener.m */; };
 		8EFFCB6E12D8F86C00201A9A /* NSString+URLParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB6D12D8F86C00201A9A /* NSString+URLParameters.m */; };
 		8EFFCB9712D8F98300201A9A /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB9612D8F98300201A9A /* NSData+Base64.m */; };
 		C50E57B8150D6C1C005F1ABC /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
@@ -89,7 +88,6 @@
 		C55D247113DF39BD003342D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		C55D247213DF39C5003342D3 /* GrabBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* GrabBoxAppDelegate.m */; };
 		C55D247313DF39C5003342D3 /* InformationGatherer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4A509F11E9155500A0A743 /* InformationGatherer.m */; };
-		C55D247513DF39D9003342D3 /* URLShortener.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB5F12D8F75A00201A9A /* URLShortener.m */; };
 		C55D247613DF39D9003342D3 /* Menubar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EAAE7F31256675800798872 /* Menubar.m */; };
 		C55D247713DF39D9003342D3 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7B6C2411EC433B00112165 /* Preferences.m */; };
 		C55D247813DF39D9003342D3 /* DropboxUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC402FB13BFFAF00001B66E /* DropboxUploader.m */; };
@@ -269,8 +267,6 @@
 		8EF627F313B050DF0013A4B4 /* GrabBox2-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GrabBox2-Info.plist"; sourceTree = "<group>"; };
 		8EF627F413B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Growl Registration Ticket.growlRegDict"; sourceTree = "<group>"; };
 		8EF627FA13B0512A0013A4B4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		8EFFCB5E12D8F75A00201A9A /* URLShortener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLShortener.h; sourceTree = "<group>"; };
-		8EFFCB5F12D8F75A00201A9A /* URLShortener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLShortener.m; sourceTree = "<group>"; };
 		8EFFCB6C12D8F86C00201A9A /* NSString+URLParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLParameters.h"; sourceTree = "<group>"; };
 		8EFFCB6D12D8F86C00201A9A /* NSString+URLParameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLParameters.m"; sourceTree = "<group>"; };
 		8EFFCB9512D8F98300201A9A /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
@@ -334,7 +330,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				8EFFCB5912D8F75A00201A9A /* Actions */,
 				8E79350012DA42710057D5ED /* Interface */,
 				8EC402F213BFF66F0001B66E /* Uploaders */,
 				8EFFCB6B12D8F86C00201A9A /* Utilities */,
@@ -513,15 +508,6 @@
 				8ED2911013A41A65005F10D3 /* GrowlerGrowl.m */,
 			);
 			path = Growler;
-			sourceTree = "<group>";
-		};
-		8EFFCB5912D8F75A00201A9A /* Actions */ = {
-			isa = PBXGroup;
-			children = (
-				8EFFCB5E12D8F75A00201A9A /* URLShortener.h */,
-				8EFFCB5F12D8F75A00201A9A /* URLShortener.m */,
-			);
-			path = Actions;
 			sourceTree = "<group>";
 		};
 		8EFFCB6B12D8F86C00201A9A /* Utilities */ = {
@@ -715,7 +701,6 @@
 				8E4A50A011E9155500A0A743 /* InformationGatherer.m in Sources */,
 				8E7B6C2511EC433B00112165 /* Preferences.m in Sources */,
 				8EAAE7F41256675800798872 /* Menubar.m in Sources */,
-				8EFFCB6212D8F75A00201A9A /* URLShortener.m in Sources */,
 				8EFFCB6E12D8F86C00201A9A /* NSString+URLParameters.m in Sources */,
 				8EFFCB9712D8F98300201A9A /* NSData+Base64.m in Sources */,
 				8ED2912813A41A66005F10D3 /* Growler.m in Sources */,
@@ -744,7 +729,6 @@
 				C55D247113DF39BD003342D3 /* main.m in Sources */,
 				C55D247213DF39C5003342D3 /* GrabBoxAppDelegate.m in Sources */,
 				C55D247313DF39C5003342D3 /* InformationGatherer.m in Sources */,
-				C55D247513DF39D9003342D3 /* URLShortener.m in Sources */,
 				C55D247613DF39D9003342D3 /* Menubar.m in Sources */,
 				C55D247713DF39D9003342D3 /* Preferences.m in Sources */,
 				C55D247813DF39D9003342D3 /* DropboxUploader.m in Sources */,
