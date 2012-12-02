@@ -1,0 +1,301 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C59CFF21166B3CB500D91C44 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF20166B3CB500D91C44 /* Cocoa.framework */; };
+		C59CFF2B166B3CB500D91C44 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C59CFF29166B3CB500D91C44 /* InfoPlist.strings */; };
+		C59CFF2D166B3CB500D91C44 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C59CFF2C166B3CB500D91C44 /* main.m */; };
+		C59CFF34166B3CB500D91C44 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C59CFF33166B3CB500D91C44 /* AppDelegate.m */; };
+		C59CFF37166B3CB500D91C44 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C59CFF35166B3CB500D91C44 /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C59CFF1C166B3CB500D91C44 /* GrabBoxHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabBoxHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C59CFF20166B3CB500D91C44 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		C59CFF23166B3CB500D91C44 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		C59CFF24166B3CB500D91C44 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		C59CFF25166B3CB500D91C44 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C59CFF28166B3CB500D91C44 /* GrabBoxHelper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GrabBoxHelper-Info.plist"; sourceTree = "<group>"; };
+		C59CFF2A166B3CB500D91C44 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C59CFF2C166B3CB500D91C44 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C59CFF2E166B3CB500D91C44 /* GrabBoxHelper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GrabBoxHelper-Prefix.pch"; sourceTree = "<group>"; };
+		C59CFF32166B3CB500D91C44 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C59CFF33166B3CB500D91C44 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C59CFF36166B3CB500D91C44 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		C59CFF43166B3E0C00D91C44 /* GrabBoxHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = GrabBoxHelper.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C59CFF19166B3CB500D91C44 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C59CFF21166B3CB500D91C44 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C59CFF11166B3CB500D91C44 = {
+			isa = PBXGroup;
+			children = (
+				C59CFF26166B3CB500D91C44 /* GrabBoxHelper */,
+				C59CFF1F166B3CB500D91C44 /* Frameworks */,
+				C59CFF1D166B3CB500D91C44 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C59CFF1D166B3CB500D91C44 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C59CFF1C166B3CB500D91C44 /* GrabBoxHelper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C59CFF1F166B3CB500D91C44 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C59CFF20166B3CB500D91C44 /* Cocoa.framework */,
+				C59CFF22166B3CB500D91C44 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C59CFF22166B3CB500D91C44 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C59CFF23166B3CB500D91C44 /* AppKit.framework */,
+				C59CFF24166B3CB500D91C44 /* CoreData.framework */,
+				C59CFF25166B3CB500D91C44 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		C59CFF26166B3CB500D91C44 /* GrabBoxHelper */ = {
+			isa = PBXGroup;
+			children = (
+				C59CFF43166B3E0C00D91C44 /* GrabBoxHelper.entitlements */,
+				C59CFF32166B3CB500D91C44 /* AppDelegate.h */,
+				C59CFF33166B3CB500D91C44 /* AppDelegate.m */,
+				C59CFF35166B3CB500D91C44 /* MainMenu.xib */,
+				C59CFF27166B3CB500D91C44 /* Supporting Files */,
+			);
+			path = GrabBoxHelper;
+			sourceTree = "<group>";
+		};
+		C59CFF27166B3CB500D91C44 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C59CFF28166B3CB500D91C44 /* GrabBoxHelper-Info.plist */,
+				C59CFF29166B3CB500D91C44 /* InfoPlist.strings */,
+				C59CFF2C166B3CB500D91C44 /* main.m */,
+				C59CFF2E166B3CB500D91C44 /* GrabBoxHelper-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C59CFF1B166B3CB500D91C44 /* GrabBoxHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C59CFF3A166B3CB500D91C44 /* Build configuration list for PBXNativeTarget "GrabBoxHelper" */;
+			buildPhases = (
+				C59CFF18166B3CB500D91C44 /* Sources */,
+				C59CFF19166B3CB500D91C44 /* Frameworks */,
+				C59CFF1A166B3CB500D91C44 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GrabBoxHelper;
+			productName = GrabBoxHelper;
+			productReference = C59CFF1C166B3CB500D91C44 /* GrabBoxHelper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C59CFF13166B3CB500D91C44 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = bitSpatter;
+			};
+			buildConfigurationList = C59CFF16166B3CB500D91C44 /* Build configuration list for PBXProject "GrabBoxHelper" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C59CFF11166B3CB500D91C44;
+			productRefGroup = C59CFF1D166B3CB500D91C44 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C59CFF1B166B3CB500D91C44 /* GrabBoxHelper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C59CFF1A166B3CB500D91C44 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C59CFF2B166B3CB500D91C44 /* InfoPlist.strings in Resources */,
+				C59CFF37166B3CB500D91C44 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C59CFF18166B3CB500D91C44 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C59CFF2D166B3CB500D91C44 /* main.m in Sources */,
+				C59CFF34166B3CB500D91C44 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C59CFF29166B3CB500D91C44 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C59CFF2A166B3CB500D91C44 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C59CFF35166B3CB500D91C44 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C59CFF36166B3CB500D91C44 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C59CFF38166B3CB500D91C44 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.7;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		C59CFF39166B3CB500D91C44 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx10.7;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		C59CFF3B166B3CB500D91C44 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = GrabBoxHelper/GrabBoxHelper.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GrabBoxHelper/GrabBoxHelper-Prefix.pch";
+				INFOPLIST_FILE = "GrabBoxHelper/GrabBoxHelper-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C59CFF3C166B3CB500D91C44 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = GrabBoxHelper/GrabBoxHelper.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GrabBoxHelper/GrabBoxHelper-Prefix.pch";
+				INFOPLIST_FILE = "GrabBoxHelper/GrabBoxHelper-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C59CFF16166B3CB500D91C44 /* Build configuration list for PBXProject "GrabBoxHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C59CFF38166B3CB500D91C44 /* Debug */,
+				C59CFF39166B3CB500D91C44 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C59CFF3A166B3CB500D91C44 /* Build configuration list for PBXNativeTarget "GrabBoxHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C59CFF3B166B3CB500D91C44 /* Debug */,
+				C59CFF3C166B3CB500D91C44 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C59CFF13166B3CB500D91C44 /* Project object */;
+}
