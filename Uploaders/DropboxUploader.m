@@ -9,7 +9,6 @@
 #import "DropboxUploader.h"
 #import "Growler.h"
 #import "InformationGatherer.h"
-#import "ImageRenamer.h"
 #import "URLShortener.h"
 
 #import "UploadManager.h"
@@ -171,13 +170,8 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
     {
         GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"URL Copied"
                                                      title:@"Screenshot uploaded!"
-                                               description:@"The screenshot has been uploaded and a link put in your clipboard. Click here to give the file a more descriptive name!"];
-        ImageRenamer* renamer = [ImageRenamer renamerForPath:uploadedPath withFile:source];
-        [Growler growl:prompt
-             withBlock:^(GrowlerGrowlAction action) {
-                 if (action == GrowlerGrowlClicked)
-                     [renamer showRenamer];
-             }];
+                                               description:@"The screenshot has been uploaded and a link put in your clipboard."];
+        [Growler growl:prompt];
     }
 
     NSError *error;

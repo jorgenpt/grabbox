@@ -9,7 +9,6 @@
 #import "Uploader.h"
 #import "Growler.h"
 #import "InformationGatherer.h"
-#import "ImageRenamer.h"
 #import "URLShortener.h"
 
 #import "ImgurUploader.h"

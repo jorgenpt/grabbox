@@ -324,31 +324,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
 {
     Uploader* up = [[UploaderFactory defaultFactory] uploaderForFile:file
                                                          inDirectory:[info screenshotPath]];
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"PromptBeforeUploading"])
-    {
-        [[DMTracker defaultTracker] trackEventInCategory:@"Features"
-                                                withName:@"Prompt"];
-        GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"Upload Screenshot?"
-                                                     title:@"Should we upload the screenshot?"
-                                               description:@"If you'd like the screenshot you just took to be uploaded and a link put in your clipboard, click here."];
-        prompt.sticky = YES;
-
-        [Growler growl:prompt
-             withBlock:^(GrowlerGrowlAction action) {
-                 if (action == GrowlerGrowlClicked)
-                 {
-                     [[DMTracker defaultTracker] trackEventInCategory:@"Features"
-                                                             withName:@"Prompt Clicked"];
-                     [up moveToWorkQueue];
-                     [manager scheduleUpload:up];
-                 }
-             }];
-    }
-    else
-    {
-        [up moveToWorkQueue];
-        [manager scheduleUpload:up];
-    }
+    [up moveToWorkQueue];
+    [manager scheduleUpload:up];
 }
 
 - (IBAction) browseUploadedScreenshots:(id)sender
