@@ -11,6 +11,10 @@
 #import "UploaderFactory.h"
 #import "GrabBoxAppDelegate.h"
 
+#import <ServiceManagement/ServiceManagement.h>
+
+static NSString * const kHelperAppIdentifier = @"com.bitspatter.GrabBoxHelper";
+
 @implementation Preferences
 
 @synthesize preferences;
@@ -36,50 +40,31 @@
 
 - (BOOL) willLaunchAtLogin
 {
-    NSString* appPath = [[NSBundle mainBundle] bundlePath];
-    NSArray* autoLaunch = (NSArray*)CFPreferencesCopyAppValue(CFSTR("AutoLaunchedApplicationDictionary"),
-                                                              CFSTR("loginwindow"));
-    [autoLaunch autorelease];
-    for (NSDictionary* dict in autoLaunch)
-    {
-        NSString* path = [dict objectForKey:@"Path"];
-        if ([path isEqual:appPath])
-            return YES;
+    CFArrayRef cfJobDicts = SMCopyAllJobDictionaries(kSMDomainUserLaunchd);
+    NSArray* jobDicts = CFBridgingRelease(cfJobDicts);
+
+    if (jobDicts && [jobDicts count] > 0) {
+        for (NSDictionary* job in jobDicts) {
+            if ([kHelperAppIdentifier isEqualToString:[job objectForKey:@"Label"]]) {
+                return [[job objectForKey:@"OnDemand"] boolValue];
+            }
+        }
     }
+
     return NO;
 }
 
 - (void) setWillLaunchAtLogin:(BOOL)state
 {
-    NSString* appPath = [[NSBundle mainBundle] bundlePath];
-    NSArray* autoLaunch = (NSArray*)CFPreferencesCopyAppValue(CFSTR("AutoLaunchedApplicationDictionary"),
-                                                              CFSTR("loginwindow"));
-    [autoLaunch autorelease];
-    NSMutableArray* autoLaunchMutable;
-
-    if (state)
-    {
-        NSDictionary* info = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [NSNumber numberWithInt:0], @"Hide",
-                              appPath, @"Path",
-                              nil];
-
-        autoLaunchMutable = [[autoLaunch mutableCopy] autorelease];
-        [autoLaunchMutable addObject:info];
+    NSString *baseDirectory = [[[NSBundle mainBundle] bundlePath] stringByDeletingLastPathComponent];
+    if (state && ![baseDirectory hasSuffix:@"/Applications"]) {
+        NSLog(@"Can't enable autostart! Application needs to live in /Applications or ~/Application, lives in %@", baseDirectory);
+        return;
     }
-    else
-    {
-        NSString* appName = [appPath lastPathComponent];
-        autoLaunchMutable = [NSMutableArray arrayWithCapacity:[autoLaunch count]];
-        for (NSDictionary* dict in autoLaunch)
-        {
-            NSString* path = [dict objectForKey:@"Path"];
-            if (![[path lastPathComponent] isEqual:appName])
-                [autoLaunchMutable addObject:dict];
-        }
+
+    if (!SMLoginItemSetEnabled((CFStringRef)kHelperAppIdentifier, state)) {
+        NSLog(@"Could not set launch at login state %i, app lives in %@", state, baseDirectory);
     }
-    CFPreferencesSetAppValue(CFSTR("AutoLaunchedApplicationDictionary"), autoLaunchMutable, CFSTR("loginwindow"));
-    CFPreferencesAppSynchronize(CFSTR("loginwindow"));
 }
 
 - (IBAction) changeUploadService:(id)sender

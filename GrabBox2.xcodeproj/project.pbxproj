@@ -149,6 +149,10 @@
 		C59CFF08166B04F200D91C44 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF07166B04F200D91C44 /* SystemConfiguration.framework */; };
 		C59CFF09166B050200D91C44 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF05166B04EA00D91C44 /* libz.1.dylib */; };
 		C59CFF0A166B050400D91C44 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF07166B04F200D91C44 /* SystemConfiguration.framework */; };
+		C59CFF46166B3EBD00D91C44 /* GrabBoxHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = C59CFF42166B3CB600D91C44 /* GrabBoxHelper.app */; };
+		C59CFF48166B3ED500D91C44 /* GrabBoxHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = C59CFF42166B3CB600D91C44 /* GrabBoxHelper.app */; };
+		C59CFF4A166B447100D91C44 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF49166B447000D91C44 /* ServiceManagement.framework */; };
+		C59CFF4B166B448000D91C44 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF49166B447000D91C44 /* ServiceManagement.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +169,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = GrabBox;
+		};
+		C59CFF41166B3CB600D91C44 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C59CFF3D166B3CB500D91C44 /* GrabBoxHelper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C59CFF1C166B3CB500D91C44;
+			remoteInfo = GrabBoxHelper;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -196,6 +207,26 @@
 				C55D24AA13DF42E4003342D3 /* Growl.framework in Copy Supporting Frameworks */,
 			);
 			name = "Copy Supporting Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C59CFF45166B3E7500D91C44 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				C59CFF46166B3EBD00D91C44 /* GrabBoxHelper.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C59CFF47166B3EC900D91C44 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				C59CFF48166B3ED500D91C44 /* GrabBoxHelper.app in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -292,6 +323,8 @@
 		C59CFF05166B04EA00D91C44 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
 		C59CFF07166B04F200D91C44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C59CFF0F166B05EA00D91C44 /* GrabBox2-SU-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GrabBox2-SU-Info.plist"; sourceTree = "<group>"; };
+		C59CFF3D166B3CB500D91C44 /* GrabBoxHelper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GrabBoxHelper.xcodeproj; sourceTree = "<group>"; };
+		C59CFF49166B447000D91C44 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/ServiceManagement.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +340,7 @@
 				C55D24A013DF3CB3003342D3 /* Cocoa.framework in Frameworks */,
 				C50E57B8150D6C1C005F1ABC /* DropboxOSX.framework in Frameworks */,
 				C50E57BE150D72B8005F1ABC /* SBJson.framework in Frameworks */,
+				C59CFF4B166B448000D91C44 /* ServiceManagement.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +348,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C59CFF4A166B447100D91C44 /* ServiceManagement.framework in Frameworks */,
 				C53A92261481A336007A5DD9 /* SBJson.framework in Frameworks */,
 				C55D249713DF3A7D003342D3 /* ObjectiveMetrics.framework in Frameworks */,
 				C55D249313DF3A62003342D3 /* Growl.framework in Frameworks */,
@@ -350,6 +385,7 @@
 				C59CFF05166B04EA00D91C44 /* libz.1.dylib */,
 				C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */,
 				C53A92251481A336007A5DD9 /* SBJson.framework */,
+				C59CFF49166B447000D91C44 /* ServiceManagement.framework */,
 				C55D24A113DF3DEE003342D3 /* Sparkle.framework */,
 				C59CFF07166B04F200D91C44 /* SystemConfiguration.framework */,
 			);
@@ -380,6 +416,7 @@
 		29B97314FDCFA39411CA2CEA /* GrabBox */ = {
 			isa = PBXGroup;
 			children = (
+				C59CFF3D166B3CB500D91C44 /* GrabBoxHelper.xcodeproj */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -530,6 +567,14 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		C59CFF3E166B3CB500D91C44 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C59CFF42166B3CB600D91C44 /* GrabBoxHelper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -539,6 +584,7 @@
 			buildPhases = (
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
+				C59CFF47166B3EC900D91C44 /* CopyFiles */,
 				8D1107290486CEB800E47090 /* Resources */,
 				8E7B688B11EBD23900112165 /* Copy Supporting Frameworks */,
 			);
@@ -559,6 +605,7 @@
 			buildPhases = (
 				C55D245313DF392C003342D3 /* Sources */,
 				C55D245413DF392C003342D3 /* Frameworks */,
+				C59CFF45166B3E7500D91C44 /* CopyFiles */,
 				C55D245513DF392C003342D3 /* Resources */,
 				C55D24A713DF42C2003342D3 /* Copy Supporting Frameworks */,
 			);
@@ -589,6 +636,12 @@
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* GrabBox */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C59CFF3E166B3CB500D91C44 /* Products */;
+					ProjectRef = C59CFF3D166B3CB500D91C44 /* GrabBoxHelper.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* GrabBox2 */,
@@ -598,6 +651,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C59CFF42166B3CB600D91C44 /* GrabBoxHelper.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = GrabBoxHelper.app;
+			remoteRef = C59CFF41166B3CB600D91C44 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8D1107290486CEB800E47090 /* Resources */ = {
@@ -794,6 +857,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Joergen Pedersen Tjernoe";
+				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = GrabBox_Prefix.pch;
@@ -801,7 +865,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx10.7;
 			};
 			name = "Debug for distribution";
@@ -812,16 +876,13 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox2.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
-				GCC_DYNAMIC_NO_PIC = NO;
 				INFOPLIST_FILE = "Resources/GrabBox2-SU-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = GrabBox2;
 			};
 			name = "Debug for distribution";
@@ -889,16 +950,13 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox2.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
-				GCC_DYNAMIC_NO_PIC = NO;
 				INFOPLIST_FILE = "Resources/GrabBox2-SU-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = GrabBox2;
 			};
 			name = Debug;
@@ -916,7 +974,6 @@
 				);
 				INFOPLIST_FILE = "Resources/GrabBox2-SU-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = GrabBox2;
 			};
 			name = Release;
@@ -926,6 +983,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = GrabBox_Prefix.pch;
@@ -936,7 +994,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx10.7;
 			};
@@ -954,7 +1012,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx10.7;
 			};
 			name = Release;
@@ -965,27 +1023,19 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox2.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
-				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"MAC_APP_STORE=1",
 					"$(GCC_PREPROCESSOR_DEFINITIONS)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "Resources/GrabBox2-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
@@ -995,27 +1045,19 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox2.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
-				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"MAC_APP_STORE=1",
 					"$(GCC_PREPROCESSOR_DEFINITIONS)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "Resources/GrabBox2-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				WRAPPER_EXTENSION = app;
 			};
 			name = "Debug for distribution";
 		};
@@ -1025,25 +1067,17 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox2.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"MAC_APP_STORE=1",
 					"$(GCC_PREPROCESSOR_DEFINITIONS)",
 				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "Resources/GrabBox2-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = GrabBox2;
-				SDKROOT = macosx;
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
