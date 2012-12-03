@@ -9,22 +9,19 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface Menubar : NSObject<NSMenuDelegate> {
-    NSStatusItem* item;
-    NSMenu* menu;
-    NSWindow* preferencesWindow;
-}
+@interface Menubar : NSObject<NSMenuDelegate>
 
+@property (assign) NSUInteger activityCount;
 @property (nonatomic, retain) IBOutlet NSStatusItem* item;
 @property (assign) IBOutlet NSMenu* menu;
-@property (assign) IBOutlet NSWindow* preferencesWindow;
 
 - (void) dealloc;
 
 - (void) show;
+- (void) startActivity;
+- (void) stopActivity;
 - (void) hide;
 
 - (IBAction) showAbout:(id)sender;
-- (IBAction) showPreferences:(id)sender;
 
 @end

@@ -82,8 +82,7 @@ static NSString * const ImgurAPIURL = @"http://api.imgur.com/2/%@",
         [Growler growl:errorGrowl];
     }
 
-    if ([delegate respondsToSelector:@selector(uploaderDone:)])
-        [delegate uploaderDone:self];
+    [self uploadDone];
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
@@ -104,8 +103,7 @@ static NSString * const ImgurAPIURL = @"http://api.imgur.com/2/%@",
                                                          description:[NSString stringWithFormat:@"Received status code %ld", (long)[error code]]];
         [Growler growl:errorGrowl];
         ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
-        if ([delegate respondsToSelector:@selector(uploaderDone:)])
-            [delegate uploaderDone:self];
+        [self uploadDone];
     }
 }
 

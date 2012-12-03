@@ -107,8 +107,7 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
 
         ErrorLog(@"Could not find a unique filename!");
 
-        if ([delegate respondsToSelector:@selector(uploaderDone:)])
-            [delegate uploaderDone:self];
+        [self uploadDone];
     }
 }
 
@@ -147,8 +146,7 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
                                                              description:[NSString stringWithFormat:@"Received status code %ld", (long)[error code]]];
             [Growler growl:errorGrowl];
             ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
-            if ([delegate respondsToSelector:@selector(uploaderDone:)])
-                [delegate uploaderDone:self];
+            [self uploadDone];
         }
     }
 }
@@ -175,8 +173,7 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
     if (!deletedOk)
         ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
 
-    if ([delegate respondsToSelector:@selector(uploaderDone:)])
-        [delegate uploaderDone:self];
+    [self uploadDone];
 }
 
 - (void)restClient:(DBRestClient*)client uploadProgress:(CGFloat)progress
@@ -189,8 +186,7 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
 {
     if (error.code == 401)
     {
-        if ([delegate respondsToSelector:@selector(uploaderDone:)])
-            [delegate uploaderDone:self];
+        [self uploadDone];
 
         // TODO: GH-1: Show error dialog & ask to re-auth.
         // For now we just force a re-auth.
@@ -215,8 +211,7 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
                                                              description:[NSString stringWithFormat:@"Received status code %ld", (long)[error code]]];
             [Growler growl:errorGrowl];
             ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
-            if ([delegate respondsToSelector:@selector(uploaderDone:)])
-                [delegate uploaderDone:self];
+            [self uploadDone];
         }
     }
 }

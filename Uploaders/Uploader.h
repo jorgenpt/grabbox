@@ -8,6 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+
+extern NSString * const kUploadStartingNotification;
+extern NSString * const kUploadFinishingNotification;
+
 @interface NSObject (UploaderDelegateInformalProtocol)
 - (void) upload:(id)uploader;
 - (void) scheduleUpload:(id)uploader;
@@ -38,6 +42,8 @@
 
 - (void) moveToWorkQueue;
 - (void) upload;
+
+- (void) uploadDone;
 
 - (NSString *) srcPath;
 

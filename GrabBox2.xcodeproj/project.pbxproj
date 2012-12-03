@@ -145,6 +145,8 @@
 		C561389B15389D0A0035C08E /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C561389815389D0A0035C08E /* WelcomeViewController.m */; };
 		C56138A11538A1980035C08E /* DropboxAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C561389F1538A1980035C08E /* DropboxAuthViewController.m */; };
 		C56138A21538A1980035C08E /* DropboxAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C561389F1538A1980035C08E /* DropboxAuthViewController.m */; };
+		C596C197166C2CDF00A03988 /* arrow_rotate.png in Resources */ = {isa = PBXBuildFile; fileRef = C596C196166C2CDF00A03988 /* arrow_rotate.png */; };
+		C596C198166C2CDF00A03988 /* arrow_rotate.png in Resources */ = {isa = PBXBuildFile; fileRef = C596C196166C2CDF00A03988 /* arrow_rotate.png */; };
 		C59CFF06166B04EA00D91C44 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF05166B04EA00D91C44 /* libz.1.dylib */; };
 		C59CFF08166B04F200D91C44 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF07166B04F200D91C44 /* SystemConfiguration.framework */; };
 		C59CFF09166B050200D91C44 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF05166B04EA00D91C44 /* libz.1.dylib */; };
@@ -320,6 +322,7 @@
 		C561389815389D0A0035C08E /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
 		C561389E1538A1980035C08E /* DropboxAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxAuthViewController.h; sourceTree = "<group>"; };
 		C561389F1538A1980035C08E /* DropboxAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxAuthViewController.m; sourceTree = "<group>"; };
+		C596C196166C2CDF00A03988 /* arrow_rotate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_rotate.png; sourceTree = "<group>"; };
 		C59CFF05166B04EA00D91C44 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
 		C59CFF07166B04F200D91C44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C59CFF0F166B05EA00D91C44 /* GrabBox2-SU-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GrabBox2-SU-Info.plist"; sourceTree = "<group>"; };
@@ -489,6 +492,7 @@
 		8E2AF15511F01D2100A29A61 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				C596C196166C2CDF00A03988 /* arrow_rotate.png */,
 				8E1D613113E625AF00F44058 /* expired.png */,
 				C52B002813D3D84600D39676 /* imgur-small.png */,
 				8EF627DB13B050CE0013A4B4 /* donate.png */,
@@ -689,6 +693,7 @@
 				C561388F153868450035C08E /* DropboxAuthView.xib in Resources */,
 				C561389215386B380035C08E /* API Request Authorization - Dropbox.jpg in Resources */,
 				C561389515386C280035C08E /* WelcomeView.xib in Resources */,
+				C596C197166C2CDF00A03988 /* arrow_rotate.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,6 +721,7 @@
 				C5613890153868450035C08E /* DropboxAuthView.xib in Resources */,
 				C561389315386B380035C08E /* API Request Authorization - Dropbox.jpg in Resources */,
 				C561389615386C280035C08E /* WelcomeView.xib in Resources */,
+				C596C198166C2CDF00A03988 /* arrow_rotate.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

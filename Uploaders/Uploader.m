@@ -13,6 +13,9 @@
 #import "ImgurUploader.h"
 #import "UploadManager.h"
 
+NSString * const kUploadStartingNotification = @"UploadStarting";
+NSString * const kUploadFinishingNotification = @"UploadFinishing";
+
 @implementation Uploader
 
 @synthesize delegate;
@@ -120,9 +123,21 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
 
 - (void) upload
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUploadStartingNotification
+                                                        object:self];
+
     [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
                                             withName:@"Upload"
                                                value:[self className]];
+}
+
+- (void) uploadDone
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUploadFinishingNotification
+                                                        object:self];
+
+    if ([delegate respondsToSelector:@selector(uploaderDone:)])
+        [delegate uploaderDone:self];
 }
 
 @end
