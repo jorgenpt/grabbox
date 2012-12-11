@@ -94,8 +94,10 @@ static NSString * const ImgurAPIURL = @"http://api.imgur.com/2/%@",
     {
         if ([delegate respondsToSelector:@selector(scheduleUpload:)])
             [delegate scheduleUpload:self];
-        else
+        else {
             NSLog(@"Delegate %@ does not respond to scheduleUpload!", delegate);
+            [self uploadDone];
+        }
     }
     else
     {
