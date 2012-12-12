@@ -155,6 +155,8 @@
 		C59CFF48166B3ED500D91C44 /* GrabBoxHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = C59CFF42166B3CB600D91C44 /* GrabBoxHelper.app */; };
 		C59CFF4A166B447100D91C44 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF49166B447000D91C44 /* ServiceManagement.framework */; };
 		C59CFF4B166B448000D91C44 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF49166B447000D91C44 /* ServiceManagement.framework */; };
+		C5A7894316787A350029A618 /* DBAccountInfo+PublicAppURL.m in Sources */ = {isa = PBXBuildFile; fileRef = C5A7894216787A350029A618 /* DBAccountInfo+PublicAppURL.m */; };
+		C5A7894416787A350029A618 /* DBAccountInfo+PublicAppURL.m in Sources */ = {isa = PBXBuildFile; fileRef = C5A7894216787A350029A618 /* DBAccountInfo+PublicAppURL.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -328,6 +330,8 @@
 		C59CFF0F166B05EA00D91C44 /* GrabBox2-SU-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GrabBox2-SU-Info.plist"; sourceTree = "<group>"; };
 		C59CFF3D166B3CB500D91C44 /* GrabBoxHelper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GrabBoxHelper.xcodeproj; sourceTree = "<group>"; };
 		C59CFF49166B447000D91C44 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/ServiceManagement.framework; sourceTree = DEVELOPER_DIR; };
+		C5A7894116787A350029A618 /* DBAccountInfo+PublicAppURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DBAccountInfo+PublicAppURL.h"; sourceTree = "<group>"; };
+		C5A7894216787A350029A618 /* DBAccountInfo+PublicAppURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DBAccountInfo+PublicAppURL.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -556,6 +560,8 @@
 			children = (
 				8E282D4613C0EA61008E619D /* ASIHTTPRequest */,
 				8ED290E713A41A65005F10D3 /* Growler */,
+				C5A7894116787A350029A618 /* DBAccountInfo+PublicAppURL.h */,
+				C5A7894216787A350029A618 /* DBAccountInfo+PublicAppURL.m */,
 				8E51825711E7CE3A00D15CAB /* FSRefConversions.h */,
 				8E51825811E7CE3A00D15CAB /* FSRefConversions.m */,
 				8E60861611E6D1B600881A1C /* Notifier.h */,
@@ -788,6 +794,7 @@
 				8E1D612E13E6235D00F44058 /* ExpirationChecker.m in Sources */,
 				C561389A15389D0A0035C08E /* WelcomeViewController.m in Sources */,
 				C56138A11538A1980035C08E /* DropboxAuthViewController.m in Sources */,
+				C5A7894316787A350029A618 /* DBAccountInfo+PublicAppURL.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -820,6 +827,7 @@
 				8E1D612F13E6235D00F44058 /* ExpirationChecker.m in Sources */,
 				C561389B15389D0A0035C08E /* WelcomeViewController.m in Sources */,
 				C56138A21538A1980035C08E /* DropboxAuthViewController.m in Sources */,
+				C5A7894416787A350029A618 /* DBAccountInfo+PublicAppURL.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,9 +13,9 @@
 #import "UploadManager.h"
 #import "UploaderFactory.h"
 
+#import "DBAccountInfo+PublicAppURL.h"
 #import "NSString+URLParameters.h"
 
-static NSString * const dropboxPath = @"/Public/Screenshots";
 static NSString * const dropboxPublicPrefix = @"/Public/";
 
 @interface DropboxUploader ()
@@ -31,14 +31,12 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
 
 + (NSString *) urlForPath:(NSString *)path
 {
-    NSString *dropboxId = [[[UploaderFactory defaultFactory] account] userId];
-    
-    // TODO: Handle non-prefixed URLs with yet-to-come API?
-    if ([path hasPrefix:dropboxPublicPrefix])
-        path = [path substringFromIndex:[dropboxPublicPrefix length]];
+    NSString *prefix = [[[UploaderFactory defaultFactory] account] publicAppURL];
 
-    return [NSString stringWithFormat:@"http://dl.dropbox.com/u/%@/%@", dropboxId, path];
+    // Ensure it has a leading slash etc.
+    path = [[@"/" stringByAppendingString:path] stringByStandardizingPath];
 
+    return [prefix stringByAppendingString:path];
 }
 
 - (id) init
@@ -81,10 +79,9 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
                            [Uploader randomStringOfLength:8], [srcFile pathExtension]];
 
     [self setDestFilename:shortName];
-    NSString* destination = [NSString pathWithComponents:[NSArray arrayWithObjects:dropboxPath, shortName, nil]];
 
-    DLog(@"Trying upload of '%@', destination '%@'", srcPath, destination);
-    [[self restClient] loadMetadata:destination];
+    DLog(@"Trying upload of '%@', destination '%@'", srcPath, shortName);
+    [[self restClient] loadMetadata:[@"/" stringByAppendingString:shortName]];
 }
 
 #pragma mark DBRestClientDelegate callbacks
@@ -117,7 +114,7 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
     {
         DLog(@"Destination file did not exist, so going ahead with upload.");
         [client uploadFile:destFilename
-                    toPath:dropboxPath
+                    toPath:@"/"
              withParentRev:nil
                   fromPath:srcPath];
     }

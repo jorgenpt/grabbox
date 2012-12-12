@@ -177,7 +177,7 @@ static UploaderFactory *defaultFactory = nil;
 {
     return [[[DBSession alloc] initWithAppKey:dropboxConsumerKey
                                     appSecret:dropboxConsumerSecret
-                                         root:kDBRootDropbox] autorelease];
+                                         root:kDBRootAppFolder] autorelease];
 }
 
 - (void) setupHost:(NSInteger)host
