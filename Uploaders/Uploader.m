@@ -60,6 +60,17 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
     return output;
 }
 
++ (BOOL)hasRetina
+{
+    for (NSScreen *screen in [NSScreen screens]) {
+        if ([screen backingScaleFactor] >= 2.0) {
+            return YES;
+        }
+    }
+
+    return NO;
+}
+
 + (id) uploaderForFile:(NSString *)file
            inDirectory:(NSString *)source
 {
@@ -118,6 +129,41 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
     {
         NSLog(@"Could not move file '%@' to workqueue location '%@', trying to upload from current location: %@ (%ld)",
               srcPath, newPath, [error localizedDescription], [error code]);
+    }
+    
+    if ([[self class] hasRetina]) {
+        [self downsizeRetinaSource];
+    }
+}
+
+- (void)downsizeRetinaSource
+{
+    NSImage *image = [[[NSImage alloc] initWithContentsOfFile:srcPath] autorelease];
+    NSBitmapImageRep *imageRep = [[image representations] objectAtIndex:0];
+    CGFloat displayScale = [imageRep pixelsWide] / [imageRep size].width;
+    NSLog(@"Image displayScale: %f", displayScale);
+    if (displayScale >= 1.95)
+    {
+        NSRect resizedBounds = NSMakeRect(0, 0, [imageRep size].width/displayScale, [imageRep size].height/displayScale);
+        NSImage* resizedImage = [[[NSImage alloc] initWithSize:resizedBounds.size] autorelease];
+
+        [resizedImage lockFocus];
+        [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationLow];
+        [image drawInRect:resizedBounds
+                 fromRect:NSZeroRect
+                operation:NSCompositeCopy
+                 fraction:1.0];
+        [resizedImage unlockFocus];
+
+        NSImageRep *rep = [[resizedImage representations] objectAtIndex:0];
+        CGImageRef img = [rep CGImageForProposedRect:NULL
+                                             context:NULL
+                                               hints:nil];
+        NSBitmapImageRep* bitmapImageRep = [[NSBitmapImageRep alloc] initWithCGImage:img];
+        NSData *imageData = [bitmapImageRep representationUsingType:NSPNGFileType
+                                                         properties:nil];
+        [imageData writeToFile:srcPath
+                    atomically:YES];
     }
 }
 
