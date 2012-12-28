@@ -16,11 +16,15 @@
 #import <Sparkle/SUUpdater.h>
 #endif
 
+static NSString * const kPausedKey = @"Paused";
+
 @interface GrabBoxAppDelegate ()
 
 @property (nonatomic, assign) InformationGatherer* info;
 @property (nonatomic, retain) Notifier* notifier;
 @property (nonatomic, retain) UploadManager *manager;
+
+- (BOOL) isPaused;
 
 - (void) startMonitoring;
 - (void) stopMonitoring;
@@ -45,10 +49,10 @@ static void translateEvent(ConstFSEventStreamRef stream,
                            const FSEventStreamEventId eventIds[]
                            ) {
     NSArray *paths = (NSArray*)eventPathsVoidPointer;
-    [(GrabBoxAppDelegate *)clientCallBackInfo eventForStream:stream
-                                                       paths:paths
-                                                       flags:eventFlags
-                                                         ids:eventIds];
+    [(id)clientCallBackInfo eventForStream:stream
+                                     paths:paths
+                                     flags:eventFlags
+                                       ids:eventIds];
 }
 
 - (void) awakeFromNib
@@ -176,6 +180,11 @@ static void translateEvent(ConstFSEventStreamRef stream,
     }
 }
 
+- (BOOL) isPaused
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kPausedKey];
+}
+
 - (void) startMonitoring
 {
     [self.notifier start];
@@ -191,6 +200,14 @@ static void translateEvent(ConstFSEventStreamRef stream,
                   flags:(const FSEventStreamEventFlags[])flags
                     ids:(const FSEventStreamEventId[]) ids
 {
+    if ([self isPaused]) {
+        // We call this to update our idea of what the dir contents is,
+        // so that we ignore any files that appear while being paused.
+        [self.info createdFiles];
+        DLog(@"App paused, ignoring FS event.");
+        return;
+    }
+
     NSString* screenshotPath = [self.info screenshotPath];
     FSRef screenshotPathRef;
     if (![screenshotPath fsRef:&screenshotPathRef])
