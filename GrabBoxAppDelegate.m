@@ -37,20 +37,6 @@
 
 @implementation GrabBoxAppDelegate
 
-@synthesize restartWindow;
-@synthesize restartWindowMAS;
-@synthesize betaExpiredWindow;
-@synthesize nagWindow;
-@synthesize checkForUpdatesMenuItem;
-@synthesize checkForUpdatesMenubarItem;
-@synthesize menubar;
-
-@synthesize info;
-@synthesize notifier;
-@synthesize manager;
-
-@synthesize canInteract;
-
 static void translateEvent(ConstFSEventStreamRef stream,
                            void *clientCallBackInfo,
                            size_t numEvents,
@@ -86,7 +72,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
     [self setInfo:[InformationGatherer defaultGatherer]];
     [self setNotifier:[Notifier notifierWithCallback:translateEvent
-                                                path:[info screenshotPath]
+                                                path:[self.info screenshotPath]
                                     callbackArgument:self]];
     [self setManager:[[[UploadManager alloc] init] autorelease]];
 
@@ -164,14 +150,14 @@ static void translateEvent(ConstFSEventStreamRef stream,
 {
     [self startMonitoring];
     [self setCanInteract:YES];
-    for (NSString *entry in [info filesInDirectory:[info workQueuePath]])
+    for (NSString *entry in [self.info filesInDirectory:[self.info workQueuePath]])
     {
         if ([entry hasPrefix:@"."])
             continue;
         
         Uploader* up = [[UploaderFactory defaultFactory] uploaderForFile:entry
-                                                             inDirectory:[info workQueuePath]];
-        [manager scheduleUpload:up];
+                                                             inDirectory:[self.info workQueuePath]];
+        [self.manager scheduleUpload:up];
     }
 }
 
@@ -181,7 +167,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
     if (expired())
     {
-        [betaExpiredWindow makeKeyAndOrderFront:self];
+        [self.betaExpiredWindow makeKeyAndOrderFront:self];
         [NSApp activateIgnoringOtherApps:YES];
     }
     else
@@ -192,24 +178,12 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void) startMonitoring
 {
-    [notifier start];
-    /* TODO: Not needed!
-
-    BOOL hasBeenNagged = [[NSUserDefaults standardUserDefaults] boolForKey:@"HasBeenNagged"];
-    int numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
-    if (!hasBeenNagged && numberOfScreenshots >= 15)
-    {
-        [[self nagWindow] makeKeyAndOrderFront:self];
-        [NSApp activateIgnoringOtherApps:YES];
-        [[NSUserDefaults standardUserDefaults] setBool:YES
-                                                forKey:@"HasBeenNagged"];
-    }
-     */
+    [self.notifier start];
 }
 
 - (void) stopMonitoring
 {
-    [notifier stop];
+    [self.notifier stop];
 }
 
 - (void) eventForStream:(ConstFSEventStreamRef)stream
@@ -217,7 +191,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
                   flags:(const FSEventStreamEventFlags[])flags
                     ids:(const FSEventStreamEventId[]) ids
 {
-    NSString* screenshotPath = [info screenshotPath];
+    NSString* screenshotPath = [self.info screenshotPath];
     FSRef screenshotPathRef;
     if (![screenshotPath fsRef:&screenshotPathRef])
     {
@@ -258,8 +232,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
     if (!screenshotDirChanged)
         return;
 
-    NSSet* newEntries = [info createdFiles];
-    NSString* pattern = [[info localizedScreenshotPattern] decomposedStringWithCanonicalMapping];
+    NSSet* newEntries = [self.info createdFiles];
+    NSString* pattern = [[self.info localizedScreenshotPattern] decomposedStringWithCanonicalMapping];
     for (NSString* entry in newEntries) {
         if (![[entry decomposedStringWithCanonicalMapping] isLike:pattern])
         {
@@ -274,18 +248,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
 - (void) uploadScreenshot:(NSString *)file
 {
     Uploader* up = [[UploaderFactory defaultFactory] uploaderForFile:file
-                                                         inDirectory:[info screenshotPath]];
+                                                         inDirectory:[self.info screenshotPath]];
     [up moveToWorkQueue];
-    [manager scheduleUpload:up];
-}
-
-- (IBAction) browseUploadedScreenshots:(id)sender
-{
-    [[DMTracker defaultTracker] trackEventInCategory:@"Features"
-                                            withName:@"Browse Uploads"];
-    // TODO: Support this?
-    // https://www.dropbox.com/browse_plain/Public/Screenshots
-//    [[NSWorkspace sharedWorkspace] openFile:[info uploadPath]];
+    [self.manager scheduleUpload:up];
 }
 
 - (IBAction) uploadFromPasteboard:(id)sender
@@ -331,7 +296,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
     {
         Uploader* up = [[UploaderFactory defaultFactory] uploaderForFile:[filename lastPathComponent]
                                                              inDirectory:[filename stringByDeletingLastPathComponent]];
-        [manager scheduleUpload:up];
+        [self.manager scheduleUpload:up];
     }
     else
     {
@@ -344,7 +309,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (NSString *) workQueueFilenameForClipboardData
 {
-    NSString *template = [NSString stringWithFormat:@"%@/GrabBoxClipboard.XXXXXX.png", [info workQueuePath]];
+    NSString *template = [NSString stringWithFormat:@"%@/GrabBoxClipboard.XXXXXX.png", [self.info workQueuePath]];
     NSUInteger numberOfBytes = [template lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     char *templateBytes = (char *)malloc(numberOfBytes);
     memcpy(templateBytes, [template UTF8String], numberOfBytes);
@@ -359,47 +324,10 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void)windowWillClose:(NSNotification *)notification
 {
-    if ([notification object] == betaExpiredWindow)
+    if ([notification object] == self.betaExpiredWindow)
     {
         [NSApp terminate:self];
     }
-}
-
-- (IBAction) openFeedback:(id)sender
-{
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://grabbox.devsoft.no/contact/?src=nag"]];
-}
-
-- (IBAction) openDonatePref:(id)sender
-{
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://grabbox.devsoft.no/donate/?src=pref"]];
-}
-
-- (IBAction) openDonateNag:(id)sender
-{
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://grabbox.devsoft.no/donate/?src=nag"]];
-}
-
-- (IBAction) restartLater:(id)sender
-{
-    [NSApp stopModal];
-    [[sender window] performClose:self];
-}
-
-- (IBAction) restartApplication:(id)sender
-{
-#ifndef MAC_APP_STORE
-    NSString *launcherSource = [[NSBundle bundleForClass:[SUUpdater class]]  pathForResource:@"relaunch" ofType:@""];
-    NSString *launcherTarget = [NSTemporaryDirectory() stringByAppendingPathComponent:[launcherSource lastPathComponent]];
-    NSString *appPath = [[NSBundle mainBundle] bundlePath];
-    NSString *processID = [NSString stringWithFormat:@"%d", [[NSProcessInfo processInfo] processIdentifier]];
-
-    [[NSFileManager defaultManager] removeItemAtPath:launcherTarget error:NULL];
-    [[NSFileManager defaultManager] copyItemAtPath:launcherSource toPath:launcherTarget error:NULL];
-
-    [NSTask launchedTaskWithLaunchPath:launcherTarget arguments:[NSArray arrayWithObjects:appPath, processID, nil]];
-    [NSApp terminate:sender];
-#endif
 }
 
 @end

@@ -14,38 +14,16 @@
 #import "Menubar.h"
 #import "UploadManager.h"
 
-@interface GrabBoxAppDelegate : NSObject {
-    NSWindow *restartWindow;
-    NSWindow *restartWindowMAS;
-    NSWindow *betaExpiredWindow;
-    NSWindow* nagWindow;
-    NSMenuItem *checkForUpdatesMenuItem;
-    NSMenuItem *checkForUpdatesMenubarItem;
-    Menubar* menubar;
-    InformationGatherer* info;
-    Notifier* notifier;
-    UploadManager *manager;
+@interface GrabBoxAppDelegate : NSObject
 
-    BOOL canInteract;
-}
-
-@property (assign) IBOutlet NSWindow* restartWindow;
-@property (assign) IBOutlet NSWindow* restartWindowMAS;
 @property (assign) IBOutlet NSWindow* betaExpiredWindow;
-@property (assign) IBOutlet NSWindow* nagWindow;
 @property (assign) IBOutlet NSMenuItem *checkForUpdatesMenuItem;
 @property (assign) IBOutlet NSMenuItem *checkForUpdatesMenubarItem;
 @property (assign) IBOutlet Menubar* menubar;
 
 @property (assign) BOOL canInteract;
 
-- (IBAction) browseUploadedScreenshots:(id)sender;
 - (IBAction) uploadFromPasteboard:(id)sender;
-- (IBAction) openFeedback:(id)sender;
-- (IBAction) openDonatePref:(id)sender;
-- (IBAction) openDonateNag:(id)sender;
-- (IBAction) restartLater:(id)sender;
-- (IBAction) restartApplication:(id)sender;
 
 #ifndef MAC_APP_STORE
 - (IBAction) checkForUpdates:(id)sender;
