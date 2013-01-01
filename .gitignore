@@ -13,3 +13,6 @@ xcuserdata/
 # Stuff polish generates
 webpage/appcast*.xml
 webpage/releasenotes*.html
+
+# CocoaPods
+/Pods/

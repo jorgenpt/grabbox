@@ -45,8 +45,6 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>DMAppId</key>
-	<string>4d6c1e92d9340b04d7000000</string>
 	<key>SUFeedURL</key>
 	<string>http://grabbox.devsoft.no/profiles/profileInfo2beta.php</string>
 	<key>SUExpectsDSASignature</key>

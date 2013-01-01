@@ -34,6 +34,7 @@
 
 /* Begin PBXBuildFile section */
 		256AC3DA0F4B6AC300CF3369 /* GrabBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* GrabBoxAppDelegate.m */; };
+		713E2E7097F7438B8B218C10 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAD807E41F7492599A1858D /* libPods.a */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8E1D612E13E6235D00F44058 /* ExpirationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E1D612D13E6235D00F44058 /* ExpirationChecker.m */; };
@@ -75,14 +76,12 @@
 		8EFFCB9712D8F98300201A9A /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB9612D8F98300201A9A /* NSData+Base64.m */; };
 		C50E57B8150D6C1C005F1ABC /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
 		C50E57B9150D6C39005F1ABC /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
-		C50E57BE150D72B8005F1ABC /* SBJson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
 		C50E57BF150D731F005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
 		C50E57C0150D7322005F1ABC /* SBJson.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
 		C50E57C1150D7338005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
 		C52B002113D3B8A900D39676 /* UploaderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C52B002013D3B8A900D39676 /* UploaderFactory.m */; };
 		C52B002313D3D47900D39676 /* HostSetup.xib in Resources */ = {isa = PBXBuildFile; fileRef = C52B002213D3D47900D39676 /* HostSetup.xib */; };
 		C52B002913D3D84600D39676 /* imgur-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C52B002813D3D84600D39676 /* imgur-small.png */; };
-		C53A92261481A336007A5DD9 /* SBJson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
 		C53A92271481A359007A5DD9 /* SBJson.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
 		C55D245A13DF392C003342D3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D245913DF392C003342D3 /* Cocoa.framework */; };
 		C55D247113DF39BD003342D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -108,8 +107,6 @@
 		C55D248C13DF39E6003342D3 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB9612D8F98300201A9A /* NSData+Base64.m */; };
 		C55D248D13DF39E6003342D3 /* NetworkReachabilityNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E368D1513A5F51800EB0D90 /* NetworkReachabilityNotifier.m */; };
 		C55D249313DF3A62003342D3 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; };
-		C55D249713DF3A7D003342D3 /* ObjectiveMetrics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */; };
-		C55D249B13DF3CAC003342D3 /* ObjectiveMetrics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */; };
 		C55D249D13DF3CAC003342D3 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; };
 		C55D24A013DF3CB3003342D3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D245913DF392C003342D3 /* Cocoa.framework */; };
 		C55D24A213DF3DEE003342D3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D24A113DF3DEE003342D3 /* Sparkle.framework */; };
@@ -236,6 +233,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		256AC3D80F4B6AC300CF3369 /* GrabBoxAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabBoxAppDelegate.h; sourceTree = "<group>"; };
@@ -332,6 +330,7 @@
 		C59CFF49166B447000D91C44 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/ServiceManagement.framework; sourceTree = DEVELOPER_DIR; };
 		C5A7894116787A350029A618 /* DBAccountInfo+PublicAppURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DBAccountInfo+PublicAppURL.h"; sourceTree = "<group>"; };
 		C5A7894216787A350029A618 /* DBAccountInfo+PublicAppURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DBAccountInfo+PublicAppURL.m"; sourceTree = "<group>"; };
+		DAAD807E41F7492599A1858D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -342,12 +341,11 @@
 				C59CFF08166B04F200D91C44 /* SystemConfiguration.framework in Frameworks */,
 				C59CFF06166B04EA00D91C44 /* libz.1.dylib in Frameworks */,
 				C55D24A213DF3DEE003342D3 /* Sparkle.framework in Frameworks */,
-				C55D249B13DF3CAC003342D3 /* ObjectiveMetrics.framework in Frameworks */,
 				C55D249D13DF3CAC003342D3 /* Growl.framework in Frameworks */,
 				C55D24A013DF3CB3003342D3 /* Cocoa.framework in Frameworks */,
 				C50E57B8150D6C1C005F1ABC /* DropboxOSX.framework in Frameworks */,
-				C50E57BE150D72B8005F1ABC /* SBJson.framework in Frameworks */,
 				C59CFF4B166B448000D91C44 /* ServiceManagement.framework in Frameworks */,
+				713E2E7097F7438B8B218C10 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,8 +354,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C59CFF4A166B447100D91C44 /* ServiceManagement.framework in Frameworks */,
-				C53A92261481A336007A5DD9 /* SBJson.framework in Frameworks */,
-				C55D249713DF3A7D003342D3 /* ObjectiveMetrics.framework in Frameworks */,
 				C55D249313DF3A62003342D3 /* Growl.framework in Frameworks */,
 				C55D245A13DF392C003342D3 /* Cocoa.framework in Frameworks */,
 				C50E57B9150D6C39005F1ABC /* DropboxOSX.framework in Frameworks */,
@@ -429,6 +425,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */,
 			);
 			name = GrabBox;
 			sourceTree = "<group>";
@@ -468,6 +465,7 @@
 			children = (
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+				DAAD807E41F7492599A1858D /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -597,6 +595,7 @@
 				C59CFF47166B3EC900D91C44 /* CopyFiles */,
 				8D1107290486CEB800E47090 /* Resources */,
 				8E7B688B11EBD23900112165 /* Copy Supporting Frameworks */,
+				79DEF08728BD47F08CBDD61A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -734,6 +733,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		79DEF08728BD47F08CBDD61A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
 		8E3FEC6D13E6339C00A36E2D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -886,6 +899,7 @@
 		};
 		8E256851129C5B5100DE3ACD /* Debug for distribution */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox2.entitlements;
@@ -960,6 +974,7 @@
 		};
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox2.entitlements;
@@ -977,6 +992,7 @@
 		};
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox2.entitlements;

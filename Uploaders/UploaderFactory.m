@@ -257,8 +257,7 @@ static UploaderFactory *defaultFactory = nil;
 
 - (void) promptForDropboxLink
 {
-    [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
-                                            withName:@"Account Link Prompt"];
+    [[DMTracker defaultTracker] trackEvent:@"Account Link Prompt"];
     if (![[self restClient] requestTokenLoaded]) {
         [[self restClient] loadRequestToken];
     }
@@ -270,8 +269,7 @@ static UploaderFactory *defaultFactory = nil;
 - (void) sessionDidReceiveAuthorizationFailure:(DBSession *)session
                                         userId:(NSString *)userId
 {
-    [[DMTracker defaultTracker] trackEventInCategory:@"Oddities"
-                                            withName:@"Authorization Failure"];
+    [[DMTracker defaultTracker] trackEvent:@"Authorization Failure"];
     NSLog(@"Received authorization failure, disabling app then prompt for link!");
     [self setAccount:nil];
     [self setUploaderClass:nil];
@@ -333,8 +331,7 @@ static UploaderFactory *defaultFactory = nil;
         }
         else
         {
-            [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
-                                                    withName:@"Bad token on first-run"];
+            [[DMTracker defaultTracker] trackEvent:@"Bad token on first-run"];
             DLog(@"401 from Dropbox when loading initial account info.");
 
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:CONFIG(Host)];

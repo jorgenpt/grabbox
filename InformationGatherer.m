@@ -112,8 +112,9 @@ static InformationGatherer* defaultInstance = nil;
         if (![[NSFileManager defaultManager] fileExistsAtPath:foundPath
                                                   isDirectory:&isDir] || !isDir)
         {
-            [[DMTracker defaultTracker] trackEventInCategory:@"Oddities"
-                                                    withName:@"Invalid com.apple.screencapture"];
+            [[DMTracker defaultTracker] trackEvent:@"Invalid com.apple.screencapture"
+                                    withProperties:@{@"Path": foundPath}];
+
             NSLog(@"Path specified in com.apple.screencapture location does not exist. Falling back to ~/Desktop.");
             foundPath = [@"~/Desktop" stringByStandardizingPath];
         }

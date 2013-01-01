@@ -130,7 +130,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [[DMTracker defaultTracker] disable];
 #endif
 
-    [[DMTracker defaultTracker] startApp];
+    [[DMTracker defaultTracker] startWithApplicationId:@"4d6c1e92d9340b04d7000000"];
 
     NSString* value = (NSString*)CFPreferencesCopyValue(CFSTR("type"), CFSTR("com.apple.screencapture"),
                                                         kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
@@ -139,9 +139,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
     if (value == nil || ![value isKindOfClass:[NSString class]])
         value = @"Not set / invalid value";
 
-    [[DMTracker defaultTracker] trackEventInCategory:@"Features"
-                                            withName:@"Screencapture type"
-                                               value:value];
+    [[DMTracker defaultTracker] trackEvent:@"Screencapture type"
+                            withProperties:@{@"Type": value}];
 }
 
 - (void) uploaderUnavailable:(NSNotification *)aNotification
@@ -272,8 +271,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (IBAction) uploadFromPasteboard:(id)sender
 {
-    [[DMTracker defaultTracker] trackEventInCategory:@"Usage"
-                                            withName:@"Clipboard Upload"];
+    [[DMTracker defaultTracker] trackEvent:@"Clipboard Upload"];
     NSImage* image = [[[NSImage alloc] initWithPasteboard:[NSPasteboard generalPasteboard]] autorelease];
     if (!image)
     {

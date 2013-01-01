@@ -1,0 +1,15 @@
+
+PODS:
+- ObjectiveMetrics (2.0):
+  - SBJson (~> 3.1.1)
+- SBJson (3.1.1)
+
+DEPENDENCIES:
+- ObjectiveMetrics
+- SBJson
+
+SPEC CHECKSUMS:
+  ObjectiveMetrics: ebaab92ec9d3e39d1bd8815d66fc2d8153bf2048
+  SBJson: d917ef596960a977b6c20235a90810bc306a48f0
+
+COCOAPODS: 0.16.0
