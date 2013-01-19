@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>GrabBox2</string>
+	<string>GrabBox</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.bitspatter.grabbox2</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -26,9 +26,9 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLIconFile</key>
-			<string>GrabBox2</string>
+			<string>GrabBox</string>
 			<key>CFBundleURLName</key>
-			<string>GrabBox2/Dropbox Integration URL</string>
+			<string>GrabBox/Dropbox Integration URL</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>db-<INSERT DROPBOX CONSUMER KEY></string>
@@ -44,7 +44,7 @@
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright 2012, bitSpatter</string>
+	<string>Copyright 2011, bitSpatter</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

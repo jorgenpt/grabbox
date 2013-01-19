@@ -49,7 +49,7 @@
 				<array class="NSMutableArray" key="NSMenuItems">
 					<object class="NSMenuItem" id="694149608">
 						<reference key="NSMenu" ref="649796088"/>
-						<string key="NSTitle">GrabBox2</string>
+						<string key="NSTitle">GrabBox</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSKeyEquivModMask">1048576</int>
 						<int key="NSMnemonicLoc">2147483647</int>
@@ -63,11 +63,11 @@
 						</object>
 						<string key="NSAction">submenuAction:</string>
 						<object class="NSMenu" key="NSSubmenu" id="110575045">
-							<string key="NSTitle">GrabBox2</string>
+							<string key="NSTitle">GrabBox</string>
 							<array class="NSMutableArray" key="NSMenuItems">
 								<object class="NSMenuItem" id="238522557">
 									<reference key="NSMenu" ref="110575045"/>
-									<string key="NSTitle">About GrabBox2</string>
+									<string key="NSTitle">About GrabBox</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
@@ -140,7 +140,7 @@
 								</object>
 								<object class="NSMenuItem" id="755159360">
 									<reference key="NSMenu" ref="110575045"/>
-									<string key="NSTitle">Hide GrabBox2</string>
+									<string key="NSTitle">Hide GrabBox</string>
 									<string key="NSKeyEquiv">h</string>
 									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
@@ -687,7 +687,7 @@
 					</object>
 					<object class="NSMenuItem" id="84868969">
 						<reference key="NSMenu" ref="439119686"/>
-						<string key="NSTitle">About GrabBox2</string>
+						<string key="NSTitle">About GrabBox</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="35465992"/>
@@ -714,7 +714,7 @@
 					</object>
 					<object class="NSMenuItem" id="729006187">
 						<reference key="NSMenu" ref="439119686"/>
-						<string key="NSTitle">Quit GrabBox2</string>
+						<string key="NSTitle">Quit GrabBox</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="35465992"/>
@@ -875,7 +875,7 @@
 							<object class="NSTextFieldCell" key="NSCell" id="930632906">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">272629760</int>
-								<string key="NSContents">The version of GrabBox2 you have installed is a beta version and has expired.  Please use the button below to check for an updated version to continue testing the GrabBox2 beta.</string>
+								<string key="NSContents">The version of GrabBox you have installed is a beta version and has expired.  Please use the button below to check for an updated version to continue testing the GrabBox beta.</string>
 								<object class="NSFont" key="NSSupport">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">13</double>

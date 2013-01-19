@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "0450"
-   version = "1.3">
+   version = "1.8">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8E7B689911EBD8BC00112165"
-               BuildableName = "Distribution"
-               BlueprintName = "Distribution"
-               ReferencedContainer = "container:GrabBox2.xcodeproj">
+               BlueprintIdentifier = "8E3FEC6A13E6339C00A36E2D"
+               BuildableName = "Update Expiration"
+               BlueprintName = "Update Expiration"
+               ReferencedContainer = "container:GrabBox.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,6 +33,8 @@
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      displayScaleIsEnabled = "NO"
+      displayScale = "1.00"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Debug"
@@ -43,6 +45,8 @@
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
+      displayScaleIsEnabled = "NO"
+      displayScale = "1.00"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"

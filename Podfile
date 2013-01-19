@@ -1,6 +1,6 @@
 platform :osx, '10.7'
 
-xcodeproj 'GrabBox2.xcodeproj'
+xcodeproj 'GrabBox.xcodeproj'
 
 pod 'ObjectiveMetrics'
 pod 'SBJson'

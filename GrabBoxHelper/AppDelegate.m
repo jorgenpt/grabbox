@@ -17,8 +17,9 @@
     NSArray *running = [[NSWorkspace sharedWorkspace] runningApplications];
     for (NSRunningApplication *app in running) {
         NSString *identifier = [app bundleIdentifier];
-        alreadyRunning = [identifier isEqualToString:@"com.bitspatter.GrabBox2"];
-        alreadyRunning = alreadyRunning || [identifier isEqualToString:@"com.bitspatter.mac.GrabBox2"];
+        NSLog(@"Identifier: %@", identifier);
+        alreadyRunning = [identifier isEqualToString:@"com.bitspatter.grabbox2"];
+        alreadyRunning = alreadyRunning || [identifier isEqualToString:@"com.bitspatter.mac.grabbox2"];
         if (alreadyRunning) {
             break;
         }
@@ -32,9 +33,9 @@
         [pathComponents removeLastObject];
         [pathComponents removeLastObject];
         [pathComponents addObject:@"MacOS"];
-        [pathComponents addObject:@"GrabBox2"];
+        [pathComponents addObject:@"GrabBox"];
         NSString *newPath = [NSString pathWithComponents:pathComponents];
-        NSLog(@"Launching main GrabBox2 app: %@", newPath);
+        NSLog(@"Launching main GrabBox app: %@", newPath);
         [[NSWorkspace sharedWorkspace] launchApplication:newPath];
     }
     

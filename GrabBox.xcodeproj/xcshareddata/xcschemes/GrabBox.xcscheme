@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8D1107260486CEB800E47090"
-               BuildableName = "GrabBox2.app"
-               BlueprintName = "GrabBox2"
-               ReferencedContainer = "container:GrabBox2.xcodeproj">
+               BuildableName = "GrabBox.app"
+               BlueprintName = "GrabBox"
+               ReferencedContainer = "container:GrabBox.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D1107260486CEB800E47090"
-            BuildableName = "GrabBox2.app"
-            BlueprintName = "GrabBox2"
-            ReferencedContainer = "container:GrabBox2.xcodeproj">
+            BuildableName = "GrabBox.app"
+            BlueprintName = "GrabBox"
+            ReferencedContainer = "container:GrabBox.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D1107260486CEB800E47090"
-            BuildableName = "GrabBox2.app"
-            BlueprintName = "GrabBox2"
-            ReferencedContainer = "container:GrabBox2.xcodeproj">
+            BuildableName = "GrabBox.app"
+            BlueprintName = "GrabBox"
+            ReferencedContainer = "container:GrabBox.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
