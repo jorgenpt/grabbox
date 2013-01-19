@@ -15,6 +15,7 @@
 @property (nonatomic, retain) IBOutlet NSStatusItem* item;
 @property (assign) IBOutlet NSMenu* menu;
 
+- (id) init;
 - (void) dealloc;
 
 - (void) show;

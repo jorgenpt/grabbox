@@ -10,8 +10,39 @@
 
 #import "UploaderFactory.h"
 
+const NSInteger numAnimationFrames = 8;
+NSString * const animationFrameFormat = @"menuicon-animation-%i";
+
+@interface Menubar ()
+@property (assign) dispatch_group_t animationLoading;
+@property (assign) NSInteger currentFrame;
+
+@property (retain) NSArray *animationFrames;
+@property (retain) NSImage *defaultImage, *uploadedImage;
+@end
 
 @implementation Menubar
+
+- (id) init
+{
+    self = [super init];
+    if (self) {
+        NSMutableArray *animationFrames = [NSMutableArray arrayWithCapacity:numAnimationFrames];
+        self.animationLoading = dispatch_group_create();
+        self.animationFrames = animationFrames;
+        self.uploadedImage = self.defaultImage = [NSImage imageNamed:@"menuicon"];
+
+        dispatch_group_async(self.animationLoading, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            for (int i = 1; i <= numAnimationFrames; ++i) {
+                NSString *frameName = [NSString stringWithFormat:animationFrameFormat, i];
+                [animationFrames addObject:[NSImage imageNamed:frameName]];
+            }
+            self.uploadedImage = [NSImage imageNamed:@"menuiconUploaded"];
+        });
+    }
+
+    return self;
+}
 
 - (void) dealloc
 {
@@ -27,8 +58,8 @@
     [[self item] setTarget:self];
     [[self item] setHighlightMode:YES];
     [[self item] setEnabled:YES];
-    [[self item] setImage:[NSImage imageNamed:@"menuicon.png"]];
-    [[self item] setAlternateImage:[NSImage imageNamed:@"menuiconInverted.png"]];
+    [[self item] setImage:self.defaultImage];
+    [[self item] setAlternateImage:[NSImage imageNamed:@"menuiconInverted"]];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(uploadStarted:)
@@ -67,7 +98,10 @@
     @synchronized(self) {
         self.activityCount++;
         if (self.activityCount == 1) {
-            [self updateFrame];
+            self.currentFrame = 0;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self updateFrame];
+            });
         }
     }
 }
@@ -94,51 +128,26 @@
 
 - (void) updateFrame
 {
-    // TODO: This is slow and hacky.
-    static CGFloat angle = 0.0;
+    if (self.activityCount > 0) {
+        if (dispatch_group_wait(self.animationLoading, DISPATCH_TIME_NOW) == 0) {
+            NSImage *icon = [self.animationFrames objectAtIndex:self.currentFrame];
+            [self.item setImage:icon];
 
-    if (self.activityCount <= 0) {
-        [[self item] setImage:[NSImage imageNamed:@"menuicon.png"]];
-        angle = 0.0f;
-        return;
+            self.currentFrame = (self.currentFrame + 1) % [self.animationFrames count];
+        }
+
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.4 * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^{
+            [self updateFrame];
+        });
+    } else {
+        // TODO: Sound?
+        [self.item setImage:self.uploadedImage];
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 2.0 * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self.item setImage:self.defaultImage];
+        });
     }
-
-    NSImage *mainIcon = [[[NSImage imageNamed:@"menuicon.png"] copy] autorelease];
-    NSImage *overlayIcon = [NSImage imageNamed:@"arrow_rotate.png"];
-
-    [mainIcon lockFocus];
-    [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
-
-    NSSize overlaySize = [overlayIcon size];
-    NSAffineTransform *transform = [NSAffineTransform transform];
-    [transform translateXBy:overlaySize.width/2.0 yBy:overlaySize.height/2.0];
-    [transform rotateByDegrees:angle];
-    [transform translateXBy:-overlaySize.width/2.0 yBy:-overlaySize.height/2.0];
-    [transform concat];
-
-    NSRect rect = NSMakeRect(0.0, 0.0,
-                             overlaySize.width, overlaySize.height);
-    [overlayIcon drawInRect:rect
-                   fromRect:NSZeroRect
-                  operation:NSCompositeSourceOver
-                   fraction:1.0];
-
-    [transform invert];
-    [transform concat];
-    [mainIcon unlockFocus];
-
-    [[self item] setImage:mainIcon];
-
-    angle += 10.0f;
-    if (angle >= 360.0f) {
-        angle -= 360.0f;
-    }
-
-    double delayInSeconds = 0.05;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^{
-        [self updateFrame];
-    });
 }
 
 @end
