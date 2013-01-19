@@ -9,11 +9,8 @@
 #import "UploaderFactory.h"
 
 #import "GrabBoxAppDelegate.h"
+#import "WelcomeWindowController.h"
 
-#import "WelcomeViewController.h"
-#import "DropboxAuthViewController.h"
-
-#import "ImgurUploader.h"
 #import "DropboxUploader.h"
 
 NSString * const GBUploaderUnavailableNotification = @"GBUploaderUnavailableNotification";
@@ -28,29 +25,13 @@ static UploaderFactory *defaultFactory = nil;
 @interface UploaderFactory ()
 
 @property (assign) Class uploaderClass;
-@property (retain) NSViewController *currentVC;
-
-- (void) promptForHost;
-- (void) promptForDropboxLink;
-
-- (void) setupHost:(NSInteger)host;
-- (void) setupDropbox;
-- (void) setupImgur;
+@property (retain) WelcomeWindowController *welcomeWindow;
 
 - (DBRestClient *)restClient;
 
 @end
 
 @implementation UploaderFactory
-
-@synthesize uploaderClass;
-@synthesize currentVC;
-
-@synthesize account;
-
-@synthesize hostSelecter;
-@synthesize radioGroup;
-@synthesize advanceButton;
 
 + (void) initialize
 {
@@ -71,11 +52,7 @@ static UploaderFactory *defaultFactory = nil;
     if (self)
     {
         ignoreUpdates = NO;
-        [self setUploaderClass:[ImgurUploader class]];
-        [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self
-                                                                  forKeyPath:[@"values." stringByAppendingString:CONFIG(Host)]
-                                                                     options:0
-                                                                     context:NULL];
+        [self setUploaderClass:[DropboxUploader class]];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(gainedFocus:)
                                                      name:NSApplicationDidBecomeActiveNotification
@@ -94,52 +71,12 @@ static UploaderFactory *defaultFactory = nil;
     [restClient setDelegate:nil];
     [restClient release];
     [self setAccount:nil];
-    [self setCurrentVC:nil];
 
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self
                                                                  forKeyPath:[@"values." stringByAppendingString:CONFIG(Host)]];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     [super dealloc];
-}
-
-- (void) awakeFromNib
-{
-    NSInteger host = [[NSUserDefaults standardUserDefaults] integerForKey:CONFIG(Host)];
-    if (!host)
-        host = HostImgur;
-
-    [radioGroup selectCellWithTag:host];
-
-    [hostSelecter makeKeyAndOrderFront:self];
-    [NSApp activateIgnoringOtherApps:YES];
-}
-
-- (IBAction) advanceSelecter:(id)sender
-{
-    NSInteger selectedTag = [radioGroup selectedTag];
-    switch (selectedTag)
-    {
-        case HostDropbox:
-            [self setCurrentVC:[[[DropboxAuthViewController alloc] init] autorelease]];
-            break;
-        case HostImgur:
-            [[NSUserDefaults standardUserDefaults] setInteger:selectedTag forKey:CONFIG(Host)];
-            [self setCurrentVC:[[[WelcomeViewController alloc] init] autorelease]];
-            break;
-
-        default:
-            // TODO: Handle this better?
-            ErrorLog(@"Invalid selected tag: %ld!", selectedTag);
-            [NSApp terminate:self];
-            return;
-    }
-
-    if (currentVC)
-    {
-        [hostSelecter setContentView:[currentVC view]];
-        [hostSelecter setTitle:[currentVC windowTitle]];
-    }
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
@@ -159,18 +96,15 @@ static UploaderFactory *defaultFactory = nil;
 - (Uploader *) uploaderForFile:(NSString *)file
                    inDirectory:(NSString *)source
 {
-    return [[[uploaderClass alloc] initForFile:file inDirectory:source] autorelease];
+    return [[[self.uploaderClass alloc] initForFile:file inDirectory:source] autorelease];
 }
 
 - (void) loadSettings
 {
-    NSInteger host = [[NSUserDefaults standardUserDefaults] integerForKey:CONFIG(Host)];
     [[NSNotificationCenter defaultCenter] postNotificationName:GBUploaderUnavailableNotification object:nil];
 
     [self setAccount:nil];
-    [self setUploaderClass:nil];
-
-    [self setupHost:host];
+    [self setupDropbox];
 }
 
 - (DBSession *) dropboxSession
@@ -180,53 +114,20 @@ static UploaderFactory *defaultFactory = nil;
                                          root:kDBRootAppFolder] autorelease];
 }
 
-- (void) setupHost:(NSInteger)host
-{
-    switch (host)
-    {
-        case HostDropbox:
-            [self setupDropbox];
-            break;
-
-        case HostImgur:
-            [self setupImgur];
-            break;
-
-        default:
-        {
-            DBSession *session = [self dropboxSession];
-            if ([session isLinked])
-            {
-                [session unlinkAll];
-                [restClient release];
-                restClient = nil;
-            }
-            [self promptForHost];
-            break;
-        }
-    }
-}
-
 - (void) setupDropbox
 {
     DBSession *session = [self dropboxSession];
     [session setDelegate:self];
     [DBSession setSharedSession:session];
 
-    NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
-    [em setEventHandler:self
-            andSelector:@selector(getUrl:withReplyEvent:)
-          forEventClass:kInternetEventClass andEventID:kAEGetURL];
-
-    [[self restClient] setDelegate:self];
-
     if ([session isLinked])
     {
+        [[self restClient] setDelegate:self];
         [[self restClient] loadAccountInfo];
     }
     else
     {
-        [self promptForDropboxLink];
+        [self showWelcomeWindow];
     }
 }
 
@@ -244,23 +145,16 @@ static UploaderFactory *defaultFactory = nil;
     // TODO: GH-2: Show a dialog to confirm
 }
 
-- (void) setupImgur
+- (void) showWelcomeWindow
 {
-    [self setUploaderClass:[ImgurUploader class]];
-    [[NSNotificationCenter defaultCenter] postNotificationName:GBUploaderAvailableNotification object:nil];
-}
+    [[DMTracker defaultTracker] trackEvent:@"Welcome Window"];
 
-- (void) promptForHost
-{
-    [NSBundle loadNibNamed:@"HostSetup" owner:self];
-}
-
-- (void) promptForDropboxLink
-{
-    [[DMTracker defaultTracker] trackEvent:@"Account Link Prompt"];
-    if (![[self restClient] requestTokenLoaded]) {
-        [[self restClient] loadRequestToken];
+    if (!self.welcomeWindow) {
+        self.welcomeWindow = [[[WelcomeWindowController alloc] initWithWindowNibName:@"WelcomeWindow"] autorelease];
     }
+
+    [self.welcomeWindow.window makeKeyAndOrderFront:self];
+    [NSApp activateIgnoringOtherApps:YES];
 }
 
 
@@ -275,7 +169,9 @@ static UploaderFactory *defaultFactory = nil;
     [self setUploaderClass:nil];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:GBUploaderUnavailableNotification object:nil];
-    [self promptForDropboxLink];
+
+    [session unlinkUserId:userId];
+    [self showWelcomeWindow];
 }
 
 #pragma mark DBRestClientOSXDelegate delegate methods
@@ -305,11 +201,6 @@ static UploaderFactory *defaultFactory = nil;
 {
     DLog(@"Got account info, starting FS monitoring and enabling interaction!");
     [self setAccount:accountInfo];
-    [self setUploaderClass:[DropboxUploader class]];
-
-    [self setCurrentVC:[[[WelcomeViewController alloc] init] autorelease]];
-    [[self hostSelecter] setContentView:[currentVC view]];
-    [[self hostSelecter] setTitle:[currentVC windowTitle]];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:GBUploaderAvailableNotification object:nil];
 }
@@ -321,7 +212,7 @@ static UploaderFactory *defaultFactory = nil;
         // "Bad or expired token. This can happen if the user or Dropbox revoked or expired an access token.
         // To fix, you should re-authenticate the user."
     {
-        if (account)
+        if (self.account)
         {
             // TODO: GH-1: Show error dialog & ask to re-auth.
             // For now we just force a re-auth.

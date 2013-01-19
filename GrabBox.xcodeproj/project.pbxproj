@@ -68,13 +68,16 @@
 		8EF627FB13B0512A0013A4B4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F913B0512A0013A4B4 /* MainMenu.xib */; };
 		8EFFCB6E12D8F86C00201A9A /* NSString+URLParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB6D12D8F86C00201A9A /* NSString+URLParameters.m */; };
 		8EFFCB9712D8F98300201A9A /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB9612D8F98300201A9A /* NSData+Base64.m */; };
+		C506DD6B16AB580E00B18D25 /* WelcomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C506DD6A16AB580E00B18D25 /* WelcomeWindowController.m */; };
+		C506DD6C16AB580E00B18D25 /* WelcomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C506DD6A16AB580E00B18D25 /* WelcomeWindowController.m */; };
+		C506DD6E16AB5A7800B18D25 /* WelcomeWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C506DD6D16AB5A7800B18D25 /* WelcomeWindow.xib */; };
+		C506DD6F16AB5A7800B18D25 /* WelcomeWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C506DD6D16AB5A7800B18D25 /* WelcomeWindow.xib */; };
 		C50E57B8150D6C1C005F1ABC /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
 		C50E57B9150D6C39005F1ABC /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
 		C50E57BF150D731F005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
 		C50E57C0150D7322005F1ABC /* SBJson.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
 		C50E57C1150D7338005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
 		C52B002113D3B8A900D39676 /* UploaderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C52B002013D3B8A900D39676 /* UploaderFactory.m */; };
-		C52B002313D3D47900D39676 /* HostSetup.xib in Resources */ = {isa = PBXBuildFile; fileRef = C52B002213D3D47900D39676 /* HostSetup.xib */; };
 		C52B002913D3D84600D39676 /* imgur-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C52B002813D3D84600D39676 /* imgur-small.png */; };
 		C53A92271481A359007A5DD9 /* SBJson.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
 		C55D245A13DF392C003342D3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D245913DF392C003342D3 /* Cocoa.framework */; };
@@ -113,7 +116,6 @@
 		C55D24AC13DF43BE003342D3 /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F413B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict */; };
 		C55D24AD13DF43BE003342D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		C55D24AE13DF43BE003342D3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F913B0512A0013A4B4 /* MainMenu.xib */; };
-		C55D24B013DF43BE003342D3 /* HostSetup.xib in Resources */ = {isa = PBXBuildFile; fileRef = C52B002213D3D47900D39676 /* HostSetup.xib */; };
 		C55D24B113DF43FB003342D3 /* imgur-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C52B002813D3D84600D39676 /* imgur-small.png */; };
 		C55D24B313DF43FB003342D3 /* dropbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627DC13B050CE0013A4B4 /* dropbox.png */; };
 		C55D24B713DF43FB003342D3 /* menuicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627E313B050CE0013A4B4 /* menuicon.png */; };
@@ -326,10 +328,12 @@
 		8EFFCB6D12D8F86C00201A9A /* NSString+URLParameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLParameters.m"; sourceTree = "<group>"; };
 		8EFFCB9512D8F98300201A9A /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		8EFFCB9612D8F98300201A9A /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		C506DD6916AB580E00B18D25 /* WelcomeWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeWindowController.h; sourceTree = "<group>"; };
+		C506DD6A16AB580E00B18D25 /* WelcomeWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeWindowController.m; sourceTree = "<group>"; };
+		C506DD6D16AB5A7800B18D25 /* WelcomeWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeWindow.xib; sourceTree = "<group>"; };
 		C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxOSX.framework; sourceTree = "<group>"; };
 		C52B001F13D3B8A900D39676 /* UploaderFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploaderFactory.h; sourceTree = "<group>"; };
 		C52B002013D3B8A900D39676 /* UploaderFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploaderFactory.m; sourceTree = "<group>"; };
-		C52B002213D3D47900D39676 /* HostSetup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HostSetup.xib; sourceTree = "<group>"; };
 		C52B002813D3D84600D39676 /* imgur-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imgur-small.png"; sourceTree = "<group>"; };
 		C536963816AA897900157D1F /* GrabBox-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GrabBox-Info.plist"; sourceTree = "<group>"; };
 		C536963916AA897900157D1F /* GrabBox-SU-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GrabBox-SU-Info.plist"; sourceTree = "<group>"; };
@@ -495,10 +499,10 @@
 				C536963916AA897900157D1F /* GrabBox-SU-Info.plist */,
 				8E63965713DF8131002EC0E0 /* GrabBox.entitlements */,
 				8EF627F413B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict */,
-				C52B002213D3D47900D39676 /* HostSetup.xib */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				8EF627F913B0512A0013A4B4 /* MainMenu.xib */,
 				C561389415386C280035C08E /* WelcomeView.xib */,
+				C506DD6D16AB5A7800B18D25 /* WelcomeWindow.xib */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -570,14 +574,16 @@
 		8E79350012DA42710057D5ED /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				C561389E1538A1980035C08E /* DropboxAuthViewController.h */,
+				C561389F1538A1980035C08E /* DropboxAuthViewController.m */,
 				8EAAE7F21256675800798872 /* Menubar.h */,
 				8EAAE7F31256675800798872 /* Menubar.m */,
 				8E7B6C2311EC433B00112165 /* Preferences.h */,
 				8E7B6C2411EC433B00112165 /* Preferences.m */,
 				C561389715389D0A0035C08E /* WelcomeViewController.h */,
 				C561389815389D0A0035C08E /* WelcomeViewController.m */,
-				C561389E1538A1980035C08E /* DropboxAuthViewController.h */,
-				C561389F1538A1980035C08E /* DropboxAuthViewController.m */,
+				C506DD6916AB580E00B18D25 /* WelcomeWindowController.h */,
+				C506DD6A16AB580E00B18D25 /* WelcomeWindowController.m */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -743,7 +749,6 @@
 				8EF627F613B050DF0013A4B4 /* dsa_pub.pem in Resources */,
 				8EF627F813B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict in Resources */,
 				8EF627FB13B0512A0013A4B4 /* MainMenu.xib in Resources */,
-				C52B002313D3D47900D39676 /* HostSetup.xib in Resources */,
 				C52B002913D3D84600D39676 /* imgur-small.png in Resources */,
 				8E1D613213E625AF00F44058 /* expired.png in Resources */,
 				C561388F153868450035C08E /* DropboxAuthView.xib in Resources */,
@@ -769,6 +774,7 @@
 				C57A2D3A16AA752100B89D82 /* menuiconInverted@2x.png in Resources */,
 				C57A2D3E16AA7B3F00B89D82 /* menuiconUploaded.png in Resources */,
 				C57A2D4016AA7B3F00B89D82 /* menuiconUploaded@2x.png in Resources */,
+				C506DD6E16AB5A7800B18D25 /* WelcomeWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -781,7 +787,6 @@
 				C55D24AC13DF43BE003342D3 /* Growl Registration Ticket.growlRegDict in Resources */,
 				C55D24AD13DF43BE003342D3 /* InfoPlist.strings in Resources */,
 				C55D24AE13DF43BE003342D3 /* MainMenu.xib in Resources */,
-				C55D24B013DF43BE003342D3 /* HostSetup.xib in Resources */,
 				C55D24BB13DF47DA003342D3 /* GrabBox.icns in Resources */,
 				C55D24B113DF43FB003342D3 /* imgur-small.png in Resources */,
 				C55D24B313DF43FB003342D3 /* dropbox.png in Resources */,
@@ -811,6 +816,7 @@
 				C57A2D3B16AA752100B89D82 /* menuiconInverted@2x.png in Resources */,
 				C57A2D3F16AA7B3F00B89D82 /* menuiconUploaded.png in Resources */,
 				C57A2D4116AA7B3F00B89D82 /* menuiconUploaded@2x.png in Resources */,
+				C506DD6F16AB5A7800B18D25 /* WelcomeWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -892,6 +898,7 @@
 				C561389A15389D0A0035C08E /* WelcomeViewController.m in Sources */,
 				C56138A11538A1980035C08E /* DropboxAuthViewController.m in Sources */,
 				C5A7894316787A350029A618 /* DBAccountInfo+PublicAppURL.m in Sources */,
+				C506DD6B16AB580E00B18D25 /* WelcomeWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -925,6 +932,7 @@
 				C561389B15389D0A0035C08E /* WelcomeViewController.m in Sources */,
 				C56138A21538A1980035C08E /* DropboxAuthViewController.m in Sources */,
 				C5A7894416787A350029A618 /* DBAccountInfo+PublicAppURL.m in Sources */,
+				C506DD6C16AB580E00B18D25 /* WelcomeWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

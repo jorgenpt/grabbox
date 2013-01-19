@@ -1,30 +1,42 @@
-//
-//  DropboxAuthViewController.m
-//  GrabBox2
-//
-//  Created by Jørgen Tjernø on 4/13/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
 #import "DropboxAuthViewController.h"
 
-#import "UploaderFactory.h"
+@interface DropboxAuthViewController () <DBRestClientDelegate>
+@property (retain) DBRestClient *restClient;
+@end
 
 @implementation DropboxAuthViewController
 
-- (id)init
+- (NSString*)windowTitle
 {
-    return [super initWithNibName:@"DropboxAuthView" bundle:nil];
+    return @"Set up GrabBox";
 }
 
-- (NSString *)windowTitle
+- (void)awakeFromNib
 {
-    return @"Authorize GrabBox";
+    [super awakeFromNib];
+
+    self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+    self.restClient.delegate = self;
+
+    [self.restClient loadRequestToken];
 }
 
 - (IBAction)open:(id)sender
 {
-    [[NSUserDefaults standardUserDefaults] setInteger:HostDropbox forKey:CONFIG(Host)];
+    NSURL *url = [self.restClient authorizeURL];
+    [[NSWorkspace sharedWorkspace] openURL:url];
+}
+
+#pragma mark - DBRestClientDelegate
+
+- (void)restClientLoadedRequestToken:(DBRestClient *)restClient
+{
+    [self.openButton setEnabled:YES];
+}
+
+- (void)restClientLoadedAccessToken:(DBRestClient *)restClient
+{
+    [self.restClient loadAccountInfo];
 }
 
 @end
