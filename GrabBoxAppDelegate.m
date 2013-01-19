@@ -58,8 +58,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
 - (void) awakeFromNib
 {
 #ifdef MAC_APP_STORE
-    [[checkForUpdatesMenuItem menu] removeItem:checkForUpdatesMenuItem];
-    [[checkForUpdatesMenubarItem menu] removeItem:checkForUpdatesMenubarItem];
+    [[self.checkForUpdatesMenuItem menu] removeItem:self.checkForUpdatesMenuItem];
+    [[self.checkForUpdatesMenubarItem menu] removeItem:self.checkForUpdatesMenubarItem];
 #else
     [[SUUpdater alloc] init];
     [[SUUpdater sharedUpdater] setDelegate:self];

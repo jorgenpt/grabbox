@@ -172,6 +172,7 @@
 		C57A2D3F16AA7B3F00B89D82 /* menuiconUploaded.png in Resources */ = {isa = PBXBuildFile; fileRef = C57A2D3C16AA7B3F00B89D82 /* menuiconUploaded.png */; };
 		C57A2D4016AA7B3F00B89D82 /* menuiconUploaded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C57A2D3D16AA7B3F00B89D82 /* menuiconUploaded@2x.png */; };
 		C57A2D4116AA7B3F00B89D82 /* menuiconUploaded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C57A2D3D16AA7B3F00B89D82 /* menuiconUploaded@2x.png */; };
+		C57A2D7C16AA7E2600B89D82 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAD807E41F7492599A1858D /* libPods.a */; };
 		C59CFF06166B04EA00D91C44 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF05166B04EA00D91C44 /* libz.1.dylib */; };
 		C59CFF08166B04F200D91C44 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF07166B04F200D91C44 /* SystemConfiguration.framework */; };
 		C59CFF09166B050200D91C44 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF05166B04EA00D91C44 /* libz.1.dylib */; };
@@ -381,12 +382,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C59CFF08166B04F200D91C44 /* SystemConfiguration.framework in Frameworks */,
-				C59CFF06166B04EA00D91C44 /* libz.1.dylib in Frameworks */,
-				C55D24A213DF3DEE003342D3 /* Sparkle.framework in Frameworks */,
+				C59CFF4B166B448000D91C44 /* ServiceManagement.framework in Frameworks */,
 				C55D249D13DF3CAC003342D3 /* Growl.framework in Frameworks */,
 				C55D24A013DF3CB3003342D3 /* Cocoa.framework in Frameworks */,
 				C50E57B8150D6C1C005F1ABC /* DropboxOSX.framework in Frameworks */,
-				C59CFF4B166B448000D91C44 /* ServiceManagement.framework in Frameworks */,
+				C55D24A213DF3DEE003342D3 /* Sparkle.framework in Frameworks */,
+				C59CFF06166B04EA00D91C44 /* libz.1.dylib in Frameworks */,
 				713E2E7097F7438B8B218C10 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -395,12 +396,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C59CFF0A166B050400D91C44 /* SystemConfiguration.framework in Frameworks */,
 				C59CFF4A166B447100D91C44 /* ServiceManagement.framework in Frameworks */,
 				C55D249313DF3A62003342D3 /* Growl.framework in Frameworks */,
 				C55D245A13DF392C003342D3 /* Cocoa.framework in Frameworks */,
 				C50E57B9150D6C39005F1ABC /* DropboxOSX.framework in Frameworks */,
 				C59CFF09166B050200D91C44 /* libz.1.dylib in Frameworks */,
-				C59CFF0A166B050400D91C44 /* SystemConfiguration.framework in Frameworks */,
+				C57A2D7C16AA7E2600B89D82 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -977,7 +979,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 			};
 			name = "Debug for distribution";
 		};
@@ -992,6 +994,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Frameworks\"",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks\"",
 				);
 				INFOPLIST_FILE = "Resources/GrabBox2-SU-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -1067,6 +1070,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Frameworks\"",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks\"",
 				);
 				INFOPLIST_FILE = "Resources/GrabBox2-SU-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -1085,6 +1089,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Frameworks\"",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks\"",
 				);
 				INFOPLIST_FILE = "Resources/GrabBox2-SU-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -1110,7 +1115,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -1127,12 +1132,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
 		C55D246E13DF392C003342D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox2.entitlements;
@@ -1155,6 +1161,7 @@
 		};
 		C55D246F13DF392C003342D3 /* Debug for distribution */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox2.entitlements;
@@ -1177,6 +1184,7 @@
 		};
 		C55D247013DF392C003342D3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox2.entitlements;
