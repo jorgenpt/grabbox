@@ -64,7 +64,7 @@ static NSString * const ImgurAPIURL = @"http://api.imgur.com/2/%@",
         {
             GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"URL Copied"
                                                          title:@"Screenshot uploaded!"
-                                                   description:@"The screenshot has been uploaded and a link put in your clipboard. Click here to give the file a more descriptive name!"];
+                                                   description:@"The screenshot has been uploaded and a link put in your clipboard."];
             [Growler growl:prompt];
         }
         
