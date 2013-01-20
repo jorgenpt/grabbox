@@ -25,6 +25,8 @@
 
 - (IBAction) uploadFromPasteboard:(id)sender;
 
+- (IBAction) logout:(id)sender;
+
 #ifndef MAC_APP_STORE
 - (IBAction) checkForUpdates:(id)sender;
 #endif

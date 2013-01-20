@@ -322,6 +322,11 @@ static void translateEvent(ConstFSEventStreamRef stream,
     }
 }
 
+- (IBAction) logout:(id)sender
+{
+    [[UploaderFactory defaultFactory] logout];
+}
+
 - (NSString *) workQueueFilenameForClipboardData
 {
     NSString *template = [NSString stringWithFormat:@"%@/GrabBoxClipboard.XXXXXX.png", [self.info workQueuePath]];

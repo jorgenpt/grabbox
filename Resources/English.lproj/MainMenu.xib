@@ -658,17 +658,17 @@
 						<reference key="NSOnImage" ref="35465992"/>
 						<reference key="NSMixedImage" ref="502551668"/>
 					</object>
-					<object class="NSMenuItem" id="287141548">
+					<object class="NSMenuItem" id="414452374">
 						<reference key="NSMenu" ref="439119686"/>
-						<string key="NSTitle">Change upload service...</string>
+						<string key="NSTitle">Start GrabBox automatically</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="35465992"/>
 						<reference key="NSMixedImage" ref="502551668"/>
 					</object>
-					<object class="NSMenuItem" id="414452374">
+					<object class="NSMenuItem" id="287141548">
 						<reference key="NSMenu" ref="439119686"/>
-						<string key="NSTitle">Start GrabBox automatically</string>
+						<string key="NSTitle">Log out of Dropbox...</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="35465992"/>
@@ -1308,11 +1308,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">changeUploadService:</string>
-						<reference key="source" ref="226433106"/>
+						<string key="label">logout:</string>
+						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="287141548"/>
 					</object>
-					<int key="connectionID">1076</int>
+					<int key="connectionID">1096</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1612,8 +1612,8 @@
 							<reference ref="168583171"/>
 							<reference ref="838164744"/>
 							<reference ref="683755835"/>
-							<reference ref="287141548"/>
 							<reference ref="414452374"/>
+							<reference ref="287141548"/>
 							<reference ref="71391325"/>
 						</array>
 						<reference key="parent" ref="0"/>
@@ -2154,7 +2154,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1095</int>
+			<int key="maxID">1096</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2163,11 +2163,16 @@
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="checkForUpdates:">id</string>
+						<string key="logout:">id</string>
 						<string key="uploadFromPasteboard:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="checkForUpdates:">
 							<string key="name">checkForUpdates:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="logout:">
+							<string key="name">logout:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="uploadFromPasteboard:">
@@ -2248,17 +2253,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">Preferences</string>
 					<string key="superclassName">NSObject</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">changeUploadService:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">changeUploadService:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">changeUploadService:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">autostartItem</string>
 						<string key="NS.object.0">NSMenuItem</string>
@@ -2280,10 +2274,6 @@
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencies">
-			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
-			<real value="1070" key="NS.object.0"/>
-		</object>
-		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin.macosx</string>
 			<real value="1070" key="NS.object.0"/>
 		</object>

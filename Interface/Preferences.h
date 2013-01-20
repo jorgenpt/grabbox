@@ -15,6 +15,4 @@
 - (BOOL) willLaunchAtLogin;
 - (void) setWillLaunchAtLogin:(BOOL)state;
 
-- (IBAction) changeUploadService:(id)sender;
-
 @end

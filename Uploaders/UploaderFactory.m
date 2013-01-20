@@ -51,7 +51,6 @@ static UploaderFactory *defaultFactory = nil;
     self = [super init];
     if (self)
     {
-        ignoreUpdates = NO;
         [self setUploaderClass:[DropboxUploader class]];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(gainedFocus:)
@@ -72,25 +71,9 @@ static UploaderFactory *defaultFactory = nil;
     [restClient release];
     [self setAccount:nil];
 
-    [[NSUserDefaultsController sharedUserDefaultsController] removeObserver:self
-                                                                 forKeyPath:[@"values." stringByAppendingString:CONFIG(Host)]];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     [super dealloc];
-}
-
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
-                         change:(NSDictionary *)change context:(void *)context
-{
-    if (ignoreUpdates)
-        return;
-
-    if ([keyPath isEqualToString:[@"values." stringByAppendingString:CONFIG(Host)]])
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self loadSettings];
-        });
-    }
 }
 
 - (Uploader *) uploaderForFile:(NSString *)file
@@ -105,6 +88,12 @@ static UploaderFactory *defaultFactory = nil;
 
     [self setAccount:nil];
     [self setupDropbox];
+}
+
+- (void) logout
+{
+    [[DBSession sharedSession] unlinkAll];
+    [self loadSettings];
 }
 
 - (DBSession *) dropboxSession
@@ -130,6 +119,7 @@ static UploaderFactory *defaultFactory = nil;
         [self showWelcomeWindow];
     }
 }
+
 
 - (void)gainedFocus:(NSNotification *)aNotification {
     if ([DBSession sharedSession])

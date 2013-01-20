@@ -27,5 +27,6 @@ extern NSString * const GBGainedFocusNotification;
 - (Uploader *) uploaderForFile:(NSString *)file
                    inDirectory:(NSString *)source;
 - (void) loadSettings;
+- (void) logout;
 
 @end

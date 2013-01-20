@@ -49,10 +49,4 @@ static NSString * const kHelperAppIdentifier = @"com.bitspatter.GrabBoxHelper";
     }
 }
 
-- (IBAction) changeUploadService:(id)sender
-{
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:CONFIG(Host)];
-}
-
-
 @end
