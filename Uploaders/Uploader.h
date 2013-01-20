@@ -34,9 +34,6 @@ extern NSString * const kUploadFinishingNotification;
 
 + (NSString *) randomStringOfLength:(int)length;
 
-+ (id) uploaderForFile:(NSString *)file
-           inDirectory:(NSString *)source;
-
 - (id) initForFile:(NSString *)file
        inDirectory:(NSString *)source;
 

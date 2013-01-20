@@ -10,7 +10,6 @@
 #import "Growler.h"
 #import "InformationGatherer.h"
 
-#import "ImgurUploader.h"
 #import "UploadManager.h"
 
 NSString * const kUploadStartingNotification = @"UploadStarting";
@@ -69,12 +68,6 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
     }
 
     return NO;
-}
-
-+ (id) uploaderForFile:(NSString *)file
-           inDirectory:(NSString *)source
-{
-    return [[[ImgurUploader alloc] initForFile:file inDirectory:source] autorelease];
 }
 
 - (id) init

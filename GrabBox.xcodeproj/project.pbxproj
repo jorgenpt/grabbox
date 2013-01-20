@@ -46,7 +46,6 @@
 		8E282D5413C0EA61008E619D /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E282D4C13C0EA61008E619D /* ASIFormDataRequest.m */; };
 		8E282D5513C0EA61008E619D /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E282D5013C0EA61008E619D /* ASIInputStream.m */; };
 		8E282D5913C0EA85008E619D /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E282D5813C0EA85008E619D /* ASIHTTPRequest.m */; };
-		8E282D6913C0EE65008E619D /* ImgurUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E282D6813C0EE65008E619D /* ImgurUploader.m */; };
 		8E368D1613A5F51800EB0D90 /* NetworkReachabilityNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E368D1513A5F51800EB0D90 /* NetworkReachabilityNotifier.m */; };
 		8E4A50A011E9155500A0A743 /* InformationGatherer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4A509F11E9155500A0A743 /* InformationGatherer.m */; };
 		8E51825911E7CE3A00D15CAB /* FSRefConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E51825811E7CE3A00D15CAB /* FSRefConversions.m */; };
@@ -87,7 +86,6 @@
 		C55D247613DF39D9003342D3 /* Menubar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EAAE7F31256675800798872 /* Menubar.m */; };
 		C55D247713DF39D9003342D3 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7B6C2411EC433B00112165 /* Preferences.m */; };
 		C55D247813DF39D9003342D3 /* DropboxUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC402FB13BFFAF00001B66E /* DropboxUploader.m */; };
-		C55D247913DF39D9003342D3 /* ImgurUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E282D6813C0EE65008E619D /* ImgurUploader.m */; };
 		C55D247A13DF39D9003342D3 /* Uploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC402FD13BFFAF00001B66E /* Uploader.m */; };
 		C55D247B13DF39D9003342D3 /* UploaderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C52B002013D3B8A900D39676 /* UploaderFactory.m */; };
 		C55D247C13DF39D9003342D3 /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC402F513BFF78D0001B66E /* UploadManager.m */; };
@@ -289,8 +287,6 @@
 		8E282D5713C0EA85008E619D /* ASIHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequest.h; sourceTree = "<group>"; };
 		8E282D5813C0EA85008E619D /* ASIHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIHTTPRequest.m; sourceTree = "<group>"; };
 		8E282D5A13C0EA9F008E619D /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
-		8E282D6713C0EE65008E619D /* ImgurUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImgurUploader.h; sourceTree = "<group>"; };
-		8E282D6813C0EE65008E619D /* ImgurUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImgurUploader.m; sourceTree = "<group>"; };
 		8E368D1413A5F51800EB0D90 /* NetworkReachabilityNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkReachabilityNotifier.h; sourceTree = "<group>"; };
 		8E368D1513A5F51800EB0D90 /* NetworkReachabilityNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkReachabilityNotifier.m; sourceTree = "<group>"; };
 		8E4A509E11E9155500A0A743 /* InformationGatherer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationGatherer.h; sourceTree = "<group>"; };
@@ -593,8 +589,6 @@
 			children = (
 				8EC402FA13BFFAF00001B66E /* DropboxUploader.h */,
 				8EC402FB13BFFAF00001B66E /* DropboxUploader.m */,
-				8E282D6713C0EE65008E619D /* ImgurUploader.h */,
-				8E282D6813C0EE65008E619D /* ImgurUploader.m */,
 				8EC402FC13BFFAF00001B66E /* Uploader.h */,
 				8EC402FD13BFFAF00001B66E /* Uploader.m */,
 				C52B001F13D3B8A900D39676 /* UploaderFactory.h */,
@@ -892,7 +886,6 @@
 				8E282D5413C0EA61008E619D /* ASIFormDataRequest.m in Sources */,
 				8E282D5513C0EA61008E619D /* ASIInputStream.m in Sources */,
 				8E282D5913C0EA85008E619D /* ASIHTTPRequest.m in Sources */,
-				8E282D6913C0EE65008E619D /* ImgurUploader.m in Sources */,
 				C52B002113D3B8A900D39676 /* UploaderFactory.m in Sources */,
 				8E1D612E13E6235D00F44058 /* ExpirationChecker.m in Sources */,
 				C561389A15389D0A0035C08E /* WelcomeViewController.m in Sources */,
@@ -912,7 +905,6 @@
 				C55D247613DF39D9003342D3 /* Menubar.m in Sources */,
 				C55D247713DF39D9003342D3 /* Preferences.m in Sources */,
 				C55D247813DF39D9003342D3 /* DropboxUploader.m in Sources */,
-				C55D247913DF39D9003342D3 /* ImgurUploader.m in Sources */,
 				C55D247A13DF39D9003342D3 /* Uploader.m in Sources */,
 				C55D247B13DF39D9003342D3 /* UploaderFactory.m in Sources */,
 				C55D247C13DF39D9003342D3 /* UploadManager.m in Sources */,
