@@ -104,9 +104,7 @@
 		C55D24A013DF3CB3003342D3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D245913DF392C003342D3 /* Cocoa.framework */; };
 		C55D24A213DF3DEE003342D3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D24A113DF3DEE003342D3 /* Sparkle.framework */; };
 		C55D24A313DF3E09003342D3 /* Sparkle.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D24A113DF3DEE003342D3 /* Sparkle.framework */; };
-		C55D24A413DF3E0C003342D3 /* ObjectiveMetrics.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */; };
 		C55D24A513DF3E0F003342D3 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; };
-		C55D24A813DF42E4003342D3 /* ObjectiveMetrics.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */; };
 		C55D24AA13DF42E4003342D3 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; };
 		C55D24AB13DF43BE003342D3 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627D813B050980013A4B4 /* Defaults.plist */; };
 		C55D24AC13DF43BE003342D3 /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F413B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict */; };
@@ -215,7 +213,6 @@
 			files = (
 				C50E57BF150D731F005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */,
 				C55D24A313DF3E09003342D3 /* Sparkle.framework in Copy Supporting Frameworks */,
-				C55D24A413DF3E0C003342D3 /* ObjectiveMetrics.framework in Copy Supporting Frameworks */,
 				C55D24A513DF3E0F003342D3 /* Growl.framework in Copy Supporting Frameworks */,
 			);
 			name = "Copy Supporting Frameworks";
@@ -227,7 +224,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C55D24A813DF42E4003342D3 /* ObjectiveMetrics.framework in Copy Supporting Frameworks */,
 				C50E57C1150D7338005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */,
 				C55D24AA13DF42E4003342D3 /* Growl.framework in Copy Supporting Frameworks */,
 			);
@@ -332,7 +328,6 @@
 		C55D245713DF392C003342D3 /* GrabBox Appstore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GrabBox Appstore.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C55D245913DF392C003342D3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C55D249213DF3A62003342D3 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
-		C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ObjectiveMetrics.framework; sourceTree = "<group>"; };
 		C55D24A113DF3DEE003342D3 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		C561388E153868450035C08E /* DropboxAuthView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropboxAuthView.xib; sourceTree = "<group>"; };
 		C561389115386B380035C08E /* API Request Authorization - Dropbox.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "API Request Authorization - Dropbox.jpg"; sourceTree = SOURCE_ROOT; };
@@ -424,7 +419,6 @@
 				C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */,
 				C55D249213DF3A62003342D3 /* Growl.framework */,
 				C59CFF05166B04EA00D91C44 /* libz.1.dylib */,
-				C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */,
 				C59CFF49166B447000D91C44 /* ServiceManagement.framework */,
 				C55D24A113DF3DEE003342D3 /* Sparkle.framework */,
 				C59CFF07166B04F200D91C44 /* SystemConfiguration.framework */,
