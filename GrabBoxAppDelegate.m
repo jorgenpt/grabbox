@@ -128,9 +128,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 #if defined(DEBUG)
     [[DMTracker defaultTracker] disable];
-#endif
-
+#else
     [[DMTracker defaultTracker] startWithApplicationId:@"916d325cf9e94b76b6d9f85cbc8b733f"];
+#endif
 
     NSString* value = (NSString*)CFPreferencesCopyValue(CFSTR("type"), CFSTR("com.apple.screencapture"),
                                                         kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
