@@ -330,7 +330,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 - (NSString *) workQueueFilenameForClipboardData
 {
     NSString *template = [NSString stringWithFormat:@"%@/GrabBoxClipboard.XXXXXX.png", [self.info workQueuePath]];
-    NSUInteger numberOfBytes = [template lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    NSUInteger numberOfBytes = [template lengthOfBytesUsingEncoding:NSUTF8StringEncoding] + 1;
     char *templateBytes = (char *)malloc(numberOfBytes);
     memcpy(templateBytes, [template UTF8String], numberOfBytes);
 
