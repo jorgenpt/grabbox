@@ -6,7 +6,7 @@
 
 #   import <Cocoa/Cocoa.h>
 #   import <DropboxOSX/DropboxOSX.h>
-#   import <ObjectiveMetrics/ObjectiveMetrics.h>
+#   import <ObjectiveMetrics/DMTracker.h>
 
 #   define LineLog(fmt, ...) do { \
         NSLog((@"%s: " fmt), __PRETTY_FUNCTION__, ##__VA_ARGS__); \
