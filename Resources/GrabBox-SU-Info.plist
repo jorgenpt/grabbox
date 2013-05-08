@@ -56,7 +56,7 @@
 	<key>SUExpectsDSASignature</key>
 	<true/>
 	<key>SUFeedURL</key>
-	<string>http://grabbox.devsoft.no/profiles/profileInfo2beta.php</string>
+	<string>http://grabbox.devsoft.no/appcastBeta.xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
 </dict>
