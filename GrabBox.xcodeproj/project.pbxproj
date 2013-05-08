@@ -74,11 +74,9 @@
 		C50E57B8150D6C1C005F1ABC /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
 		C50E57B9150D6C39005F1ABC /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
 		C50E57BF150D731F005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
-		C50E57C0150D7322005F1ABC /* SBJson.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
 		C50E57C1150D7338005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
 		C52B002113D3B8A900D39676 /* UploaderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C52B002013D3B8A900D39676 /* UploaderFactory.m */; };
 		C52B002913D3D84600D39676 /* imgur-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C52B002813D3D84600D39676 /* imgur-small.png */; };
-		C53A92271481A359007A5DD9 /* SBJson.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C53A92251481A336007A5DD9 /* SBJson.framework */; };
 		C55D245A13DF392C003342D3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D245913DF392C003342D3 /* Cocoa.framework */; };
 		C55D247113DF39BD003342D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		C55D247213DF39C5003342D3 /* GrabBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* GrabBoxAppDelegate.m */; };
@@ -218,7 +216,6 @@
 				C50E57BF150D731F005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */,
 				C55D24A313DF3E09003342D3 /* Sparkle.framework in Copy Supporting Frameworks */,
 				C55D24A413DF3E0C003342D3 /* ObjectiveMetrics.framework in Copy Supporting Frameworks */,
-				C50E57C0150D7322005F1ABC /* SBJson.framework in Copy Supporting Frameworks */,
 				C55D24A513DF3E0F003342D3 /* Growl.framework in Copy Supporting Frameworks */,
 			);
 			name = "Copy Supporting Frameworks";
@@ -231,7 +228,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				C55D24A813DF42E4003342D3 /* ObjectiveMetrics.framework in Copy Supporting Frameworks */,
-				C53A92271481A359007A5DD9 /* SBJson.framework in Copy Supporting Frameworks */,
 				C50E57C1150D7338005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */,
 				C55D24AA13DF42E4003342D3 /* Growl.framework in Copy Supporting Frameworks */,
 			);
@@ -333,7 +329,6 @@
 		C52B002813D3D84600D39676 /* imgur-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imgur-small.png"; sourceTree = "<group>"; };
 		C536963816AA897900157D1F /* GrabBox-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GrabBox-Info.plist"; sourceTree = "<group>"; };
 		C536963916AA897900157D1F /* GrabBox-SU-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GrabBox-SU-Info.plist"; sourceTree = "<group>"; };
-		C53A92251481A336007A5DD9 /* SBJson.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SBJson.framework; sourceTree = "<group>"; };
 		C55D245713DF392C003342D3 /* GrabBox Appstore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GrabBox Appstore.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C55D245913DF392C003342D3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C55D249213DF3A62003342D3 /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
@@ -430,7 +425,6 @@
 				C55D249213DF3A62003342D3 /* Growl.framework */,
 				C59CFF05166B04EA00D91C44 /* libz.1.dylib */,
 				C55D249613DF3A7D003342D3 /* ObjectiveMetrics.framework */,
-				C53A92251481A336007A5DD9 /* SBJson.framework */,
 				C59CFF49166B447000D91C44 /* ServiceManagement.framework */,
 				C55D24A113DF3DEE003342D3 /* Sparkle.framework */,
 				C59CFF07166B04F200D91C44 /* SystemConfiguration.framework */,
