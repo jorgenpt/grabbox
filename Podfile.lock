@@ -1,13 +1,26 @@
 PODS:
+  - ASIHTTPRequest (1.8.1):
+    - ASIHTTPRequest/ASIWebPageRequest
+    - ASIHTTPRequest/CloudFiles
+    - ASIHTTPRequest/S3
+    - Reachability
+  - ASIHTTPRequest/ASIWebPageRequest (1.8.1):
+    - Reachability
+  - ASIHTTPRequest/CloudFiles (1.8.1):
+    - Reachability
+  - ASIHTTPRequest/S3 (1.8.1):
+    - Reachability
   - ObjectiveMetrics (2.1.1):
     - SBJson (~> 3.1.1)
   - SBJson (3.1.1)
 
 DEPENDENCIES:
+  - ASIHTTPRequest
   - ObjectiveMetrics
   - SBJson
 
 SPEC CHECKSUMS:
+  ASIHTTPRequest: a79e32b54f92471bff8979f3b82182f0e9b6992c
   ObjectiveMetrics: 6b5197af43a8b298a0a178b1192ceb31e8e4509a
   SBJson: d917ef596960a977b6c20235a90810bc306a48f0
 
