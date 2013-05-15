@@ -26,15 +26,15 @@ static char encodingTable[64] = {
 }
 
 - (id) initWithBase64EncodedString:(NSString *)string {
-	NSMutableData *mutableData = nil;
+    NSMutableData *mutableData = nil;
 
-	if (!string)
+    if (!string)
         return [self init];
 
     unsigned long ixtext = 0;
     unsigned long lentext = 0;
     unsigned char ch = 0;
-    unsigned char inbuf[4], outbuf[3];
+    unsigned char inbuf[4] = {}, outbuf[3] = {};
     short ixinbuf = 0;
     BOOL flignore = NO;
     BOOL flendtext = NO;

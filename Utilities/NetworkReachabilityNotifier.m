@@ -54,7 +54,12 @@ void NetworkReachabilityChangedCallbackWrapper(
     {
         const char *nodeName = [name cStringUsingEncoding:NSASCIIStringEncoding];
         SCNetworkReachabilityRef ref = SCNetworkReachabilityCreateWithName(kCFAllocatorDefault, nodeName);
-        
+
+        if (!ref) {
+            [self release];
+            return nil;
+        }
+
         SCNetworkReachabilityContext context = {
             .version = 0,
             .info = self,

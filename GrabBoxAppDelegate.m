@@ -61,7 +61,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [[self.checkForUpdatesMenuItem menu] removeItem:self.checkForUpdatesMenuItem];
     [[self.checkForUpdatesMenubarItem menu] removeItem:self.checkForUpdatesMenubarItem];
 #else
-    [[SUUpdater alloc] init];
     [[SUUpdater sharedUpdater] setDelegate:self];
 #endif
 

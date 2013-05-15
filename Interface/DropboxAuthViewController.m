@@ -15,7 +15,7 @@
 {
     [super awakeFromNib];
 
-    self.restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+    self.restClient = [[[DBRestClient alloc] initWithSession:[DBSession sharedSession]] autorelease];
     self.restClient.delegate = self;
 
     [self.restClient loadRequestToken];
