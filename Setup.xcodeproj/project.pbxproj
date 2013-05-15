@@ -24,13 +24,13 @@
 /* Begin PBXBuildFile section */
 		438FFB460EBC411AB778FECC /* libPods-GrabBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C82E04876DC443A3BD502C1F /* libPods-GrabBox.a */; };
 		D5548C6A17443FD7006D00B3 /* GrabBoxMenubar.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = D5548C6717443FD0006D00B3 /* GrabBoxMenubar.app */; };
-		D5548C8E17444793006D00B3 /* GrabBox.icns in Resources */ = {isa = PBXBuildFile; fileRef = D5548C8D17444793006D00B3 /* GrabBox.icns */; };
+		D5548D1417444D39006D00B3 /* GrabBox.icns in Resources */ = {isa = PBXBuildFile; fileRef = D5548D1317444D39006D00B3 /* GrabBox.icns */; };
+		D5548D1817444DAE006D00B3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5548D1617444DAE006D00B3 /* MainMenu.xib */; };
 		D57A4A7F17443DEF0054C719 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D57A4A7E17443DEF0054C719 /* Cocoa.framework */; };
 		D57A4A8917443DEF0054C719 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D57A4A8717443DEF0054C719 /* InfoPlist.strings */; };
 		D57A4A8B17443DEF0054C719 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D57A4A8A17443DEF0054C719 /* main.m */; };
 		D57A4A8F17443DEF0054C719 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D57A4A8D17443DEF0054C719 /* Credits.rtf */; };
 		D57A4A9217443DEF0054C719 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D57A4A9117443DEF0054C719 /* AppDelegate.m */; };
-		D57A4A9517443DEF0054C719 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D57A4A9317443DEF0054C719 /* MainMenu.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,8 +81,9 @@
 		6E5E19ABEF1843DFA9F06106 /* Pods-GrabBox.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GrabBox.xcconfig"; path = "Pods/Pods-GrabBox.xcconfig"; sourceTree = SOURCE_ROOT; };
 		C82E04876DC443A3BD502C1F /* libPods-GrabBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GrabBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5548C5F17443FCF006D00B3 /* Menubar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Menubar.xcodeproj; sourceTree = "<group>"; };
-		D5548C8D17444793006D00B3 /* GrabBox.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = GrabBox.icns; path = Resources/Images/GrabBox.icns; sourceTree = SOURCE_ROOT; };
 		D5548C9517444A2A006D00B3 /* Setup.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Setup.entitlements; sourceTree = "<group>"; };
+		D5548D1317444D39006D00B3 /* GrabBox.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = GrabBox.icns; sourceTree = "<group>"; };
+		D5548D1717444DAE006D00B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		D57A4A7B17443DEF0054C719 /* GrabBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D57A4A7E17443DEF0054C719 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D57A4A8117443DEF0054C719 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -91,11 +92,10 @@
 		D57A4A8617443DEF0054C719 /* GrabBox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GrabBox-Info.plist"; sourceTree = "<group>"; };
 		D57A4A8817443DEF0054C719 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D57A4A8A17443DEF0054C719 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D57A4A8C17443DEF0054C719 /* GrabBox-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GrabBox-Prefix.pch"; sourceTree = "<group>"; };
+		D57A4A8C17443DEF0054C719 /* Setup_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Setup_Prefix.pch; sourceTree = "<group>"; };
 		D57A4A8E17443DEF0054C719 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		D57A4A9017443DEF0054C719 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D57A4A9117443DEF0054C719 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D57A4A9417443DEF0054C719 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,11 +120,31 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D5548D1217444D39006D00B3 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				D5548D1317444D39006D00B3 /* GrabBox.icns */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		D5548D1517444D61006D00B3 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				D57A4A8A17443DEF0054C719 /* main.m */,
+				D57A4A8C17443DEF0054C719 /* Setup_Prefix.pch */,
+			);
+			name = "Other Sources";
+			path = Setup;
+			sourceTree = "<group>";
+		};
 		D57A4A7217443DEF0054C719 = {
 			isa = PBXGroup;
 			children = (
 				D5548C5F17443FCF006D00B3 /* Menubar.xcodeproj */,
-				D57A4A8417443DEF0054C719 /* GrabBox */,
+				D57A4A8417443DEF0054C719 /* Classes */,
+				D5548D1517444D61006D00B3 /* Other Sources */,
+				D57A4A8517443DEF0054C719 /* Resources */,
 				D57A4A7D17443DEF0054C719 /* Frameworks */,
 				D57A4A7C17443DEF0054C719 /* Products */,
 				6E5E19ABEF1843DFA9F06106 /* Pods-GrabBox.xcconfig */,
@@ -162,30 +182,28 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		D57A4A8417443DEF0054C719 /* GrabBox */ = {
+		D57A4A8417443DEF0054C719 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				D57A4A9017443DEF0054C719 /* AppDelegate.h */,
 				D57A4A9117443DEF0054C719 /* AppDelegate.m */,
-				D57A4A9317443DEF0054C719 /* MainMenu.xib */,
-				D57A4A8517443DEF0054C719 /* Supporting Files */,
 			);
-			name = GrabBox;
+			name = Classes;
 			path = Setup;
 			sourceTree = "<group>";
 		};
-		D57A4A8517443DEF0054C719 /* Supporting Files */ = {
+		D57A4A8517443DEF0054C719 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D5548D1217444D39006D00B3 /* Images */,
 				D5548C9517444A2A006D00B3 /* Setup.entitlements */,
-				D5548C8D17444793006D00B3 /* GrabBox.icns */,
 				D57A4A8617443DEF0054C719 /* GrabBox-Info.plist */,
+				D5548D1617444DAE006D00B3 /* MainMenu.xib */,
 				D57A4A8717443DEF0054C719 /* InfoPlist.strings */,
-				D57A4A8A17443DEF0054C719 /* main.m */,
-				D57A4A8C17443DEF0054C719 /* GrabBox-Prefix.pch */,
 				D57A4A8D17443DEF0054C719 /* Credits.rtf */,
 			);
-			name = "Supporting Files";
+			name = Resources;
+			path = Setup/Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,8 +287,8 @@
 			files = (
 				D57A4A8917443DEF0054C719 /* InfoPlist.strings in Resources */,
 				D57A4A8F17443DEF0054C719 /* Credits.rtf in Resources */,
-				D57A4A9517443DEF0054C719 /* MainMenu.xib in Resources */,
-				D5548C8E17444793006D00B3 /* GrabBox.icns in Resources */,
+				D5548D1417444D39006D00B3 /* GrabBox.icns in Resources */,
+				D5548D1817444DAE006D00B3 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +364,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		D5548D1617444DAE006D00B3 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D5548D1717444DAE006D00B3 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
 		D57A4A8717443DEF0054C719 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -360,14 +386,6 @@
 				D57A4A8E17443DEF0054C719 /* en */,
 			);
 			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		D57A4A9317443DEF0054C719 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D57A4A9417443DEF0054C719 /* en */,
-			);
-			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -400,12 +418,14 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = Setup/Resources/Setup.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Joergen Pedersen Tjernoe";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = Setup/Setup_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -435,11 +455,13 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = Setup/Resources/Setup.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Joergen Pedersen Tjernoe";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PREFIX_HEADER = Setup/Setup_Prefix.pch;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -454,11 +476,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E5E19ABEF1843DFA9F06106 /* Pods-GrabBox.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Setup/Setup.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Setup/GrabBox-Prefix.pch";
-				INFOPLIST_FILE = "Setup/GrabBox-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Setup/Resources/GrabBox-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -468,11 +488,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E5E19ABEF1843DFA9F06106 /* Pods-GrabBox.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Setup/Setup.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Setup/GrabBox-Prefix.pch";
-				INFOPLIST_FILE = "Setup/GrabBox-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Setup/Resources/GrabBox-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
