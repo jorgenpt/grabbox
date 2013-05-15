@@ -17,7 +17,7 @@
                BlueprintIdentifier = "8E3FEC6A13E6339C00A36E2D"
                BuildableName = "Update Expiration"
                BlueprintName = "Update Expiration"
-               ReferencedContainer = "container:GrabBox.xcodeproj">
+               ReferencedContainer = "container:GrabBoxMenubar.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -14,30 +14,21 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C55D245613DF392C003342D3"
+               BlueprintIdentifier = "8D1107260486CEB800E47090"
                BuildableName = "GrabBox.app"
-               BlueprintName = "GrabBox Appstore"
-               ReferencedContainer = "container:GrabBox.xcodeproj">
+               BlueprintName = "GrabBoxMenubar"
+               ReferencedContainer = "container:GrabBoxMenubar.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C55D245613DF392C003342D3"
-            BuildableName = "GrabBox.app"
-            BlueprintName = "GrabBox Appstore"
-            ReferencedContainer = "container:GrabBox.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -53,10 +44,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C55D245613DF392C003342D3"
+            BlueprintIdentifier = "8D1107260486CEB800E47090"
             BuildableName = "GrabBox.app"
-            BlueprintName = "GrabBox Appstore"
-            ReferencedContainer = "container:GrabBox.xcodeproj">
+            BlueprintName = "GrabBoxMenubar"
+            ReferencedContainer = "container:GrabBoxMenubar.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -73,10 +64,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C55D245613DF392C003342D3"
+            BlueprintIdentifier = "8D1107260486CEB800E47090"
             BuildableName = "GrabBox.app"
-            BlueprintName = "GrabBox Appstore"
-            ReferencedContainer = "container:GrabBox.xcodeproj">
+            BlueprintName = "GrabBoxMenubar"
+            ReferencedContainer = "container:GrabBoxMenubar.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
