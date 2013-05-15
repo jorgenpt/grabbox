@@ -13,3 +13,9 @@ target 'GrabBoxMenubar' do
   pod 'ASIHTTPRequest'
   pod 'ObjectiveMetrics'
 end
+
+target 'GrabBoxMenubar Appstore' do
+  xcodeproj 'Menubar.xcodeproj'
+  pod 'ASIHTTPRequest'
+  pod 'ObjectiveMetrics'
+end
