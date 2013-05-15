@@ -22,6 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		438FFB460EBC411AB778FECC /* libPods-GrabBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C82E04876DC443A3BD502C1F /* libPods-GrabBox.a */; };
 		D5548C6A17443FD7006D00B3 /* GrabBoxMenubar.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = D5548C6717443FD0006D00B3 /* GrabBoxMenubar.app */; };
 		D57A4A7F17443DEF0054C719 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D57A4A7E17443DEF0054C719 /* Cocoa.framework */; };
 		D57A4A8917443DEF0054C719 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D57A4A8717443DEF0054C719 /* InfoPlist.strings */; };
@@ -76,6 +77,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6E5E19ABEF1843DFA9F06106 /* Pods-GrabBox.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GrabBox.xcconfig"; path = "Pods/Pods-GrabBox.xcconfig"; sourceTree = SOURCE_ROOT; };
+		C82E04876DC443A3BD502C1F /* libPods-GrabBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GrabBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5548C5F17443FCF006D00B3 /* Menubar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Menubar.xcodeproj; sourceTree = "<group>"; };
 		D57A4A7B17443DEF0054C719 /* GrabBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D57A4A7E17443DEF0054C719 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -98,6 +101,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D57A4A7F17443DEF0054C719 /* Cocoa.framework in Frameworks */,
+				438FFB460EBC411AB778FECC /* libPods-GrabBox.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,8 +124,12 @@
 				D57A4A8417443DEF0054C719 /* GrabBox */,
 				D57A4A7D17443DEF0054C719 /* Frameworks */,
 				D57A4A7C17443DEF0054C719 /* Products */,
+				6E5E19ABEF1843DFA9F06106 /* Pods-GrabBox.xcconfig */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
+			usesTabs = 0;
 		};
 		D57A4A7C17443DEF0054C719 /* Products */ = {
 			isa = PBXGroup;
@@ -136,6 +144,7 @@
 			children = (
 				D57A4A7E17443DEF0054C719 /* Cocoa.framework */,
 				D57A4A8017443DEF0054C719 /* Other Frameworks */,
+				C82E04876DC443A3BD502C1F /* libPods-GrabBox.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -181,10 +190,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D57A4A9817443DEF0054C719 /* Build configuration list for PBXNativeTarget "GrabBox" */;
 			buildPhases = (
+				CE304F79D7644C51A66EC8E3 /* Check Pods Manifest.lock */,
 				D57A4A7717443DEF0054C719 /* Sources */,
 				D57A4A7817443DEF0054C719 /* Frameworks */,
 				D57A4A9C17443F0C0054C719 /* CopyFiles */,
 				D57A4A7917443DEF0054C719 /* Resources */,
+				06044A78EE6D4170B45BA854 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -260,6 +271,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		06044A78EE6D4170B45BA854 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-GrabBox-resources.sh\"\n";
+		};
+		CE304F79D7644C51A66EC8E3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+		};
 		D5548C77174440CE006D00B3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -403,6 +442,7 @@
 		};
 		D57A4A9917443DEF0054C719 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E5E19ABEF1843DFA9F06106 /* Pods-GrabBox.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -415,6 +455,7 @@
 		};
 		D57A4A9A17443DEF0054C719 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E5E19ABEF1843DFA9F06106 /* Pods-GrabBox.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -435,6 +476,7 @@
 				D5548C74174440C2006D00B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D57A4A7617443DEF0054C719 /* Build configuration list for PBXProject "Setup" */ = {
 			isa = XCConfigurationList;

@@ -1,9 +1,15 @@
 platform :osx, '10.7'
 
-xcodeproj 'GrabBox.xcodeproj'
+workspace 'GrabBox.xcworkspace'
 
-pod 'ASIHTTPRequest'
-pod 'ObjectiveMetrics'
-pod 'SBJson'
+xcodeproj 'Setup.xcodeproj'
 
-target 'GrabBox Appstore' do; end
+target 'GrabBox' do
+  pod 'ObjectiveMetrics'
+end
+
+target 'GrabBoxMenubar' do
+  xcodeproj 'Menubar.xcodeproj'
+  pod 'ASIHTTPRequest'
+  pod 'ObjectiveMetrics'
+end

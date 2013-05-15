@@ -17,10 +17,9 @@ PODS:
 DEPENDENCIES:
   - ASIHTTPRequest
   - ObjectiveMetrics
-  - SBJson
 
 SPEC CHECKSUMS:
-  ASIHTTPRequest: a79e32b54f92471bff8979f3b82182f0e9b6992c
+  ASIHTTPRequest: a411b8d0f006ed8fc24248be6a0c4ad2abc9b101
   ObjectiveMetrics: 6b5197af43a8b298a0a178b1192ceb31e8e4509a
   SBJson: d917ef596960a977b6c20235a90810bc306a48f0
 
