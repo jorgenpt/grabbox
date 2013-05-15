@@ -434,8 +434,11 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */,
 			);
+			indentWidth = 4;
 			name = GrabBox;
 			sourceTree = "<group>";
+			tabWidth = 4;
+			usesTabs = 0;
 		};
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;

@@ -49,7 +49,10 @@
 				C59CFF1F166B3CB500D91C44 /* Frameworks */,
 				C59CFF1D166B3CB500D91C44 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
+			usesTabs = 0;
 		};
 		C59CFF1D166B3CB500D91C44 /* Products */ = {
 			isa = PBXGroup;
