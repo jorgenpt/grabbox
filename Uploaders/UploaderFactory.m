@@ -131,7 +131,7 @@ static UploaderFactory *defaultFactory = nil;
 }
 
 - (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
-	// This gets called when the user clicks Show "App name". You don't need to do anything for Dropbox here
+    // This gets called when the user clicks Show "App name". You don't need to do anything for Dropbox here
     // TODO: GH-2: Show a dialog to confirm
 }
 
@@ -227,11 +227,11 @@ static UploaderFactory *defaultFactory = nil;
 }
 
 - (DBRestClient *)restClient {
-	if (!restClient) {
-		restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-		restClient.delegate = self;
-	}
-	return restClient;
+    if (!restClient) {
+        restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+        restClient.delegate = self;
+    }
+    return restClient;
 }
 
 @end

@@ -22,7 +22,7 @@ static char encodingTable[64] = {
 @implementation NSData (Base64)
 
 + (NSData *) dataWithBase64EncodedString:(NSString *)string {
-	return [[[NSData allocWithZone:nil] initWithBase64EncodedString:string] autorelease];
+    return [[[NSData allocWithZone:nil] initWithBase64EncodedString:string] autorelease];
 }
 
 - (id) initWithBase64EncodedString:(NSString *)string {
@@ -109,47 +109,47 @@ static char encodingTable[64] = {
         }
     }
 
-	return [self initWithData:mutableData];
+    return [self initWithData:mutableData];
 }
 
 - (NSString *) base64Encoding
 {
-	return [self base64EncodingWithLineLength:0];
+    return [self base64EncodingWithLineLength:0];
 }
 
 - (NSString *) base64EncodingWithLineLength:(NSUInteger) lineLength
 {
-	const unsigned char	*bytes = [self bytes];
-	NSMutableString *result = [NSMutableString stringWithCapacity:[self length]];
-	unsigned long ixtext = 0;
-	unsigned long lentext = [self length];
-	long ctremaining = 0;
-	unsigned char inbuf[3], outbuf[4];
-	unsigned short charsonline = 0, ctcopy = 0;
-	unsigned long ix = 0;
+    const unsigned char    *bytes = [self bytes];
+    NSMutableString *result = [NSMutableString stringWithCapacity:[self length]];
+    unsigned long ixtext = 0;
+    unsigned long lentext = [self length];
+    long ctremaining = 0;
+    unsigned char inbuf[3], outbuf[4];
+    unsigned short charsonline = 0, ctcopy = 0;
+    unsigned long ix = 0;
 
-	while (YES)
+    while (YES)
     {
-		ctremaining = lentext - ixtext;
-		if (ctremaining <= 0)
+        ctremaining = lentext - ixtext;
+        if (ctremaining <= 0)
             break;
 
-		for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
-			ix = ixtext + i;
-			if (ix < lentext)
+            ix = ixtext + i;
+            if (ix < lentext)
                 inbuf[i] = bytes[ix];
-			else
+            else
                 inbuf [i] = 0;
-		}
+        }
 
-		outbuf [0] = ( inbuf [0] & 0xFC) >> 2;
-		outbuf [1] = ((inbuf [0] & 0x03) << 4) | ((inbuf [1] & 0xF0) >> 4);
-		outbuf [2] = ((inbuf [1] & 0x0F) << 2) | ((inbuf [2] & 0xC0) >> 6);
-		outbuf [3] =   inbuf [2] & 0x3F;
-		ctcopy = 4;
+        outbuf [0] = ( inbuf [0] & 0xFC) >> 2;
+        outbuf [1] = ((inbuf [0] & 0x03) << 4) | ((inbuf [1] & 0xF0) >> 4);
+        outbuf [2] = ((inbuf [1] & 0x0F) << 2) | ((inbuf [2] & 0xC0) >> 6);
+        outbuf [3] =   inbuf [2] & 0x3F;
+        ctcopy = 4;
 
-		switch (ctremaining)
+        switch (ctremaining)
         {
             case 1:
                 ctcopy = 2;
@@ -157,28 +157,28 @@ static char encodingTable[64] = {
             case 2:
                 ctcopy = 3;
                 break;
-		}
+        }
 
-		for (int i = 0; i < ctcopy; i++)
-			[result appendFormat:@"%c", encodingTable[outbuf[i]]];
+        for (int i = 0; i < ctcopy; i++)
+            [result appendFormat:@"%c", encodingTable[outbuf[i]]];
 
-		for (int i = ctcopy; i < 4; i++)
-			[result appendString:@"="];
+        for (int i = ctcopy; i < 4; i++)
+            [result appendString:@"="];
 
-		ixtext += 3;
-		charsonline += 4;
+        ixtext += 3;
+        charsonline += 4;
 
-		if (lineLength > 0)
+        if (lineLength > 0)
         {
-			if (charsonline >= lineLength)
+            if (charsonline >= lineLength)
             {
-				charsonline = 0;
-				[result appendString:@"\n"];
-			}
-		}
-	}
+                charsonline = 0;
+                [result appendString:@"\n"];
+            }
+        }
+    }
 
-	return [NSString stringWithString:result];
+    return [NSString stringWithString:result];
 }
 
 @end

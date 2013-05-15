@@ -214,11 +214,11 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
 }
 
 - (DBRestClient *)restClient {
-	if (!restClient) {
-		restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-		restClient.delegate = self;
-	}
-	return restClient;
+    if (!restClient) {
+        restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+        restClient.delegate = self;
+    }
+    return restClient;
 }
 
 @end
