@@ -51,13 +51,7 @@
 	<string>NSApplication</string>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
-	<key>SUEnableSystemProfiling</key>
-	<true/>
-	<key>SUExpectsDSASignature</key>
-	<true/>
 	<key>SUFeedURL</key>
 	<string>http://grabbox.devsoft.no/appcastBeta.xml</string>
-	<key>SUPublicDSAKeyFile</key>
-	<string>dsa_pub.pem</string>
 </dict>
 </plist>
