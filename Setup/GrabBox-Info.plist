@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
+	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>GrabBox</string>
+	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>com.bitspatter.mac.grabbox2</string>
+	<string>com.bitspatter.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -20,38 +20,15 @@
 	<string>0.5</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLIconFile</key>
-			<string>GrabBox</string>
-			<key>CFBundleURLName</key>
-			<string>GrabBox/Dropbox Integration URL</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>db-<INSERT DROPBOX CONSUMER KEY></string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleVersion</key>
 	<string>0.5</string>
-	<key>LSApplicationCategoryType</key>
-	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
-	<key>LSUIElement</key>
-	<true/>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright 2013, bitSpatter</string>
+	<string>Copyright © 2013 bitSpatter. All rights reserved.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>SUEnableAutomaticChecks</key>
-	<true/>
-	<key>SUFeedURL</key>
-	<string>http://grabbox.devsoft.no/appcastBeta.xml</string>
 </dict>
 </plist>

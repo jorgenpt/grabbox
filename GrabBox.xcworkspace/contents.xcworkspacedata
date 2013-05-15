@@ -5,6 +5,6 @@
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:GrabBoxMenubar.xcodeproj">
+      location = "group:Setup.xcodeproj">
    </FileRef>
 </Workspace>
