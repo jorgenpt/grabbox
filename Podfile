@@ -5,4 +5,4 @@ xcodeproj 'GrabBox.xcodeproj'
 pod 'ObjectiveMetrics'
 pod 'SBJson'
 
-target 'GrabBox2 Appstore' do; end
+target 'GrabBox Appstore' do; end
