@@ -92,8 +92,6 @@
 		C55D24B713DF43FB003342D3 /* menuicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627E313B050CE0013A4B4 /* menuicon.png */; };
 		C55D24B813DF43FB003342D3 /* menuiconInverted.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627E413B050CE0013A4B4 /* menuiconInverted.png */; };
 		C55D24BA13DF4460003342D3 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F113B050DF0013A4B4 /* Credits.rtf */; };
-		C55D24BB13DF47DA003342D3 /* GrabBox.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627DE13B050CE0013A4B4 /* GrabBox.icns */; };
-		C55D24BC13DF47E4003342D3 /* GrabBox.icns in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627DE13B050CE0013A4B4 /* GrabBox.icns */; };
 		C561388F153868450035C08E /* DropboxAuthView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C561388E153868450035C08E /* DropboxAuthView.xib */; };
 		C5613890153868450035C08E /* DropboxAuthView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C561388E153868450035C08E /* DropboxAuthView.xib */; };
 		C561389215386B380035C08E /* API Request Authorization - Dropbox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C561389115386B380035C08E /* API Request Authorization - Dropbox.jpg */; };
@@ -252,7 +250,6 @@
 		8ED2911013A41A65005F10D3 /* GrowlerGrowl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowlerGrowl.m; sourceTree = "<group>"; };
 		8EF627D813B050980013A4B4 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 		8EF627DC13B050CE0013A4B4 /* dropbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropbox.png; sourceTree = "<group>"; };
-		8EF627DE13B050CE0013A4B4 /* GrabBox.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = GrabBox.icns; sourceTree = "<group>"; };
 		8EF627E313B050CE0013A4B4 /* menuicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuicon.png; sourceTree = "<group>"; };
 		8EF627E413B050CE0013A4B4 /* menuiconInverted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuiconInverted.png; sourceTree = "<group>"; };
 		8EF627F113B050DF0013A4B4 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
@@ -457,7 +454,6 @@
 			children = (
 				8EF627DC13B050CE0013A4B4 /* dropbox.png */,
 				8E1D613113E625AF00F44058 /* expired.png */,
-				8EF627DE13B050CE0013A4B4 /* GrabBox.icns */,
 				C52B002813D3D84600D39676 /* imgur-small.png */,
 				C57A2D0616AA752100B89D82 /* menuicon-animation-1.png */,
 				C57A2D0716AA752100B89D82 /* menuicon-animation-1@2x.png */,
@@ -632,7 +628,6 @@
 				8EF627E713B050CE0013A4B4 /* dropbox.png in Resources */,
 				8EF627EE13B050CE0013A4B4 /* menuicon.png in Resources */,
 				8EF627EF13B050CE0013A4B4 /* menuiconInverted.png in Resources */,
-				C55D24BC13DF47E4003342D3 /* GrabBox.icns in Resources */,
 				8EF627F513B050DF0013A4B4 /* Credits.rtf in Resources */,
 				8EF627F613B050DF0013A4B4 /* dsa_pub.pem in Resources */,
 				8EF627F813B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict in Resources */,
@@ -675,7 +670,6 @@
 				C55D24AC13DF43BE003342D3 /* Growl Registration Ticket.growlRegDict in Resources */,
 				C55D24AD13DF43BE003342D3 /* InfoPlist.strings in Resources */,
 				C55D24AE13DF43BE003342D3 /* MainMenu.xib in Resources */,
-				C55D24BB13DF47DA003342D3 /* GrabBox.icns in Resources */,
 				C55D24B113DF43FB003342D3 /* imgur-small.png in Resources */,
 				C55D24B313DF43FB003342D3 /* dropbox.png in Resources */,
 				C55D24B713DF43FB003342D3 /* menuicon.png in Resources */,
