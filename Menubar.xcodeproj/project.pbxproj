@@ -107,6 +107,8 @@
 		C59CFF0A166B050400D91C44 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF07166B04F200D91C44 /* SystemConfiguration.framework */; };
 		C59CFF4A166B447100D91C44 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF49166B447000D91C44 /* ServiceManagement.framework */; };
 		C59CFF4B166B448000D91C44 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF49166B447000D91C44 /* ServiceManagement.framework */; };
+		D507B10118EA680A0016EA80 /* DropboxAPIKey_Private.inl in Resources */ = {isa = PBXBuildFile; fileRef = D507B0FF18EA680A0016EA80 /* DropboxAPIKey_Private.inl */; };
+		D507B10218EA680A0016EA80 /* DropboxAPIKey_Private.inl in Resources */ = {isa = PBXBuildFile; fileRef = D507B0FF18EA680A0016EA80 /* DropboxAPIKey_Private.inl */; };
 		D5548CD317444B9A006D00B3 /* GrabBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D5548C9817444B9A006D00B3 /* GrabBoxAppDelegate.m */; };
 		D5548CD417444B9A006D00B3 /* GrabBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D5548C9817444B9A006D00B3 /* GrabBoxAppDelegate.m */; };
 		D5548CD517444B9A006D00B3 /* InformationGatherer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5548C9A17444B9A006D00B3 /* InformationGatherer.m */; };
@@ -259,6 +261,7 @@
 		C59CFF05166B04EA00D91C44 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = usr/lib/libz.1.dylib; sourceTree = SDKROOT; };
 		C59CFF07166B04F200D91C44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C59CFF49166B447000D91C44 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/ServiceManagement.framework; sourceTree = DEVELOPER_DIR; };
+		D507B0FF18EA680A0016EA80 /* DropboxAPIKey_Private.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DropboxAPIKey_Private.inl; sourceTree = "<group>"; };
 		D5548C92174448BC006D00B3 /* Menubar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Menubar.entitlements; sourceTree = "<group>"; };
 		D5548C9717444B9A006D00B3 /* GrabBoxAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabBoxAppDelegate.h; sourceTree = "<group>"; };
 		D5548C9817444B9A006D00B3 /* GrabBoxAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrabBoxAppDelegate.m; sourceTree = "<group>"; };
@@ -341,6 +344,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D507B0FE18EA680A0016EA80 /* Common */,
 				D5548C9B17444B9A006D00B3 /* Interface */,
 				D5548CA717444B9A006D00B3 /* Uploaders */,
 				D5548CB017444B9A006D00B3 /* Utilities */,
@@ -479,6 +483,14 @@
 			);
 			path = Images;
 			sourceTree = "<group>";
+		};
+		D507B0FE18EA680A0016EA80 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D507B0FF18EA680A0016EA80 /* DropboxAPIKey_Private.inl */,
+			);
+			path = Common;
+			sourceTree = SOURCE_ROOT;
 		};
 		D5548C9B17444B9A006D00B3 /* Interface */ = {
 			isa = PBXGroup;
@@ -625,6 +637,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				D507B10118EA680A0016EA80 /* DropboxAPIKey_Private.inl in Resources */,
 				8EF627D913B050980013A4B4 /* Defaults.plist in Resources */,
 				8EF627E713B050CE0013A4B4 /* dropbox.png in Resources */,
 				8EF627EE13B050CE0013A4B4 /* menuicon.png in Resources */,
@@ -696,6 +709,7 @@
 				C57A2D3F16AA7B3F00B89D82 /* menuiconUploaded.png in Resources */,
 				C57A2D4116AA7B3F00B89D82 /* menuiconUploaded@2x.png in Resources */,
 				C506DD6F16AB5A7800B18D25 /* WelcomeWindow.xib in Resources */,
+				D507B10218EA680A0016EA80 /* DropboxAPIKey_Private.inl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

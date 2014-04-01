@@ -8,12 +8,12 @@
 
 #import "AppDelegate.h"
 
+// If this fails, then you need to copy DropboxAPIKey_Private.inl.dist to DropboxAPIKey_Private.inl, and edit it.
+#import "../Common/DropboxAPIKey_Private.inl"
+
 #import <DropboxOSX/DropboxOSX.h>
 
 @implementation AppDelegate
-
-static NSString * const dropboxConsumerKey = @"<INSERT DROPBOX CONSUMER KEY>";
-static NSString * const dropboxConsumerSecret = @"<INSERT DROPBOX CONSUMER SECRET>";
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     DBSession *session = [[DBSession alloc] initWithAppKey:dropboxConsumerKey

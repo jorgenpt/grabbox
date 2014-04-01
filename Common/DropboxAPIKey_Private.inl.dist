@@ -1,0 +1,5 @@
+#error Missing Dropbox API key
+
+// Put your private API key here.
+static NSString * const dropboxConsumerKey = @"<INSERT DROPBOX CONSUMER KEY>";
+static NSString * const dropboxConsumerSecret = @"<INSERT DROPBOX CONSUMER SECRET>";

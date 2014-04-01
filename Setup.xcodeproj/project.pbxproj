@@ -23,6 +23,7 @@
 
 /* Begin PBXBuildFile section */
 		438FFB460EBC411AB778FECC /* libPods-GrabBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C82E04876DC443A3BD502C1F /* libPods-GrabBox.a */; };
+		D507B00918EA67EA0016EA80 /* DropboxAPIKey_Private.inl in Resources */ = {isa = PBXBuildFile; fileRef = D507B00718EA67EA0016EA80 /* DropboxAPIKey_Private.inl */; };
 		D5548C6A17443FD7006D00B3 /* GrabBoxMenubar.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = D5548C6717443FD0006D00B3 /* GrabBoxMenubar.app */; };
 		D5548D1417444D39006D00B3 /* GrabBox.icns in Resources */ = {isa = PBXBuildFile; fileRef = D5548D1317444D39006D00B3 /* GrabBox.icns */; };
 		D5548D1817444DAE006D00B3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5548D1617444DAE006D00B3 /* MainMenu.xib */; };
@@ -83,6 +84,7 @@
 /* Begin PBXFileReference section */
 		6E5E19ABEF1843DFA9F06106 /* Pods-GrabBox.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GrabBox.xcconfig"; path = "Pods/Pods-GrabBox.xcconfig"; sourceTree = SOURCE_ROOT; };
 		C82E04876DC443A3BD502C1F /* libPods-GrabBox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GrabBox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D507B00718EA67EA0016EA80 /* DropboxAPIKey_Private.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DropboxAPIKey_Private.inl; sourceTree = "<group>"; };
 		D5548C5F17443FCF006D00B3 /* Menubar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Menubar.xcodeproj; sourceTree = "<group>"; };
 		D5548C9517444A2A006D00B3 /* Setup.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Setup.entitlements; sourceTree = "<group>"; };
 		D5548D1317444D39006D00B3 /* GrabBox.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = GrabBox.icns; sourceTree = "<group>"; };
@@ -118,6 +120,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D507B00618EA67EA0016EA80 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D507B00718EA67EA0016EA80 /* DropboxAPIKey_Private.inl */,
+			);
+			path = Common;
+			sourceTree = SOURCE_ROOT;
+		};
 		D5548C6017443FCF006D00B3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +205,7 @@
 		D57A4A8417443DEF0054C719 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D507B00618EA67EA0016EA80 /* Common */,
 				D57A4A9017443DEF0054C719 /* AppDelegate.h */,
 				D57A4A9117443DEF0054C719 /* AppDelegate.m */,
 			);
@@ -305,6 +316,7 @@
 			files = (
 				D57A4A8917443DEF0054C719 /* InfoPlist.strings in Resources */,
 				D57A4A8F17443DEF0054C719 /* Credits.rtf in Resources */,
+				D507B00918EA67EA0016EA80 /* DropboxAPIKey_Private.inl in Resources */,
 				D5548D1417444D39006D00B3 /* GrabBox.icns in Resources */,
 				D5548D1817444DAE006D00B3 /* MainMenu.xib in Resources */,
 				D5C7B592179FAB98000116C7 /* progressbutton_active.png in Resources */,
