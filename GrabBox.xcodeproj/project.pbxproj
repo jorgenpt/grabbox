@@ -42,7 +42,6 @@
 		8EF627EE13B050CE0013A4B4 /* menuicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627E313B050CE0013A4B4 /* menuicon.png */; };
 		8EF627EF13B050CE0013A4B4 /* menuiconInverted.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627E413B050CE0013A4B4 /* menuiconInverted.png */; };
 		8EF627F513B050DF0013A4B4 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F113B050DF0013A4B4 /* Credits.rtf */; };
-		8EF627F613B050DF0013A4B4 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F213B050DF0013A4B4 /* dsa_pub.pem */; };
 		8EF627F813B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F413B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict */; };
 		8EF627FB13B0512A0013A4B4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F913B0512A0013A4B4 /* MainMenu.xib */; };
 		8EFFCB6E12D8F86C00201A9A /* NSString+URLParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB6D12D8F86C00201A9A /* NSString+URLParameters.m */; };
@@ -261,7 +260,6 @@
 		8EF627E313B050CE0013A4B4 /* menuicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuicon.png; sourceTree = "<group>"; };
 		8EF627E413B050CE0013A4B4 /* menuiconInverted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuiconInverted.png; sourceTree = "<group>"; };
 		8EF627F113B050DF0013A4B4 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
-		8EF627F213B050DF0013A4B4 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		8EF627F413B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Growl Registration Ticket.growlRegDict"; sourceTree = "<group>"; };
 		8EF627FA13B0512A0013A4B4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		8EFFCB6C12D8F86C00201A9A /* NSString+URLParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLParameters.h"; sourceTree = "<group>"; };
@@ -430,7 +428,6 @@
 				8EF627F113B050DF0013A4B4 /* Credits.rtf */,
 				8EF627D813B050980013A4B4 /* Defaults.plist */,
 				C561388E153868450035C08E /* DropboxAuthView.xib */,
-				8EF627F213B050DF0013A4B4 /* dsa_pub.pem */,
 				C536963816AA897900157D1F /* GrabBox-Info.plist */,
 				C536963916AA897900157D1F /* GrabBox-SU-Info.plist */,
 				8E63965713DF8131002EC0E0 /* GrabBox.entitlements */,
@@ -654,7 +651,6 @@
 				8EF627EF13B050CE0013A4B4 /* menuiconInverted.png in Resources */,
 				C55D24BC13DF47E4003342D3 /* GrabBox.icns in Resources */,
 				8EF627F513B050DF0013A4B4 /* Credits.rtf in Resources */,
-				8EF627F613B050DF0013A4B4 /* dsa_pub.pem in Resources */,
 				8EF627F813B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict in Resources */,
 				8EF627FB13B0512A0013A4B4 /* MainMenu.xib in Resources */,
 				C52B002913D3D84600D39676 /* imgur-small.png in Resources */,
