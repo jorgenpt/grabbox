@@ -14,7 +14,7 @@
 #import "DropboxUploader.h"
 
 // If this fails, then you need to copy DropboxAPIKey_Private.inl.dist to DropboxAPIKey_Private.inl, and edit it.
-#import "../Common/DropboxAPIKey_Private.inl"
+#import "../../Common/DropboxAPIKey_Private.inl"
 
 NSString * const GBUploaderUnavailableNotification = @"GBUploaderUnavailableNotification";
 NSString * const GBUploaderAvailableNotification = @"GBUploaderAvailableNotification";
