@@ -31,6 +31,9 @@
 		D57A4A8B17443DEF0054C719 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D57A4A8A17443DEF0054C719 /* main.m */; };
 		D57A4A8F17443DEF0054C719 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D57A4A8D17443DEF0054C719 /* Credits.rtf */; };
 		D57A4A9217443DEF0054C719 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D57A4A9117443DEF0054C719 /* AppDelegate.m */; };
+		D5C7B592179FAB98000116C7 /* progressbutton_active.png in Resources */ = {isa = PBXBuildFile; fileRef = D5C7B590179FAB98000116C7 /* progressbutton_active.png */; };
+		D5C7B593179FAB98000116C7 /* progressbutton_inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = D5C7B591179FAB98000116C7 /* progressbutton_inactive.png */; };
+		D5C7B597179FAFBB000116C7 /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C7B596179FAFBB000116C7 /* DropboxOSX.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +99,9 @@
 		D57A4A8E17443DEF0054C719 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		D57A4A9017443DEF0054C719 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D57A4A9117443DEF0054C719 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D5C7B590179FAB98000116C7 /* progressbutton_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progressbutton_active.png; sourceTree = "<group>"; };
+		D5C7B591179FAB98000116C7 /* progressbutton_inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progressbutton_inactive.png; sourceTree = "<group>"; };
+		D5C7B596179FAFBB000116C7 /* DropboxOSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxOSX.framework; path = Frameworks/DropboxOSX.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5C7B597179FAFBB000116C7 /* DropboxOSX.framework in Frameworks */,
 				D57A4A7F17443DEF0054C719 /* Cocoa.framework in Frameworks */,
 				438FFB460EBC411AB778FECC /* libPods-GrabBox.a in Frameworks */,
 			);
@@ -123,6 +130,8 @@
 		D5548D1217444D39006D00B3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D5C7B590179FAB98000116C7 /* progressbutton_active.png */,
+				D5C7B591179FAB98000116C7 /* progressbutton_inactive.png */,
 				D5548D1317444D39006D00B3 /* GrabBox.icns */,
 			);
 			path = Images;
@@ -165,6 +174,7 @@
 		D57A4A7D17443DEF0054C719 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D5C7B598179FAFC6000116C7 /* Linked Frameworks */,
 				D57A4A7E17443DEF0054C719 /* Cocoa.framework */,
 				D57A4A8017443DEF0054C719 /* Other Frameworks */,
 				C82E04876DC443A3BD502C1F /* libPods-GrabBox.a */,
@@ -204,6 +214,14 @@
 			);
 			name = Resources;
 			path = Setup/Resources;
+			sourceTree = "<group>";
+		};
+		D5C7B598179FAFC6000116C7 /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D5C7B596179FAFBB000116C7 /* DropboxOSX.framework */,
+			);
+			name = "Linked Frameworks";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +307,8 @@
 				D57A4A8F17443DEF0054C719 /* Credits.rtf in Resources */,
 				D5548D1417444D39006D00B3 /* GrabBox.icns in Resources */,
 				D5548D1817444DAE006D00B3 /* MainMenu.xib in Resources */,
+				D5C7B592179FAB98000116C7 /* progressbutton_active.png in Resources */,
+				D5C7B593179FAB98000116C7 /* progressbutton_inactive.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +497,10 @@
 			baseConfigurationReference = 6E5E19ABEF1843DFA9F06106 /* Pods-GrabBox.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Setup/Resources/GrabBox-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -489,6 +513,10 @@
 			baseConfigurationReference = 6E5E19ABEF1843DFA9F06106 /* Pods-GrabBox.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Setup/Resources/GrabBox-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
