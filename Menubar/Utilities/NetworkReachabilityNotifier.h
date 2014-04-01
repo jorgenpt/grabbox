@@ -3,7 +3,7 @@
 //  GrabBox
 //
 //  Created by Jørgen P. Tjernø on 6/13/11.
-//  Copyright 2011 devSoft. All rights reserved.
+//  Copyright (C) 2014 Jørgen P. Tjernø. Licensed under GPLv2, see LICENSE in the project root for more info.
 //
 
 #import <Foundation/Foundation.h>

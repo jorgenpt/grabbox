@@ -3,7 +3,7 @@
 //  GrabBox
 //
 //  Created by Jørgen Tjernø on 5/15/13.
-//  Copyright (c) 2013 bitSpatter. All rights reserved.
+//  Copyright (C) 2014 Jørgen P. Tjernø. Licensed under GPLv2, see LICENSE in the project root for more info.
 //
 
 #import "AppDelegate.h"

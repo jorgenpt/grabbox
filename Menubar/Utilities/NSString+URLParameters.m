@@ -3,7 +3,7 @@
 //  PublishBox
 //
 //  Created by Jørgen P. Tjernø on 12/6/10.
-//  Copyright 2010 devSoft. All rights reserved.
+//  Copyright (C) 2014 Jørgen P. Tjernø. Licensed under GPLv2, see LICENSE in the project root for more info.
 //
 
 #import "NSString+URLParameters.h"

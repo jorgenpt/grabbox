@@ -3,7 +3,7 @@
 //  GrabBox2
 //
 //  Created by Jørgen Tjernø on 7/17/11.
-//  Copyright 2011 Lookout, Inc. All rights reserved.
+//  Copyright (C) 2014 Jørgen P. Tjernø. Licensed under GPLv2, see LICENSE in the project root for more info.
 //
 
 #import <Foundation/Foundation.h>
