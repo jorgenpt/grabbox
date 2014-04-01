@@ -16,3 +16,6 @@ webpage/releasenotes*.html
 
 # CocoaPods
 /Pods/
+
+# This is an API key from Dropbox
+/Common/DropboxAPIKey_Private.inl

@@ -6,4 +6,8 @@ pod 'ASIHTTPRequest'
 pod 'ObjectiveMetrics'
 pod 'SBJson'
 
-target 'GrabBox Appstore' do; end
+target 'GrabBox Appstore' do
+  pod 'ASIHTTPRequest'
+  pod 'ObjectiveMetrics'
+  pod 'SBJson'
+end

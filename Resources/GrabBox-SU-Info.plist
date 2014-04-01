@@ -31,7 +31,7 @@
 			<string>GrabBox/Dropbox Integration URL</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>db-<INSERT DROPBOX CONSUMER KEY></string>
+				<string>db-jok6n04b2kprh4t</string>
 			</array>
 		</dict>
 	</array>
