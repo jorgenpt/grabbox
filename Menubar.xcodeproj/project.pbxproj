@@ -209,7 +209,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -400,7 +399,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
-				01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */,
 				4B86D89894A1414BB014C0C1 /* Pods-GrabBoxMenubar.xcconfig */,
 				5B4BCD9EED4545FAB592A6AA /* Pods-GrabBoxMenubar Appstore.xcconfig */,
 			);
@@ -609,7 +607,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Menubar" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -877,8 +875,8 @@
 		8E256850129C5B5100DE3ACD /* Debug for distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Menubar/Resources/Menubar.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application: Joergen Pedersen Tjernoe";
 				COPY_PHASE_STRIP = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Menubar/Menubar_Prefix.pch;
@@ -973,8 +971,8 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Menubar/Resources/Menubar.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application: Joergen Pedersen Tjernoe";
 				COPY_PHASE_STRIP = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Menubar/Menubar_Prefix.pch;
@@ -995,8 +993,8 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Menubar/Resources/Menubar.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application: Joergen Pedersen Tjernoe";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Menubar/Menubar_Prefix.pch;

@@ -16,8 +16,6 @@
 #import "DBAccountInfo+PublicAppURL.h"
 #import "NSString+URLParameters.h"
 
-static NSString * const dropboxPublicPrefix = @"/Public/";
-
 @interface DropboxUploader ()
 
 @property (nonatomic, retain) NSString* destFilename;
