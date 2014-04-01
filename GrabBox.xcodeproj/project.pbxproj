@@ -7,17 +7,6 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		8E3FEC6A13E6339C00A36E2D /* Update Expiration */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 8E3FEC6E13E6339C00A36E2D /* Build configuration list for PBXAggregateTarget "Update Expiration" */;
-			buildPhases = (
-				8E3FEC6D13E6339C00A36E2D /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = "Update Expiration";
-			productName = Distribution;
-		};
 		8E7B689911EBD8BC00112165 /* Distribution */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 8E7B68AC11EBD8D500112165 /* Build configuration list for PBXAggregateTarget "Distribution" */;
@@ -37,10 +26,6 @@
 		713E2E7097F7438B8B218C10 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAD807E41F7492599A1858D /* libPods.a */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
-		8E1D612E13E6235D00F44058 /* ExpirationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E1D612D13E6235D00F44058 /* ExpirationChecker.m */; };
-		8E1D612F13E6235D00F44058 /* ExpirationChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E1D612D13E6235D00F44058 /* ExpirationChecker.m */; };
-		8E1D613213E625AF00F44058 /* expired.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1D613113E625AF00F44058 /* expired.png */; };
-		8E1D613313E625AF00F44058 /* expired.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E1D613113E625AF00F44058 /* expired.png */; };
 		8E368D1613A5F51800EB0D90 /* NetworkReachabilityNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E368D1513A5F51800EB0D90 /* NetworkReachabilityNotifier.m */; };
 		8E4A50A011E9155500A0A743 /* InformationGatherer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4A509F11E9155500A0A743 /* InformationGatherer.m */; };
 		8E51825911E7CE3A00D15CAB /* FSRefConversions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E51825811E7CE3A00D15CAB /* FSRefConversions.m */; };
@@ -171,13 +156,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8E3FEC7213E6340800A36E2D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8E3FEC6A13E6339C00A36E2D;
-			remoteInfo = "Update Expiration";
-		};
 		8E7B689C11EBD8C000112165 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -253,8 +231,6 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107320486CEB800E47090 /* GrabBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E1D612D13E6235D00F44058 /* ExpirationChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpirationChecker.m; sourceTree = "<group>"; };
-		8E1D613113E625AF00F44058 /* expired.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expired.png; sourceTree = "<group>"; };
 		8E368D1413A5F51800EB0D90 /* NetworkReachabilityNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkReachabilityNotifier.h; sourceTree = "<group>"; };
 		8E368D1513A5F51800EB0D90 /* NetworkReachabilityNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkReachabilityNotifier.m; sourceTree = "<group>"; };
 		8E4A509E11E9155500A0A743 /* InformationGatherer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationGatherer.h; sourceTree = "<group>"; };
@@ -481,7 +457,6 @@
 			isa = PBXGroup;
 			children = (
 				8EF627DC13B050CE0013A4B4 /* dropbox.png */,
-				8E1D613113E625AF00F44058 /* expired.png */,
 				8EF627DE13B050CE0013A4B4 /* GrabBox.icns */,
 				C52B002813D3D84600D39676 /* imgur-small.png */,
 				C57A2D0616AA752100B89D82 /* menuicon-animation-1.png */,
@@ -569,7 +544,6 @@
 				8EFFCB9612D8F98300201A9A /* NSData+Base64.m */,
 				8E368D1413A5F51800EB0D90 /* NetworkReachabilityNotifier.h */,
 				8E368D1513A5F51800EB0D90 /* NetworkReachabilityNotifier.m */,
-				8E1D612D13E6235D00F44058 /* ExpirationChecker.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -599,7 +573,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				8E3FEC7313E6340800A36E2D /* PBXTargetDependency */,
 			);
 			name = GrabBox;
 			productInstallPath = "$(HOME)/Applications";
@@ -655,7 +628,6 @@
 				8D1107260486CEB800E47090 /* GrabBox */,
 				C55D245613DF392C003342D3 /* GrabBox Appstore */,
 				8E7B689911EBD8BC00112165 /* Distribution */,
-				8E3FEC6A13E6339C00A36E2D /* Update Expiration */,
 			);
 		};
 /* End PBXProject section */
@@ -686,7 +658,6 @@
 				8EF627F813B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict in Resources */,
 				8EF627FB13B0512A0013A4B4 /* MainMenu.xib in Resources */,
 				C52B002913D3D84600D39676 /* imgur-small.png in Resources */,
-				8E1D613213E625AF00F44058 /* expired.png in Resources */,
 				C561388F153868450035C08E /* DropboxAuthView.xib in Resources */,
 				C561389215386B380035C08E /* API Request Authorization - Dropbox.jpg in Resources */,
 				C561389515386C280035C08E /* WelcomeView.xib in Resources */,
@@ -728,7 +699,6 @@
 				C55D24B313DF43FB003342D3 /* dropbox.png in Resources */,
 				C55D24B713DF43FB003342D3 /* menuicon.png in Resources */,
 				C55D24B813DF43FB003342D3 /* menuiconInverted.png in Resources */,
-				8E1D613313E625AF00F44058 /* expired.png in Resources */,
 				C5613890153868450035C08E /* DropboxAuthView.xib in Resources */,
 				C561389315386B380035C08E /* API Request Authorization - Dropbox.jpg in Resources */,
 				C561389615386C280035C08E /* WelcomeView.xib in Resources */,
@@ -773,20 +743,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 		};
-		8E3FEC6D13E6339C00A36E2D /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "set -o errexit\n\ntouch $SRCROOT/Utilities/ExpirationChecker.m";
-			showEnvVarsInLog = 0;
-		};
 		8E7B68A111EBD8CE00112165 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -824,7 +780,6 @@
 				8EC402FE13BFFAF00001B66E /* DropboxUploader.m in Sources */,
 				8EC402FF13BFFAF00001B66E /* Uploader.m in Sources */,
 				C52B002113D3B8A900D39676 /* UploaderFactory.m in Sources */,
-				8E1D612E13E6235D00F44058 /* ExpirationChecker.m in Sources */,
 				C561389A15389D0A0035C08E /* WelcomeViewController.m in Sources */,
 				C56138A11538A1980035C08E /* DropboxAuthViewController.m in Sources */,
 				C5A7894316787A350029A618 /* DBAccountInfo+PublicAppURL.m in Sources */,
@@ -852,7 +807,6 @@
 				C55D248B13DF39E6003342D3 /* NSString+URLParameters.m in Sources */,
 				C55D248C13DF39E6003342D3 /* NSData+Base64.m in Sources */,
 				C55D248D13DF39E6003342D3 /* NetworkReachabilityNotifier.m in Sources */,
-				8E1D612F13E6235D00F44058 /* ExpirationChecker.m in Sources */,
 				C561389B15389D0A0035C08E /* WelcomeViewController.m in Sources */,
 				C56138A21538A1980035C08E /* DropboxAuthViewController.m in Sources */,
 				C5A7894416787A350029A618 /* DBAccountInfo+PublicAppURL.m in Sources */,
@@ -863,11 +817,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8E3FEC7313E6340800A36E2D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8E3FEC6A13E6339C00A36E2D /* Update Expiration */;
-			targetProxy = 8E3FEC7213E6340800A36E2D /* PBXContainerItemProxy */;
-		};
 		8E7B689D11EBD8C000112165 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8D1107260486CEB800E47090 /* GrabBox */;
@@ -917,7 +866,6 @@
 			baseConfigurationReference = 01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -941,30 +889,6 @@
 				PRODUCT_NAME = Distribution;
 			};
 			name = "Debug for distribution";
-		};
-		8E3FEC6F13E6339C00A36E2D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				PRODUCT_NAME = "Update Expiration";
-			};
-			name = Debug;
-		};
-		8E3FEC7013E6339C00A36E2D /* Debug for distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				PRODUCT_NAME = "Update Expiration";
-			};
-			name = "Debug for distribution";
-		};
-		8E3FEC7113E6339C00A36E2D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				PRODUCT_NAME = "Update Expiration";
-			};
-			name = Release;
 		};
 		8E7B689A11EBD8BD00112165 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -993,7 +917,6 @@
 			baseConfigurationReference = 01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1012,7 +935,6 @@
 			baseConfigurationReference = 01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1133,16 +1055,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8E3FEC6E13E6339C00A36E2D /* Build configuration list for PBXAggregateTarget "Update Expiration" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8E3FEC6F13E6339C00A36E2D /* Debug */,
-				8E3FEC7013E6339C00A36E2D /* Debug for distribution */,
-				8E3FEC7113E6339C00A36E2D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		8E7B68AC11EBD8D500112165 /* Build configuration list for PBXAggregateTarget "Distribution" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

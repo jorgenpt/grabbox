@@ -245,7 +245,7 @@
 		C59CFF3B166B3CB500D91C44 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = GrabBoxHelper/GrabBoxHelper.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GrabBoxHelper/GrabBoxHelper-Prefix.pch";
@@ -258,7 +258,7 @@
 		C59CFF3C166B3CB500D91C44 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = GrabBoxHelper/GrabBoxHelper.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GrabBoxHelper/GrabBoxHelper-Prefix.pch";

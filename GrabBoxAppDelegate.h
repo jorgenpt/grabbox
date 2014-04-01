@@ -16,7 +16,6 @@
 
 @interface GrabBoxAppDelegate : NSObject
 
-@property (assign) IBOutlet NSWindow* betaExpiredWindow;
 @property (assign) IBOutlet NSMenuItem *checkForUpdatesMenuItem;
 @property (assign) IBOutlet NSMenuItem *checkForUpdatesMenubarItem;
 @property (assign) IBOutlet Menubar* menubar;

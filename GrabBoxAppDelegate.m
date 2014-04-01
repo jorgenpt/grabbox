@@ -167,15 +167,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 {
     [self uploaderUnavailable:nil];
 
-    if (expired())
-    {
-        [self.betaExpiredWindow makeKeyAndOrderFront:self];
-        [NSApp activateIgnoringOtherApps:YES];
-    }
-    else
-    {
-        [[UploaderFactory defaultFactory] loadSettings];
-    }
+    [[UploaderFactory defaultFactory] loadSettings];
 }
 
 - (BOOL) isPaused
@@ -339,14 +331,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
     free(templateBytes);
 
     return filename;
-}
-
-- (void)windowWillClose:(NSNotification *)notification
-{
-    if ([notification object] == self.betaExpiredWindow)
-    {
-        [NSApp terminate:self];
-    }
 }
 
 @end
