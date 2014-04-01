@@ -24,6 +24,7 @@
 /* Begin PBXBuildFile section */
 		438FFB460EBC411AB778FECC /* libPods-GrabBox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C82E04876DC443A3BD502C1F /* libPods-GrabBox.a */; };
 		D507B00918EA67EA0016EA80 /* DropboxAPIKey_Private.inl in Resources */ = {isa = PBXBuildFile; fileRef = D507B00718EA67EA0016EA80 /* DropboxAPIKey_Private.inl */; };
+		D507B11118EA74830016EA80 /* DropboxOSX.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D5C7B596179FAFBB000116C7 /* DropboxOSX.framework */; };
 		D5548C6A17443FD7006D00B3 /* GrabBoxMenubar.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = D5548C6717443FD0006D00B3 /* GrabBoxMenubar.app */; };
 		D5548D1417444D39006D00B3 /* GrabBox.icns in Resources */ = {isa = PBXBuildFile; fileRef = D5548D1317444D39006D00B3 /* GrabBox.icns */; };
 		D5548D1817444DAE006D00B3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5548D1617444DAE006D00B3 /* MainMenu.xib */; };
@@ -69,6 +70,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		D507B11018EA746B0016EA80 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D507B11118EA74830016EA80 /* DropboxOSX.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D57A4A9C17443F0C0054C719 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -248,6 +259,7 @@
 				D57A4A9C17443F0C0054C719 /* CopyFiles */,
 				D57A4A7917443DEF0054C719 /* Resources */,
 				06044A78EE6D4170B45BA854 /* Copy Pods Resources */,
+				D507B11018EA746B0016EA80 /* CopyFiles */,
 			);
 			buildRules = (
 			);
