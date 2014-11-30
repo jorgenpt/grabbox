@@ -73,13 +73,13 @@
 {
     [super upload];
 
-    NSString* shortName = [NSString stringWithFormat:@"%@.%@",
-                           [Uploader randomStringOfLength:8], [srcFile pathExtension]];
+    NSString* fileName = [NSString stringWithFormat:@"%@ %@.%@",
+                           [[srcFile lastPathComponent] stringByDeletingPathExtension], [Uploader randomStringOfLength:8], [srcFile pathExtension]];
 
-    [self setDestFilename:shortName];
+    [self setDestFilename:fileName];
 
-    DLog(@"Trying upload of '%@', destination '%@'", srcPath, shortName);
-    [[self restClient] loadMetadata:[@"/" stringByAppendingString:shortName]];
+    DLog(@"Trying upload of '%@', destination '%@'", srcPath, fileName);
+    [[self restClient] loadMetadata:[@"/" stringByAppendingString:fileName]];
 }
 
 #pragma mark DBRestClientDelegate callbacks
