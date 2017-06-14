@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "BF67289B14BAC3FA20A076FB39064E48729D49B8",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "43FBA336F3B62D2C9024C2FD511BB277A875DA38" : 9223372036854775807,
+    "BF67289B14BAC3FA20A076FB39064E48729D49B8" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A61887FC-5D5B-4E73-A784-7AFEFED58B51",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "43FBA336F3B62D2C9024C2FD511BB277A875DA38" : "GrabBox\/Utilities\/Growler\/",
+    "BF67289B14BAC3FA20A076FB39064E48729D49B8" : "GrabBox\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "GrabBox",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "GrabBox.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:jorgenpt\/Growler.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "43FBA336F3B62D2C9024C2FD511BB277A875DA38"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:jorgenpt\/grabbox.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BF67289B14BAC3FA20A076FB39064E48729D49B8"
+    }
+  ]
+}

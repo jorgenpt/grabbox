@@ -3,9 +3,11 @@ use_frameworks!
 
 project 'GrabBox.xcodeproj'
 
-pod 'ASIHTTPRequest'
-pod 'SBJson'
-pod 'ObjectiveDropboxOfficial'
+target 'GrabBox' do
+    pod 'ASIHTTPRequest'
+    pod 'SBJson'
+    pod 'ObjectiveDropboxOfficial'
+end
 
 target 'GrabBox Appstore' do
   pod 'ASIHTTPRequest'

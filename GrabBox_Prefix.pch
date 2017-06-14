@@ -5,7 +5,7 @@
 #ifdef __OBJC__
 
 #   import <Cocoa/Cocoa.h>
-#   import <DropboxOSX/DropboxOSX.h>
+#   import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 
 #   define LineLog(fmt, ...) do { \
         NSLog((@"%s: " fmt), __PRETTY_FUNCTION__, ##__VA_ARGS__); \
