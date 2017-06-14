@@ -31,6 +31,7 @@ NSString * const animationFrameFormat = @"menuicon-animation-%i";
         self.animationLoading = dispatch_group_create();
         self.animationFrames = animationFrames;
         self.uploadedImage = self.defaultImage = [NSImage imageNamed:@"menuicon"];
+        self.defaultImage.template = YES;
 
         dispatch_group_async(self.animationLoading, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
             for (int i = 1; i <= numAnimationFrames; ++i) {
@@ -59,7 +60,7 @@ NSString * const animationFrameFormat = @"menuicon-animation-%i";
     [[self item] setHighlightMode:YES];
     [[self item] setEnabled:YES];
     [[self item] setImage:self.defaultImage];
-    [[self item] setAlternateImage:[NSImage imageNamed:@"menuiconInverted"]];
+    //[[self item] setAlternateImage:[NSImage imageNamed:@"menuiconInverted"]];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(uploadStarted:)
