@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A61887FC-5D5B-4E73-A784-7AFEFED58B51</string>
+	<key>IDESourceControlProjectName</key>
+	<string>GrabBox</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BF67289B14BAC3FA20A076FB39064E48729D49B8</key>
+		<string>github.com:jorgenpt/grabbox.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>GrabBox.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BF67289B14BAC3FA20A076FB39064E48729D49B8</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:jorgenpt/grabbox.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BF67289B14BAC3FA20A076FB39064E48729D49B8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BF67289B14BAC3FA20A076FB39064E48729D49B8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>GrabBox</string>
+		</dict>
+	</array>
+</dict>
+</plist>
