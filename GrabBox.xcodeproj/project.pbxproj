@@ -49,10 +49,6 @@
 		C506DD6C16AB580E00B18D25 /* WelcomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C506DD6A16AB580E00B18D25 /* WelcomeWindowController.m */; };
 		C506DD6E16AB5A7800B18D25 /* WelcomeWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C506DD6D16AB5A7800B18D25 /* WelcomeWindow.xib */; };
 		C506DD6F16AB5A7800B18D25 /* WelcomeWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C506DD6D16AB5A7800B18D25 /* WelcomeWindow.xib */; };
-		C50E57B8150D6C1C005F1ABC /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
-		C50E57B9150D6C39005F1ABC /* DropboxOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
-		C50E57BF150D731F005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
-		C50E57C1150D7338005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */; };
 		C52B002113D3B8A900D39676 /* UploaderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C52B002013D3B8A900D39676 /* UploaderFactory.m */; };
 		C52B002913D3D84600D39676 /* imgur-small.png in Resources */ = {isa = PBXBuildFile; fileRef = C52B002813D3D84600D39676 /* imgur-small.png */; };
 		C55D245A13DF392C003342D3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D245913DF392C003342D3 /* Cocoa.framework */; };
@@ -75,9 +71,9 @@
 		C55D249D13DF3CAC003342D3 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; };
 		C55D24A013DF3CB3003342D3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D245913DF392C003342D3 /* Cocoa.framework */; };
 		C55D24A213DF3DEE003342D3 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C55D24A113DF3DEE003342D3 /* Sparkle.framework */; };
-		C55D24A313DF3E09003342D3 /* Sparkle.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D24A113DF3DEE003342D3 /* Sparkle.framework */; };
-		C55D24A513DF3E0F003342D3 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; };
-		C55D24AA13DF42E4003342D3 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; };
+		C55D24A313DF3E09003342D3 /* Sparkle.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D24A113DF3DEE003342D3 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		C55D24A513DF3E0F003342D3 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		C55D24AA13DF42E4003342D3 /* Growl.framework in Copy Supporting Frameworks */ = {isa = PBXBuildFile; fileRef = C55D249213DF3A62003342D3 /* Growl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		C55D24AB13DF43BE003342D3 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627D813B050980013A4B4 /* Defaults.plist */; };
 		C55D24AC13DF43BE003342D3 /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F413B050DF0013A4B4 /* Growl Registration Ticket.growlRegDict */; };
 		C55D24AD13DF43BE003342D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -175,7 +171,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C50E57BF150D731F005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */,
 				C55D24A313DF3E09003342D3 /* Sparkle.framework in Copy Supporting Frameworks */,
 				C55D24A513DF3E0F003342D3 /* Growl.framework in Copy Supporting Frameworks */,
 			);
@@ -188,7 +183,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C50E57C1150D7338005F1ABC /* DropboxOSX.framework in Copy Supporting Frameworks */,
 				C55D24AA13DF42E4003342D3 /* Growl.framework in Copy Supporting Frameworks */,
 			);
 			name = "Copy Supporting Frameworks";
@@ -266,7 +260,6 @@
 		C506DD6916AB580E00B18D25 /* WelcomeWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeWindowController.h; sourceTree = "<group>"; };
 		C506DD6A16AB580E00B18D25 /* WelcomeWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeWindowController.m; sourceTree = "<group>"; };
 		C506DD6D16AB5A7800B18D25 /* WelcomeWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeWindow.xib; sourceTree = "<group>"; };
-		C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxOSX.framework; sourceTree = "<group>"; };
 		C52B001F13D3B8A900D39676 /* UploaderFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploaderFactory.h; sourceTree = "<group>"; };
 		C52B002013D3B8A900D39676 /* UploaderFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploaderFactory.m; sourceTree = "<group>"; };
 		C52B002813D3D84600D39676 /* imgur-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imgur-small.png"; sourceTree = "<group>"; };
@@ -321,7 +314,6 @@
 				C59CFF4B166B448000D91C44 /* ServiceManagement.framework in Frameworks */,
 				C55D249D13DF3CAC003342D3 /* Growl.framework in Frameworks */,
 				C55D24A013DF3CB3003342D3 /* Cocoa.framework in Frameworks */,
-				C50E57B8150D6C1C005F1ABC /* DropboxOSX.framework in Frameworks */,
 				C55D24A213DF3DEE003342D3 /* Sparkle.framework in Frameworks */,
 				C59CFF06166B04EA00D91C44 /* libz.1.dylib in Frameworks */,
 			);
@@ -335,7 +327,6 @@
 				C59CFF4A166B447100D91C44 /* ServiceManagement.framework in Frameworks */,
 				C55D249313DF3A62003342D3 /* Growl.framework in Frameworks */,
 				C55D245A13DF392C003342D3 /* Cocoa.framework in Frameworks */,
-				C50E57B9150D6C39005F1ABC /* DropboxOSX.framework in Frameworks */,
 				C59CFF09166B050200D91C44 /* libz.1.dylib in Frameworks */,
 				AC2A486479A2A9D88C076095 /* Pods_GrabBox_Appstore.framework in Frameworks */,
 			);
@@ -362,7 +353,6 @@
 			isa = PBXGroup;
 			children = (
 				C55D245913DF392C003342D3 /* Cocoa.framework */,
-				C50E57B7150D6C1C005F1ABC /* DropboxOSX.framework */,
 				C55D249213DF3A62003342D3 /* Growl.framework */,
 				C59CFF05166B04EA00D91C44 /* libz.1.dylib */,
 				C59CFF49166B447000D91C44 /* ServiceManagement.framework */,
@@ -393,7 +383,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		29B97314FDCFA39411CA2CEA = {
+		29B97314FDCFA39411CA2CEA /* GrabBox */ = {
 			isa = PBXGroup;
 			children = (
 				C59CFF3D166B3CB500D91C44 /* GrabBoxHelper.xcodeproj */,
@@ -608,7 +598,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0830;
 				TargetAttributes = {
 					8D1107260486CEB800E47090 = {
 						DevelopmentTeam = X35L5R6VQN;
@@ -623,7 +613,7 @@
 				en,
 				English,
 			);
-			mainGroup = 29B97314FDCFA39411CA2CEA;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* GrabBox */;
 			productRefGroup = 19C28FACFE9D520D11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -884,15 +874,33 @@
 		8E256850129C5B5100DE3ACD /* Debug for distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Joergen Pedersen Tjernoe";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = GrabBox_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
 			name = "Debug for distribution";
@@ -910,6 +918,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/GrabBox-SU-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitspatter.mac.grabbox2;
 				PRODUCT_NAME = GrabBox;
 			};
 			name = "Debug for distribution";
@@ -960,6 +969,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/GrabBox-SU-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitspatter.mac.grabbox2;
 				PRODUCT_NAME = GrabBox;
 			};
 			name = Debug;
@@ -977,6 +987,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/GrabBox-SU-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitspatter.mac.grabbox2;
 				PRODUCT_NAME = GrabBox;
 			};
 			name = Release;
@@ -984,18 +995,35 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Joergen Pedersen Tjernoe";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = GrabBox_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"NO_LICENSE=1",
 				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -1004,14 +1032,30 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Joergen Pedersen Tjernoe";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = GrabBox_Prefix.pch;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -1035,6 +1079,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/GrabBox-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitspatter.grabbox2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1058,6 +1103,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/GrabBox-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitspatter.grabbox2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Debug for distribution";
@@ -1079,6 +1125,7 @@
 					"$(GCC_PREPROCESSOR_DEFINITIONS)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/GrabBox-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitspatter.grabbox2;
 				PRODUCT_NAME = GrabBox;
 			};
 			name = Release;
