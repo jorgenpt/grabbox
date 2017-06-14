@@ -1,29 +1,30 @@
 PODS:
-  - ASIHTTPRequest (1.8.1):
-    - ASIHTTPRequest/ASIWebPageRequest
-    - ASIHTTPRequest/CloudFiles
+  - ASIHTTPRequest (1.8.2):
+    - ASIHTTPRequest/ASIWebPageRequest (= 1.8.2)
+    - ASIHTTPRequest/CloudFiles (= 1.8.2)
+    - ASIHTTPRequest/Core (= 1.8.2)
+    - ASIHTTPRequest/S3 (= 1.8.2)
+  - ASIHTTPRequest/ASIWebPageRequest (1.8.2):
     - ASIHTTPRequest/Core
-    - ASIHTTPRequest/S3
-  - ASIHTTPRequest/ASIWebPageRequest (1.8.1):
+  - ASIHTTPRequest/CloudFiles (1.8.2):
     - ASIHTTPRequest/Core
-  - ASIHTTPRequest/CloudFiles (1.8.1):
-    - ASIHTTPRequest/Core
-  - ASIHTTPRequest/Core (1.8.1):
+  - ASIHTTPRequest/Core (1.8.2):
     - Reachability
-  - ASIHTTPRequest/S3 (1.8.1):
+  - ASIHTTPRequest/S3 (1.8.2):
     - ASIHTTPRequest/Core
-  - ObjectiveMetrics (2.1.1):
-    - SBJson (~> 3.1.1)
-  - SBJson (3.1.1)
+  - ObjectiveDropboxOfficial (3.1.2)
+  - SBJson (5.0.0)
 
 DEPENDENCIES:
   - ASIHTTPRequest
-  - ObjectiveMetrics
+  - ObjectiveDropboxOfficial
   - SBJson
 
 SPEC CHECKSUMS:
-  ASIHTTPRequest: 34f0d02cc3e31e87591c8d9bda78697a29b92035
-  ObjectiveMetrics: 6b5197af43a8b298a0a178b1192ceb31e8e4509a
-  SBJson: ecac4323aab930c85e2ceb6b795533b97e3c1cbf
+  ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
+  ObjectiveDropboxOfficial: 9a147eccd987723f6b25b6923f57a5b3fcd3f4bd
+  SBJson: 73c848dc34be51fda282fab12bda6c426f5ead08
 
-COCOAPODS: 0.31.0
+PODFILE CHECKSUM: 7eaed373aa28fbe35d4975b93e9c8cb58e378bda
+
+COCOAPODS: 1.2.1

@@ -23,7 +23,6 @@
 
 /* Begin PBXBuildFile section */
 		256AC3DA0F4B6AC300CF3369 /* GrabBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* GrabBoxAppDelegate.m */; };
-		713E2E7097F7438B8B218C10 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAD807E41F7492599A1858D /* libPods.a */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8E368D1613A5F51800EB0D90 /* NetworkReachabilityNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E368D1513A5F51800EB0D90 /* NetworkReachabilityNotifier.m */; };
@@ -45,6 +44,7 @@
 		8EF627FB13B0512A0013A4B4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EF627F913B0512A0013A4B4 /* MainMenu.xib */; };
 		8EFFCB6E12D8F86C00201A9A /* NSString+URLParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB6D12D8F86C00201A9A /* NSString+URLParameters.m */; };
 		8EFFCB9712D8F98300201A9A /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFFCB9612D8F98300201A9A /* NSData+Base64.m */; };
+		AC2A486479A2A9D88C076095 /* Pods_GrabBox_Appstore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E81CB4E7C8F9CA77646E99D /* Pods_GrabBox_Appstore.framework */; };
 		C506DD6B16AB580E00B18D25 /* WelcomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C506DD6A16AB580E00B18D25 /* WelcomeWindowController.m */; };
 		C506DD6C16AB580E00B18D25 /* WelcomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C506DD6A16AB580E00B18D25 /* WelcomeWindowController.m */; };
 		C506DD6E16AB5A7800B18D25 /* WelcomeWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C506DD6D16AB5A7800B18D25 /* WelcomeWindow.xib */; };
@@ -139,7 +139,6 @@
 		C57A2D3F16AA7B3F00B89D82 /* menuiconUploaded.png in Resources */ = {isa = PBXBuildFile; fileRef = C57A2D3C16AA7B3F00B89D82 /* menuiconUploaded.png */; };
 		C57A2D4016AA7B3F00B89D82 /* menuiconUploaded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C57A2D3D16AA7B3F00B89D82 /* menuiconUploaded@2x.png */; };
 		C57A2D4116AA7B3F00B89D82 /* menuiconUploaded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C57A2D3D16AA7B3F00B89D82 /* menuiconUploaded@2x.png */; };
-		C57A2D7C16AA7E2600B89D82 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAD807E41F7492599A1858D /* libPods.a */; };
 		C59CFF06166B04EA00D91C44 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF05166B04EA00D91C44 /* libz.1.dylib */; };
 		C59CFF08166B04F200D91C44 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF07166B04F200D91C44 /* SystemConfiguration.framework */; };
 		C59CFF09166B050200D91C44 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF05166B04EA00D91C44 /* libz.1.dylib */; };
@@ -218,15 +217,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		1B38264D4FEF3BCC33050C01 /* Pods-GrabBox Appstore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GrabBox Appstore.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GrabBox Appstore/Pods-GrabBox Appstore.debug.xcconfig"; sourceTree = "<group>"; };
 		256AC3D80F4B6AC300CF3369 /* GrabBoxAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabBoxAppDelegate.h; sourceTree = "<group>"; };
 		256AC3D90F4B6AC300CF3369 /* GrabBoxAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = GrabBoxAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		256AC3F00F4B6AF500CF3369 /* GrabBox_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrabBox_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		323D2FB3A0D38A228D1226D1 /* Pods-GrabBox Appstore.debug for distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GrabBox Appstore.debug for distribution.xcconfig"; path = "Pods/Target Support Files/Pods-GrabBox Appstore/Pods-GrabBox Appstore.debug for distribution.xcconfig"; sourceTree = "<group>"; };
+		7E81CB4E7C8F9CA77646E99D /* Pods_GrabBox_Appstore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GrabBox_Appstore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1107320486CEB800E47090 /* GrabBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E368D1413A5F51800EB0D90 /* NetworkReachabilityNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkReachabilityNotifier.h; sourceTree = "<group>"; };
 		8E368D1513A5F51800EB0D90 /* NetworkReachabilityNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkReachabilityNotifier.m; sourceTree = "<group>"; };
@@ -308,7 +309,7 @@
 		C59CFF49166B447000D91C44 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/ServiceManagement.framework; sourceTree = DEVELOPER_DIR; };
 		C5A7894116787A350029A618 /* DBAccountInfo+PublicAppURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DBAccountInfo+PublicAppURL.h"; sourceTree = "<group>"; };
 		C5A7894216787A350029A618 /* DBAccountInfo+PublicAppURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DBAccountInfo+PublicAppURL.m"; sourceTree = "<group>"; };
-		DAAD807E41F7492599A1858D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5F8CD770D8157E34F02D9D5 /* Pods-GrabBox Appstore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GrabBox Appstore.release.xcconfig"; path = "Pods/Target Support Files/Pods-GrabBox Appstore/Pods-GrabBox Appstore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,7 +324,6 @@
 				C50E57B8150D6C1C005F1ABC /* DropboxOSX.framework in Frameworks */,
 				C55D24A213DF3DEE003342D3 /* Sparkle.framework in Frameworks */,
 				C59CFF06166B04EA00D91C44 /* libz.1.dylib in Frameworks */,
-				713E2E7097F7438B8B218C10 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,7 +337,7 @@
 				C55D245A13DF392C003342D3 /* Cocoa.framework in Frameworks */,
 				C50E57B9150D6C39005F1ABC /* DropboxOSX.framework in Frameworks */,
 				C59CFF09166B050200D91C44 /* libz.1.dylib in Frameworks */,
-				C57A2D7C16AA7E2600B89D82 /* libPods.a in Frameworks */,
+				AC2A486479A2A9D88C076095 /* Pods_GrabBox_Appstore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,7 +393,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		29B97314FDCFA39411CA2CEA /* GrabBox */ = {
+		29B97314FDCFA39411CA2CEA = {
 			isa = PBXGroup;
 			children = (
 				C59CFF3D166B3CB500D91C44 /* GrabBoxHelper.xcodeproj */,
@@ -402,7 +402,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
-				01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */,
+				B1981F656B89E153B6638424 /* Pods */,
 			);
 			name = GrabBox;
 			sourceTree = "<group>";
@@ -441,7 +441,7 @@
 			children = (
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
-				DAAD807E41F7492599A1858D /* libPods.a */,
+				7E81CB4E7C8F9CA77646E99D /* Pods_GrabBox_Appstore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -539,6 +539,16 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		B1981F656B89E153B6638424 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1B38264D4FEF3BCC33050C01 /* Pods-GrabBox Appstore.debug.xcconfig */,
+				323D2FB3A0D38A228D1226D1 /* Pods-GrabBox Appstore.debug for distribution.xcconfig */,
+				E5F8CD770D8157E34F02D9D5 /* Pods-GrabBox Appstore.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C59CFF3E166B3CB500D91C44 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -559,7 +569,6 @@
 				C59CFF47166B3EC900D91C44 /* CopyFiles */,
 				8D1107290486CEB800E47090 /* Resources */,
 				8E7B688B11EBD23900112165 /* Copy Supporting Frameworks */,
-				79DEF08728BD47F08CBDD61A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -575,11 +584,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C55D246D13DF392C003342D3 /* Build configuration list for PBXNativeTarget "GrabBox Appstore" */;
 			buildPhases = (
+				147420B10374D0E2D486E2C4 /* [CP] Check Pods Manifest.lock */,
 				C55D245313DF392C003342D3 /* Sources */,
 				C55D245413DF392C003342D3 /* Frameworks */,
 				C59CFF45166B3E7500D91C44 /* CopyFiles */,
 				C55D245513DF392C003342D3 /* Resources */,
 				C55D24A713DF42C2003342D3 /* Copy Supporting Frameworks */,
+				CFF66FBC1DBBAD6D2C129C76 /* [CP] Embed Pods Frameworks */,
+				07F961317E72A9C1DF38240A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -597,6 +609,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0450;
+				TargetAttributes = {
+					8D1107260486CEB800E47090 = {
+						DevelopmentTeam = X35L5R6VQN;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GrabBox" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -606,7 +623,8 @@
 				en,
 				English,
 			);
-			mainGroup = 29B97314FDCFA39411CA2CEA /* GrabBox */;
+			mainGroup = 29B97314FDCFA39411CA2CEA;
+			productRefGroup = 19C28FACFE9D520D11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectReferences = (
 				{
@@ -719,19 +737,35 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		79DEF08728BD47F08CBDD61A /* Copy Pods Resources */ = {
+		07F961317E72A9C1DF38240A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GrabBox Appstore/Pods-GrabBox Appstore-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		147420B10374D0E2D486E2C4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		8E7B68A111EBD8CE00112165 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -745,6 +779,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "set -o errexit\n\n[[ -z \"$BUILD_STYLE\" ]] && BUILD_STYLE=$CONFIGURATION\n\n[ $BUILD_STYLE = Release ] || { echo Distribution target requires \"'Release'\" build style; false; }\n\nCFBundleVersion=$(/usr/bin/env git describe --long --match 'v*' | cut -c2- | sed s/-/./g)\nCFBundleShortVersionString=$(/usr/bin/env git describe --match 'v*' | cut -c2- | sed 's/-/./; s/-.*$//')\n\ndomain=\"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\"\n\ndefaults write \"$domain\" CFBundleVersion -string \"$CFBundleVersion\"\ndefaults write \"$domain\" CFBundleShortVersionString -string \"$CFBundleShortVersionString\"\nplutil -convert xml1 -s \"$domain.plist\"\n\nVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleVersion)\nARCHIVE_FILENAME=\"$PROJECT_NAME $CFBundleShortVersionString.zip\"\nKEYCHAIN_PRIVKEY_NAME=\"GrabBox Sparkle Private Key\"\nWD=$PWD\nRELEASEINFO_FILENAME=\"../releases/$CFBundleShortVersionString.yaml\"\n\nif [ ! -f \"$WD/webpage/$RELEASEINFO_FILENAME\" ]; then\n    echo \"Missing releaseinfo: $WD/webpage/$RELEASEINFO_FILENAME\"\n    exit 1\nfi\n\ncd \"$BUILT_PRODUCTS_DIR\"\n\nrm -f \"$PROJECT_NAME\"*.zip\nditto -ck --keepParent \"$PROJECT_NAME.app\" \"$ARCHIVE_FILENAME\"\n\nSIZE=$(stat -f %z \"$ARCHIVE_FILENAME\")\nPUBDATE=$(LC_TIME=en_US date +\"%a, %d %b %G %T %z\")\nSIGNATURE=$(\n\topenssl dgst -sha1 -binary < \"$ARCHIVE_FILENAME\" \\\n\t| openssl dgst -dss1 -sign <(security find-generic-password -g -s \"$KEYCHAIN_PRIVKEY_NAME\" 2>&1 1>/dev/null | perl -pe '($_) = /\"(.+)\"/; s/\\\\012/\\n/g' | perl -MXML::LibXML -e 'print XML::LibXML->new()->parse_file(\"-\")->findvalue(q(//string[preceding-sibling::key[1] = \"NOTE\"]))') \\\n\t| openssl enc -base64\n)\n\n[ $SIGNATURE ] || { echo Unable to load signing private key with name \"'$KEYCHAIN_PRIVKEY_NAME'\" from keychain; false; }\n\nmv \"$HOME/Projects/GrabBox/build/Release/$ARCHIVE_FILENAME\" \"$WD/webpage/updates/\"\n\necho \"cd '$WD/webpage'\"\necho cat \\> \\\"$RELEASEINFO_FILENAME\\\"\nperl -ple 's#(date:\\s+)(.*)#$1'\"$PUBDATE\"'#; s#(signature:\\s+)(.*)#$1'\"$SIGNATURE\"'#' \"$WD/webpage/$RELEASEINFO_FILENAME\"\necho\necho ./generate appcast \\> appcast2beta.xml\necho ./generate releasenotes \\> releasenotes2beta.html\necho scp \"'updates/$ARCHIVE_FILENAME'\" arachnophobia:grabbox/updates/\necho scp appcast2beta.xml releasenotes2beta.html arachnophobia:grabbox/";
+			showEnvVarsInLog = 0;
+		};
+		CFF66FBC1DBBAD6D2C129C76 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GrabBox Appstore/Pods-GrabBox Appstore-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -850,9 +899,9 @@
 		};
 		8E256851129C5B5100DE3ACD /* Debug for distribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -900,9 +949,9 @@
 		};
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -917,9 +966,9 @@
 		};
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -969,7 +1018,7 @@
 		};
 		C55D246E13DF392C003342D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */;
+			baseConfigurationReference = 1B38264D4FEF3BCC33050C01 /* Pods-GrabBox Appstore.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox.entitlements;
@@ -992,7 +1041,7 @@
 		};
 		C55D246F13DF392C003342D3 /* Debug for distribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */;
+			baseConfigurationReference = 323D2FB3A0D38A228D1226D1 /* Pods-GrabBox Appstore.debug for distribution.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox.entitlements;
@@ -1015,7 +1064,7 @@
 		};
 		C55D247013DF392C003342D3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01C3EAEB84AF49D284CA4778 /* Pods.xcconfig */;
+			baseConfigurationReference = E5F8CD770D8157E34F02D9D5 /* Pods-GrabBox Appstore.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Resources/GrabBox.entitlements;

@@ -1,13 +1,14 @@
-platform :osx, '10.7'
+platform :osx, '10.10'
+use_frameworks!
 
-xcodeproj 'GrabBox.xcodeproj'
+project 'GrabBox.xcodeproj'
 
 pod 'ASIHTTPRequest'
-pod 'ObjectiveMetrics'
 pod 'SBJson'
+pod 'ObjectiveDropboxOfficial'
 
 target 'GrabBox Appstore' do
   pod 'ASIHTTPRequest'
-  pod 'ObjectiveMetrics'
   pod 'SBJson'
+  pod 'ObjectiveDropboxOfficial'
 end
