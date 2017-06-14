@@ -137,8 +137,6 @@ static UploaderFactory *defaultFactory = nil;
 
 - (void) showWelcomeWindow
 {
-    [[DMTracker defaultTracker] trackEvent:@"Welcome Window"];
-
     if (!self.welcomeWindow) {
         self.welcomeWindow = [[[WelcomeWindowController alloc] initWithWindowNibName:@"WelcomeWindow"] autorelease];
     }
@@ -153,7 +151,6 @@ static UploaderFactory *defaultFactory = nil;
 - (void) sessionDidReceiveAuthorizationFailure:(DBSession *)session
                                         userId:(NSString *)userId
 {
-    [[DMTracker defaultTracker] trackEvent:@"Authorization Failure"];
     NSLog(@"Received authorization failure, disabling app then prompt for link!");
     [self setAccount:nil];
     [self setUploaderClass:nil];
@@ -212,7 +209,6 @@ static UploaderFactory *defaultFactory = nil;
         }
         else
         {
-            [[DMTracker defaultTracker] trackEvent:@"Bad token on first-run"];
             DLog(@"401 from Dropbox when loading initial account info.");
 
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:CONFIG(Host)];

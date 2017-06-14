@@ -6,17 +6,14 @@
 
 #   import <Cocoa/Cocoa.h>
 #   import <DropboxOSX/DropboxOSX.h>
-#   import <ObjectiveMetrics/DMTracker.h>
 
 #   define LineLog(fmt, ...) do { \
         NSLog((@"%s: " fmt), __PRETTY_FUNCTION__, ##__VA_ARGS__); \
     } while (0)
 #   define DMLog(fmt, ...) do { \
-        [[DMTracker defaultTracker] trackLog:(@"%s: " fmt), __PRETTY_FUNCTION__, ##__VA_ARGS__]; \
     } while (0)
 #   define ErrorLog(fmt, ...) do { \
         LineLog(@"ERROR: " fmt, ##__VA_ARGS__); \
-        DMLog(@"ERROR: " fmt, ##__VA_ARGS__); \
     } while (0)
 
 #   ifdef DEBUG

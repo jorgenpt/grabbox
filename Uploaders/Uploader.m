@@ -179,9 +179,6 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:kUploadStartingNotification
                                                         object:self];
-
-    [[DMTracker defaultTracker] trackEvent:@"Upload"
-                            withProperties:@{@"Uploader": [self className]}];
 }
 
 - (void) uploadDone

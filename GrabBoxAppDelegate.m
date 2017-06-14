@@ -124,21 +124,12 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [userDefaults setBool:YES forKey:@"SUSendProfileInfo"];
 #endif
 
-#if defined(DEBUG)
-    [[DMTracker defaultTracker] disable];
-#else
-    [[DMTracker defaultTracker] startWithApplicationId:@"916d325cf9e94b76b6d9f85cbc8b733f"];
-#endif
-
     NSString* value = (NSString*)CFPreferencesCopyValue(CFSTR("type"), CFSTR("com.apple.screencapture"),
                                                         kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
     [value autorelease];
 
     if (value == nil || ![value isKindOfClass:[NSString class]])
         value = @"Not set / invalid value";
-
-    [[DMTracker defaultTracker] trackEvent:@"Screencapture type"
-                            withProperties:@{@"Type": value}];
 }
 
 - (void) uploaderUnavailable:(NSNotification *)aNotification
@@ -238,7 +229,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (IBAction) uploadFromPasteboard:(id)sender
 {
-    [[DMTracker defaultTracker] trackEvent:@"Clipboard Upload"];
     NSImage* image = [[[NSImage alloc] initWithPasteboard:[NSPasteboard generalPasteboard]] autorelease];
     if (!image)
     {
