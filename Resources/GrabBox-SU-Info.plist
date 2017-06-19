@@ -53,6 +53,17 @@
 	<true/>
 	<key>SUEnableSystemProfiling</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>grabbox.devsoft.no</key>
+			<dict>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
 	<key>SUFeedURL</key>
 	<string>http://grabbox.devsoft.no/appcastBeta.xml</string>
 </dict>
