@@ -132,6 +132,7 @@
 				TargetAttributes = {
 					C59CFF1B166B3CB500D91C44 = {
 						DevelopmentTeam = X35L5R6VQN;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -250,12 +251,15 @@
 		C59CFF3B166B3CB500D91C44 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = X35L5R6VQN;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GrabBoxHelper/GrabBoxHelper-Prefix.pch";
 				INFOPLIST_FILE = "GrabBoxHelper/GrabBoxHelper-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -263,12 +267,15 @@
 		C59CFF3C166B3CB500D91C44 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = X35L5R6VQN;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GrabBoxHelper/GrabBoxHelper-Prefix.pch";
 				INFOPLIST_FILE = "GrabBoxHelper/GrabBoxHelper-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

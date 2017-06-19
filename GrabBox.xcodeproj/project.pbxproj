@@ -609,6 +609,7 @@
 				TargetAttributes = {
 					8D1107260486CEB800E47090 = {
 						DevelopmentTeam = X35L5R6VQN;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -964,8 +965,9 @@
 			baseConfigurationReference = 8F94C460314DED78602854A3 /* Pods-GrabBox.debug for distribution.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -976,6 +978,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitspatter.mac.grabbox2;
 				PRODUCT_NAME = GrabBox;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = "Debug for distribution";
 		};
@@ -1017,8 +1020,9 @@
 			baseConfigurationReference = 76AD51F50A48D06C27DEBC55 /* Pods-GrabBox.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1029,6 +1033,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitspatter.mac.grabbox2;
 				PRODUCT_NAME = GrabBox;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -1037,8 +1042,9 @@
 			baseConfigurationReference = D6E39DB7925D7DEEEF2708A1 /* Pods-GrabBox.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1049,6 +1055,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitspatter.mac.grabbox2;
 				PRODUCT_NAME = GrabBox;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
