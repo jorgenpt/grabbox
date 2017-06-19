@@ -858,7 +858,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Frameworks\"",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/GrabBox-SU-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -909,7 +908,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Frameworks\"",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/GrabBox-SU-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
@@ -927,7 +925,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/Frameworks\"",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks\"",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/GrabBox-SU-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
