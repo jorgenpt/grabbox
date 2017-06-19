@@ -14,17 +14,20 @@ PODS:
     - ASIHTTPRequest/Core
   - ObjectiveDropboxOfficial (3.1.2)
   - SBJson (5.0.0)
+  - Sparkle (1.17.0)
 
 DEPENDENCIES:
   - ASIHTTPRequest
   - ObjectiveDropboxOfficial
   - SBJson
+  - Sparkle
 
 SPEC CHECKSUMS:
   ASIHTTPRequest: ec013992946676b7978dcbde6396d57312d21db4
   ObjectiveDropboxOfficial: 9a147eccd987723f6b25b6923f57a5b3fcd3f4bd
   SBJson: 73c848dc34be51fda282fab12bda6c426f5ead08
+  Sparkle: ccfb47699feea7b40b51cf3176f69404e5b1da6c
 
-PODFILE CHECKSUM: aa973293f0051a88c782e16ff3c0b0a589d0f405
+PODFILE CHECKSUM: c2c1901e17441fae517c35bf52416c3fa6ec2d8f
 
 COCOAPODS: 1.2.1

@@ -17,7 +17,7 @@
 
 static NSString * const kPausedKey = @"Paused";
 
-@interface GrabBoxAppDelegate ()
+@interface GrabBoxAppDelegate () <SUUpdaterDelegate>
 
 @property (nonatomic, assign) InformationGatherer* info;
 @property (nonatomic, retain) Notifier* notifier;

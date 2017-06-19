@@ -7,6 +7,7 @@ target 'GrabBox' do
     pod 'ASIHTTPRequest', :inhibit_warnings => true
     pod 'SBJson'
     pod 'ObjectiveDropboxOfficial'
+    pod 'Sparkle'
 end
 
 target 'GrabBox Appstore' do
