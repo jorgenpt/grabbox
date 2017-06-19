@@ -132,12 +132,27 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
 - (void)downsizeRetinaSource
 {
     NSImage *image = [[[NSImage alloc] initWithContentsOfFile:srcPath] autorelease];
-    NSBitmapImageRep *imageRep = [[image representations] objectAtIndex:0];
-    CGFloat displayScale = [imageRep pixelsWide] / [imageRep size].width;
+    NSBitmapImageRep *bitmapRep = nil;
+    for (NSImageRep* representation in [image representations])
+    {
+        if ([representation isKindOfClass:[NSBitmapImageRep class]])
+        {
+            bitmapRep = (NSBitmapImageRep*)representation;
+            break;
+        }
+    }
+
+    if (!bitmapRep)
+    {
+        NSLog(@"Could not find bitmap representation of image for downsizing");
+        return;
+    }
+
+    CGFloat displayScale = [bitmapRep pixelsWide] / [bitmapRep size].width;
     NSLog(@"Image displayScale: %f", displayScale);
     if (displayScale >= 1.95)
     {
-        NSRect resizedBounds = NSMakeRect(0, 0, [imageRep size].width/displayScale, [imageRep size].height/displayScale);
+        NSRect resizedBounds = NSMakeRect(0, 0, [bitmapRep size].width/displayScale, [bitmapRep size].height/displayScale);
         NSImage* resizedImage = [[[NSImage alloc] initWithSize:resizedBounds.size] autorelease];
 
         [resizedImage lockFocus];
