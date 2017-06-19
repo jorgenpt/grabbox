@@ -19,7 +19,12 @@ static NSString * const kHelperAppIdentifier = @"com.bitspatter.GrabBoxHelper";
 
 - (BOOL) willLaunchAtLogin
 {
+    // > As of WWDC 2017, Apple engineers have stated that [SMCopyAllJobDictionaries] is still the preferred API to use.
+    //  - https://github.com/alexzielenski/StartAtLoginController/issues/12#issuecomment-307525807
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     CFArrayRef cfJobDicts = SMCopyAllJobDictionaries(kSMDomainUserLaunchd);
+#pragma pop
     NSArray* jobDicts = CFBridgingRelease(cfJobDicts);
 
     if (jobDicts && [jobDicts count] > 0) {
