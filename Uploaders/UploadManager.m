@@ -18,6 +18,8 @@
 @synthesize uploads;
 @synthesize queueIsSuspended;
 
+static NSString * const kDropboxHost = @"www.dropbox.com";
+
 - (id)init
 {
     self = [super init];
@@ -29,7 +31,7 @@
         [self setQueueIsSuspended:NO];
 
         __block id manager = self;
-        notifier = [[NetworkReachabilityNotifier alloc] initWithName:kDBDropboxAPIHost];
+        notifier = [[NetworkReachabilityNotifier alloc] initWithName:kDropboxHost];
         [notifier setCallback:^(SCNetworkReachabilityFlags flags) {
             BOOL reachable = YES;
             if ((flags & kSCNetworkReachabilityFlagsReachable) == 0)

@@ -10,11 +10,8 @@
 
 #import "Uploader.h"
 
-@interface DropboxUploader : Uploader <DBRestClientDelegate> {
-    DBRestClient *restClient;
+@interface DropboxUploader : Uploader {
     NSString *destFilename;
 }
-
-+ (NSString *) urlForPath:(NSString *)path;
 
 @end

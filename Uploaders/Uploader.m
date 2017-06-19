@@ -123,7 +123,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
         NSLog(@"Could not move file '%@' to workqueue location '%@', trying to upload from current location: %@ (%ld)",
               srcPath, newPath, [error localizedDescription], [error code]);
     }
-    
+
     if ([[self class] hasRetina]) {
         [self downsizeRetinaSource];
     }
@@ -140,6 +140,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
             bitmapRep = (NSBitmapImageRep*)representation;
             break;
         }
+
     }
 
     if (!bitmapRep)

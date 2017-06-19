@@ -130,6 +130,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
     if (value == nil || ![value isKindOfClass:[NSString class]])
         value = @"Not set / invalid value";
+
+    [[UploaderFactory defaultFactory] applicationWillFinishLaunching];
 }
 
 - (void) uploaderUnavailable:(NSNotification *)aNotification
@@ -146,7 +148,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
     {
         if ([entry hasPrefix:@"."])
             continue;
-        
+
         Uploader* up = [[UploaderFactory defaultFactory] uploaderForFile:entry
                                                              inDirectory:[self.info workQueuePath]];
         [self.manager scheduleUpload:up];

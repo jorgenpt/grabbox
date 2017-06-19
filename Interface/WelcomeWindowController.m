@@ -26,12 +26,6 @@
 {
     [super windowDidLoad];
 
-    NSAppleEventManager *em = [NSAppleEventManager sharedAppleEventManager];
-    [em setEventHandler:self
-            andSelector:@selector(getUrl:withReplyEvent:)
-          forEventClass:kInternetEventClass
-             andEventID:kAEGetURL];
-
     [self presentVC:[[[DropboxAuthViewController alloc] initWithNibName:@"DropboxAuthView"
                                                                  bundle:nil] autorelease]];
 }
@@ -43,12 +37,8 @@
     self.window.contentView = vc.view;
 }
 
-
-- (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent
+- (void)loggedIn
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:GBGainedFocusNotification
-                                                        object:self];
-
     [self presentVC:[[[WelcomeViewController alloc] initWithNibName:@"WelcomeView"
                                                              bundle:nil] autorelease]];
 }

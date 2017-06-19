@@ -13,31 +13,17 @@
 #import "UploadManager.h"
 #import "UploaderFactory.h"
 
-#import "DBAccountInfo+PublicAppURL.h"
 #import "NSString+URLParameters.h"
-
-static NSString * const dropboxPublicPrefix = @"/Public/";
 
 @interface DropboxUploader ()
 
 @property (nonatomic, retain) NSString* destFilename;
-- (DBRestClient *)restClient;
 
 @end
 
 @implementation DropboxUploader
 
 @synthesize destFilename;
-
-+ (NSString *) urlForPath:(NSString *)path
-{
-    NSString *prefix = [[[UploaderFactory defaultFactory] account] publicAppURL];
-
-    // Ensure it has a leading slash etc.
-    path = [[@"/" stringByAppendingString:path] stringByStandardizingPath];
-
-    return [prefix stringByAppendingString:path];
-}
 
 - (id) init
 {
@@ -64,8 +50,6 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
 
 - (void) dealloc
 {
-    [restClient setDelegate:nil];
-    [restClient release];
     [self setDestFilename:nil];
 
     [super dealloc];
@@ -75,150 +59,109 @@ static NSString * const dropboxPublicPrefix = @"/Public/";
 {
     [super upload];
 
-    NSString* shortName = [NSString stringWithFormat:@"%@.%@",
+    NSString* shortName = [NSString stringWithFormat:@"/%@.%@",
                            [Uploader randomStringOfLength:8], [srcFile pathExtension]];
 
     [self setDestFilename:shortName];
 
     DLog(@"Trying upload of '%@', destination '%@'", srcPath, shortName);
-    [[self restClient] loadMetadata:[@"/" stringByAppendingString:shortName]];
-}
+    DBFILESWriteMode *mode = [[DBFILESWriteMode alloc] initWithAdd];
 
-#pragma mark DBRestClientDelegate callbacks
+    DBUploadTask<DBFILESFileMetadata *, DBFILESUploadError *>* task = [DBClientsManager.authorizedClient.filesRoutes
+                                                                       uploadUrl:destFilename
+                                                                       mode:mode
+                                                                       autorename:@(YES)
+                                                                       clientModified:nil
+                                                                       mute:@(NO)
+                                                                       inputUrl:srcPath];
 
-- (void)restClient:(DBRestClient*)client
-    loadedMetadata:(DBMetadata*)metadata
-{
-    [self setRetries:retries - 1];
-    DLog(@"Suggested filename exists, retries left: %d", retries);
-
-    if (retries > 0)
+    [task setResponseBlock:^(DBFILESFileMetadata *result,
+                             DBFILESUploadError *routeError,
+                             DBRequestError *networkError)
     {
-        [self upload];
-    }
-    else
-    {
-        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to Dropbox!"
-                                                         description:@"Could not find a unique filename"];
-        [Growler growl:errorGrowl];
-
-        ErrorLog(@"Could not find a unique filename!");
-
-        [self uploadDone];
-    }
-}
-
-- (void)restClient:(DBRestClient*)client loadMetadataFailedWithError:(NSError*)error
-{
-    if (error.code == 404)
-    {
-        DLog(@"Destination file did not exist, so going ahead with upload.");
-        [client uploadFile:destFilename
-                    toPath:@"/"
-             withParentRev:nil
-                  fromPath:srcPath];
-    }
-    else if (error.code == 401)
-    {
-        // TODO: GH-1: Show error dialog & ask to re-auth.
-        // For now we just force a re-auth.
-        DLog(@"401 from Dropbox when loading metadata.");
-
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:CONFIG(Host)];
-    }
-    else
-    {
-        [self setRetries:retries - 1];
-        DLog(@"Metadata request failed, retries left: %d", retries);
-        if (retries > 0)
+        if (result)
         {
-            if ([delegate respondsToSelector:@selector(scheduleUpload:)])
-                [delegate scheduleUpload:self];
-            else
-                NSLog(@"Delegate %@ does not respond to scheduleUpload!", delegate);
+            DLog(@"Upload complete, %@ -> %@", self.srcPath, result.pathDisplay);
+            NSInteger numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
+            [[NSUserDefaults standardUserDefaults] setInteger:(numberOfScreenshots + 1)
+                                                       forKey:@"NumberOfScreenshotsUploaded"];
+            [[DBClientsManager.authorizedClient.sharingRoutes
+             createSharedLinkWithSettings:result.pathLower]
+             setResponseBlock:^(DBSHARINGSharedLinkMetadata *result,
+                                DBSHARINGCreateSharedLinkWithSettingsError *routeError,
+                                DBRequestError *networkError)
+             {
+                 if (result)
+                 {
+                     if ([Uploader pasteboardURL:result.url])
+                     {
+                         GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"URL Copied"
+                                                                      title:@"Screenshot uploaded!"
+                                                                description:@"The screenshot has been uploaded and a link put in your clipboard."];
+                         [Growler growl:prompt];
+                     }
+
+                     NSError *error;
+                     BOOL deletedOk = [[NSFileManager defaultManager] removeItemAtPath:self.srcPath
+                                                                                 error:&error];
+                     if (!deletedOk)
+                         ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
+                 }
+                 else
+                 {
+                     GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to Dropbox!"
+                                                                      description:@"Failed to share link"];
+                     [Growler growl:errorGrowl];
+                 }
+
+                 [self uploadDone];
+
+             }];
         }
         else
         {
-            GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to Dropbox!"
-                                                             description:[NSString stringWithFormat:@"Received status code %ld", (long)[error code]]];
-            [Growler growl:errorGrowl];
-            ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
-            [self uploadDone];
-        }
-    }
-}
+            [self setRetries:retries - 1];
+            DLog(@"Suggested filename exists, retries left: %d", retries);
 
-- (void)restClient:(DBRestClient*)client
-      uploadedFile:(NSString*)uploadedPath
-              from:(NSString*)source
-{
-    DLog(@"Upload complete, %@ -> %@", source, uploadedPath);
-    NSInteger numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
-    [[NSUserDefaults standardUserDefaults] setInteger:(numberOfScreenshots + 1)
-                                               forKey:@"NumberOfScreenshotsUploaded"];
-    if ([Uploader pasteboardURL:[DropboxUploader urlForPath:uploadedPath]])
-    {
-        GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"URL Copied"
-                                                     title:@"Screenshot uploaded!"
-                                               description:@"The screenshot has been uploaded and a link put in your clipboard."];
-        [Growler growl:prompt];
-    }
+            if (retries > 0)
+            {
+                [self upload];
+            }
+            else if (routeError)
+            {
+                GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to Dropbox!"
+                                                                 description:@"Received error from Dropbox"];
+                [Growler growl:errorGrowl];
+                ErrorLog(@"Upload error: %@", routeError);
+                [self uploadDone];
+            }
+            else if (networkError)
+            {
+                if ([networkError isAuthError])
+                {
+                    DLog(@"401 from Dropbox when uploading file.");
 
-    NSError *error;
-    BOOL deletedOk = [[NSFileManager defaultManager] removeItemAtPath:source
-                                                                error:&error];
-    if (!deletedOk)
-        ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
-
-    [self uploadDone];
-}
-
-- (void)restClient:(DBRestClient*)client uploadProgress:(CGFloat)progress
-           forFile:(NSString*)dest from:(NSString*)source
-{
-    DLog(@"%@ -> %@: %.1f", source, dest, progress*100.0);
-}
-
-- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error
-{
-    if (error.code == 401)
-    {
-        [self uploadDone];
-
-        // TODO: GH-1: Show error dialog & ask to re-auth.
-        // For now we just force a re-auth.
-        DLog(@"401 from Dropbox when uploading file.");
-
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:CONFIG(Host)];
-    }
-    else
-    {
-        [self setRetries:retries - 1];
-        DLog(@"Upload request failed, retries left: %d", retries);
-        if (retries > 0)
-        {
-            if ([delegate respondsToSelector:@selector(scheduleUpload:)])
-                [delegate scheduleUpload:self];
+                    [[UploaderFactory defaultFactory] logout];
+                }
+                else
+                {
+                    GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to Dropbox!"
+                                                                     description:@"Encountered error accessing service"];
+                    [Growler growl:errorGrowl];
+                    ErrorLog(@"Upload error: %@", networkError);
+                    [self uploadDone];
+                }
+            }
             else
-                NSLog(@"Delegate %@ does not respond to scheduleUpload!", delegate);
+            {
+                GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to Dropbox!"
+                                                                 description:@"Unknown error"];
+                [Growler growl:errorGrowl];
+                ErrorLog(@"Unknown upload error");
+                [self uploadDone];
+            }
         }
-        else
-        {
-            GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload file to Dropbox!"
-                                                             description:[NSString stringWithFormat:@"Received status code %ld", (long)[error code]]];
-            [Growler growl:errorGrowl];
-            ErrorLog(@"%@ (%ld)", [error localizedDescription], [error code]);
-            [self uploadDone];
-        }
-    }
-}
-
-- (DBRestClient *)restClient {
-    if (!restClient) {
-        restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-        restClient.delegate = self;
-    }
-    return restClient;
+    }];
 }
 
 @end

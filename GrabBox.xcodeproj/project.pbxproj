@@ -143,8 +143,6 @@
 		C59CFF48166B3ED500D91C44 /* GrabBoxHelper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = C59CFF42166B3CB600D91C44 /* GrabBoxHelper.app */; };
 		C59CFF4A166B447100D91C44 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF49166B447000D91C44 /* ServiceManagement.framework */; };
 		C59CFF4B166B448000D91C44 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59CFF49166B447000D91C44 /* ServiceManagement.framework */; };
-		C5A7894316787A350029A618 /* DBAccountInfo+PublicAppURL.m in Sources */ = {isa = PBXBuildFile; fileRef = C5A7894216787A350029A618 /* DBAccountInfo+PublicAppURL.m */; };
-		C5A7894416787A350029A618 /* DBAccountInfo+PublicAppURL.m in Sources */ = {isa = PBXBuildFile; fileRef = C5A7894216787A350029A618 /* DBAccountInfo+PublicAppURL.m */; };
 		FA93152649E6112A445EA9B4 /* Pods_GrabBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADC2381F51357AA4E4CA3AEE /* Pods_GrabBox.framework */; };
 /* End PBXBuildFile section */
 
@@ -304,8 +302,6 @@
 		C59CFF07166B04F200D91C44 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C59CFF3D166B3CB500D91C44 /* GrabBoxHelper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GrabBoxHelper.xcodeproj; sourceTree = "<group>"; };
 		C59CFF49166B447000D91C44 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/ServiceManagement.framework; sourceTree = DEVELOPER_DIR; };
-		C5A7894116787A350029A618 /* DBAccountInfo+PublicAppURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DBAccountInfo+PublicAppURL.h"; sourceTree = "<group>"; };
-		C5A7894216787A350029A618 /* DBAccountInfo+PublicAppURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DBAccountInfo+PublicAppURL.m"; sourceTree = "<group>"; };
 		D6E39DB7925D7DEEEF2708A1 /* Pods-GrabBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GrabBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-GrabBox/Pods-GrabBox.release.xcconfig"; sourceTree = "<group>"; };
 		E5F8CD770D8157E34F02D9D5 /* Pods-GrabBox Appstore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GrabBox Appstore.release.xcconfig"; path = "Pods/Target Support Files/Pods-GrabBox Appstore/Pods-GrabBox Appstore.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -522,8 +518,6 @@
 			isa = PBXGroup;
 			children = (
 				8ED290E713A41A65005F10D3 /* Growler */,
-				C5A7894116787A350029A618 /* DBAccountInfo+PublicAppURL.h */,
-				C5A7894216787A350029A618 /* DBAccountInfo+PublicAppURL.m */,
 				8E60861611E6D1B600881A1C /* Notifier.h */,
 				8E60861711E6D1B600881A1C /* Notifier.m */,
 				8EFFCB6C12D8F86C00201A9A /* NSString+URLParameters.h */,
@@ -868,7 +862,6 @@
 				C52B002113D3B8A900D39676 /* UploaderFactory.m in Sources */,
 				C561389A15389D0A0035C08E /* WelcomeViewController.m in Sources */,
 				C56138A11538A1980035C08E /* DropboxAuthViewController.m in Sources */,
-				C5A7894316787A350029A618 /* DBAccountInfo+PublicAppURL.m in Sources */,
 				C506DD6B16AB580E00B18D25 /* WelcomeWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -894,7 +887,6 @@
 				C55D248D13DF39E6003342D3 /* NetworkReachabilityNotifier.m in Sources */,
 				C561389B15389D0A0035C08E /* WelcomeViewController.m in Sources */,
 				C56138A21538A1980035C08E /* DropboxAuthViewController.m in Sources */,
-				C5A7894416787A350029A618 /* DBAccountInfo+PublicAppURL.m in Sources */,
 				C506DD6C16AB580E00B18D25 /* WelcomeWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -947,6 +939,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = GrabBox_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1077,6 +1070,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = GrabBox_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (

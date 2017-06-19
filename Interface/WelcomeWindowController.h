@@ -6,4 +6,6 @@
 
 @interface WelcomeWindowController : NSWindowController
 
+- (void)loggedIn;
+
 @end

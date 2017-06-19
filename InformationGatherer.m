@@ -171,7 +171,7 @@ static InformationGatherer* defaultInstance = nil;
                                                    forLocalization:language];
         if (!table)
         {
-            NSLog(@"Lookup failed, trying next language (this isn't necessarily bad).");
+            ErrorLog(@"Lookup failed, trying next language.");
             continue;
         }
 
@@ -252,7 +252,7 @@ static InformationGatherer* defaultInstance = nil;
     {
         base = NSTemporaryDirectory();
     }
-    
+
     if (base)
     {
         NSError *error;
@@ -314,7 +314,7 @@ static InformationGatherer* defaultInstance = nil;
         ErrorLog(@"Failed getting dirlist: %@", [error localizedDescription]);
         return [NSSet set];
     }
-    
+
     return [NSSet setWithArray:dirList];
 }
 

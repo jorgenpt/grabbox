@@ -27,7 +27,7 @@ static UploaderFactory *defaultFactory = nil;
 @property (assign) Class uploaderClass;
 @property (retain) WelcomeWindowController *welcomeWindow;
 
-- (DBRestClient *)restClient;
+- (void)setAvailable:(BOOL)availability;
 
 @end
 
@@ -51,6 +51,7 @@ static UploaderFactory *defaultFactory = nil;
     self = [super init];
     if (self)
     {
+        isAvailable = NO;
         [self setUploaderClass:[DropboxUploader class]];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(gainedFocus:)
@@ -67,13 +68,30 @@ static UploaderFactory *defaultFactory = nil;
 
 - (void) dealloc
 {
-    [restClient setDelegate:nil];
-    [restClient release];
-    [self setAccount:nil];
-
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     [super dealloc];
+}
+
+- (void)setAvailable:(BOOL)availability
+{
+    if (isAvailable == availability)
+    {
+        return;
+    }
+
+    isAvailable = availability;
+
+    if (isAvailable)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:GBUploaderAvailableNotification
+                                                            object:nil];
+    }
+    else
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:GBUploaderUnavailableNotification
+                                                            object:nil];
+    }
 }
 
 - (Uploader *) uploaderForFile:(NSString *)file
@@ -82,57 +100,67 @@ static UploaderFactory *defaultFactory = nil;
     return [[[self.uploaderClass alloc] initForFile:file inDirectory:source] autorelease];
 }
 
+- (void) applicationWillFinishLaunching
+{
+    [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self
+                                                       andSelector:@selector(handleAppleEvent:withReplyEvent:)
+                                                     forEventClass:kInternetEventClass
+                                                        andEventID:kAEGetURL];
+}
+
+- (void)handleAppleEvent:(NSAppleEventDescriptor *)event
+          withReplyEvent:(NSAppleEventDescriptor *)replyEvent
+{
+    NSURL *url = [NSURL URLWithString:[[event paramDescriptorForKeyword:keyDirectObject] stringValue]];
+    DBOAuthResult *authResult = [DBClientsManager handleRedirectURL:url];
+    if (authResult != nil) {
+        if ([authResult isSuccess]) {
+            DLog(@"Got account info, starting FS monitoring and enabling interaction!");
+            [self setAvailable:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:GBUploaderAvailableNotification
+                                                                object:nil];
+            [self.welcomeWindow loggedIn];
+        } else if ([authResult isCancel]) {
+            DLog(@"Authorization flow was manually canceled by user!");
+        } else if ([authResult isError]) {
+            NSLog(@"Received authorization failure, disabling app then prompt for link!");
+            [self setUploaderClass:nil];
+            [DBClientsManager unlinkAndResetClients];
+        }
+    }
+
+    [self.welcomeWindow.window makeKeyAndOrderFront:self];
+    [[NSRunningApplication currentApplication]
+     activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
+}
+
 - (void) loadSettings
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:GBUploaderUnavailableNotification object:nil];
-
-    [self setAccount:nil];
     [self setupDropbox];
 }
 
 - (void) logout
 {
-    [[DBSession sharedSession] unlinkAll];
-    [self loadSettings];
-}
-
-- (DBSession *) dropboxSession
-{
-    return [[[DBSession alloc] initWithAppKey:dropboxConsumerKey
-                                    appSecret:dropboxConsumerSecret
-                                         root:kDBRootAppFolder] autorelease];
+    [DBClientsManager unlinkAndResetClients];
+    [self setAvailable:NO];
+    [self showWelcomeWindow];
 }
 
 - (void) setupDropbox
 {
-    DBSession *session = [self dropboxSession];
-    [session setDelegate:self];
-    [DBSession setSharedSession:session];
-
-    if ([session isLinked])
+    if (![DBClientsManager appKey])
     {
-        [[self restClient] setDelegate:self];
-        [[self restClient] loadAccountInfo];
+         [DBClientsManager setupWithAppKeyDesktop:dropboxConsumerKey];
+    }
+
+    if ([DBClientsManager.authorizedClient isAuthorized])
+    {
+        [self setAvailable:YES];
     }
     else
     {
         [self showWelcomeWindow];
     }
-}
-
-
-- (void)gainedFocus:(NSNotification *)aNotification {
-    if ([DBSession sharedSession])
-    {
-        if ([[self restClient] requestTokenLoaded]) {
-            [[self restClient] loadAccessToken];
-        }
-    }
-}
-
-- (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
-    // This gets called when the user clicks Show "App name". You don't need to do anything for Dropbox here
-    // TODO: GH-2: Show a dialog to confirm
 }
 
 - (void) showWelcomeWindow
@@ -145,89 +173,13 @@ static UploaderFactory *defaultFactory = nil;
     [NSApp activateIgnoringOtherApps:YES];
 }
 
-
-#pragma mark DBSession delegate methods
-
-- (void) sessionDidReceiveAuthorizationFailure:(DBSession *)session
-                                        userId:(NSString *)userId
+- (void)gainedFocus:(NSNotification *)aNotification
 {
-    NSLog(@"Received authorization failure, disabling app then prompt for link!");
-    [self setAccount:nil];
-    [self setUploaderClass:nil];
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:GBUploaderUnavailableNotification object:nil];
-
-    [session unlinkUserId:userId];
-    [self showWelcomeWindow];
-}
-
-#pragma mark DBRestClientOSXDelegate delegate methods
-
-- (void)restClientLoadedRequestToken:(DBRestClient *)restClient
-{
-    NSURL *url = [[self restClient] authorizeURL];
-    [[NSWorkspace sharedWorkspace] openURL:url];
-}
-
-- (void)restClient:(DBRestClient *)restClient loadRequestTokenFailedWithError:(NSError *)error {
-    DLog(@"loadRequestTokenFailedWithError: %@", error);
-}
-
-- (void)restClientLoadedAccessToken:(DBRestClient *)restClient {
-    [[self restClient] loadAccountInfo];
-}
-
-- (void)restClient:(DBRestClient *)restClient loadAccessTokenFailedWithError:(NSError *)error {
-    DLog(@"loadAccessTokenFailedWithError: %@", error);
-}
-
-#pragma mark DBRestClient delegate methods
-
-- (void)restClient:(DBRestClient*)client
- loadedAccountInfo:(DBAccountInfo*)accountInfo
-{
-    DLog(@"Got account info, starting FS monitoring and enabling interaction!");
-    [self setAccount:accountInfo];
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:GBUploaderAvailableNotification object:nil];
-}
-
-- (void)restClient:(DBRestClient*)client loadAccountInfoFailedWithError:(NSError*)error
-{
-    // Error codes described here: https://www.dropbox.com/developers/reference/api
-    if (error.code == 401)
-        // "Bad or expired token. This can happen if the user or Dropbox revoked or expired an access token.
-        // To fix, you should re-authenticate the user."
+    if ([DBClientsManager.authorizedClient isAuthorized])
     {
-        if (self.account)
-        {
-            // TODO: GH-1: Show error dialog & ask to re-auth.
-            // For now we just force a re-auth.
-            DLog(@"401 from Dropbox when loading account info.");
-
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:CONFIG(Host)];
-        }
-        else
-        {
-            DLog(@"401 from Dropbox when loading initial account info.");
-
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:CONFIG(Host)];
-        }
-    }
-    else
-    {
-        // TODO: GH-3: Open an error dialog!
-        ErrorLog(@"Failed retrieving account info: %ld", error.code);
-        [NSApp terminate:self];
+        [self setAvailable:YES];
     }
 }
 
-- (DBRestClient *)restClient {
-    if (!restClient) {
-        restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-        restClient.delegate = self;
-    }
-    return restClient;
-}
 
 @end

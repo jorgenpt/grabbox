@@ -14,18 +14,15 @@ extern NSString * const GBUploaderUnavailableNotification;
 extern NSString * const GBUploaderAvailableNotification;
 extern NSString * const GBGainedFocusNotification;
 
-@interface UploaderFactory : NSObject <DBSessionDelegate, DBRestClientDelegate> {
-    DBRestClient *restClient;
-
-    BOOL ignoreUpdates;
+@interface UploaderFactory : NSObject {
+    BOOL isAvailable;
 }
-
-@property (nonatomic, retain) DBAccountInfo *account;
 
 + (id) defaultFactory;
 
 - (Uploader *) uploaderForFile:(NSString *)file
                    inDirectory:(NSString *)source;
+- (void) applicationWillFinishLaunching;
 - (void) loadSettings;
 - (void) logout;
 
