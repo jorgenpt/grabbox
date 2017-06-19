@@ -76,6 +76,15 @@ static InformationGatherer* defaultInstance = nil;
     return defaultInstance;
 }
 
+- (void) dealloc
+{
+    [self setScreenshotPath:nil];
+    [self setDirContents:nil];
+    [self setLocalizedScreenshotPattern:nil];
+    [self setWorkQueuePath:nil];
+    [super dealloc];
+}
+
 /* Make sure there is always one instance, and make sure it's never free'd. */
 - (id) copyWithZone:(NSZone *)zone { return self; }
 - (id) retain { return self; }

@@ -12,14 +12,11 @@
 
 @implementation WelcomeWindowController
 
-- (id)initWithWindow:(NSWindow *)window
+- (void) dealloc
 {
-    self = [super initWithWindow:window];
-    if (self) {
-        // Initialization code here.
-    }
+    [self setCurrentVC:nil];
 
-    return self;
+    [super dealloc];
 }
 
 - (void)windowDidLoad

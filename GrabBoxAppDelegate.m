@@ -92,6 +92,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 {
     [self setInfo:nil];
     [self setNotifier:nil];
+    [self setManager:nil];
 
     [super dealloc];
 }
@@ -123,13 +124,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
 #if !defined(MAC_APP_STORE)
     [userDefaults setBool:YES forKey:@"SUSendProfileInfo"];
 #endif
-
-    NSString* value = (NSString*)CFPreferencesCopyValue(CFSTR("type"), CFSTR("com.apple.screencapture"),
-                                                        kCFPreferencesCurrentUser, kCFPreferencesCurrentHost);
-    [value autorelease];
-
-    if (value == nil || ![value isKindOfClass:[NSString class]])
-        value = @"Not set / invalid value";
 
     [[UploaderFactory defaultFactory] applicationWillFinishLaunching];
 }

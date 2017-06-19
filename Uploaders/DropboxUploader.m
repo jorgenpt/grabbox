@@ -65,7 +65,7 @@
     [self setDestFilename:shortName];
 
     DLog(@"Trying upload of '%@', destination '%@'", srcPath, shortName);
-    DBFILESWriteMode *mode = [[DBFILESWriteMode alloc] initWithAdd];
+    DBFILESWriteMode *mode = [[[DBFILESWriteMode alloc] initWithAdd] autorelease];
 
     DBUploadTask<DBFILESFileMetadata *, DBFILESUploadError *>* task = [DBClientsManager.authorizedClient.filesRoutes
                                                                        uploadUrl:destFilename

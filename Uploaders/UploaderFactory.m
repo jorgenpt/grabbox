@@ -69,6 +69,7 @@ static UploaderFactory *defaultFactory = nil;
 - (void) dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self setWelcomeWindow:nil];
 
     [super dealloc];
 }

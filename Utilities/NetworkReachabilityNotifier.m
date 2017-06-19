@@ -80,6 +80,7 @@ void NetworkReachabilityChangedCallbackWrapper(
 - (void)dealloc
 {
     [self setReachability:NULL];
+    [self setCallback:NULL];
 
     [super dealloc];
 }
