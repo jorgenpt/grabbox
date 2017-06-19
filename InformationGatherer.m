@@ -130,7 +130,6 @@ static InformationGatherer* defaultInstance = nil;
                        fromBundle:(NSBundle *)bundle
                   forLocalization:(NSString *)localization
 {
-    NSString *error;
     NSString *tablePath = [bundle pathForResource:tableName
                                            ofType:@"strings"
                                       inDirectory:@""
@@ -141,18 +140,20 @@ static InformationGatherer* defaultInstance = nil;
         return nil;
     }
 
-    NSData* data = [NSData dataWithContentsOfFile:tablePath];
-    if (!data)
+    NSInputStream* tableStream = [NSInputStream inputStreamWithFileAtPath:tablePath];
+    [tableStream open];
+    if ([tableStream streamStatus] == NSStreamStatusError)
     {
-        ErrorLog(@"Couldn't load %@.lproj/%@.strings.", localization, tableName);
+        ErrorLog(@"Couldn't load %@.lproj/%@.strings: %@", localization, tableName, [tableStream streamError]);
         return nil;
     }
 
-    NSDictionary* table = [NSPropertyListSerialization propertyListFromData:data
-                                                           mutabilityOption:NSPropertyListImmutable
-                                                                     format:NULL
-                                                           errorDescription:&error];
-    if (!table)
+    NSError *error = nil;
+    NSDictionary* table = [NSPropertyListSerialization propertyListWithStream:tableStream
+                                                                      options:NSPropertyListImmutable
+                                                                       format:nil
+                                                                        error:&error];
+    if (error)
     {
         ErrorLog(@"Couldn't parse %@.lproj/%@.strings: %@", localization, tableName, error);
         return nil;
