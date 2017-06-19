@@ -12,7 +12,6 @@
     NSString* screenshotPath;
     NSString* localizedScreenshotPattern;
     NSString* workQueuePath;
-    SInt32 osVersion;
     NSSet* dirContents;
 }
 
