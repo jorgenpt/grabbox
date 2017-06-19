@@ -173,34 +173,12 @@ static InformationGatherer* defaultInstance = nil;
                    fromBundle:(NSBundle *)bundle
                         table:(NSString *)tableName
 {
-    /* Dictionary so we can do lookup for preferred locale -> localizations of the bundle. */
-    NSMutableDictionary* bundleLanguages = [NSMutableDictionary dictionary];
-    for (NSString* locale in [bundle localizations])
+    for (NSString* language in [bundle preferredLocalizations])
     {
-        [bundleLanguages setObject:locale
-                            forKey:[NSLocale canonicalLocaleIdentifierFromString:locale]];
-    }
-
-    /* Go through each preferred language in order of preference. */
-    NSArray* languages = [NSLocale preferredLanguages];
-    for (NSString* language in languages)
-    {
-        DLog(@"Trying language (before canonicalization): %@", language);
-        language = [NSLocale canonicalLocaleIdentifierFromString:language];
-        DLog(@"Trying language (after canonicalization):  %@", language);
-
-        /* If we can't look it up, it means its not in the bundle. Try next preferred. */
-        NSString* lproj = [bundleLanguages objectForKey:language];
-        if (!lproj)
-        {
-            DLog(@"No lproj for %@, trying next preferred language (this isn't necessarily bad).", language);
-            continue;
-        }
-
         /* Table of localized strings */
         NSDictionary *table = [InformationGatherer stringsForTable:tableName
                                                         fromBundle:bundle
-                                                   forLocalization:lproj];
+                                                   forLocalization:language];
         if (!table)
         {
             NSLog(@"Lookup failed, trying next language (this isn't necessarily bad).");
@@ -214,7 +192,7 @@ static InformationGatherer* defaultInstance = nil;
             return localizedString;
         }
 
-        NSLog(@"No value for '%@' in %@, trying next preferred language (this isn't necessarily bad).", string, lproj);
+        NSLog(@"No value for '%@' in %@, trying next preferred language (this isn't necessarily bad).", string, language);
     }
 
     ErrorLog(@"Could not look up a localization for %@ in table %@!", string, tableName);
