@@ -7,7 +7,6 @@
 //
 
 #import "GrabBoxAppDelegate.h"
-#import "FSRefConversions.h"
 
 #import "Growler.h"
 #import "UploaderFactory.h"
@@ -198,37 +197,14 @@ static void translateEvent(ConstFSEventStreamRef stream,
         return;
     }
 
-    NSString* screenshotPath = [self.info screenshotPath];
-    FSRef screenshotPathRef;
-    if (![screenshotPath fsRef:&screenshotPathRef])
-    {
-        GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not get Screen Grab path!"
-                                                         description:@"Could not find directory to monitor for screenshots."];
-        [Growler growl:errorGrowl];
-        ErrorLog(@"Failed getting FSRef for screenshotPath '%@'", screenshotPath);
-        return;
-    }
+    NSURL* screenshotPath = [[NSURL fileURLWithPath:[self.info screenshotPath]] URLByResolvingSymlinksInPath];
 
     BOOL screenshotDirChanged = NO;
-
-    for (NSString* path in paths)
+    for (NSString* changedPath in paths)
     {
-        FSRef pathRef;
-        if (![path fsRef:&pathRef])
+        NSURL *pathURL = [[NSURL fileURLWithPath:changedPath] URLByResolvingSymlinksInPath];
+        if (![screenshotPath isEqual:pathURL])
         {
-            ErrorLog(@"Failed getting FSRef for path '%@'", path);
-            continue;
-        }
-
-        OSErr comparison = FSCompareFSRefs(&screenshotPathRef, &pathRef);
-        if (comparison == diffVolErr || comparison == errFSRefsDifferent)
-        {
-            continue;
-        }
-
-        if (comparison != noErr)
-        {
-            ErrorLog(@"Failed comparing FSRef for path (%@) and screenshotPath (%@): %i", path, screenshotPath, comparison);
             continue;
         }
 
