@@ -169,7 +169,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
                                                hints:nil];
         NSBitmapImageRep* bitmapImageRep = [[[NSBitmapImageRep alloc] initWithCGImage:img] autorelease];
         NSData *imageData = [bitmapImageRep representationUsingType:NSPNGFileType
-                                                         properties:nil];
+                                                         properties:@{}];
         [imageData writeToFile:srcPath
                     atomically:YES];
     }

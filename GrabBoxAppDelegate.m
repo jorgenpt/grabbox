@@ -270,7 +270,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
     }
 
     NSData *data = [bits representationUsingType:NSPNGFileType
-                                      properties:nil];
+                                      properties:@{}];
 
     NSError *error;
     NSString *filename = [self workQueueFilenameForClipboardData];
