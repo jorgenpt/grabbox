@@ -25,6 +25,7 @@
 		256AC3DA0F4B6AC300CF3369 /* GrabBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* GrabBoxAppDelegate.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		8E040B0E1EFD05A5007933AE /* fabric.apikey in Resources */ = {isa = PBXBuildFile; fileRef = 8E040B0D1EFD05A5007933AE /* fabric.apikey */; };
 		8E368D1613A5F51800EB0D90 /* NetworkReachabilityNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E368D1513A5F51800EB0D90 /* NetworkReachabilityNotifier.m */; };
 		8E4A50A011E9155500A0A743 /* InformationGatherer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E4A509F11E9155500A0A743 /* InformationGatherer.m */; };
 		8E60861811E6D1B600881A1C /* Notifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E60861711E6D1B600881A1C /* Notifier.m */; };
@@ -219,6 +220,7 @@
 		76AD51F50A48D06C27DEBC55 /* Pods-GrabBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GrabBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GrabBox/Pods-GrabBox.debug.xcconfig"; sourceTree = "<group>"; };
 		7E81CB4E7C8F9CA77646E99D /* Pods_GrabBox_Appstore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GrabBox_Appstore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1107320486CEB800E47090 /* GrabBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrabBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E040B0D1EFD05A5007933AE /* fabric.apikey */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = fabric.apikey; path = secrets/fabric.apikey; sourceTree = SOURCE_ROOT; };
 		8E368D1413A5F51800EB0D90 /* NetworkReachabilityNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkReachabilityNotifier.h; sourceTree = "<group>"; };
 		8E368D1513A5F51800EB0D90 /* NetworkReachabilityNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkReachabilityNotifier.m; sourceTree = "<group>"; };
 		8E4A509E11E9155500A0A743 /* InformationGatherer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationGatherer.h; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8E040B0D1EFD05A5007933AE /* fabric.apikey */,
 				8EC03FC41EFCE22B00FFB542 /* sparkle_dsa_pub.pem */,
 				8E2AF15511F01D2100A29A61 /* Images */,
 				C561389115386B380035C08E /* API Request Authorization - Dropbox.jpg */,
@@ -559,6 +562,7 @@
 				8E7B688B11EBD23900112165 /* Copy Supporting Frameworks */,
 				4B3496323C0085D9559092DC /* [CP] Embed Pods Frameworks */,
 				757146961590B6D50444A266 /* [CP] Copy Pods Resources */,
+				8E040B0B1EFD0047007933AE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -668,6 +672,7 @@
 				8EC03FC51EFCE22B00FFB542 /* sparkle_dsa_pub.pem in Resources */,
 				C57A2D2216AA752100B89D82 /* menuicon-animation-3@2x.png in Resources */,
 				C57A2D2416AA752100B89D82 /* menuicon-animation-4.png in Resources */,
+				8E040B0E1EFD05A5007933AE /* fabric.apikey in Resources */,
 				C57A2D2616AA752100B89D82 /* menuicon-animation-4@2x.png in Resources */,
 				C57A2D2816AA752100B89D82 /* menuicon-animation-5.png in Resources */,
 				C57A2D2A16AA752100B89D82 /* menuicon-animation-5@2x.png in Resources */,
@@ -804,6 +809,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GrabBox/Pods-GrabBox-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8E040B0B1EFD0047007933AE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FABRIC_APIKEY_FILE=\"${SRCROOT}/secrets/fabric.apikey\"\nFABRIC_BUILDSECRET_FILE=\"${SRCROOT}/secrets/fabric.buildsecret\"\n\nif test ! -f \"$FABRIC_APIKEY_FILE\" -o ! -f \"$FABRIC_BUILDSECRET_FILE\"; then\n    echo \"This build wants to upload dSYM files to Crashlytics.\"\n    echo \"Uploading is possible only if a Fabric API key and a Fabric build secret are\"\n    echo \"available. This build is failing because at least one of these pieces of\"\n    echo \"information is missing.\"\n    echo \"\"\n    echo \"To fix the problem, create the following files and store the API key and\"\n    echo \"build secret, respectively, within those files:\"\n    echo \"\"\n    echo \"  $FABRIC_APIKEY_FILE\"\n    echo \"  $FABRIC_BUILDSECRET_FILE\"\n    echo \"\"\n    echo \"If you forked the project then you must register with Crashlytics and\"\n    echo \"get your own API key and build secret.\"\n\n    # Let the build fail\n    exit 1\nfi\n\nFABRIC_APIKEY=$(cat \"$FABRIC_APIKEY_FILE\")\nif test $? -ne 0; then\n    echo \"Cannot read $FABRIC_APIKEY_FILE\"\n    exit 1\nfi\n\nFABRIC_BUILDSECRET=$(cat \"$FABRIC_BUILDSECRET_FILE\")\nif test $? -ne 0; then\n    echo \"Cannot read $FABRIC_BUILDSECRET_FILE\"\n    exit 1\nfi\n\necho \"Uploading dSYM files to Crashlytics\"\n\n\"${PODS_ROOT}/Fabric/run\" \"$FABRIC_APIKEY\" \"$FABRIC_BUILDSECRET\"";
+		};
 		8E7B68A111EBD8CE00112165 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -931,6 +949,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Joergen Pedersen Tjernoe";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1068,6 +1087,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application: Joergen Pedersen Tjernoe";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;

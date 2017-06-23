@@ -8,6 +8,9 @@
 
 #import "GrabBoxAppDelegate.h"
 
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 #import "Growler.h"
 #import "UploaderFactory.h"
 
@@ -151,6 +154,22 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"NSApplicationCrashOnExceptions": @YES }];
+
+    NSURL* resourceURL = [[NSBundle mainBundle] URLForResource:@"fabric"
+                                                 withExtension:@"apikey"];
+    NSString* fabricAPIKey = [NSString stringWithContentsOfURL:resourceURL
+                                                  usedEncoding:NULL
+                                                         error:NULL];
+
+    // The string that results from reading the bundle resource contains a trailing
+    // newline character, which we must remove now because Fabric/Crashlytics
+    // can't handle extraneous whitespace.
+    NSString* fabricAPIKeyTrimmed = [fabricAPIKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
+    // Crashlytics calls [Fabric with:...] behind the scenes
+    [Crashlytics startWithAPIKey:fabricAPIKeyTrimmed];
+
     [self uploaderUnavailable:nil];
 
     [[UploaderFactory defaultFactory] loadSettings];

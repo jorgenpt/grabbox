@@ -15,6 +15,8 @@
 
 #import "NSString+URLParameters.h"
 
+#import <Crashlytics/Crashlytics.h>
+
 @interface DropboxUploader ()
 
 @property (nonatomic, retain) NSString* destFilename;
@@ -81,6 +83,8 @@
     {
         if (result)
         {
+            [Answers logCustomEventWithName:@"Dropbox Screenshot Uploaded"
+                           customAttributes:NULL];
             DLog(@"Upload complete, %@ -> %@", self.srcPath, result.pathDisplay);
             NSInteger numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
             [[NSUserDefaults standardUserDefaults] setInteger:(numberOfScreenshots + 1)

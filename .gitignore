@@ -18,3 +18,4 @@ xcuserdata/
 
 # This is the private update signing key
 bin/sparkle_dsa_priv.pem
+secrets/
