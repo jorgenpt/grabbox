@@ -54,7 +54,7 @@
 	<key>SUEnableSystemProfiling</key>
 	<true/>
 	<key>SUFeedURL</key>
-	<string>https://jorgenpt.github.io/grabbox/updates/appcast.xml</string>
+	<string>https://grabbox.bitspatter.com/updates/appcast.xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>sparkle_dsa_pub.pem</string>
 </dict>
