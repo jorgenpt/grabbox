@@ -83,12 +83,13 @@
     {
         if (result)
         {
-            [Answers logCustomEventWithName:@"Dropbox Screenshot Uploaded"
-                           customAttributes:NULL];
             DLog(@"Upload complete, %@ -> %@", self.srcPath, result.pathDisplay);
             NSInteger numberOfScreenshots = [[NSUserDefaults standardUserDefaults] integerForKey:@"NumberOfScreenshotsUploaded"];
             [[NSUserDefaults standardUserDefaults] setInteger:(numberOfScreenshots + 1)
                                                        forKey:@"NumberOfScreenshotsUploaded"];
+            [Answers logCustomEventWithName:@"Dropbox Screenshot Uploaded"
+                           customAttributes:@{@"NumberOfScreenshots": @(numberOfScreenshots + 1)}];
+
             [[DBClientsManager.authorizedClient.sharingRoutes
              createSharedLinkWithSettings:result.pathLower]
              setResponseBlock:^(DBSHARINGSharedLinkMetadata *result,
