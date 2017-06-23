@@ -20,7 +20,7 @@
 
 static NSString * const kPausedKey = @"Paused";
 
-@interface GrabBoxAppDelegate () <SUUpdaterDelegate>
+@interface GrabBoxAppDelegate ()
 
 @property (nonatomic, assign) InformationGatherer* info;
 @property (nonatomic, retain) Notifier* notifier;
@@ -62,8 +62,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
 #ifdef MAC_APP_STORE
     [[self.checkForUpdatesMenuItem menu] removeItem:self.checkForUpdatesMenuItem];
     [[self.checkForUpdatesMenubarItem menu] removeItem:self.checkForUpdatesMenubarItem];
-#else
-    [[SUUpdater sharedUpdater] setDelegate:self];
 #endif
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -99,20 +97,6 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
     [super dealloc];
 }
-
-#ifndef MAC_APP_STORE
-- (NSArray *)feedParametersForUpdater:(SUUpdater *)updater sendingSystemProfile:(BOOL)sendingProfile
-{
-    NSString* appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-    NSDictionary* versionParam = [NSDictionary dictionaryWithObjectsAndKeys:
-                                  @"currentversion", @"key",
-                                  appVersion, @"value",
-                                  @"Current Version", @"displayKey",
-                                  appVersion, @"displayValue",
-                                  nil];
-    return [NSArray arrayWithObject:versionParam];
-}
-#endif
 
 - (void) applicationWillFinishLaunching:(NSNotification *)aNotification
 {
