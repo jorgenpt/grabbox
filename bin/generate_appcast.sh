@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PRIVKEY_PATH="bin/sparkle_dsa_priv.pem"
+PRIVKEY_PATH="secrets/sparkle_dsa_priv.pem"
 
 cd "$(dirname "$0")/.."
 

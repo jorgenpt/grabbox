@@ -16,6 +16,5 @@ xcuserdata/
 # This is an API key from Dropbox
 /Common/DropboxAPIKey_Private.inl
 
-# This is the private update signing key
-bin/sparkle_dsa_priv.pem
+# This is where we keep Sparkle and Fabric secrets
 secrets/
