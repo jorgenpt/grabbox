@@ -65,8 +65,19 @@
 	<true/>
 	<key>SUEnableSystemProfiling</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>grabbox.bitspatter.com</key>
+			<dict>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
 	<key>SUFeedURL</key>
-	<string>https://grabbox.bitspatter.com/updates/appcast.xml</string>
+	<string>http://grabbox.bitspatter.com/updates/appcast.xml</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>sparkle_dsa_pub.pem</string>
 </dict>
