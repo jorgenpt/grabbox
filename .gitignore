@@ -10,12 +10,11 @@ xcuserdata/
 # OS X
 .DS_Store
 
-# Stuff polish generates
-webpage/appcast*.xml
-webpage/releasenotes*.html
-
 # CocoaPods
 /Pods/
 
 # This is an API key from Dropbox
 /Common/DropboxAPIKey_Private.inl
+
+# This is the private update signing key
+bin/sparkle_dsa_priv.pem
