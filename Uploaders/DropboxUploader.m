@@ -98,7 +98,9 @@
              {
                  if (result)
                  {
-                     if ([Uploader pasteboardURL:result.url])
+                     NSURLComponents* urlComponents = [[[NSURLComponents alloc] initWithString:result.url] autorelease];
+                     [urlComponents setQuery:@"raw=1"];
+                     if ([Uploader pasteboardURL:[urlComponents string]])
                      {
                          GrowlerGrowl *prompt = [GrowlerGrowl growlWithName:@"URL Copied"
                                                                       title:@"Screenshot uploaded!"
