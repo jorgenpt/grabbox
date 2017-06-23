@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="yes"?><rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+<channel>
+<title>GrabBox</title>
+<item>
+<title>0.4.4</title>
+<pubDate>Thu, 22 Jun 2017 23:22:28 -0700</pubDate>
+<sparkle:minimumSystemVersion>10.10</sparkle:minimumSystemVersion>
+<sparkle:releaseNotesLink>https://jorgenpt.github.io/grabbox/updates/GrabBox-0.4.4.html</sparkle:releaseNotesLink>
+<enclosure url="https://jorgenpt.github.io/grabbox/updates/GrabBox-0.4.4.zip" sparkle:version="0.4.4" sparkle:shortVersionString="0.4.4" length="4143922" type="application/octet-stream" sparkle:dsaSignature="MC0CFF18INAKRgmyMxfQMZZx6zXmlcNqAhUAzCuhiVIv/VezHk9xhgHtHKVcgZg="/>
+</item>
+</channel></rss>
