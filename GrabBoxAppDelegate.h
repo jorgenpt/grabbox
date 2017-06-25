@@ -7,7 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <Sparkle/Sparkle.h>
+
+#if !defined(MAC_APP_STORE)
+# import <Sparkle/Sparkle.h>
+#endif // !defined(MAC_APP_STORE)
 
 #import "Notifier.h"
 #import "InformationGatherer.h"
@@ -26,8 +29,8 @@
 
 - (IBAction) logout:(id)sender;
 
-#ifndef MAC_APP_STORE
+#if !defined(MAC_APP_STORE)
 - (IBAction) checkForUpdates:(id)sender;
-#endif
+#endif // !defined(MAC_APP_STORE)
 
 @end

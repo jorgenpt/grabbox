@@ -8,15 +8,14 @@
 
 #import "GrabBoxAppDelegate.h"
 
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
+#if !defined(MAC_APP_STORE)
+# import <Fabric/Fabric.h>
+# import <Crashlytics/Crashlytics.h>
+# import <Sparkle/SUUpdater.h>
+#endif // !defined(MAC_APP_STORE)
 
 #import "Growler.h"
 #import "UploaderFactory.h"
-
-#ifndef MAC_APP_STORE
-#import <Sparkle/SUUpdater.h>
-#endif
 
 static NSString * const kPausedKey = @"Paused";
 
@@ -59,10 +58,10 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void) awakeFromNib
 {
-#ifdef MAC_APP_STORE
+#if !defined(MAC_APP_STORE)
     [[self.checkForUpdatesMenuItem menu] removeItem:self.checkForUpdatesMenuItem];
     [[self.checkForUpdatesMenubarItem menu] removeItem:self.checkForUpdatesMenubarItem];
-#endif
+#endif // !defined(MAC_APP_STORE)
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(uploaderAvailable:)
@@ -84,9 +83,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (IBAction)checkForUpdates:(id)sender
 {
-#ifndef MAC_APP_STORE
+#if !defined(MAC_APP_STORE)
     [[SUUpdater sharedUpdater] checkForUpdates:sender];
-#endif
+#endif // !defined(MAC_APP_STORE)
 }
 
 - (void) dealloc
@@ -110,7 +109,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 #if !defined(MAC_APP_STORE)
     [userDefaults setBool:YES forKey:@"SUSendProfileInfo"];
-#endif
+#endif // !defined(MAC_APP_STORE)
 
     [[UploaderFactory defaultFactory] applicationWillFinishLaunching];
 }
@@ -138,6 +137,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (void) applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+#if !defined(MAC_APP_STORE)
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"NSApplicationCrashOnExceptions": @YES }];
 
     NSURL* resourceURL = [[NSBundle mainBundle] URLForResource:@"fabric"
@@ -153,6 +153,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
     // Crashlytics calls [Fabric with:...] behind the scenes
     [Crashlytics startWithAPIKey:fabricAPIKeyTrimmed];
+#endif // !defined(MAC_APP_STORE)
 
     [self uploaderUnavailable:nil];
 
