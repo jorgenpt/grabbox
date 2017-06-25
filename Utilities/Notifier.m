@@ -8,31 +8,47 @@
 
 #import "Notifier.h"
 
-@implementation Notifier
-
-+ (id) notifierWithCallback:(FSEventStreamCallback)newCallback
-                       path:(NSString *)newPath
-           callbackArgument:(void *)info
-{
-    return [[self alloc] initWithCallback:newCallback path:newPath callbackArgument:info];
+static void translateEvent(ConstFSEventStreamRef stream,
+                           void *clientCallBackInfo,
+                           size_t numEvents,
+                           void *eventPathsVoidPointer,
+                           const FSEventStreamEventFlags eventFlags[],
+                           const FSEventStreamEventId eventIds[]
+                           ) {
+    NSArray *paths = (__bridge NSArray*)eventPathsVoidPointer;
+    [(__bridge id<NotifierDelegate>)clientCallBackInfo eventForPaths:paths
+                                                               flags:eventFlags
+                                                                 ids:eventIds];
 }
 
-- (id) initWithCallback:(FSEventStreamCallback)newCallback
+@interface Notifier ()
+@property (weak) id<NotifierDelegate> delegate;
+@end
+
+@implementation Notifier
+
++ (id) notifierWithDelegate:(id<NotifierDelegate>)newDelegate
+                       path:(NSString *)newPath{
+    return [[self alloc] initWithDelegate:newDelegate
+                                     path:newPath];
+}
+
+- (id) initWithDelegate:(id<NotifierDelegate>)newDelegate
                    path:(NSString *)newPath
-       callbackArgument:(void *)info
 {
     self = [super init];
     if (self)
     {
+        self.delegate = newDelegate;
         isRunning = NO;
-        paths = [NSArray arrayWithObject:newPath];
+        watchedPaths = [NSArray arrayWithObject:newPath];
         context.version = 0L;
-        context.info = info;
-        context.retain = (CFAllocatorRetainCallBack)CFRetain;
-        context.release = (CFAllocatorReleaseCallBack)CFRelease;
+        context.info = (__bridge void *)self;
+        context.retain = NULL;
+        context.release = NULL;
         context.copyDescription = (CFAllocatorCopyDescriptionCallBack)CFCopyDescription;
 
-        stream = FSEventStreamCreate(kCFAllocatorDefault, newCallback, &context, (__bridge CFArrayRef)paths, kFSEventStreamEventIdSinceNow, /*latency*/ 1.0, kFSEventStreamCreateFlagUseCFTypes);
+        stream = FSEventStreamCreate(kCFAllocatorDefault, translateEvent, &context, (__bridge CFArrayRef)watchedPaths, kFSEventStreamEventIdSinceNow, /*latency*/ 1.0, kFSEventStreamCreateFlagUseCFTypes);
         if (!stream)
         {
             NSLog(@"Could not create event stream for path %@", newPath);
@@ -49,6 +65,15 @@
     [self stop];
     FSEventStreamUnscheduleFromRunLoop(stream, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
     CFRelease(stream);
+}
+
+- (void) eventForPaths:(NSArray *)paths
+                 flags:(const FSEventStreamEventFlags[])flags
+                   ids:(const FSEventStreamEventId[]) ids;
+{
+    [self.delegate eventForPaths:paths
+                           flags:flags
+                             ids:ids];
 }
 
 - (void) start

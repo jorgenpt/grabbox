@@ -19,7 +19,7 @@
 
 static NSString * const kPausedKey = @"Paused";
 
-@interface GrabBoxAppDelegate ()
+@interface GrabBoxAppDelegate () <NotifierDelegate>
 
 @property (nonatomic, weak) InformationGatherer* info;
 @property (nonatomic, strong) Notifier* notifier;
@@ -30,31 +30,12 @@ static NSString * const kPausedKey = @"Paused";
 - (void) startMonitoring;
 - (void) stopMonitoring;
 
-- (void) eventForStream:(ConstFSEventStreamRef)stream
-                  paths:(NSArray *)paths
-                  flags:(const FSEventStreamEventFlags[])flags
-                    ids:(const FSEventStreamEventId[]) ids;
-
 - (void) uploadScreenshot:(NSString *)file;
 - (NSString *) workQueueFilenameForClipboardData;
 
 @end
 
 @implementation GrabBoxAppDelegate
-
-static void translateEvent(ConstFSEventStreamRef stream,
-                           void *clientCallBackInfo,
-                           size_t numEvents,
-                           void *eventPathsVoidPointer,
-                           const FSEventStreamEventFlags eventFlags[],
-                           const FSEventStreamEventId eventIds[]
-                           ) {
-    NSArray *paths = (__bridge NSArray*)eventPathsVoidPointer;
-    [(__bridge id)clientCallBackInfo eventForStream:stream
-                                              paths:paths
-                                              flags:eventFlags
-                                                ids:eventIds];
-}
 
 - (void) awakeFromNib
 {
@@ -73,9 +54,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
                                                object:nil];
 
     [self setInfo:[InformationGatherer defaultGatherer]];
-    [self setNotifier:[Notifier notifierWithCallback:translateEvent
-                                                path:[self.info screenshotPath]
-                                    callbackArgument:(__bridge void *)(self)]];
+    [self setNotifier:[Notifier notifierWithDelegate:self
+                                                path:[self.info screenshotPath]]];
     [self setManager:[[UploadManager alloc] init]];
 
     [[self menubar] show];
@@ -172,10 +152,9 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [self.notifier stop];
 }
 
-- (void) eventForStream:(ConstFSEventStreamRef)stream
-                  paths:(NSArray *)paths
-                  flags:(const FSEventStreamEventFlags[])flags
-                    ids:(const FSEventStreamEventId[]) ids
+- (void) eventForPaths:(NSArray *)paths
+                 flags:(const FSEventStreamEventFlags[])flags
+                   ids:(const FSEventStreamEventId[]) ids
 {
     if ([self isPaused]) {
         // We call this to update our idea of what the dir contents is,

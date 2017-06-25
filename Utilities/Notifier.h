@@ -6,19 +6,23 @@
 //  Copyright 2009 Peter Hosey. All rights reserved.
 //
 
-@interface Notifier : NSObject {
-    NSArray *paths; // Actually just one.
+@protocol NotifierDelegate
+- (void) eventForPaths:(NSArray *)paths
+                 flags:(const FSEventStreamEventFlags[])flags
+                   ids:(const FSEventStreamEventId[]) ids;
+@end
+
+@interface Notifier : NSObject<NotifierDelegate> {
+    NSArray *watchedPaths; // Actually just one.
     FSEventStreamRef stream;
     struct FSEventStreamContext context;
     BOOL isRunning;
 }
 
-+ (id) notifierWithCallback:(FSEventStreamCallback)newCallback
-                       path:(NSString *)newPath
-           callbackArgument:(void *)info;
-- (id) initWithCallback:(FSEventStreamCallback)newCallback
-                   path:(NSString *)newPath
-       callbackArgument:(void *)info;
++ (id) notifierWithDelegate:(id<NotifierDelegate>)newDelegate
+                       path:(NSString *)newPath;
+- (id) initWithDelegate:(id<NotifierDelegate>)newDelegate
+                   path:(NSString *)newPath;
 
 - (void) start;
 - (void) stop;
