@@ -19,9 +19,9 @@
 
 @interface GrabBoxAppDelegate : NSObject
 
-@property (assign) IBOutlet NSMenuItem *checkForUpdatesMenuItem;
-@property (assign) IBOutlet NSMenuItem *checkForUpdatesMenubarItem;
-@property (assign) IBOutlet Menubar* menubar;
+@property (weak) IBOutlet NSMenuItem *checkForUpdatesMenuItem;
+@property (weak) IBOutlet NSMenuItem *checkForUpdatesMenubarItem;
+@property (weak) IBOutlet Menubar* menubar;
 
 @property (assign) BOOL canInteract;
 

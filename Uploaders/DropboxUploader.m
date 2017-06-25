@@ -19,7 +19,7 @@
 
 @interface DropboxUploader ()
 
-@property (nonatomic, retain) NSString* destFilename;
+@property (nonatomic, strong) NSString* destFilename;
 
 @end
 
@@ -50,12 +50,6 @@
     return self;
 }
 
-- (void) dealloc
-{
-    [self setDestFilename:nil];
-
-    [super dealloc];
-}
 
 - (void) upload
 {
@@ -67,7 +61,7 @@
     [self setDestFilename:shortName];
 
     DLog(@"Trying upload of '%@', destination '%@'", srcPath, shortName);
-    DBFILESWriteMode *mode = [[[DBFILESWriteMode alloc] initWithAdd] autorelease];
+    DBFILESWriteMode *mode = [[DBFILESWriteMode alloc] initWithAdd];
 
     DBUploadTask<DBFILESFileMetadata *, DBFILESUploadError *>* task = [DBClientsManager.authorizedClient.filesRoutes
                                                                        uploadUrl:destFilename
@@ -98,7 +92,7 @@
              {
                  if (result)
                  {
-                     NSURLComponents* urlComponents = [[[NSURLComponents alloc] initWithString:result.url] autorelease];
+                     NSURLComponents* urlComponents = [[NSURLComponents alloc] initWithString:result.url];
                      [urlComponents setQuery:@"raw=1"];
                      if ([Uploader pasteboardURL:[urlComponents string]])
                      {

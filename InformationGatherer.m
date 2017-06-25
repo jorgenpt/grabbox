@@ -14,10 +14,10 @@ static InformationGatherer* defaultInstance = nil;
 
 @interface InformationGatherer ()
 
-@property (nonatomic, retain) NSString* screenshotPath;
-@property (nonatomic, retain) NSString* localizedScreenshotPattern;
-@property (nonatomic, retain) NSString* workQueuePath;
-@property (nonatomic, retain) NSSet* dirContents;
+@property (nonatomic, strong) NSString* screenshotPath;
+@property (nonatomic, strong) NSString* localizedScreenshotPattern;
+@property (nonatomic, strong) NSString* workQueuePath;
+@property (nonatomic, strong) NSSet* dirContents;
 
 @end
 
@@ -49,17 +49,6 @@ static InformationGatherer* defaultInstance = nil;
     return defaultInstance;
 }
 
-+ (id) allocWithZone:(NSZone *)zone
-{
-    /* Make sure we're not allocated more than once. */
-    @synchronized(self) {
-        if (defaultInstance == nil) {
-            return [super allocWithZone:zone];
-        }
-    }
-    return defaultInstance;
-}
-
 - (id) init
 {
     if (defaultInstance == nil)
@@ -76,21 +65,6 @@ static InformationGatherer* defaultInstance = nil;
     return defaultInstance;
 }
 
-- (void) dealloc
-{
-    [self setScreenshotPath:nil];
-    [self setDirContents:nil];
-    [self setLocalizedScreenshotPattern:nil];
-    [self setWorkQueuePath:nil];
-    [super dealloc];
-}
-
-/* Make sure there is always one instance, and make sure it's never free'd. */
-- (id) copyWithZone:(NSZone *)zone { return self; }
-- (id) retain { return self; }
-- (NSUInteger) retainCount { return UINT_MAX; }
-- (oneway void) release {}
-- (id) autorelease { return self; }
 
 #pragma mark -
 #pragma mark Information gathering

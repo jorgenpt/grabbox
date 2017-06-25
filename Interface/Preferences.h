@@ -10,7 +10,7 @@
 
 @interface Preferences : NSObject
 
-@property (assign) IBOutlet NSMenuItem *autostartItem;
+@property (weak) IBOutlet NSMenuItem *autostartItem;
 
 - (BOOL) willLaunchAtLogin;
 - (void) setWillLaunchAtLogin:(BOOL)state;

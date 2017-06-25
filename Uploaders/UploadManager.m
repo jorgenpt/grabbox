@@ -9,14 +9,16 @@
 #import "UploadManager.h"
 
 @interface UploadManager ()
-@property (retain) NSMutableDictionary *uploads;
+@property (strong) NSMutableDictionary *uploads;
 @property (assign) BOOL queueIsSuspended;
+@property (strong) dispatch_queue_t queue;
 @end
 
 @implementation UploadManager
 
 @synthesize uploads;
 @synthesize queueIsSuspended;
+@synthesize queue;
 
 static NSString * const kDropboxHost = @"www.dropbox.com";
 
@@ -30,9 +32,15 @@ static NSString * const kDropboxHost = @"www.dropbox.com";
 
         [self setQueueIsSuspended:NO];
 
-        __block id manager = self;
+        __weak UploadManager* weakSelf = self;
         notifier = [[NetworkReachabilityNotifier alloc] initWithName:kDropboxHost];
         [notifier setCallback:^(SCNetworkReachabilityFlags flags) {
+            __strong UploadManager* strongSelf = weakSelf;
+            if (!strongSelf)
+            {
+                return;
+            }
+
             BOOL reachable = YES;
             if ((flags & kSCNetworkReachabilityFlagsReachable) == 0)
                 reachable = NO;
@@ -43,17 +51,17 @@ static NSString * const kDropboxHost = @"www.dropbox.com";
 
             if (reachable)
             {
-                DLog(@"Reachable, queueIsSuspended: %i", [manager queueIsSuspended]);
-                if ([manager queueIsSuspended])
-                    dispatch_resume(queue);
-                [manager setQueueIsSuspended:NO];
+                DLog(@"Reachable, queueIsSuspended: %i", [strongSelf queueIsSuspended]);
+                if ([strongSelf queueIsSuspended])
+                    dispatch_resume(strongSelf.queue);
+                [strongSelf setQueueIsSuspended:NO];
             }
             else
             {
-                DLog(@"Unreachable, queueIsSuspended: %i", [manager queueIsSuspended]);
-                if (![manager queueIsSuspended])
-                    dispatch_suspend(queue);
-                [manager setQueueIsSuspended:YES];
+                DLog(@"Unreachable, queueIsSuspended: %i", [strongSelf queueIsSuspended]);
+                if (![strongSelf queueIsSuspended])
+                    dispatch_suspend(strongSelf.queue);
+                [strongSelf setQueueIsSuspended:YES];
             }
         }];
 
@@ -68,11 +76,8 @@ static NSString * const kDropboxHost = @"www.dropbox.com";
 
 - (void)dealloc
 {
-    [self setUploads:nil];
-    [notifier release];
-    dispatch_release(queue);
-
-    [super dealloc];
+    queue = nil;
+    
 }
 
 - (void) scheduleUpload:(Uploader *)uploader
@@ -94,7 +99,6 @@ static NSString * const kDropboxHost = @"www.dropbox.com";
 - (void) uploaderDone:(id)uploader
 {
     [uploader setDelegate:nil];
-    [[uploader retain] autorelease];
     [uploads removeObjectForKey:[uploader srcPath]];
 }
 @end

@@ -21,9 +21,9 @@ static NSString * const kPausedKey = @"Paused";
 
 @interface GrabBoxAppDelegate ()
 
-@property (nonatomic, assign) InformationGatherer* info;
-@property (nonatomic, retain) Notifier* notifier;
-@property (nonatomic, retain) UploadManager *manager;
+@property (nonatomic, weak) InformationGatherer* info;
+@property (nonatomic, strong) Notifier* notifier;
+@property (nonatomic, strong) UploadManager *manager;
 
 - (BOOL) isPaused;
 
@@ -49,11 +49,11 @@ static void translateEvent(ConstFSEventStreamRef stream,
                            const FSEventStreamEventFlags eventFlags[],
                            const FSEventStreamEventId eventIds[]
                            ) {
-    NSArray *paths = (NSArray*)eventPathsVoidPointer;
-    [(id)clientCallBackInfo eventForStream:stream
-                                     paths:paths
-                                     flags:eventFlags
-                                       ids:eventIds];
+    NSArray *paths = (__bridge NSArray*)eventPathsVoidPointer;
+    [(__bridge id)clientCallBackInfo eventForStream:stream
+                                              paths:paths
+                                              flags:eventFlags
+                                                ids:eventIds];
 }
 
 - (void) awakeFromNib
@@ -75,8 +75,8 @@ static void translateEvent(ConstFSEventStreamRef stream,
     [self setInfo:[InformationGatherer defaultGatherer]];
     [self setNotifier:[Notifier notifierWithCallback:translateEvent
                                                 path:[self.info screenshotPath]
-                                    callbackArgument:self]];
-    [self setManager:[[[UploadManager alloc] init] autorelease]];
+                                    callbackArgument:(__bridge void *)(self)]];
+    [self setManager:[[UploadManager alloc] init]];
 
     [[self menubar] show];
 }
@@ -91,10 +91,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 - (void) dealloc
 {
     [self setInfo:nil];
-    [self setNotifier:nil];
-    [self setManager:nil];
 
-    [super dealloc];
 }
 
 - (void) applicationWillFinishLaunching:(NSNotification *)aNotification
@@ -229,7 +226,7 @@ static void translateEvent(ConstFSEventStreamRef stream,
 
 - (IBAction) uploadFromPasteboard:(id)sender
 {
-    NSImage* image = [[[NSImage alloc] initWithPasteboard:[NSPasteboard generalPasteboard]] autorelease];
+    NSImage* image = [[NSImage alloc] initWithPasteboard:[NSPasteboard generalPasteboard]];
     if (!image)
     {
         GrowlerGrowl *errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload from clipboard!"

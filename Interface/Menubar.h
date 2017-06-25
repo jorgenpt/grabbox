@@ -12,11 +12,10 @@
 @interface Menubar : NSObject<NSMenuDelegate>
 
 @property (assign) NSUInteger activityCount;
-@property (nonatomic, retain) IBOutlet NSStatusItem* item;
-@property (assign) IBOutlet NSMenu* menu;
+@property (nonatomic, strong) IBOutlet NSStatusItem* item;
+@property (weak) IBOutlet NSMenu* menu;
 
 - (id) init;
-- (void) dealloc;
 
 - (void) show;
 - (void) startActivity;

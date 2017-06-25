@@ -16,9 +16,9 @@ NSString * const animationFrameFormat = @"menuicon-animation-%i";
 @interface Menubar ()
 @property (assign) NSInteger currentFrame;
 
-@property (retain) dispatch_group_t animationLoading;
-@property (retain) NSArray *animationFrames;
-@property (retain) NSImage *defaultImage, *uploadedImage;
+@property (strong) dispatch_group_t animationLoading;
+@property (strong) NSArray *animationFrames;
+@property (strong) NSImage *defaultImage, *uploadedImage;
 @end
 
 @implementation Menubar
@@ -28,7 +28,7 @@ NSString * const animationFrameFormat = @"menuicon-animation-%i";
     self = [super init];
     if (self) {
         NSMutableArray *animationFrames = [NSMutableArray arrayWithCapacity:numAnimationFrames];
-        self.animationLoading = [dispatch_group_create() autorelease];
+        self.animationLoading = dispatch_group_create();
         self.animationFrames = animationFrames;
         self.uploadedImage = self.defaultImage = [NSImage imageNamed:@"menuicon"];
         self.defaultImage.template = YES;
@@ -45,16 +45,6 @@ NSString * const animationFrameFormat = @"menuicon-animation-%i";
     return self;
 }
 
-- (void) dealloc
-{
-    [self setItem:nil];
-    [self setAnimationFrames:nil];
-    [self setAnimationLoading:NULL];
-    [self setUploadedImage:nil];
-    [self setDefaultImage:nil];
-
-    [super dealloc];
-}
 
 - (void) show
 {

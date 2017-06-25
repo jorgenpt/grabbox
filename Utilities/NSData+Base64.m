@@ -22,7 +22,7 @@ static char encodingTable[64] = {
 @implementation NSData (Base64)
 
 + (NSData *) dataWithBase64EncodedString:(NSString *)string {
-    return [[[NSData allocWithZone:nil] initWithBase64EncodedString:string] autorelease];
+    return [[NSData allocWithZone:nil] initWithBase64EncodedString:string];
 }
 
 - (id) initWithBase64EncodedString:(NSString *)string {

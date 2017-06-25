@@ -13,12 +13,12 @@
 
 - (NSString *) stringByAddingPercentEscapesAndEscapeCharactersInString:(NSString *)escape
 {
-    NSString *result = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                                 (CFStringRef)self,
-                                                                                 NULL,
-                                                                                 (CFStringRef)escape,
-                                                                                 kCFStringEncodingUTF8));
-    return [result autorelease];
+    NSString *result = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                                             (CFStringRef)self,
+                                                                                             NULL,
+                                                                                             (CFStringRef)escape,
+                                                                                             kCFStringEncodingUTF8);
+    return result;
 }
 
 - (NSString *) stringByAddingPercentEscapesForQuery

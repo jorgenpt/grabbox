@@ -48,7 +48,7 @@ static NSString * const kHelperAppIdentifier = @"com.bitspatter.GrabBoxHelper";
         return;
     }
 
-    if (!SMLoginItemSetEnabled((CFStringRef)kHelperAppIdentifier, state)) {
+    if (!SMLoginItemSetEnabled((__bridge CFStringRef)kHelperAppIdentifier, state)) {
         [self.autostartItem setState:(state ? NSOffState : NSOnState)];
         NSLog(@"Could not set launch at login state %i, app lives in %@", state, baseDirectory);
     }

@@ -14,7 +14,7 @@ void NetworkReachabilityChangedCallbackWrapper(
                                    void *info
                                    )
 {
-    NetworkReachabilityNotifier *notifier = (NetworkReachabilityNotifier *)info;
+    NetworkReachabilityNotifier *notifier = (__bridge NetworkReachabilityNotifier *)info;
     if (notifier)
     {
         if ([notifier callback])
@@ -56,13 +56,12 @@ void NetworkReachabilityChangedCallbackWrapper(
         SCNetworkReachabilityRef ref = SCNetworkReachabilityCreateWithName(kCFAllocatorDefault, nodeName);
 
         if (!ref) {
-            [self release];
             return nil;
         }
 
         SCNetworkReachabilityContext context = {
             .version = 0,
-            .info = self,
+            .info = (__bridge void * _Nullable)(self),
             .retain = NULL,
             .release = NULL,
             .copyDescription = CFCopyDescription
@@ -80,9 +79,7 @@ void NetworkReachabilityChangedCallbackWrapper(
 - (void)dealloc
 {
     [self setReachability:NULL];
-    [self setCallback:NULL];
 
-    [super dealloc];
 }
 
 - (void)setReachability:(SCNetworkReachabilityRef)newReachability

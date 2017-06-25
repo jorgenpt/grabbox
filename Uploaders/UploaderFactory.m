@@ -24,8 +24,8 @@ static UploaderFactory *defaultFactory = nil;
 
 @interface UploaderFactory ()
 
-@property (assign) Class uploaderClass;
-@property (retain) WelcomeWindowController *welcomeWindow;
+@property (unsafe_unretained) Class uploaderClass;
+@property (strong) WelcomeWindowController *welcomeWindow;
 
 - (void)setAvailable:(BOOL)availability;
 
@@ -69,9 +69,7 @@ static UploaderFactory *defaultFactory = nil;
 - (void) dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self setWelcomeWindow:nil];
 
-    [super dealloc];
 }
 
 - (void)setAvailable:(BOOL)availability
@@ -98,7 +96,7 @@ static UploaderFactory *defaultFactory = nil;
 - (Uploader *) uploaderForFile:(NSString *)file
                    inDirectory:(NSString *)source
 {
-    return [[[self.uploaderClass alloc] initForFile:file inDirectory:source] autorelease];
+    return [[self.uploaderClass alloc] initForFile:file inDirectory:source];
 }
 
 - (void) applicationWillFinishLaunching
@@ -167,7 +165,7 @@ static UploaderFactory *defaultFactory = nil;
 - (void) showWelcomeWindow
 {
     if (!self.welcomeWindow) {
-        self.welcomeWindow = [[[WelcomeWindowController alloc] initWithWindowNibName:@"WelcomeWindow"] autorelease];
+        self.welcomeWindow = [[WelcomeWindowController alloc] initWithWindowNibName:@"WelcomeWindow"];
     }
 
     [self.welcomeWindow.window makeKeyAndOrderFront:self];

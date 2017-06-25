@@ -6,25 +6,19 @@
 
 @interface WelcomeWindowController ()
 
-@property (retain) NSViewController<WindowContentDelegate> *currentVC;
+@property (strong) NSViewController<WindowContentDelegate> *currentVC;
 
 @end
 
 @implementation WelcomeWindowController
 
-- (void) dealloc
-{
-    [self setCurrentVC:nil];
-
-    [super dealloc];
-}
 
 - (void)windowDidLoad
 {
     [super windowDidLoad];
 
-    [self presentVC:[[[DropboxAuthViewController alloc] initWithNibName:@"DropboxAuthView"
-                                                                 bundle:nil] autorelease]];
+    [self presentVC:[[DropboxAuthViewController alloc] initWithNibName:@"DropboxAuthView"
+                                                                 bundle:nil]];
 }
 
 - (void)presentVC:(NSViewController<WindowContentDelegate> *)vc
@@ -36,7 +30,7 @@
 
 - (void)loggedIn
 {
-    [self presentVC:[[[WelcomeViewController alloc] initWithNibName:@"WelcomeView"
-                                                             bundle:nil] autorelease]];
+    [self presentVC:[[WelcomeViewController alloc] initWithNibName:@"WelcomeView"
+                                                             bundle:nil]];
 }
 @end

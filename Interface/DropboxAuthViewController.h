@@ -4,7 +4,7 @@
 
 @interface DropboxAuthViewController : NSViewController <WindowContentDelegate>
 
-@property (assign) IBOutlet NSButton *openButton;
+@property (weak) IBOutlet NSButton *openButton;
 
 - (IBAction)open:(id)sender;
 

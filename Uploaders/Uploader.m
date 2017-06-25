@@ -95,13 +95,6 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
     return self;
 }
 
-- (void) dealloc
-{
-    [self setSrcFile:nil];
-    [self setSrcPath:nil];
-
-    [super dealloc];
-}
 
 - (void) moveToWorkQueue
 {
@@ -131,7 +124,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
 
 - (void)downsizeRetinaSource
 {
-    NSImage *image = [[[NSImage alloc] initWithContentsOfFile:srcPath] autorelease];
+    NSImage *image = [[NSImage alloc] initWithContentsOfFile:srcPath];
     NSBitmapImageRep *bitmapRep = nil;
     for (NSImageRep* representation in [image representations])
     {
@@ -154,7 +147,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
     if (displayScale >= 1.95)
     {
         NSRect resizedBounds = NSMakeRect(0, 0, [bitmapRep size].width/displayScale, [bitmapRep size].height/displayScale);
-        NSImage* resizedImage = [[[NSImage alloc] initWithSize:resizedBounds.size] autorelease];
+        NSImage* resizedImage = [[NSImage alloc] initWithSize:resizedBounds.size];
 
         [resizedImage lockFocus];
         [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationLow];
@@ -168,7 +161,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
         CGImageRef img = [rep CGImageForProposedRect:NULL
                                              context:NULL
                                                hints:nil];
-        NSBitmapImageRep* bitmapImageRep = [[[NSBitmapImageRep alloc] initWithCGImage:img] autorelease];
+        NSBitmapImageRep* bitmapImageRep = [[NSBitmapImageRep alloc] initWithCGImage:img];
         NSData *imageData = [bitmapImageRep representationUsingType:NSPNGFileType
                                                          properties:@{}];
         [imageData writeToFile:srcPath

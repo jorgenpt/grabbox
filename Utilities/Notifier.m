@@ -14,7 +14,7 @@
                        path:(NSString *)newPath
            callbackArgument:(void *)info
 {
-    return [[[self alloc] initWithCallback:newCallback path:newPath callbackArgument:info] autorelease];
+    return [[self alloc] initWithCallback:newCallback path:newPath callbackArgument:info];
 }
 
 - (id) initWithCallback:(FSEventStreamCallback)newCallback
@@ -25,18 +25,17 @@
     if (self)
     {
         isRunning = NO;
-        paths = [[NSArray arrayWithObject:newPath] retain];
+        paths = [NSArray arrayWithObject:newPath];
         context.version = 0L;
         context.info = info;
         context.retain = (CFAllocatorRetainCallBack)CFRetain;
         context.release = (CFAllocatorReleaseCallBack)CFRelease;
         context.copyDescription = (CFAllocatorCopyDescriptionCallBack)CFCopyDescription;
 
-        stream = FSEventStreamCreate(kCFAllocatorDefault, newCallback, &context, (CFArrayRef)paths, kFSEventStreamEventIdSinceNow, /*latency*/ 1.0, kFSEventStreamCreateFlagUseCFTypes);
+        stream = FSEventStreamCreate(kCFAllocatorDefault, newCallback, &context, (__bridge CFArrayRef)paths, kFSEventStreamEventIdSinceNow, /*latency*/ 1.0, kFSEventStreamCreateFlagUseCFTypes);
         if (!stream)
         {
             NSLog(@"Could not create event stream for path %@", newPath);
-            [self release];
             return nil;
         }
 
@@ -50,7 +49,6 @@
     [self stop];
     FSEventStreamUnscheduleFromRunLoop(stream, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
     CFRelease(stream);
-    [super dealloc];
 }
 
 - (void) start

@@ -19,16 +19,16 @@ extern NSString * const kUploadFinishingNotification;
 @end
 
 @interface Uploader : NSObject {
-    id delegate;
+    id __unsafe_unretained delegate;
     int retries;
     NSString *srcFile;
     NSString *srcPath;
 }
 
-@property (assign) id delegate;
+@property (unsafe_unretained) id delegate;
 @property (nonatomic, assign) int retries;
-@property (nonatomic, retain) NSString* srcFile;
-@property (nonatomic, retain) NSString* srcPath;
+@property (nonatomic, strong) NSString* srcFile;
+@property (nonatomic, strong) NSString* srcPath;
 
 + (BOOL) pasteboardURL:(NSString *)url;
 
