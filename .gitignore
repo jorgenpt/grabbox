@@ -17,4 +17,7 @@ xcuserdata/
 /Common/DropboxAPIKey_Private.inl
 
 # This is where we keep Sparkle and Fabric secrets
-secrets/
+/secrets/
+
+# This is where we keep the git repo for the HTML site
+/site/

@@ -13,4 +13,4 @@ cd "$BUILT_PRODUCTS_DIR"
 rm -f "$PROJECT_NAME"*.zip
 ditto -ck --keepParent "$PROJECT_NAME.app" "$ARCHIVE_FILENAME"
 
-mv "$ARCHIVE_FILENAME" "$WD/../grabbox_site/updates/"
+mv "$ARCHIVE_FILENAME" "$WD/site/updates/"
