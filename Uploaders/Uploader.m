@@ -59,8 +59,13 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
     return output;
 }
 
-+ (BOOL)hasRetina
++ (BOOL)hasRetinaAndShouldDownsize
 {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"DownsizeRetina"])
+    {
+        return NO;
+    }
+
     for (NSScreen *screen in [NSScreen screens]) {
         if ([screen backingScaleFactor] >= 2.0) {
             return YES;
@@ -117,7 +122,7 @@ NSString *urlCharacters = @"0123456789abcdefghijklmnopqrstuvwxyz-_";
               srcPath, newPath, [error localizedDescription], [error code]);
     }
 
-    if ([[self class] hasRetina]) {
+    if ([[self class] hasRetinaAndShouldDownsize]) {
         [self downsizeRetinaSource];
     }
 }
