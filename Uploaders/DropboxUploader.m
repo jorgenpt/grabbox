@@ -63,13 +63,32 @@
     DLog(@"Trying upload of '%@', destination '%@'", srcPath, shortName);
     DBFILESWriteMode *mode = [[DBFILESWriteMode alloc] initWithAdd];
 
-    DBUploadTask<DBFILESFileMetadata *, DBFILESUploadError *>* task = [DBClientsManager.authorizedClient.filesRoutes
-                                                                       uploadUrl:destFilename
-                                                                       mode:mode
-                                                                       autorename:@(YES)
-                                                                       clientModified:nil
-                                                                       mute:@(YES)
-                                                                       inputUrl:srcPath];
+    DBUploadTask<DBFILESFileMetadata *, DBFILESUploadError *>* task = nil;
+    @try{
+        task = [DBClientsManager.authorizedClient.filesRoutes
+                uploadUrl:destFilename
+                mode:mode
+                autorename:@(YES)
+                clientModified:nil
+                mute:@(YES)
+                inputUrl:srcPath];
+    } @catch (NSException* exception) {
+        ErrorLog(@"uploadUrl exception: %@, reason: %@", exception.name, exception.reason);
+        GrowlerGrowl *errorGrowl = nil;
+        if ([exception.name isEqualToString:NSInvalidArgumentException])
+        {
+            errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload screenshot to Dropbox!"
+                                               description:@"Could not read file"];
+        }
+        else
+        {
+            errorGrowl = [GrowlerGrowl growlErrorWithTitle:@"GrabBox could not upload screenshot to Dropbox!"
+                                               description:exception.reason];
+        }
+        [Growler growl:errorGrowl];
+        [self uploadDone];
+        return;
+    }
 
     [task setResponseBlock:^(DBFILESFileMetadata *result,
                              DBFILESUploadError *routeError,
