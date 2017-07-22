@@ -169,8 +169,9 @@
                                                                      description:@"Encountered error accessing service"];
                     [Growler growl:errorGrowl];
                     ErrorLog(@"Upload error: %@", networkError);
-                    [self uploadDone];
                 }
+
+                [self uploadDone];
             }
             else
             {
