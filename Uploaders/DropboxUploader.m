@@ -68,7 +68,7 @@
                                                                        mode:mode
                                                                        autorename:@(YES)
                                                                        clientModified:nil
-                                                                       mute:@(NO)
+                                                                       mute:@(YES)
                                                                        inputUrl:srcPath];
 
     [task setResponseBlock:^(DBFILESFileMetadata *result,
