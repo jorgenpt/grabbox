@@ -240,7 +240,7 @@ static NSString * const kPausedKey = @"Paused";
 
     NSError *error;
     NSString *filename = [self workQueueFilenameForClipboardData];
-    if (![data writeToFile:filename options:0 error:&error])
+    if ([data writeToFile:filename options:0 error:&error])
     {
         Uploader* up = [[UploaderFactory defaultFactory] uploaderForFile:[filename lastPathComponent]
                                                              inDirectory:[filename stringByDeletingLastPathComponent]];
