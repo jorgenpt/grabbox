@@ -14,14 +14,14 @@
         CLSNSLog(@"ERROR: " fmt, ##__VA_ARGS__); \
     } while (0)
 
-#   ifdef DEBUG
-#       define DLog(fmt, ...) LineLog(fmt, ##__VA_ARGS__)
-#   else
-#       define DLog(...)
-#   endif
-#endif
+#   define DLog(fmt, ...) do { if (IsDLogEnabled()) { LineLog(fmt, ##__VA_ARGS__); } } while (0)
 
-#define CONFIG(name) (@#name)
+static inline BOOL IsDLogEnabled()
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"DebugLog"];
+}
+
+#endif
 
 #if defined(MAC_APP_STORE)
 # define BUNDLE_IDENTIFIER @"com.bitspatter.grabbox2"
