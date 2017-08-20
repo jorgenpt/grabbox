@@ -39,10 +39,10 @@ static NSString * const kPausedKey = @"Paused";
 
 - (void) awakeFromNib
 {
-#if !defined(MAC_APP_STORE)
+#if defined(MAC_APP_STORE)
     [[self.checkForUpdatesMenuItem menu] removeItem:self.checkForUpdatesMenuItem];
     [[self.checkForUpdatesMenubarItem menu] removeItem:self.checkForUpdatesMenubarItem];
-#endif // !defined(MAC_APP_STORE)
+#endif // defined(MAC_APP_STORE)
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(uploaderAvailable:)
