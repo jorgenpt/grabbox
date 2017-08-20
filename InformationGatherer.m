@@ -180,7 +180,6 @@ static InformationGatherer* defaultInstance = nil;
     /* These are the keys we look up for localization. */
     NSString *name = @"Screen Shot";
     NSString *format = @"%@ %@ at %@";
-    NSString *formatTable = @"ScreenCapture";
     NSString* screenshotPattern = nil;
 
     /* Look up the SystemUIServer bundle - we'll be reading its localization strings. */
@@ -191,11 +190,18 @@ static InformationGatherer* defaultInstance = nil;
                                persistentDomainForName:@"com.apple.screencapture"];
         NSString* nameOverride = [dict objectForKey:@"name"];
         if (nameOverride)
+        {
+            DLog(@"Retrieved base name from com.apple.screencapture name override: '%@'", name);
             name = nameOverride;
+        }
         else
+        {
             name = [self localizedString:name fromBundle:systemUIServer table:@"ScreenCapture"];
+            DLog(@"Retrieved base name localized SystemUIServer.app string: '%@'", name);
+        }
 
-        format = [self localizedString:format fromBundle:systemUIServer table:formatTable];
+        format = [self localizedString:format fromBundle:systemUIServer table:@"ScreenCapture"];
+        DLog(@"Retrieved filename format from SystemUIServer.app string: '%@'", format);
     }
     else
     {
@@ -204,7 +210,7 @@ static InformationGatherer* defaultInstance = nil;
     }
 
     screenshotPattern = [[NSString stringWithFormat:format, name, @"*", @"*"] stringByAppendingString:@".*"];
-    DLog(@"Pattern is %@", screenshotPattern);
+    DLog(@"Final screenshot pattern is '%@'", screenshotPattern);
 
     [self setLocalizedScreenshotPattern:screenshotPattern];
 }
